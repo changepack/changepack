@@ -1,13 +1,1 @@
-div id=dom_id(changelog)
-  .my-5
-    strong.block.font-medium.mb-1 Title:
-    = changelog.title
-
-  .my-5
-    strong.block.font-medium.mb-1 Body:
-    == changelog.content
-
-  - if action_name != 'show'
-    = link_to 'Show this changelog', changelog, class: 'button secondary inline-block'
-    = link_to 'Edit this changelog', edit_changelog_path(changelog), class: 'button secondary ml-2 inline-block'
-    hr.mt-6
+= component(:changelog, changelog: changelog)

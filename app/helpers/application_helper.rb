@@ -2,11 +2,11 @@ module ApplicationHelper
   def component(name, context: nil, **args, &block)
     return render_component_in(context, name, **args, &block) if context
 
-    render component_class_for(name).new(args), &block
+    render component_class_for(name).new(**args), &block
   end
 
   def render_component_in(context, name, **args, &block)
-    component_class_for(name).new(args).render_in(context, &block)
+    component_class_for(name).new(**args).render_in(context, &block)
   end
 
   private

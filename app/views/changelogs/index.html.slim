@@ -6,5 +6,7 @@
     h1.font-bold.text-4xl Changelogs
     = link_to 'New changelog', new_changelog_path, class: 'button primary'
 
-  #changelogs.min-w-full
-    = render @changelogs
+  section.text-gray-600.body-font.overflow-hidden#changelogs
+    .container.py-24.mx-auto
+      .-my-8.divide-y-2.divide-gray-100
+        = render @changelogs

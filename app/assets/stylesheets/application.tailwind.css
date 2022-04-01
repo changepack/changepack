@@ -14,5 +14,9 @@
   .button.secondary {
     @apply bg-gray-100;
   }
+
+  .button.mini {
+    @apply py-2 px-3 text-sm;
+  }
 }
 
