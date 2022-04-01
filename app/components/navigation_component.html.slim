@@ -1,0 +1,12 @@
+nav.bg-white
+  .w-full.mx-auto.px-8
+    .flex.items-center.justify-between.h-16
+      .flex.items-center
+        a.flex-shrink-0 href=root_path
+          img.inline.h-12.w-12 src=image_path('logo')
+          span.text-gray-800.hover:text-gray-800.py-2.text-sm.font-medium.ml-2
+            ' Changepack
+        .md:block
+          .ml-6.flex.items-baseline.space-x-4
+            - link_tos.each do |link_to|
+              = link_to

@@ -72,3 +72,5 @@ gem "figaro", "~> 1.2"
 gem "tailwindcss-rails", "~> 2.0"
 
 gem "prettyid", "~> 0.2.0", require: "pretty_id"
+
+gem "view_component", "~> 2.52", require: "view_component/engine"

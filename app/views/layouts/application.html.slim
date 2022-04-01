@@ -9,5 +9,8 @@ html
     = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
     = javascript_importmap_tags
   body
+    header.w-full.mx-auto
+      = component :navigation do |nav|
+        - nav.link_to "Home", root_path
     main.container.mx-auto.mt-28.px-5.flex
       = yield

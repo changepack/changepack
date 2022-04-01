@@ -33,5 +33,6 @@ module Changepack
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.generators.template_engine = :slim
   end
 end
