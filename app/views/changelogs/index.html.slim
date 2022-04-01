@@ -4,7 +4,7 @@
 
   .flex.justify-between.items-center
     h1.font-bold.text-4xl Changelogs
-    = link_to 'New changelog', new_changelog_path, class: 'rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium'
+    = link_to 'New changelog', new_changelog_path, class: 'button primary'
 
   #changelogs.min-w-full
     = render @changelogs

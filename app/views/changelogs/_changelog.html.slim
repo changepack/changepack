@@ -8,6 +8,6 @@ div id=dom_id(changelog)
     == changelog.content
 
   - if action_name != 'show'
-    = link_to 'Show this changelog', changelog, class: 'rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium'
-    = link_to 'Edit this changelog', edit_changelog_path(changelog), class: 'rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium'
+    = link_to 'Show this changelog', changelog, class: 'button secondary inline-block'
+    = link_to 'Edit this changelog', edit_changelog_path(changelog), class: 'button secondary ml-2 inline-block'
     hr.mt-6

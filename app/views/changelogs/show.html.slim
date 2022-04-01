@@ -5,7 +5,7 @@
 
     = render @changelog
 
-    = link_to 'Edit this changelog', edit_changelog_path(@changelog), class: 'mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium'
+    = link_to 'Edit this changelog', edit_changelog_path(@changelog), class: 'button secondary mt-2 inline-block'
     .inline-block.ml-2
-      = button_to 'Destroy this changelog', changelog_path(@changelog), method: :delete, class: 'mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium'
-    = link_to 'Back to changelogs', changelogs_path, class: 'ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium'
+      = button_to 'Destroy this changelog', changelog_path(@changelog), method: :delete, class: 'button secondary mt-2'
+    = link_to 'Back to changelogs', changelogs_path, class: 'button secondary ml-2 inline-block'
