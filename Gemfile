@@ -72,3 +72,7 @@ gem "figaro", "~> 1.2"
 gem "tailwindcss-rails", "~> 2.0"
 
 gem "prettyid", "~> 0.2.0", require: "pretty_id"
+
+gem "rbs_rails", "~> 0.11.0"
+
+gem "steep", "~> 0.50.0"

@@ -37,3 +37,4 @@
 !/app/assets/builds/.keep
 
 /.tmuxinator.yml
+/.gem_rbs_collection
