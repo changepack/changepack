@@ -1,0 +1,12 @@
+# ./.tmuxinator.yml
+
+name: changepack
+root: ~/
+
+socket_name: changepack
+
+windows:
+  - changepack:
+      layout: tiled
+      panes:
+        - rails tailwindcss:watch
