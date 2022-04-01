@@ -4,19 +4,15 @@
 
 @layer components {
   .button {
-    @apply rounded-lg py-3 px-5 font-medium cursor-pointer text-gray-800 hover:bg-gray-100;
+    @apply rounded-lg py-2 px-3 text-sm font-medium cursor-pointer text-gray-800 hover:bg-gray-100;
   }
 
-  .button.primary {
-    @apply bg-blue-600 text-white hover:bg-blue-600;
+  .button-1 {
+    @apply bg-primary text-white hover:bg-primary;
   }
 
-  .button.secondary {
+  .button-2 {
     @apply border border-gray-300 bg-white hover:bg-white hover:shadow transition-shadow ease-out duration-300;
-  }
-
-  .button.mini {
-    @apply py-2 px-3 text-sm;
   }
 }
 

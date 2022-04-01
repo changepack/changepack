@@ -5,6 +5,6 @@
 
     = render @changelog
 
-    = link_to 'Edit changelog', edit_changelog_path(@changelog), class: 'button secondary mt-2 inline-block'
+    = link_to 'Edit changelog', edit_changelog_path(@changelog), class: 'button button-2 mt-2 inline-block'
     .inline-block.ml-2
-      = button_to 'Delete changelog', changelog_path(@changelog), method: :delete, class: 'button secondary mt-2'
+      = button_to 'Delete changelog', changelog_path(@changelog), method: :delete, class: 'button button-2 mt-2'

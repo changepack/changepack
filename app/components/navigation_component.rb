@@ -11,7 +11,7 @@ class NavigationComponent < ViewComponent::Base
     end
 
     def call
-      link_to @title, @url, class: "button mini #{@active && 'primary'}"
+      link_to @title, @url, class: "button #{@active && 'button-1'}"
     end
   end
 end

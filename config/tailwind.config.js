@@ -12,6 +12,9 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        primary: '#ff611a',
+      },
       boxShadow: {
         'sm': '0 0.125em 0.313em rgba(50, 50, 93, .09), 0 0.063em 0.125em rgba(0, 0, 0, .07)',
         'DEFAULT': '0 0.250em 0.375em rgba(50, 50, 93, .09), 0 0.063em 0.188em rgba(0, 0, 0, .08)',
