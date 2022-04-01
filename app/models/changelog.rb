@@ -3,4 +3,7 @@ class Changelog < ApplicationRecord
 
   attribute :title, :string
   attribute :body, :text
+
+  validates :title, presence: true
+  validates :body, presence: true
 end

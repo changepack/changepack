@@ -1,1 +1,10 @@
-p Hello world
+.w-full
+  - if notice.present?
+    p.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block#notice = notice
+
+  .flex.justify-between.items-center
+    h1.font-bold.text-4xl Changelogs
+    = link_to 'New changelog', new_changelog_path, class: 'rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium'
+
+  #changelogs.min-w-full
+    = render @changelogs
