@@ -10,5 +10,4 @@
       == changelog.content
 
     = link_to 'Edit changelog', edit_changelog_path(@changelog), class: 'button secondary mini mt-4 inline-block'
-    .inline-block.ml-2
-      = button_to 'Destroy changelog', changelog_path(@changelog), method: :delete, class: 'button secondary mini mt-4'
+    .inline-block.ml-2 = button_to 'Delete changelog', changelog_path(@changelog), method: :delete, class: 'button secondary mini mt-4'

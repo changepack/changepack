@@ -4,13 +4,14 @@ class NavigationComponent < ViewComponent::Base
   renders_many :link_tos, 'LinkToComponent'
 
   class LinkToComponent < ViewComponent::Base
-    def initialize(title, url)
+    def initialize(title, url, active: false)
       @title = title
       @url = url
+      @active = active
     end
 
     def call
-      link_to @title, @url, class: 'text-gray-500 hover:text-gray-800 px-3 py-2 text-sm font-medium'
+      link_to @title, @url, class: "button mini #{@active && 'primary'}"
     end
   end
 end
