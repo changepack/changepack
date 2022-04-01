@@ -64,3 +64,5 @@ group :development do
   # gem "spring"
 end
 
+
+gem "slim-rails", "~> 3.4"
