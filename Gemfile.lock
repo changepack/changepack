@@ -77,6 +77,8 @@ GEM
       reline (>= 0.2.7)
     digest (3.1.0)
     erubi (1.10.0)
+    figaro (1.2.0)
+      thor (>= 0.14.0, < 2)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.10.0)
@@ -198,6 +200,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
+  figaro (~> 1.2)
   importmap-rails
   jbuilder
   pg (~> 1.1)

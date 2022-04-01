@@ -66,3 +66,5 @@ end
 
 
 gem "slim-rails", "~> 3.4"
+
+gem "figaro", "~> 1.2"
