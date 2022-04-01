@@ -2,7 +2,7 @@ class ChangelogsController < ApplicationController
   before_action :set_changelog, only: %i[show edit update destroy]
 
   def index
-    @changelogs = Changelog.order(created_at: :desc)
+    @changelogs = Changelog.order(created_at: :desc).with_rich_text_content
   end
 
   def show
@@ -57,6 +57,6 @@ class ChangelogsController < ApplicationController
     end
 
     def changelog_params
-      params.require(:changelog).permit(:title, :body)
+      params.require(:changelog).permit(:title, :content)
     end
 end

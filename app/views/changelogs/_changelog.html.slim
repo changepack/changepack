@@ -1,11 +1,11 @@
 div id=dom_id(changelog)
-  p.my-5
+  .my-5
     strong.block.font-medium.mb-1 Title:
     = changelog.title
 
-  p.my-5
+  .my-5
     strong.block.font-medium.mb-1 Body:
-    = changelog.body
+    == changelog.content
 
   - if action_name != 'show'
     = link_to 'Show this changelog', changelog, class: 'rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium'
