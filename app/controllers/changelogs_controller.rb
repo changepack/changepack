@@ -2,7 +2,7 @@ class ChangelogsController < ApplicationController
   before_action :set_changelog, only: %i[show edit update destroy]
 
   def index
-    @changelogs = Changelog.all
+    @changelogs = Changelog.order(created_at: :desc)
   end
 
   def show
