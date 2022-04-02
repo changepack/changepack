@@ -26,16 +26,20 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
       - name: Run Rubocop
+        env:
+          CI: 1
         run: |
           bundle exec rubocop
       - name: Setup test database
         env:
           DATABASE_URL: postgresql://rails_github_actions:postgres@localhost:5432/changepack_test
           RAILS_ENV: test
+          CI: 1
         run: |
           rails db:create db:migrate
       - name: Run tests
         env:
           DATABASE_URL: postgresql://rails_github_actions:postgres@localhost:5432/changepack_test
           RAILS_ENV: test
+          CI: 1
         run: bundle exec rspec

@@ -1,14 +1,14 @@
 = render ContentComponent.new do |component|
   - component.article do
-    h2.text-2xl.font-medium.text-gray-900.title-font.mb-2
-      = link_to changelog.title, changelog
+    h2.text-2xl.font-medium.text-gray-900.title-font.mb-2 data-test-id="changelog"
+      = link_to changelog.title, changelog, data: { test_id: 'show' }
 
     article.leading-relaxed.prose.max-w-full == changelog.content
 
-    = link_to edit_changelog_path(@changelog), class: 'button button-2 mt-4 inline-block' do
+    = link_to edit_changelog_path(@changelog), class: 'button button-2 mt-4 inline-block', data: { test_id: 'edit' } do
       = helpers.icon 'pencil', class: 'mr-2'
       | Edit changelog
-    .inline-block.ml-2 = button_to changelog_path(@changelog), method: :delete, class: 'button button-2 mt-4 text-red-600' do
+    .inline-block.ml-2 = button_to changelog_path(@changelog), method: :delete, class: 'button button-2 mt-4 text-red-600', data: { test_id: 'destroy' } do
       = helpers.icon 'trash', class: 'mr-2'
       | Delete
 

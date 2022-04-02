@@ -8,12 +8,12 @@
           li = error.full_message
 
   .mb-5
-    = form.text_field :title, class: 'input', placeholder: 'Title'
+    = form.text_field :title, class: 'input', placeholder: 'Title', data: { test_id: 'title' }
 
   .my-5
-    = form.rich_text_area :content, class: 'input prose', placeholder: 'Content'
+    = form.rich_text_area :content, class: 'input prose', placeholder: 'Content', data: { test_id: 'content' }
 
   .inline
-    = form.button class: 'button button-1', type: 'submit' do
+    = form.button class: 'button button-1', type: 'submit', data: { test_id: 'submit' } do
       = icon 'check', class: 'mr-2'
       | Save changelog
