@@ -5,7 +5,7 @@
       .text-xs.text-red-500.mt-2 = error_message
 
   .my-5
-    = form.rich_text_area :content, class: "prose input #{'input-invalid' if changelog.errors.include?(:content)}", placeholder: 'Content', data: { test_id: 'content' }
+    = form.rich_text_area :content, class: "prose input #{'input-invalid' if changelog.errors.include?(:content)}", autofocus: true, data: { test_id: 'content' }
     - changelog.errors.full_messages_for(:content).each do |error_message|
       .text-xs.text-red-500.mt-2 = error_message
 

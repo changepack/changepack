@@ -12,7 +12,7 @@ describe Changelog, type: :model do
     context 'when title is not present' do
       let(:title) { nil }
 
-      it { is_expected.to be_falsey }
+      it { is_expected.to be_truthy }
     end
 
     context 'when content is not present' do
