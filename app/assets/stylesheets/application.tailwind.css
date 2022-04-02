@@ -14,5 +14,13 @@
   .button-2 {
     @apply border border-gray-300 bg-white hover:bg-white hover:shadow transition-shadow ease-out duration-300;
   }
+
+  .input {
+    @apply block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full max-w-full placeholder:text-gray-300;
+  }
+}
+
+trix-editor:empty:not(:focus)::before {
+  @apply text-gray-300;
 }
 

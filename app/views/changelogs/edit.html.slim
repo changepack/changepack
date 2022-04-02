@@ -1,6 +1,7 @@
-.mx-auto.md:w-3/5.w-full
-  h1.font-bold.text-4xl Editing changelog
+.w-2/3
+  = component :content do |component|
+    - component.article do
+      = render 'form', changelog: @changelog
 
-  = render 'form', changelog: @changelog
-
-  = link_to 'Show changelog', @changelog, class: 'button button-2 ml-2'
+    - component.metadata do
+      span.mt-1.text-gray-400 = l @changelog.created_at&.to_date, format: :long

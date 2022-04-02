@@ -7,12 +7,11 @@
         - changelog.errors.each do |error|
           li = error.full_message
 
-  .my-5
-    = form.label :title
-    = form.text_field :title, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full'
+  .mb-5
+    = form.text_field :title, class: 'input', placeholder: 'Title'
 
   .my-5
-    = form.rich_text_area :content, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full prose max-w-full'
+    = form.rich_text_area :content, class: 'input prose', placeholder: 'Content'
 
   .inline
     = form.submit 'Save changelog', class: 'button button-1'

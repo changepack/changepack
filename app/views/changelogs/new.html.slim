@@ -1,4 +1,11 @@
-.mx-auto.md:w-2/3.w-full
-  h1.font-bold.text-4xl New changelog
+.w-2/3
+  .flex.justify-between.items-center
+      section
+        h1.font-bold.text-4xl New changelog
 
-  = render 'form', changelog: @changelog
+  = component :content do |component|
+    - component.article do
+      = render 'form', changelog: @changelog
+
+    - component.metadata do
+      span.mt-1.text-gray-400 = l Date.current, format: :long

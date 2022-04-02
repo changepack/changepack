@@ -1,14 +1,9 @@
-.py-8.flex.flex-wrap.md:flex-nowrap id=dom_id(changelog)
-  .md:w-64.md:mb-0.mb-6.flex-shrink-0.flex.flex-col
-    = link_to changelog, class: 'mt-1 text-gray-400' do
-      = l(changelog.created_at.to_date, format: :long)
-
-  .md:flex-grow
+= render ContentComponent.new do |component|
+  - component.article do
     h2.text-2xl.font-medium.text-gray-900.title-font.mb-2
       = link_to changelog.title, changelog
 
-    article.leading-relaxed.prose
-      == changelog.content
+    article.leading-relaxed.prose.max-w-full == changelog.content
 
     = link_to edit_changelog_path(@changelog), class: 'button button-2 mt-4 inline-block' do
       = helpers.icon 'pencil', class: 'mr-2'
@@ -16,3 +11,7 @@
     .inline-block.ml-2 = button_to changelog_path(@changelog), method: :delete, class: 'button button-2 mt-4' do
       = helpers.icon 'trash', class: 'mr-2'
       ' Delete changelog
+
+  - component.metadata do
+    = link_to changelog, class: 'mt-1 text-gray-400' do
+      = l(changelog.created_at.to_date, format: :long)
