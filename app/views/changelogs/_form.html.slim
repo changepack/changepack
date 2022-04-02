@@ -1,11 +1,11 @@
 = form_with(model: changelog, class: 'contents') do |form|
   .mb-5
-    = form.text_field :title, class: "input #{'border border-red-500' if changelog.errors.include?(:title)}", placeholder: 'Title', data: { test_id: 'title' }
+    = form.text_field :title, class: "input #{'input-invalid' if changelog.errors.include?(:title)}", placeholder: 'Title', data: { test_id: 'title' }
     - changelog.errors.full_messages_for(:title).each do |error_message|
       .text-xs.text-red-500.mt-2 = error_message
 
   .my-5
-    = form.rich_text_area :content, class: "input prose #{'border border-red-500' if changelog.errors.include?(:content)}", placeholder: 'Content', data: { test_id: 'content' }
+    = form.rich_text_area :content, class: "prose input #{'input-invalid' if changelog.errors.include?(:content)}", placeholder: 'Content', data: { test_id: 'content' }
     - changelog.errors.full_messages_for(:content).each do |error_message|
       .text-xs.text-red-500.mt-2 = error_message
 
