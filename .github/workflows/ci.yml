@@ -1,5 +1,11 @@
 name: Continuous integration
 on: push
+env:
+  DATABASE_URL: postgresql://rails_github_actions:postgres@localhost:5432/changepack_test
+  RAILS_ENV: test
+  CI: true
+  CYPRESS: true
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 jobs:
   verify:
     name: Build
@@ -26,20 +32,18 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
       - name: Run Rubocop
-        env:
-          CI: 1
         run: |
           bundle exec rubocop
       - name: Setup test database
-        env:
-          DATABASE_URL: postgresql://rails_github_actions:postgres@localhost:5432/changepack_test
-          RAILS_ENV: test
-          CI: 1
         run: |
           rails db:create db:migrate
-      - name: Run tests
-        env:
-          DATABASE_URL: postgresql://rails_github_actions:postgres@localhost:5432/changepack_test
-          RAILS_ENV: test
-          CI: 1
+      - name: Run RSpec
         run: bundle exec rspec
+      - name: Run Cypress
+        uses: cypress-io/github-action@v1
+        with:
+          start: bundle exec rails server -e test -p 5017
+          wait-on: 'http://localhost:5017'
+          browser: chrome
+          headless: true
+          project: ./spec

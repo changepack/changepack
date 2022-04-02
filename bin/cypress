@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+yarn cypress run --project ./spec
