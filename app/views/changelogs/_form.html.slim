@@ -1,17 +1,13 @@
 = form_with(model: changelog, class: 'contents') do |form|
-  - if changelog.errors.any?
-    #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-lg.mt-3
-      h2 #{pluralize(changelog.errors.count, 'error')} prohibited this changelog from being saved:
-
-      ul
-        - changelog.errors.each do |error|
-          li = error.full_message
-
   .mb-5
-    = form.text_field :title, class: 'input', placeholder: 'Title', data: { test_id: 'title' }
+    = form.text_field :title, class: "input #{'border border-red-500' if changelog.errors.include?(:title)}", placeholder: 'Title', data: { test_id: 'title' }
+    - changelog.errors.full_messages_for(:title).each do |error_message|
+      .text-xs.text-red-500.mt-2 = error_message
 
   .my-5
-    = form.rich_text_area :content, class: 'input prose', placeholder: 'Content', data: { test_id: 'content' }
+    = form.rich_text_area :content, class: "input prose #{'border border-red-500' if changelog.errors.include?(:content)}", placeholder: 'Content', data: { test_id: 'content' }
+    - changelog.errors.full_messages_for(:content).each do |error_message|
+      .text-xs.text-red-500.mt-2 = error_message
 
   .inline
     = form.button class: 'button button-1', type: 'submit', data: { test_id: 'submit' } do
