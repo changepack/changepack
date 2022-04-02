@@ -59,6 +59,8 @@ group :development, :test do
   gem "database_cleaner-active_record", "~> 2.0"
 
   gem "rubocop", "~> 1.26", require: false
+
+  gem "cypress-on-rails", "~> 1.12"
 end
 
 group :development do

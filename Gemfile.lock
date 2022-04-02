@@ -74,6 +74,8 @@ GEM
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
+    cypress-on-rails (1.12.1)
+      rack
     database_cleaner-active_record (2.0.1)
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
@@ -264,6 +266,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  cypress-on-rails (~> 1.12)
   database_cleaner-active_record (~> 2.0)
   debug
   figaro (~> 1.2)
