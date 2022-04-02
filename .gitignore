@@ -37,3 +37,6 @@
 !/app/assets/builds/.keep
 
 /.tmuxinator.yml
+
+/spec/cypress/screenshots
+/spec/cypress/vidoes
