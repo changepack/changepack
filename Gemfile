@@ -88,3 +88,5 @@ gem "view_component", "~> 2.52"
 gem "font-awesome-rails", "~> 4.7"
 
 gem "statesman", "~> 9.0"
+
+gem "normatron", "~> 0.3.4"

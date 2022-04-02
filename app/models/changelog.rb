@@ -13,5 +13,6 @@ class Changelog < ApplicationRecord
 
   validates :content, presence: true
 
+  normalize :title
   inquirer :status
 end

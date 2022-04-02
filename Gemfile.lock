@@ -137,6 +137,10 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.3-arm64-darwin)
       racc (~> 1.4)
+    normatron (0.3.4)
+      activerecord (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      stringex (>= 1.4.0)
     parallel (1.22.1)
     parser (3.1.1.0)
       ast (~> 2.4.1)
@@ -236,6 +240,7 @@ GEM
     statesman (9.0.1)
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
+    stringex (2.8.5)
     strscan (3.0.1)
     tailwindcss-rails (2.0.8-arm64-darwin)
       railties (>= 6.0.0)
@@ -275,6 +280,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
+  normatron (~> 0.3.4)
   pg (~> 1.1)
   prettyid (~> 0.2.0)
   pry-rails

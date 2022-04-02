@@ -7,7 +7,6 @@ class ChangelogStateMachine
   transition from: :draft, to: [:published]
 
   after_transition(after_commit: true) do |model, transition|
-    model.state = transition.to_state
-    model.save!
+    model.update!(status: transition.to_state)
   end
 end
