@@ -8,7 +8,7 @@
   }
 
   .button-1 {
-    @apply bg-primary text-white hover:bg-primary;
+    @apply bg-orange-900 text-white hover:bg-orange-900;
   }
 
   .button-2 {

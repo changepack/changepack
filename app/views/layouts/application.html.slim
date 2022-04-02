@@ -15,8 +15,7 @@ html
   body
     header.w-full.mx-auto
       = component :navigation do |nav|
-        - nav.link_to "Home", root_path
-        - nav.link_to "Changelogs", root_path, active: true
+        - nav.link_to "Home", root_path, active: true
         - nav.link_to "Team", root_path
 
     main.lg:container.mx-auto.mt-28.px-5.flex

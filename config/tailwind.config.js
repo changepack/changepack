@@ -13,7 +13,17 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        primary: '#ff611a',
+        orange: {
+          100: '#FFFFE6',
+          200: '#FFFFCD',
+          300: '#FFFAB3',
+          400: '#FFE099',
+          500: '#FFC780',
+          600: '#FFAE67',
+          700: '#FF944D',
+          800: '#FF7B34',
+          900: '#FF611A',
+        },
       },
       boxShadow: {
         'sm': '0 0.125em 0.313em rgba(50, 50, 93, .09), 0 0.063em 0.125em rgba(0, 0, 0, .07)',

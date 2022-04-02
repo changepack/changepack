@@ -9,6 +9,10 @@ module ApplicationHelper
     component_class_for(name).new(**args).render_in(context, &block)
   end
 
+  def icon(name, **args)
+    fa_icon(name, **args)
+  end
+
   private
 
   def component_class_for(path)

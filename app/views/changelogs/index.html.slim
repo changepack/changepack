@@ -3,8 +3,12 @@
     p.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block#notice = notice
 
   .flex.justify-between.items-center
-    h1.font-bold.text-4xl Changelogs
-    = link_to 'New changelog', new_changelog_path, class: 'button button-1'
+    section
+      h1.font-bold.text-4xl Changelog
+      h2.mt-3 New updates and improvements to Changepack.
+    = link_to new_changelog_path, class: 'button button-1' do
+      = icon 'plus', class: 'mr-2'
+      ' Compose
 
   section.text-gray-600.body-font.overflow-hidden#changelogs
     .container.py-24.mx-auto
