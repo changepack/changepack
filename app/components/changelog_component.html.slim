@@ -8,7 +8,7 @@
     = link_to edit_changelog_path(@changelog), class: 'button button-2 mt-4 inline-block' do
       = helpers.icon 'pencil', class: 'mr-2'
       ' Edit changelog
-    .inline-block.ml-2 = button_to changelog_path(@changelog), method: :delete, class: 'button button-2 mt-4' do
+    .inline-block.ml-2 = button_to changelog_path(@changelog), method: :delete, class: 'button button-2 mt-4 text-red-600' do
       = helpers.icon 'trash', class: 'mr-2'
       ' Delete
 
