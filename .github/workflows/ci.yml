@@ -1,4 +1,4 @@
-name: RSpec
+name: Continuous integration
 on: push
 jobs:
   verify:
@@ -25,6 +25,9 @@ jobs:
           sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
           gem install bundler
           bundle install --jobs 4 --retry 3
+      - name: Run Rubocop
+        run: |
+          bundle exec rubocop
       - name: Setup test database
         env:
           DATABASE_URL: postgresql://rails_github_actions:postgres@localhost:5432/changepack_test

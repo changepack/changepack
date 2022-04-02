@@ -8,6 +8,7 @@ class NavigationComponent < ViewComponent::Base
       @title = title
       @url = url
       @active = active
+      super
     end
 
     def call

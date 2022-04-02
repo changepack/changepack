@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def component(name, context: nil, **args, &block)
     return render_component_in(context, name, **args, &block) if context
@@ -5,8 +7,8 @@ module ApplicationHelper
     render component_class_for(name).new(**args), &block
   end
 
-  def render_component_in(context, name, **args, &block)
-    component_class_for(name).new(**args).render_in(context, &block)
+  def render_component_in(context, name, **args, &)
+    component_class_for(name).new(**args).render_in(context, &)
   end
 
   def icon(name, **args)
@@ -32,6 +34,6 @@ module ApplicationHelper
   end
 
   def component_path(file_name)
-    Dir.glob(File.join(Rails.root, 'app', 'components', '**', file_name + ".rb")).first
+    Dir.glob(File.join(Rails.root, 'app', 'components', '**', "#{file_name}.rb")).first
   end
 end

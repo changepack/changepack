@@ -3,6 +3,8 @@
 class ChangelogComponent < ViewComponent::Base
   def initialize(changelog:)
     @changelog = changelog
+
+    super
   end
 
   attr_reader :changelog

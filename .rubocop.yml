@@ -1,0 +1,21 @@
+
+AllCops:
+  TargetRubyVersion: 3.1
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - "bin/**/*"
+    - "tmp/**/*"
+    - "config/**/*"
+    - "db/**/*"
+    - "lib/**/*"
+    - "node_modules/**/*"
+    - "spec/**/*"
+    - 'vendor/**/*'
+    - '*.md'
+    - 'Gemfile'
+    - 'Rakefile'
+    - 'config.ru'
+
+Style/Documentation:
+  Enabled: false

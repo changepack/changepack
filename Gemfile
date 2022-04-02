@@ -57,6 +57,8 @@ group :development, :test do
   gem "rspec-rails", "~> 5.1"
 
   gem "database_cleaner-active_record", "~> 2.0"
+
+  gem "rubocop", "~> 1.26", require: false
 end
 
 group :development do

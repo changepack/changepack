@@ -1,1 +1,3 @@
-json.partial! "changelogs/changelog", changelog: @changelog
+# frozen_string_literal: true
+
+json.partial! 'changelogs/changelog', changelog: @changelog

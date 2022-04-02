@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangelogsController < ApplicationController
   before_action :set_changelog, only: %i[show edit update destroy]
 
@@ -5,15 +7,13 @@ class ChangelogsController < ApplicationController
     @changelogs = Changelog.order(created_at: :desc).with_rich_text_content
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @changelog = Changelog.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @changelog = Changelog.new(changelog_params)
@@ -52,11 +52,11 @@ class ChangelogsController < ApplicationController
 
   private
 
-    def set_changelog
-      @changelog = Changelog.find(params[:id])
-    end
+  def set_changelog
+    @changelog = Changelog.find(params[:id])
+  end
 
-    def changelog_params
-      params.require(:changelog).permit(:title, :content)
-    end
+  def changelog_params
+    params.require(:changelog).permit(:title, :content)
+  end
 end

@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: changepack_production
-  username: changepack
-  password: <%= ENV["CHANGEPACK_DATABASE_PASSWORD"] %>
+  url: <%= ENV["MY_APP_DATABASE_URL"] %>
