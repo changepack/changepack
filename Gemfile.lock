@@ -233,6 +233,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    statesman (9.0.1)
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
     strscan (3.0.1)
@@ -284,6 +285,7 @@ DEPENDENCIES
   rubocop (~> 1.26)
   slim-rails (~> 3.4)
   sprockets-rails
+  statesman (~> 9.0)
   stimulus-rails
   tailwindcss-rails (~> 2.0)
   turbo-rails

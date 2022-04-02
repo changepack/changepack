@@ -86,3 +86,5 @@ gem "prettyid", "~> 0.2.0", require: "pretty_id"
 gem "view_component", "~> 2.52"
 
 gem "font-awesome-rails", "~> 4.7"
+
+gem "statesman", "~> 9.0"

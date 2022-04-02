@@ -22,6 +22,10 @@
   .input-invalid {
     @apply border border-red-500;
   }
+
+  .toggle-checkbox:checked {
+    @apply right-0;
+  }
 }
 
 trix-editor:empty:not(:focus)::before {
