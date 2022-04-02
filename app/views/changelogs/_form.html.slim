@@ -14,4 +14,6 @@
     = form.rich_text_area :content, class: 'input prose', placeholder: 'Content'
 
   .inline
-    = form.submit 'Save changelog', class: 'button button-1'
+    = form.button class: 'button button-1', type: 'submit' do
+      = icon 'check', class: 'mr-2'
+      | Save changelog
