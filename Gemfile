@@ -55,6 +55,8 @@ group :development, :test do
   gem "pry-rails"
 
   gem "rspec-rails", "~> 5.1"
+
+  gem "database_cleaner-active_record", "~> 2.0"
 end
 
 group :development do
