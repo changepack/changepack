@@ -1,6 +1,7 @@
 .py-8.flex.flex-wrap.md:flex-nowrap id=dom_id(changelog)
   .md:w-64.md:mb-0.mb-6.flex-shrink-0.flex.flex-col
-    span.mt-1.text-gray-400 = l(changelog.created_at.to_date, format: :long)
+    = link_to changelog, class: 'mt-1 text-gray-400' do
+      = l(changelog.created_at.to_date, format: :long)
 
   .md:flex-grow
     h2.text-2xl.font-medium.text-gray-900.title-font.mb-2

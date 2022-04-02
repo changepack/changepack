@@ -1,10 +1,7 @@
-.mx-auto.md:w-2/3.w-full.flex
-  .mx-auto
-    - if notice.present?
-      p.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block#notice = notice
+section.overflow-hidden
+  .container.mx-auto
+    .-my-8.divide-y-2.divide-gray-100
+      - if notice.present?
+        p.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block#notice = notice
 
-    = render @changelog
-
-    = link_to 'Edit changelog', edit_changelog_path(@changelog), class: 'button button-2 mt-2 inline-block'
-    .inline-block.ml-2
-      = button_to 'Delete changelog', changelog_path(@changelog), method: :delete, class: 'button button-2 mt-2'
+      = render @changelog
