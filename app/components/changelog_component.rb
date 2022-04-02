@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ChangelogComponent < ViewComponent::Base
+class ChangelogComponent < ApplicationComponent
   def initialize(changelog:)
     @changelog = changelog
 

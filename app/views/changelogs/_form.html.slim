@@ -10,7 +10,7 @@
       .text-xs.text-red-500.mt-2 = error_message
 
   .my-5
-    = component :toggle, label: 'Published', name: 'changelog[published]', checked: changelog.current_state == 'published'
+    = component :toggle, label: 'Published', name: 'changelog[published]', checked: changelog.status.published?
 
   .inline
     = form.button class: 'button button-1', type: 'submit', data: { test_id: 'submit' } do

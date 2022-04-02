@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationRecord < ActiveRecord::Base
-  include PrettyId
+  include PrettyId, Inquirer
 
   primary_abstract_class
 

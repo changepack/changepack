@@ -5,4 +5,8 @@ class ChangelogStateMachine
   state :published
 
   transition from: :draft, to: [:published]
+
+  after_transition(to: :published) do |changelog, _|
+    changelog.update!(status: 'published')
+  end
 end

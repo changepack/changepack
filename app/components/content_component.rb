@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ContentComponent < ViewComponent::Base
+class ContentComponent < ApplicationComponent
   renders_one :article
   renders_one :metadata
 end

@@ -15,5 +15,6 @@
   - component.metadata do
     = link_to changelog, class: 'mt-1 text-gray-400' do
       = l(changelog.created_at.to_date, format: :long)
-      - if changelog.current_state == 'draft'
+
+      - if changelog.status.draft?
         .mt-1.text-gray-300 Draft

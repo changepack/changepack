@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class NavigationComponent < ViewComponent::Base
+class NavigationComponent < ApplicationComponent
   renders_many :link_tos, 'LinkToComponent'
 
-  class LinkToComponent < ViewComponent::Base
+  class LinkToComponent < ApplicationComponent
     def initialize(title, url, active: false)
       @title = title
       @url = url
