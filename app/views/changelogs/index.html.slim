@@ -1,6 +1,6 @@
 .w-full
-  - if notice.present?
-    p.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block#notice = notice
+  = component :notice do
+    = notice
 
   .flex.justify-between.items-center
     section
