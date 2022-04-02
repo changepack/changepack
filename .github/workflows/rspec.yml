@@ -1,0 +1,38 @@
+name: RSpec
+on: push
+jobs:
+  verify:
+    name: Build
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: rails_github_actions
+          POSTGRES_DB: changepack_test
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+      - name: Install dependencies
+        run: |
+          sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+      - name: Setup test database
+        env:
+          DATABASE_URL: postgresql://rails_github_actions:postgres@localhost:5432/changepack_test
+          RAILS_ENV: test
+        run: |
+          rails db:create db:migrate
+      - name: Run tests
+        env:
+          DATABASE_URL: postgresql://rails_github_actions:postgres@localhost:5432/changepack_test
+          RAILS_ENV: test
+        run: bundle exec rspec
