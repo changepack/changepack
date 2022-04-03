@@ -37,6 +37,6 @@ module ApplicationHelper
   end
 
   def component_path(file_name)
-    Dir.glob(File.join(Rails.root, 'app', 'components', '**', "#{file_name}.rb")).first
+    Dir.glob(Rails.root.join('app', 'components', '**', "#{file_name}.rb")).first
   end
 end

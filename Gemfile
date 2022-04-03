@@ -63,6 +63,12 @@ group :development, :test do
   gem "cypress-on-rails", "~> 1.12"
 
   gem "factory_bot_rails", "~> 6.2"
+
+  gem "rubocop-sorbet", "~> 0.6.7", require: false
+
+  gem "unparser", "~> 0.6.4"
+
+  gem "rubocop-rails", "~> 2.14", require: false
 end
 
 group :development do
@@ -106,9 +112,5 @@ gem "after_commit_everywhere", "~> 1.2"
 gem "sorbet-rails", "~> 0.7.32"
 
 gem "tapioca", "~> 0.7.1", group: :development, require: false
-
-gem "rubocop-sorbet", "~> 0.6.7", group: %i[development test], require: false
-
-gem "unparser", "~> 0.6.4"
 
 gem "pagy", "~> 5.10"

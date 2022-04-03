@@ -23,7 +23,7 @@ class ChangelogsController < ApplicationController
 
     respond_to do |format|
       if Changelogs::Upsert.new(changelog_params).perform
-        format.html { redirect_to changelog_url(@changelog), notice: 'Changelog was successfully created.' }
+        format.html { redirect_to changelog_url(@changelog) }
         format.json { render :show, status: :created, location: @changelog }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -35,7 +35,7 @@ class ChangelogsController < ApplicationController
   def update
     respond_to do |format|
       if Changelogs::Upsert.new(changelog_params).perform
-        format.html { redirect_to changelog_url(@changelog), notice: 'Changelog was successfully updated.' }
+        format.html { redirect_to changelog_url(@changelog) }
         format.json { render :show, status: :ok, location: @changelog }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -48,7 +48,7 @@ class ChangelogsController < ApplicationController
     @changelog.destroy
 
     respond_to do |format|
-      format.html { redirect_to changelogs_url, notice: 'Changelog was successfully destroyed.' }
+      format.html { redirect_to changelogs_url }
       format.json { head :no_content }
     end
   end

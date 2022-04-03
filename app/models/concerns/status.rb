@@ -8,16 +8,14 @@ module Status
     extend ActiveSupport::Concern
 
     included do
-      has_many transition_name, class_name: transition_class.to_s, autosave: false
+      has_many transition_name, class_name: transition_class.to_s, autosave: false, dependent: :delete_all
 
       delegate :can_transition_to?, :history, :last_transition, :last_transition_to,
                :transition_to!, :transition_to, to: :state_machine
     end
 
     module ClassMethods
-      def initial_state
-        state_machine.initial_state
-      end
+      delegate :initial_state, to: :state_machine
     end
 
     def in_state?(state)
