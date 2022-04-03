@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Changelog < ApplicationRecord
-  include StateMachine
+  include Status
 
   key :log
 
