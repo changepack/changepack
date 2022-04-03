@@ -4,7 +4,6 @@ if defined?(DatabaseCleaner)
   DatabaseCleaner.clean
 else
   logger.warn "add database_cleaner or update cypress/app_commands/clean.rb"
-  Post.delete_all if defined?(Post)
 end
 
 CypressOnRails::SmartFactoryWrapper.reload
