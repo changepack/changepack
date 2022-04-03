@@ -1,2 +1,4 @@
-web: bin/rails server -p 3000
-css: bin/rails tailwindcss:watch
+web: bundle exec rails server -p 3000
+css: bundle exec rails tailwindcss:watch
+cypress: CYPRESS=1 RAILS_ENV=test bundle exec rails server -p 5017
+guard: bundle exec guard

@@ -9,5 +9,6 @@ windows:
   - changepack:
       layout: tiled
       panes:
-        - rails tailwindcss:watch
-        - CYPRESS=1 RAILS_ENV=test bin/rails server -p 5017
+        - bundle exec rails tailwindcss:watch
+        - CYPRESS=1 RAILS_ENV=test bundle exec rails server -p 5017
+        - bundle exec guard

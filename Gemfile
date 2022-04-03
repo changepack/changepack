@@ -86,6 +86,12 @@ group :development do
   # gem "spring"
 
   gem "active_record_query_trace", "~> 1.8"
+
+  gem "guard", "~> 2.18"
+
+  gem "guard-livereload", "~> 2.5", require: false
+
+  gem "rack-livereload", "~> 0.3.17"
 end
 
 
