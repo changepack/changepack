@@ -287,6 +287,9 @@ GEM
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (>= 3.0, < 5.0)
+    slim_lint (0.22.1)
+      rubocop (>= 0.78.0)
+      slim (>= 3.0, < 5.0)
     sorbet (0.5.9837)
       sorbet-static (= 0.5.9837)
     sorbet-coerce (0.5.0)
@@ -393,6 +396,7 @@ DEPENDENCIES
   rubocop-rspec (~> 2.9)
   rubocop-sorbet (~> 0.6.7)
   slim-rails (~> 3.4)
+  slim_lint (~> 0.22.1)
   sorbet-rails (~> 0.7.32)
   sprockets-rails
   statesman (~> 9.0)

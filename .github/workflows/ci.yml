@@ -37,6 +37,9 @@ jobs:
       - name: Run Sorbet
         run: |
           bundle exec srb tc
+      - name: Run slim-lint
+        run: |
+          bundle exec slim-lint app/views app/components
       - name: Setup test database
         run: |
           rails db:create db:migrate

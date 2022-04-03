@@ -19,6 +19,10 @@
     @apply button text-gray-800 hover:bg-gray-100;
   }
 
+  .button-delete {
+    @apply button-2 text-red-600;
+  }
+
   .button-1:disabled, .button-2:disabled {
     @apply opacity-50;
   }
@@ -53,7 +57,7 @@ trix-editor:empty:not(:focus)::before {
 }
 
 .pagination .page {
-  @apply button button-2 hidden;
+  @apply button-2 hidden;
 }
 
 .pagination .next, .pagination .prev {

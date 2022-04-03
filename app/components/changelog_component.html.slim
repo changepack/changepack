@@ -1,17 +1,25 @@
 = render ContentComponent.new do |component|
   - component.article do
     - if changelog.title?
-      h2.text-2xl.font-medium.text-gray-900.title-font.mb-2 data-test-id="changelog"
+      h2.text-2xl.font-medium.text-gray-900.title-font.mb-2(
+        data-test-id="changelog"
+      )
         = link_to changelog.title, changelog, data: { test_id: 'show' }
 
     article.leading-relaxed.prose.max-w-full == changelog.content
 
-    = link_to edit_changelog_path(@changelog), class: 'button button-2 mt-4 inline-block', data: { test_id: 'edit' } do
+    = link_to edit_changelog_path(@changelog), \
+                class: 'button-2 mt-4 inline-block', \
+                data: { test_id: 'edit' } do
       = helpers.icon 'pencil', class: 'mr-2'
       | Edit changelog
-    .inline-block.ml-2 = button_to changelog_path(@changelog), method: :delete, class: 'button button-2 mt-4 text-red-600', data: { test_id: 'destroy' } do
-      = helpers.icon 'trash', class: 'mr-2'
-      | Delete
+    .inline-block.ml-2
+      = button_to changelog_path(@changelog), \
+                    class: 'button-delete mt-4 text-red-600', \
+                    data: { test_id: 'delete' }, \
+                    method: :delete do
+        = helpers.icon 'trash', class: 'mr-2'
+        | Delete
 
   - component.metadata do
     = link_to changelog, class: 'mt-1 text-gray-400' do

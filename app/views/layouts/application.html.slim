@@ -7,16 +7,16 @@ html
     = csrf_meta_tags
     = csp_meta_tag
 
-    = stylesheet_link_tag "application", "data-turbo-track": "reload"
-    = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
+    = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
+    = stylesheet_link_tag 'tailwind', 'inter-font', 'data-turbo-track': 'reload'
 
     = javascript_importmap_tags
 
   body
     header.w-full.mx-auto
       = component :navigation do |nav|
-        - nav.link_to "Home", root_path, active: true
-        - nav.link_to "Account", root_path
+        - nav.link_to 'Home', root_path, active: true
+        - nav.link_to 'Account', root_path
 
     main.lg:container.mx-auto.mt-28.px-5.flex
       = yield

@@ -71,6 +71,8 @@ group :development, :test do
   gem "rubocop-rails", "~> 2.14", require: false
 
   gem "rubocop-rspec", "~> 2.9", require: false
+
+  gem "slim_lint", "~> 0.22.1"
 end
 
 group :development do

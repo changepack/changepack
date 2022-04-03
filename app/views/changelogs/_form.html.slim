@@ -1,18 +1,28 @@
 = form_with(model: changelog, class: 'contents') do |form|
   .mb-5
-    = form.text_field :title, class: "input #{'input-invalid' if changelog.errors.include?(:title)}", placeholder: 'Title', data: { test_id: 'title' }
+    = form.text_field :title, class: text_field_class(changelog, :title), \
+                              placeholder: 'Title', \
+                              data: { test_id: 'title' }
     - changelog.errors.full_messages_for(:title).each do |error_message|
       .text-xs.text-red-500.mt-2 = error_message
 
   .my-5
-    = form.rich_text_area :content, class: "prose input #{'input-invalid' if changelog.errors.include?(:content)}", autofocus: true, data: { test_id: 'content' }
+    / slim-lint:disable LineLength
+    = form.rich_text_area :content, class: "prose #{text_field_class(changelog, :content)}", \
+                                    data: { test_id: 'content' }, \
+                                    autofocus: true
+    / slim-lint:enable LineLength
     - changelog.errors.full_messages_for(:content).each do |error_message|
       .text-xs.text-red-500.mt-2 = error_message
 
   .my-5
-    = component :toggle, label: 'Published', name: 'changelog[published]', checked: changelog.status.published?
+    = component :toggle, label: 'Published', \
+                         name: 'changelog[published]', \
+                         checked: changelog.status.published?
 
   .inline
-    = form.button class: 'button button-1', type: 'submit', data: { test_id: 'submit' } do
+    = form.button class: 'button-1', \
+                  type: 'submit', \
+                  data: { test_id: 'submit' } do
       = icon 'save', class: 'mr-2'
       | Save changelog

@@ -18,6 +18,10 @@ module ApplicationHelper
     fa_icon(name, **args)
   end
 
+  def text_field_class(model, field)
+    "input #{'input-invalid' if model.errors.include?(field.to_sym)}"
+  end
+
   private
 
   def component_class_for(path)
