@@ -1,3 +1,4 @@
+# typed: false
 # frozen_string_literal: true
 
 module Status
@@ -48,8 +49,8 @@ module Status
     end
 
     included do |base|
-      @transition_class = "#{base.name}Transition".constantize
-      @state_machine = "#{base.name}StateMachine".constantize
+      @transition_class = "#{base.name}Transition".constantize # rubocop:disable Sorbet/ConstantsFromStrings
+      @state_machine = "#{base.name}StateMachine".constantize # rubocop:disable Sorbet/ConstantsFromStrings
       @transition_name = :transitions
     end
   end

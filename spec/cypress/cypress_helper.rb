@@ -1,3 +1,4 @@
+# typed: strict
 # This is loaded once before the first command is executed
 
 begin

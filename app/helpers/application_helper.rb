@@ -1,3 +1,4 @@
+# typed: ignore
 # frozen_string_literal: true
 
 module ApplicationHelper
@@ -23,9 +24,9 @@ module ApplicationHelper
     file_name = "#{name}_component"
     component_name = file_name.classify
     namespace ||= namespace(file_name)
-    return "#{namespace.capitalize}::#{component_name}".constantize unless namespace == 'components'
+    return "#{namespace.capitalize}::#{component_name}".constantize unless namespace == 'components' # rubocop:disable Sorbet/ConstantsFromStrings
 
-    component_name.constantize
+    component_name.constantize # rubocop:disable Sorbet/ConstantsFromStrings
   end
 
   def namespace(file_name)

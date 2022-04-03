@@ -1,3 +1,4 @@
+# typed: strict
 Normatron.setup do |config|
   # Comment the line below to disable Normatron
   config.add_orm Normatron::Extensions::ActiveRecord

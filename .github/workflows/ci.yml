@@ -34,6 +34,9 @@ jobs:
       - name: Run Rubocop
         run: |
           bundle exec rubocop
+      - name: Run Sorbet
+        run: |
+          bundle exec srb tc
       - name: Setup test database
         run: |
           rails db:create db:migrate

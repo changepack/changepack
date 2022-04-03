@@ -1,3 +1,5 @@
+require:
+  - rubocop-sorbet
 
 AllCops:
   TargetRubyVersion: 3.1
@@ -19,3 +21,13 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
+
+Sorbet/FalseSigil:
+  Exclude:
+    - "app/helpers/application_helper.rb"
+    - "app/models/concerns/inquirer.rb"
+
+Sorbet/ValidSigil:
+  Exclude:
+    - "app/helpers/application_helper.rb"
+    - "app/models/concerns/inquirer.rb"

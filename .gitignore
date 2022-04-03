@@ -40,3 +40,5 @@
 
 /spec/cypress/screenshots
 /spec/cypress/vidoes
+
+/sorbet/rbi/hidden-definitions/errors.txt
