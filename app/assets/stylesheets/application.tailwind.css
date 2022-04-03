@@ -4,15 +4,19 @@
 
 @layer components {
   .button {
-    @apply rounded-lg py-2 px-3 text-sm font-medium cursor-pointer text-gray-800 hover:bg-gray-100;
+    @apply rounded-lg py-2 px-3 text-sm font-medium cursor-pointer;
   }
 
   .button-1 {
-    @apply bg-orange-900 text-white hover:bg-orange-900;
+    @apply button bg-orange-900 text-white hover:bg-orange-900;
   }
 
   .button-2 {
-    @apply border border-gray-300 bg-white hover:bg-white shadow-sm hover:shadow-md transition-shadow ease-out duration-300;
+    @apply button border py-1 px-2 border-gray-300 bg-white hover:bg-white shadow-sm hover:shadow-md transition-shadow ease-out duration-300;
+  }
+
+  .button-3 {
+    @apply button text-gray-800 hover:bg-gray-100;
   }
 
   .button-1:disabled, .button-2:disabled {
@@ -29,6 +33,14 @@
 
   .toggle-checkbox:checked {
     @apply right-0;
+  }
+
+  .tab {
+    @apply button-3 rounded-full;
+  }
+
+  .tab-active {
+    @apply button-1 rounded-full;
   }
 }
 

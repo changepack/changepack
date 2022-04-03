@@ -14,7 +14,7 @@ class NavigationComponent < ApplicationComponent
     end
 
     def call
-      link_to @title, @url, class: "button #{@active && 'button-1'}"
+      link_to @title, @url, class: @active ? 'tab-active' : 'tab'
     end
   end
 end
