@@ -11,6 +11,7 @@ class Changelog < ApplicationRecord
 
   has_rich_text :content
 
+  validates :title, length: { maximum: 140 }
   validates :content, presence: true
 
   normalize :title
