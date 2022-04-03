@@ -6,10 +6,10 @@ class Changelog < ApplicationRecord
   key :log
 
   attribute :title, :string
-  attribute :status, :string
+  attribute :status, :string, default: 'draft'
 
   has_rich_text :content
-  has_many :transitions, class_name: 'ChangelogTransition', autosave: false
+  has_many :transitions, class_name: 'ChangelogTransition', autosave: false, dependent: :delete_all
 
   validates :content, presence: true
 

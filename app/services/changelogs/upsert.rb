@@ -5,7 +5,7 @@ module Changelogs
     params changelog: Types::Instance(Changelog),
            title: Types::String.optional,
            content: Types::String,
-           published?: Types::String
+           published?: Types::String.optional
 
     def perform
       changelog.update(attributes).tap do
