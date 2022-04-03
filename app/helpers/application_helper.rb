@@ -2,6 +2,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  include Pagy::Frontend
+
   def component(name, context: nil, **args, &block)
     return render_component_in(context, name, **args, &block) if context
 

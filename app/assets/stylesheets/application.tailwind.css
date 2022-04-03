@@ -12,7 +12,11 @@
   }
 
   .button-2 {
-    @apply border border-gray-300 bg-white hover:bg-white hover:shadow transition-shadow ease-out duration-300;
+    @apply border border-gray-300 bg-white hover:bg-white shadow-sm hover:shadow-md transition-shadow ease-out duration-300;
+  }
+
+  .button-1:disabled, .button-2:disabled {
+    @apply opacity-50;
   }
 
   .input {
@@ -32,3 +36,18 @@ trix-editor:empty:not(:focus)::before {
   @apply text-gray-300;
 }
 
+.pagination {
+  @apply text-right;
+}
+
+.pagination .page {
+  @apply button button-2 hidden;
+}
+
+.pagination .next, .pagination .prev {
+  @apply inline-block;
+}
+
+.pagination .page.disabled {
+  @apply opacity-50;
+}

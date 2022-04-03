@@ -110,3 +110,5 @@ gem "tapioca", "~> 0.7.1", group: :development, require: false
 gem "rubocop-sorbet", "~> 0.6.7", group: %i[development test], require: false
 
 gem "unparser", "~> 0.6.4"
+
+gem "pagy", "~> 5.10"

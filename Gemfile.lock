@@ -176,6 +176,8 @@ GEM
       activerecord (>= 3.2.0)
       activesupport (>= 3.2.0)
       stringex (>= 1.4.0)
+    pagy (5.10.1)
+      activesupport
     parallel (1.22.1)
     parlour (6.0.1)
       commander (~> 4.5)
@@ -372,6 +374,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   normatron (~> 0.3.4)
+  pagy (~> 5.10)
   pg (~> 1.1)
   prettyid (~> 0.2.0)
   pry-rails

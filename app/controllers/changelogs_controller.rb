@@ -5,7 +5,9 @@ class ChangelogsController < ApplicationController
   before_action :set_changelog, only: %i[show edit update destroy]
 
   def index
-    @changelogs = Changelog.order(created_at: :desc).with_rich_text_content
+    @pagy, @changelogs = pagy(
+      Changelog.order(created_at: :desc).with_rich_text_content
+    )
   end
 
   def show; end
