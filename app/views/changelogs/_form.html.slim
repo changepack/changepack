@@ -15,14 +15,14 @@
     - changelog.errors.full_messages_for(:content).each do |error_message|
       .text-xs.text-red-500.mt-2 = error_message
 
-  .my-5
-    = component :toggle, label: 'Published', \
-                         name: 'changelog[published]', \
-                         checked: changelog.status.published?
-
-  .inline
-    = form.button class: 'button-1', \
-                  type: 'submit', \
-                  data: { test_id: 'submit' } do
-      = icon 'save', class: 'mr-2'
-      | Save changelog
+  .columns-2
+    .column
+      = form.button class: 'button-1', \
+                    type: 'submit', \
+                    data: { test_id: 'submit' } do
+        = icon 'save', class: 'mr-2'
+        | Save changelog
+    .column.text-right
+      = component :toggle, label: 'Published', \
+                           name: 'changelog[published]', \
+                           checked: changelog.status.published?
