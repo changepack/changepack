@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ChangelogTransition < ApplicationRecord
+  key :ctr
+
   belongs_to :changelog, inverse_of: :transitions
 
   after_destroy :update_most_recent, if: :most_recent?

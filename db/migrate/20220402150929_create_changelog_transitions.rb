@@ -1,6 +1,6 @@
 class CreateChangelogTransitions < ActiveRecord::Migration[7.0]
   def change
-    create_table :changelog_transitions do |t|
+    create_table :changelog_transitions, id: :string do |t|
       t.string :to_state, null: false
       t.jsonb :metadata, default: {}
       t.integer :sort_key, null: false

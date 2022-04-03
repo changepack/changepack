@@ -46,6 +46,7 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_record_query_trace (1.8)
     activejob (7.0.2.3)
       activesupport (= 7.0.2.3)
       globalid (>= 0.3.6)
@@ -297,6 +298,7 @@ PLATFORMS
   arm64-darwin-21
 
 DEPENDENCIES
+  active_record_query_trace (~> 1.8)
   after_commit_everywhere (~> 1.2)
   bootsnap
   cypress-on-rails (~> 1.12)

@@ -8,8 +8,10 @@ module Changelogs
            published?: Types::String
 
     def perform
-      changelog.transition_to(:published) if publish?
-      changelog.update(attributes)
+      changelog.update(attributes).tap do
+        changelog.transition_to(:published) if publish?
+        changelog.transition_to(:draft) if draft?
+      end
     end
 
     private
@@ -23,6 +25,10 @@ module Changelogs
 
     def publish?
       params.fetch(:published, false).present? && changelog.can_transition_to?(:published)
+    end
+
+    def draft?
+      params.fetch(:published, false).blank? && changelog.can_transition_to?(:draft)
     end
 
     delegate :changelog, to: :params

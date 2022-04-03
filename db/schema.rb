@@ -52,7 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_173725) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "changelog_transitions", force: :cascade do |t|
+  create_table "changelog_transitions", id: :string, force: :cascade do |t|
     t.string "to_state", null: false
     t.jsonb "metadata", default: {}
     t.integer "sort_key", null: false
