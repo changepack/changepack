@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module StateMachine
   extend ::ActiveSupport::Concern
 
@@ -8,8 +10,8 @@ module StateMachine
       has_many transition_name, class_name: transition_class.to_s, autosave: false
 
       delegate :can_transition_to?,
-           :current_state, :history, :last_transition, :last_transition_to,
-           :transition_to!, :transition_to, :in_state?, to: :state_machine
+               :current_state, :history, :last_transition, :last_transition_to,
+               :transition_to!, :transition_to, :in_state?, to: :state_machine
     end
 
     module ClassMethods
@@ -32,10 +34,6 @@ module StateMachine
         transition_class: self.class.transition_class,
         association_name: self.class.transition_name
       )
-    end
-
-    def current_state
-      self['cached_state'].presence || state_machine.current_state
     end
   end
 

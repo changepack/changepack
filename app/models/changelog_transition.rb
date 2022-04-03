@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangelogTransition < ApplicationRecord
   belongs_to :changelog, inverse_of: :transitions
 
@@ -8,6 +10,7 @@ class ChangelogTransition < ApplicationRecord
   def update_most_recent
     last_transition = changelog.transitions.order(:sort_key).last
     return unless last_transition.present?
+
     last_transition.update_column(:most_recent, true)
   end
 end

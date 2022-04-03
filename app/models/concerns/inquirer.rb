@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Inquirer
   extend ::ActiveSupport::Concern
 
   module NilInquiry
-    def method_missing(method_name, *args, &block)
+    def method_missing(method_name, *args, &)
       return false if method_name.to_s.include?('?')
 
       super

@@ -66,6 +66,9 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    after_commit_everywhere (1.2.0)
+      activerecord (>= 4.2)
+      activesupport
     ast (2.4.2)
     bindex (0.8.1)
     bootsnap (1.11.1)
@@ -85,6 +88,28 @@ GEM
       reline (>= 0.2.7)
     diff-lcs (1.5.0)
     digest (3.1.0)
+    dry-configurable (0.14.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 0.6)
+    dry-container (0.9.0)
+      concurrent-ruby (~> 1.0)
+      dry-configurable (~> 0.13, >= 0.13.0)
+    dry-core (0.7.1)
+      concurrent-ruby (~> 1.0)
+    dry-inflector (0.2.1)
+    dry-initializer (3.1.1)
+    dry-initializer-rails (3.1.1)
+      dry-initializer (>= 2.4, < 4)
+      rails (> 3.0)
+    dry-logic (1.2.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 0.5, >= 0.5)
+    dry-types (1.5.1)
+      concurrent-ruby (~> 1.0)
+      dry-container (~> 0.3)
+      dry-core (~> 0.5, >= 0.5)
+      dry-inflector (~> 0.1, >= 0.1.2)
+      dry-logic (~> 1.0, >= 1.0.2)
     erubi (1.10.0)
     ffi (1.15.5)
     figaro (1.2.0)
@@ -93,6 +118,7 @@ GEM
       railties (>= 3.2, < 8.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    hashie (5.0.0)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -271,12 +297,16 @@ PLATFORMS
   arm64-darwin-21
 
 DEPENDENCIES
+  after_commit_everywhere (~> 1.2)
   bootsnap
   cypress-on-rails (~> 1.12)
   database_cleaner-active_record (~> 2.0)
   debug
+  dry-initializer-rails (~> 3.1)
+  dry-types (~> 1.5)
   figaro (~> 1.2)
   font-awesome-rails (~> 4.7)
+  hashie (~> 5.0)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
