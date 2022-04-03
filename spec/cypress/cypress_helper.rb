@@ -1,4 +1,6 @@
 # typed: strict
+# frozen_string_literal: true
+
 # This is loaded once before the first command is executed
 
 begin
@@ -31,9 +33,9 @@ factory = FactoryGirl if defined?(FactoryGirl)
 
 CypressOnRails::SmartFactoryWrapper.configure(
   always_reload: false,
-  factory: factory,
+  factory:,
   files: [
-    Rails.root.join('spec', 'factories.rb'),
-    Rails.root.join('spec', 'factories', '**', '*.rb')
+    Rails.root.join('spec/factories.rb'),
+    Rails.root.join('spec/factories/**/*.rb')
   ]
 )

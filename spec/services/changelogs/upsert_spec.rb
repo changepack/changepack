@@ -1,30 +1,32 @@
 # typed: false
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Changelogs::Upsert do
   describe '#perform' do
+    subject(:operation) { described_class.new(params) }
+
     let(:changelog) { build(:changelog) }
     let(:title) { 'Title' }
     let(:content) { 'Content' }
     let(:published) { 'on' }
     let(:params) do
       {
-        changelog: changelog,
-        title: title,
-        content: content,
-        published: published
+        changelog:,
+        title:,
+        content:,
+        published:
       }
     end
 
-    subject { described_class.new(params) }
-
     context 'when inserting' do
       it 'creates a changelog' do
-        expect { subject.perform }.to change(Changelog, :count).by(1)
+        expect { operation.perform }.to change(Changelog, :count).by(1)
       end
 
       it 'sets status to published' do
-        expect { subject.perform }.to change { changelog.status }.from('draft').to('published')
+        expect { operation.perform }.to change(changelog, :status).from('draft').to('published')
       end
     end
 
@@ -36,11 +38,11 @@ describe Changelogs::Upsert do
       before { changelog.transition_to!(:published) }
 
       it 'assigns new attributes to a changelog' do
-        expect { subject.perform }.to change { changelog.title }.from('Title').to('Updated title')
+        expect { operation.perform }.to change(changelog, :title).from('Title').to('Updated title')
       end
 
       it 'sets status back to draft' do
-        expect { subject.perform }.to change { changelog.status }.from('published').to('draft')
+        expect { operation.perform }.to change(changelog, :status).from('published').to('draft')
       end
     end
   end

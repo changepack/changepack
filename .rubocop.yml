@@ -1,19 +1,19 @@
 require:
   - rubocop-sorbet
   - rubocop-rails
+  - rubocop-rspec
 
 AllCops:
   TargetRubyVersion: 3.1
   NewCops: enable
   SuggestExtensions: false
   Exclude:
-    - "bin/**/*"
-    - "tmp/**/*"
-    - "config/**/*"
-    - "db/**/*"
-    - "lib/**/*"
-    - "node_modules/**/*"
-    - "spec/**/*"
+    - 'bin/**/*'
+    - 'tmp/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'lib/**/*'
+    - 'node_modules/**/*'
     - 'vendor/**/*'
     - '*.md'
     - 'Gemfile'
@@ -23,12 +23,15 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
+Metrics/BlockLength:
+  IgnoredMethods: ['describe', 'context']
+
 Sorbet/FalseSigil:
   Exclude:
-    - "app/helpers/application_helper.rb"
-    - "app/models/concerns/inquirer.rb"
+    - 'app/helpers/application_helper.rb'
+    - 'app/models/concerns/inquirer.rb'
 
 Sorbet/ValidSigil:
   Exclude:
-    - "app/helpers/application_helper.rb"
-    - "app/models/concerns/inquirer.rb"
+    - 'app/helpers/application_helper.rb'
+    - 'app/models/concerns/inquirer.rb'

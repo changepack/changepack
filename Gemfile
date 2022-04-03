@@ -69,6 +69,8 @@ group :development, :test do
   gem "unparser", "~> 0.6.4"
 
   gem "rubocop-rails", "~> 2.14", require: false
+
+  gem "rubocop-rspec", "~> 2.9", require: false
 end
 
 group :development do

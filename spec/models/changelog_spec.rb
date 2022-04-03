@@ -1,12 +1,14 @@
 # typed: false
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Changelog, type: :model do
   describe '#valid?' do
+    subject { described_class.new(title:, content:).valid? }
+
     let(:title) { 'Title' }
     let(:content) { 'Content' }
-
-    subject { described_class.new(title: title, content: content).valid? }
 
     it { is_expected.to be_truthy }
 
