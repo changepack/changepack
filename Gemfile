@@ -124,3 +124,5 @@ gem "sorbet-rails", "~> 0.7.32"
 gem "tapioca", "~> 0.7.1", group: :development, require: false
 
 gem "pagy", "~> 5.10"
+
+gem "devise", "~> 4.8"

@@ -58,3 +58,14 @@ Cypress.on('fail', (err, runnable) => {
 
   throw err;
 });
+
+Cypress.Commands.add("login", (details) => {
+  if(!details)
+    details = {}
+
+  if(!details.redirect_to)
+    details.redirect_to = '/'
+
+  cy.visit("__cypress__/authenticate",
+    { method: "POST", body: { email: details.email, redirect_to: details.redirect_to }  })
+});

@@ -1,6 +1,8 @@
 describe('Changelogs', function() {
   beforeEach(() => {
     cy.app('clean')
+    cy.appFactories([['create', 'user']])
+    cy.login()
   })
 
   it('happy path', function() {
