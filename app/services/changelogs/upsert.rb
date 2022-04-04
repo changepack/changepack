@@ -4,6 +4,7 @@
 module Changelogs
   class Upsert < Operation
     params changelog: Types::Instance(Changelog),
+           user: Types::Instance(User),
            title: Types::String.optional,
            content: Types::String,
            published?: Types::String.optional
@@ -20,7 +21,8 @@ module Changelogs
     def attributes
       {
         title: params.title,
-        content: params.content
+        content: params.content,
+        user: changelog.user || params.user
       }
     end
 
@@ -32,6 +34,6 @@ module Changelogs
       params.fetch(:published, false).blank? && changelog.can_transition_to?(:draft)
     end
 
-    delegate :changelog, to: :params
+    delegate :changelog, :user, to: :params
   end
 end

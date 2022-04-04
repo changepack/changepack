@@ -1,5 +1,5 @@
-= render ContentComponent.new do |component|
-  - component.article do
+= render ContentComponent.new do |content|
+  - content.article do
     - if changelog.title?
       h2.text-2xl.font-medium.text-gray-900.title-font.mb-2(
         data-test-id="changelog"
@@ -22,10 +22,5 @@
           = helpers.icon 'trash', class: 'mr-2'
           | Delete
 
-  - component.metadata do
-    = link_to changelog, class: 'mt-1 text-gray-400', \
-                         data: { turbo_frame: '_top' } do
-      = l(changelog.created_at.to_date, format: :long)
-
-      - if changelog.status.draft?
-        .mt-1: span.label Draft
+  - content.sidebar do
+    = render MetadataComponent.new(changelog:)

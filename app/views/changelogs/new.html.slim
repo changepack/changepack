@@ -3,9 +3,9 @@
       section
         h1.font-bold.text-4xl New changelog
 
-  = component :content do |component|
-    - component.article do
+  = component :content do |content|
+    - content.article do
       = render 'form', changelog: @changelog
 
-    - component.metadata do
-      span.mt-1.text-gray-400 = l Date.current, format: :long
+    - content.sidebar do
+      = component :metadata, changelog: @changelog

@@ -6,10 +6,11 @@ class Changelog < ApplicationRecord
 
   key :log
 
+  has_rich_text :content
   attribute :title, :string
   attribute :status, :string, default: 'draft'
 
-  has_rich_text :content
+  belongs_to :user, optional: true
 
   validates :title, length: { maximum: 140 }
   validates :content, presence: true

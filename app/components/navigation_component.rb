@@ -5,16 +5,12 @@ class NavigationComponent < ApplicationComponent
   renders_many :link_tos, 'LinkToComponent'
 
   class LinkToComponent < ApplicationComponent
-    def initialize(title, url, active: false)
-      @title = title
-      @url = url
-      @active = active
-
-      super
-    end
+    param :title
+    param :url
+    option :active, default: -> { false }
 
     def call
-      link_to @title, @url, class: @active ? 'tab-active' : 'tab'
+      link_to title, url, class: active ? 'tab-active' : 'tab'
     end
   end
 end

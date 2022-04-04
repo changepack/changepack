@@ -62,6 +62,8 @@ class ChangelogsController < ApplicationController
   end
 
   def changelog_params
-    params.require(:changelog).permit(:title, :content, :published).merge(changelog: @changelog)
+    params.require(:changelog)
+          .permit(:title, :content, :published)
+          .merge(changelog: @changelog, user: current_user)
   end
 end

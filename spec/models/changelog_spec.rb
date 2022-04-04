@@ -5,10 +5,11 @@ require 'rails_helper'
 
 describe Changelog, type: :model do
   describe '#valid?' do
-    subject { described_class.new(title:, content:).valid? }
+    subject { described_class.new(title:, content:, user:).valid? }
 
     let(:title) { 'Title' }
     let(:content) { 'Content' }
+    let(:user) { create(:user) }
 
     it { is_expected.to be_truthy }
 

@@ -1,13 +1,9 @@
 .-my-8
   = turbo_frame_tag dom_id(@changelog) do
     .w-2/3 data-test-id="edit_page"
-      = component :content do |component|
-        - component.article do
+      = component :content do |content|
+        - content.article do
           = render 'form', changelog: @changelog
 
-        - component.metadata do
-          span.mt-1.text-gray-400
-            = l @changelog.created_at&.to_date, format: :long
-
-          - if @changelog.status.draft?
-            .mt-2: span.label Draft
+        - content.sidebar do
+          = component :metadata, changelog: @changelog

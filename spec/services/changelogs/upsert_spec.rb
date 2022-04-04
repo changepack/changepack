@@ -4,16 +4,20 @@
 require 'rails_helper'
 
 describe Changelogs::Upsert do
+  let!(:user) { create(:user) }
+
   describe '#perform' do
     subject(:operation) { described_class.new(params) }
 
-    let(:changelog) { build(:changelog) }
+    let(:changelog) { build(:changelog, user:) }
     let(:title) { 'Title' }
     let(:content) { 'Content' }
     let(:published) { 'on' }
-    let(:params) do
+
+    def params
       {
         changelog:,
+        user:,
         title:,
         content:,
         published:
@@ -31,7 +35,7 @@ describe Changelogs::Upsert do
     end
 
     context 'when updating' do
-      let(:changelog) { create(:changelog) }
+      let(:changelog) { create(:changelog, user:) }
       let(:title) { 'Updated title' }
       let(:published) { nil }
 

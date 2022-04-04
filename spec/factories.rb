@@ -9,6 +9,7 @@ FactoryBot.define do
   end
 
   factory :changelog do
+    user
     title { 'Title' }
     content { 'Content' }
   end

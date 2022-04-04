@@ -3,5 +3,5 @@
 
 class ContentComponent < ApplicationComponent
   renders_one :article
-  renders_one :metadata
+  renders_one :sidebar
 end

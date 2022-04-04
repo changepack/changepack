@@ -2,12 +2,8 @@
 # frozen_string_literal: true
 
 class ToggleComponent < ApplicationComponent
-  def initialize(id: 'toggle', label: nil, name: nil, checked: nil)
-    @label = label
-    @id = id
-    @name = name
-    @checked = checked
-
-    super
-  end
+  option :id, default: -> { 'toggle' }
+  option :label, optional: true
+  option :name, optional: true
+  option :checked, optional: true
 end
