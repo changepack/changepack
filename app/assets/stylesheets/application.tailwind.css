@@ -46,6 +46,10 @@
   .tab-active {
     @apply button-1 rounded-full;
   }
+
+  .label {
+    @apply rounded-lg py-1 px-2 text-xs font-medium bg-[#FCEDB9] text-[#A82C2B];
+  }
 }
 
 trix-editor:empty:not(:focus)::before {
