@@ -6,4 +6,5 @@
           = render 'form', changelog: @changelog
 
         - component.metadata do
-          span.mt-1.text-gray-400 = l @changelog.created_at&.to_date, format: :long
+          span.mt-1.text-gray-400
+            = l @changelog.created_at&.to_date, format: :long
