@@ -22,6 +22,7 @@
                     data: { test_id: 'submit' } do
         = icon 'save', class: 'mr-2'
         | Save changelog
+      = link_to 'Cancel', changelog, class: 'ml-2 button-3'
     .column.text-right
       = component :toggle, label: 'Published', \
                            name: 'changelog[published]', \

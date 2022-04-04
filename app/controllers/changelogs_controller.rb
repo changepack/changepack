@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 class ChangelogsController < ApplicationController
-  before_action :set_changelog, only: %i[show edit update destroy]
+  before_action :set_changelog, only: %i[show edit update confirm_destroy destroy]
 
   def index
     @pagy, @changelogs = pagy(
@@ -43,6 +43,8 @@ class ChangelogsController < ApplicationController
       end
     end
   end
+
+  def confirm_destroy; end
 
   def destroy
     @changelog.destroy

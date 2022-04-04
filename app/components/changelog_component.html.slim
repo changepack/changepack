@@ -4,7 +4,8 @@
       h2.text-2xl.font-medium.text-gray-900.title-font.mb-2(
         data-test-id="changelog"
       )
-        = link_to changelog.title, changelog, data: { test_id: 'show' }
+        = link_to changelog.title, changelog, \
+                    data: { test_id: 'show', turbo_frame: '_top' }
 
     article.leading-relaxed.prose.max-w-full == changelog.content
 
@@ -14,15 +15,16 @@
       = helpers.icon 'pencil', class: 'mr-2'
       | Edit changelog
     .inline-block.ml-2
-      = button_to changelog_path(@changelog), \
-                    class: 'button-delete mt-4 text-red-600', \
-                    data: { test_id: 'delete' }, \
-                    method: :delete do
-        = helpers.icon 'trash', class: 'mr-2'
-        | Delete
+      turbo-frame id="confirm_destroy_#{@changelog.id}"
+        = link_to confirm_destroy_changelog_path(@changelog), \
+                    class: 'button-delete mt-4 inline-block', \
+                    data: { test_id: 'delete' } do
+          = helpers.icon 'trash', class: 'mr-2'
+          | Delete
 
   - component.metadata do
-    = link_to changelog, class: 'mt-1 text-gray-400' do
+    = link_to changelog, class: 'mt-1 text-gray-400', \
+                         data: { turbo_frame: '_top' } do
       = l(changelog.created_at.to_date, format: :long)
 
       - if changelog.status.draft?

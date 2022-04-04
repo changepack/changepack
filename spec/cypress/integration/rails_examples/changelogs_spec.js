@@ -21,9 +21,10 @@ describe('Changelogs', function() {
     cy.get('[data-test-id="submit"]').click()
     cy.get('[data-test-id="show_page"]').should('have.length.gt', 0)
     cy.contains('We added Cypress to Changepack to make the app more testable.').should('be.visible')
-    cy.contains('Draft').should('have.length', 0).pause()
+    cy.contains('Draft').should('have.length', 0)
 
     cy.get('[data-test-id="delete"]').click()
+    cy.get('[data-test-id="confirm"]').click()
     cy.get('[data-test-id="index_page"]').should('have.length.gt', 0)
     cy.get('[data-testid=changelog]').should('have.length', 0)
   })
