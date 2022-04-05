@@ -206,6 +206,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.3-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.3-x86_64-linux)
+      racc (~> 1.4)
     normatron (0.3.4)
       activerecord (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -351,6 +353,7 @@ GEM
       sorbet-runtime (>= 0.5)
     sorbet-runtime (0.5.9837)
     sorbet-static (0.5.9837-universal-darwin-21)
+    sorbet-static (0.5.9837-x86_64-linux)
     spoom (1.1.9)
       sorbet (>= 0.5.9204)
       sorbet-runtime (>= 0.5.9204)
@@ -368,6 +371,8 @@ GEM
     stringex (2.8.5)
     strscan (3.0.1)
     tailwindcss-rails (2.0.8-arm64-darwin)
+      railties (>= 6.0.0)
+    tailwindcss-rails (2.0.8-x86_64-linux)
       railties (>= 6.0.0)
     tapioca (0.7.1)
       bundler (>= 1.17.3)
@@ -414,6 +419,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   active_record_query_trace (~> 1.8)
