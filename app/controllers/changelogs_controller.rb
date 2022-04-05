@@ -6,7 +6,9 @@ class ChangelogsController < ApplicationController
 
   def index
     @pagy, @changelogs = pagy(
-      Changelog.order(created_at: :desc).with_rich_text_content
+      Changelog.includes(:user)
+               .order(created_at: :desc)
+               .with_rich_text_content
     )
   end
 
