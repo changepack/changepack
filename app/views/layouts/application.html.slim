@@ -15,8 +15,9 @@ html
   body
     header.w-full.mx-auto
       = component :navigation do |nav|
-        - nav.link_to 'Home', root_path, active: true
-        - nav.link_to 'Account', root_path
+        - if user_signed_in?
+          - nav.link_to 'Home', root_path, active: true
+          - nav.link_to 'Account', root_path
 
-    main.lg:container.mx-auto.mt-28.px-5.flex.mb-28
+    main.lg:container.mx-auto.my-28.px-5.flex
       = yield

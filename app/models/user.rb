@@ -4,8 +4,7 @@
 class User < ApplicationRecord
   key :usr
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :rememberable, :validatable
 
   attribute :first_name, :string
   attribute :last_name, :string
