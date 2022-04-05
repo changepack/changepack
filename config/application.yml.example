@@ -1,2 +1,2 @@
-app_host: 'changepack.test'
-app_port: '80'
+app_host: 'localhost'
+app_port: '3000'
