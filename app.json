@@ -1,0 +1,43 @@
+{
+  "name": "Changepack",
+  "description": "Changepack is an open-source changelog for your product.",
+  "website": "https://changepack.co/",
+  "repository": "https://github.com/changepack/changepack",
+  "keywords": [
+    "changelog",
+    "ruby",
+    "rails"
+  ],
+  "success_url": "/",
+  "env": {
+    "RACK_ENV": {
+      "description": "Environment for rack middleware.",
+      "value": "production"
+    },
+    "RAILS_ENV": {
+      "description": "Environment for rails middleware.",
+      "value": "production"
+    },
+    "app_host": {
+      "description": "The hostname for the application.",
+      "value": "example.com"
+    },
+    "app_port": {
+      "description": "The port for the application.",
+      "value": "80"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "FREE"
+    }
+  },
+  "image": "heroku/ruby",
+  "addons": ["heroku-postgresql"],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}

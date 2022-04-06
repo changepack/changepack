@@ -1,6 +1,8 @@
-![example workflow](https://github.com/changepack/changepack/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/changepack/changepack/actions/workflows/ci.yml/badge.svg)
 
 Changepack is an open-source changelog for your product. Share updates about your product with your customers and keep people in the loop!
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 # Build and run locally
 
