@@ -64,8 +64,6 @@ group :development, :test do
 
   gem "factory_bot_rails", "~> 6.2"
 
-  gem "rubocop-sorbet", "~> 0.6.7", require: false
-
   gem "unparser", "~> 0.6.4"
 
   gem "rubocop-rails", "~> 2.14", require: false
@@ -118,10 +116,6 @@ gem "dry-types", "~> 1.5"
 gem "hashie", "~> 5.0"
 
 gem "after_commit_everywhere", "~> 1.2"
-
-gem "sorbet-rails", "~> 0.7.32"
-
-gem "tapioca", "~> 0.7.1", group: :development, require: false
 
 gem "pagy", "~> 5.10"
 

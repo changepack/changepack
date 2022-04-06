@@ -1,5 +1,4 @@
 require:
-  - rubocop-sorbet
   - rubocop-rails
   - rubocop-rspec
 
@@ -25,13 +24,3 @@ Style/Documentation:
 
 Metrics/BlockLength:
   IgnoredMethods: ['describe', 'context']
-
-Sorbet/FalseSigil:
-  Exclude:
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/concerns/inquirer.rb'
-
-Sorbet/ValidSigil:
-  Exclude:
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/concerns/inquirer.rb'
