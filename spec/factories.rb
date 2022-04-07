@@ -2,20 +2,20 @@
 
 FactoryBot.define do
   factory :account do
-    name { 'Account' }
+    name { Faker::Company.name }
   end
 
   factory :user do
     account
-    email { 'user@example.com' }
-    password { 'password' }
-    password_confirmation { 'password' }
+    email { Faker::Internet.email }
+    password { Faker::Internet.password }
+    password_confirmation { password }
   end
 
   factory :changelog do
     user
     account { user.account }
-    title { 'Title' }
-    content { 'Content' }
+    title { Faker::Lorem.sentence }
+    content { Faker::Lorem.paragraph }
   end
 end

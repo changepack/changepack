@@ -41,7 +41,7 @@ describe Changelogs::Upsert do
       before { changelog.transition_to!(:published) }
 
       it 'assigns new attributes to a changelog' do
-        expect { operation.perform }.to change(changelog, :title).from('Title').to('Updated title')
+        expect { operation.perform }.to change(changelog, :title).to('Updated title')
       end
 
       it 'sets status back to draft' do

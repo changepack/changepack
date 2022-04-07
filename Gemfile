@@ -71,6 +71,8 @@ group :development, :test do
   gem "rubocop-rspec", "~> 2.9", require: false
 
   gem "slim_lint", "~> 0.22.1"
+
+  gem "faker", "~> 2.20"
 end
 
 group :development do
