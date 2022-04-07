@@ -10,6 +10,7 @@ class Changelog < ApplicationRecord
   attribute :status, :string, default: 'draft'
 
   belongs_to :user, optional: true
+  belongs_to :account
 
   validates :title, length: { maximum: 140 }
   validates :content, presence: true

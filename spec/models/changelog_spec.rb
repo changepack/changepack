@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Changelog, type: :model do
   describe '#valid?' do
-    subject { described_class.new(title:, content:, user:).valid? }
+    subject { described_class.new(title:, content:, user:, account: user.account).valid? }
 
     let(:title) { 'Title' }
     let(:content) { 'Content' }

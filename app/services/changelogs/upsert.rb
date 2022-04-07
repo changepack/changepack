@@ -21,8 +21,13 @@ module Changelogs
       {
         title: params.title,
         content: params.content,
-        user: changelog.user || params.user
+        user:,
+        account: user.account
       }
+    end
+
+    def user
+      @user ||= changelog.user || params.user
     end
 
     def publish?

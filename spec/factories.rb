@@ -14,6 +14,7 @@ FactoryBot.define do
 
   factory :changelog do
     user
+    account { user.account }
     title { 'Title' }
     content { 'Content' }
   end

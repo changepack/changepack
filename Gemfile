@@ -120,3 +120,5 @@ gem "after_commit_everywhere", "~> 1.2"
 gem "pagy", "~> 5.10"
 
 gem "devise", "~> 4.8"
+
+gem "paper_trail", "~> 12.3"

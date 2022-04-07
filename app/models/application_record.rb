@@ -5,6 +5,7 @@ class ApplicationRecord < ActiveRecord::Base
   include PrettyId
 
   primary_abstract_class
+  has_paper_trail
 
   class << self
     def key(id)
