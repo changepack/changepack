@@ -8,7 +8,7 @@ describe('Changelogs', function() {
 
   it('happy path', function() {
     cy.visit(`/`)
-    cy.contains('A changelog from another account').should('have.length.gt', 0)
+    cy.get('[data-test-id="changelog"]').should('not.exist');
 
     cy.get('[data-test-id="new"]').click()
     cy.get('[data-test-id="new_page"]').should('have.length.gt', 0)
