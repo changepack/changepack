@@ -111,8 +111,6 @@ gem "font-awesome-rails", "~> 4.7"
 
 gem "statesman", "~> 9.0"
 
-gem "normatron", "~> 0.3.4"
-
 gem "dry-initializer-rails", "~> 3.1"
 
 gem "dry-types", "~> 1.5"
@@ -126,3 +124,5 @@ gem "pagy", "~> 5.10"
 gem "devise", "~> 4.8"
 
 gem "paper_trail", "~> 12.3"
+
+gem "normalize_attributes", "~> 0.4.0"

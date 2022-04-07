@@ -6,13 +6,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :rememberable, :validatable
 
   attribute :name, :string
+  attribute :email, :string
 
   belongs_to :account
   has_many :changelogs, dependent: :nullify
   accepts_nested_attributes_for :account
 
   validates :name, presence: true
+
   normalize :name
+  normalize :email, with: %i[squish downcase]
 
   after_initialize do
     self.account = Account.new if account_id.nil?

@@ -207,10 +207,8 @@ GEM
       racc (~> 1.4)
     nokogiri (1.13.3-x86_64-linux)
       racc (~> 1.4)
-    normatron (0.3.4)
-      activerecord (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      stringex (>= 1.4.0)
+    normalize_attributes (0.4.0)
+      activerecord
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -342,7 +340,6 @@ GEM
     statesman (9.0.1)
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
-    stringex (2.8.5)
     strscan (3.0.1)
     tailwindcss-rails (2.0.8-arm64-darwin)
       railties (>= 6.0.0)
@@ -400,7 +397,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
-  normatron (~> 0.3.4)
+  normalize_attributes (~> 0.4.0)
   pagy (~> 5.10)
   paper_trail (~> 12.3)
   pg (~> 1.1)

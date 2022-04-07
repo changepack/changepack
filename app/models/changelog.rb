@@ -5,12 +5,13 @@ class Changelog < ApplicationRecord
 
   key :log
 
-  has_rich_text :content
   attribute :title, :string
   attribute :status, :string, default: 'draft'
 
   belongs_to :user, optional: true
   belongs_to :account
+
+  has_rich_text :content
 
   validates :title, length: { maximum: 140 }
   validates :content, presence: true
