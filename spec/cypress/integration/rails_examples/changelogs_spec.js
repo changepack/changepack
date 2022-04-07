@@ -2,11 +2,13 @@ describe('Changelogs', function() {
   beforeEach(() => {
     cy.app('clean')
     cy.appFactories([['create', 'user']])
+    cy.appFactories([['create', 'changelog', { title: 'A changelog from another account' }]])
     cy.login()
   })
 
   it('happy path', function() {
     cy.visit(`/`)
+    cy.contains('A changelog from another account').should('have.length.gt', 0)
 
     cy.get('[data-test-id="new"]').click()
     cy.get('[data-test-id="new_page"]').should('have.length.gt', 0)

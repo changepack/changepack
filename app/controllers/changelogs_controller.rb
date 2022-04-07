@@ -5,7 +5,7 @@ class ChangelogsController < ApplicationController
 
   def index
     @pagy, @changelogs = pagy(
-      Changelog.includes(:user)
+      changelogs.includes(:user)
                .order(created_at: :desc)
                .with_rich_text_content
     )
@@ -59,7 +59,7 @@ class ChangelogsController < ApplicationController
   private
 
   def set_changelog
-    @changelog = Changelog.find(params[:id])
+    @changelog = changelogs.find(params[:id])
   end
 
   def changelog_params
@@ -67,4 +67,6 @@ class ChangelogsController < ApplicationController
           .permit(:title, :content, :published)
           .merge(changelog: @changelog, user: current_user)
   end
+
+  delegate :changelogs, to: :current_account
 end
