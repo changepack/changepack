@@ -1,10 +1,9 @@
-# typed: strict
 Normatron.setup do |config|
   # Comment the line below to disable Normatron
   config.add_orm Normatron::Extensions::ActiveRecord
 
-  # Create your own filters using a Proc/lambda as following: 
-  # 
+  # Create your own filters using a Proc/lambda as following:
+  #
   # config.filters[:smile] = lambda do |value|
   #   value.kind_of?(String) : value + " =]" : value
   # end

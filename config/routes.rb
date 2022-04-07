@@ -1,7 +1,7 @@
-# typed: false
 Rails.application.routes.draw do
-  devise_for :users
   root 'changelogs#index'
+
+  devise_for :users, controllers: { registrations: 'registrations' }
 
   resources :changelogs do
     member do

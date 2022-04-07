@@ -1,4 +1,3 @@
-# typed: false
 class CreateChangelogTransitions < ActiveRecord::Migration[7.0]
   def change
     create_table :changelog_transitions, id: :string do |t|

@@ -1,4 +1,3 @@
-# typed: false
 # frozen_string_literal: true
 
 Array.wrap(command_options).map do |factory_options|

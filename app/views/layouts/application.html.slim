@@ -17,7 +17,6 @@ html
       = component :navigation do |nav|
         - if user_signed_in?
           - nav.link_to 'Home', root_path, active: true
-          - nav.link_to 'Account', root_path
 
     main.lg:container.mx-auto.my-28.px-5.flex
       = yield

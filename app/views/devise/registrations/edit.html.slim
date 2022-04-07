@@ -2,7 +2,7 @@ h2
   | Edit
   = resource_name.to_s.humanize
 = form_for(resource, as: resource_name, \
-                     url: registration_path(resource_name), \
+                     url: user_registration_path, \
                      html: { method: :put }) do |f|
   = render 'devise/shared/error_messages', resource: resource
   .field
@@ -13,6 +13,11 @@ h2
     div
       | Currently waiting confirmation for:
       = resource.unconfirmed_email
+  .field
+    = f.fields_for :account do |field|
+      = field.label :name, 'Company name'
+      br
+      = field.text_field :name
   .field
     = f.label :password
     i
@@ -41,7 +46,7 @@ h3
 p
   | Unhappy?
   = button_to 'Cancel my account', \
-              registration_path(resource_name), \
+              user_registration_path, \
               data: { confirm: 'Are you sure?' }, \
               method: :delete
 = link_to 'Back', :back
