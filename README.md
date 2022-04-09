@@ -18,6 +18,7 @@ yarn install
 cp config/application.yml.example config/application.yml
 
 # Run application
+bundle exec rails db:create db:migrate db:seed
 bundle exec rails s
 ```
 
