@@ -3,13 +3,7 @@
 class ChangelogsController < ApplicationController
   before_action :set_changelog, only: %i[show edit update confirm_destroy destroy]
 
-  def index
-    @pagy, @changelogs = pagy(
-      changelogs.includes(:user)
-               .order(created_at: :desc)
-               .with_rich_text_content
-    )
-  end
+  def index; end
 
   def show; end
 

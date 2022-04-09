@@ -1,3 +1,4 @@
+- readonly ||= false
 article
   = turbo_frame_tag dom_id(changelog) do
-    = component :changelog, changelog:
+    = component :changelog, changelog:, readonly:
