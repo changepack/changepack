@@ -5,7 +5,7 @@
       h2.mt-3
         | New updates and improvements
         - if current_account.name?
-          ' to #{current_account.name}
+          span< to #{current_account.name}
 
     = link_to new_changelog_path, class: 'button-1', \
                                   data: { test_id: 'new' } do
