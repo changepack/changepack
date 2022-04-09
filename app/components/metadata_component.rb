@@ -7,7 +7,7 @@ class MetadataComponent < ApplicationComponent
 
   def user
     @user ||= changelog.user || (
-      helpers.current_user if changelog.new_record?
+      current_user if changelog.new_record?
     )
   end
 

@@ -10,7 +10,10 @@ class ChangelogsController < ApplicationController
   end
 
   def index
-    redirect_to account_path(current_account)
+    respond_to do |format|
+      format.html { redirect_to account_path(current_account) }
+      format.json { render :index, locals: { changelogs: } }
+    end
   end
 
   def show
@@ -63,7 +66,11 @@ class ChangelogsController < ApplicationController
   private
 
   def set_changelog
-    @changelog = authorized_scope(Changelog.all).find(params.require(:id))
+    @changelog = changelogs.find(params.require(:id))
+  end
+
+  def changelogs
+    @changelogs ||= authorized_scope(Changelog.all)
   end
 
   def changelog_params

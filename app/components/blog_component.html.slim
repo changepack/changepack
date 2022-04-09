@@ -7,10 +7,10 @@
         - if account.name?
           span< to #{account.name}
 
-    - if helpers.allowed_to?(:create?, @changelogs)
+    - if allowed_to?(:create?, @changelogs, with: ChangelogPolicy)
       = link_to new_changelog_path, class: 'button-1', \
                                     data: { test_id: 'new' } do
-        = helpers.icon 'plus', class: 'mr-2'
+        = icon 'plus', class: 'mr-2'
         | Compose
 
   section.overflow-hidden#changelogs

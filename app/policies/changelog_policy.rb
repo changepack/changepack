@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class ChangelogPolicy < ApplicationPolicy
-  alias_rule :edit?, :update?, :destroy?, to: :manage?
-  alias_rule :show?, :new?, :create?, :confirm_destroy?, to: :index?
+  alias_rule :edit?, :update?, :confirm_destroy?, :destroy?, to: :manage?
+  alias_rule :show?, to: :index?
+  alias_rule :new?, to: :create?
 
   relation_scope do |relation|
     relation.where(account_id: user.account_id)
@@ -10,6 +11,10 @@ class ChangelogPolicy < ApplicationPolicy
 
   def index?
     true
+  end
+
+  def create?
+    user.present?
   end
 
   def manage?

@@ -1,22 +1,20 @@
 describe('Accounts', function() {
   beforeEach(() => {
     cy.app('clean')
+    cy.appScenario('accounts')
   })
 
   it('happy path', function() {
-    cy.appFactories([['create', 'changelog', { title: 'A publicly available changelog' }]]).then(results => {
-      const changelog = results[0]
+    cy.visit('/acc_test')
 
-      cy.visit(`/${changelog.account_id}`)
+    cy.contains('Published').should('be.visible')
+    cy.contains('Draft').should('have.length', 0)
+    cy.get('[data-test-id="edit"]').should('not.exist')
+    cy.get('[data-test-id="delete"]').should('not.exist')
 
-      cy.contains('A publicly available changelog').should('be.visible')
-      cy.get('[data-test-id="edit"]').should('not.exist')
-      cy.get('[data-test-id="delete"]').should('not.exist')
-
-      cy.get('[data-test-id="show"]').click()
-      cy.location('pathname').should('eq', `/changelogs/${changelog.id}`)
-      cy.get('[data-test-id="edit"]').should('not.exist')
-      cy.get('[data-test-id="delete"]').should('not.exist')
-    })
+    cy.get('[data-test-id="show"]').click()
+    cy.location('pathname').should('eq', `/changelogs/log_published`)
+    cy.get('[data-test-id="edit"]').should('not.exist')
+    cy.get('[data-test-id="delete"]').should('not.exist')
   })
 })

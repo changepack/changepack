@@ -18,4 +18,6 @@ class Changelog < ApplicationRecord
 
   normalize :title
   inquirer :status
+
+  scope :for, ->(user) { where(user.nil? && { status: :published }) }
 end
