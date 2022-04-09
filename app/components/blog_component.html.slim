@@ -1,5 +1,5 @@
 .w-full data-test-id="index_page"
-  .flex.justify-between.items-center
+  .block.md:flex.md:justify-between.md:items-center
     section
       h1.font-bold.text-4xl Changelog
       h2.mt-3
@@ -8,13 +8,14 @@
           span< to #{account.name}
 
     - if allowed_to?(:create?, @changelogs, with: ChangelogPolicy)
-      = link_to new_changelog_path, class: 'button-1', \
-                                    data: { test_id: 'new' } do
-        = icon 'plus', class: 'mr-2'
-        | Compose
+      .mt-4.md:mt-0
+        = link_to new_changelog_path, class: 'button-1', \
+                                      data: { test_id: 'new' } do
+          = icon 'plus', class: 'mr-2'
+          | Compose
 
   section.overflow-hidden#changelogs
-    .container.py-24.mx-auto
+    .container.py-10.md:py-24.mx-auto
       .-my-8.divide-y-2.divide-gray-100
         = render @changelogs
 
