@@ -9,7 +9,7 @@
 
     article.leading-relaxed.prose.max-w-full == changelog.content
 
-    - if readonly.blank?
+    - if helpers.allowed_to?(:manage?, @changelog)
       = link_to edit_changelog_path(@changelog), \
                   class: 'button-2 mt-4 inline-block', \
                   data: { test_id: 'edit' } do

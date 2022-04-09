@@ -2,7 +2,6 @@
 
 class BlogComponent < ApplicationComponent
   option :account
-  option :readonly, optional: true, default: -> { false }
 
   def before_render
     @pagy, @changelogs = pagy(

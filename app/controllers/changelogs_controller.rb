@@ -1,11 +1,21 @@
 # frozen_string_literal: true
 
 class ChangelogsController < ApplicationController
-  before_action :set_changelog, only: %i[show edit update confirm_destroy destroy]
+  skip_before_action :authenticate_user!, only: %i[show]
+  skip_verify_authorized
 
-  def index; end
+  before_action :set_changelog, only: %i[edit update confirm_destroy destroy]
+  before_action only: %i[edit update destroy] do
+    authorize! @changelog
+  end
 
-  def show; end
+  def index
+    redirect_to account_path(current_account)
+  end
+
+  def show
+    @changelog = Changelog.find(params.require(:id))
+  end
 
   def new
     @changelog = Changelog.new
@@ -53,7 +63,7 @@ class ChangelogsController < ApplicationController
   private
 
   def set_changelog
-    @changelog = changelogs.find(params[:id])
+    @changelog = authorized_scope(Changelog.all).find(params.require(:id))
   end
 
   def changelog_params
@@ -61,6 +71,4 @@ class ChangelogsController < ApplicationController
           .permit(:title, :content, :published)
           .merge(changelog: @changelog, user: current_user)
   end
-
-  delegate :changelogs, to: :current_account
 end

@@ -7,7 +7,7 @@
         - if account.name?
           span< to #{account.name}
 
-    - if readonly.blank?
+    - if helpers.allowed_to?(:create?, @changelogs)
       = link_to new_changelog_path, class: 'button-1', \
                                     data: { test_id: 'new' } do
         = helpers.icon 'plus', class: 'mr-2'
@@ -16,8 +16,6 @@
   section.overflow-hidden#changelogs
     .container.py-24.mx-auto
       .-my-8.divide-y-2.divide-gray-100
-        - # rubocop:disable Style/MultilineIfModifier
-        = render @changelogs, readonly:
-        - # rubocop:enable Style/MultilineIfModifier
+        = render @changelogs
 
       == pagy_nav(@pagy) if @pagy.pages > 1

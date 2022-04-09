@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get ':id', to: 'accounts#show', as: :account
+
   unless Rails.env.production?
     scope path: '/__cypress__', controller: 'cypress' do
       post 'authenticate', action: 'authenticate'
