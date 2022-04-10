@@ -50,7 +50,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: ENV['app_host'], port: ENV['app_port'] }
+  config.action_mailer.default_url_options = { host: ENV['APP_HOST'], port: ENV['APP_PORT'] }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -79,7 +79,7 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
-  config.hosts = ENV['app_host']
+  config.hosts = ENV['APP_HOST']
 
   config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
 end

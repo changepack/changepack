@@ -1,2 +1,4 @@
-app_host: 'localhost'
-app_port: '3000'
+APP_HOST: 'localhost'
+APP_PORT: '3000'
+GITHUB_KEY:
+GITHUB_SECRET:
