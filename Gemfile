@@ -96,6 +96,8 @@ group :development do
   gem "guard-livereload", "~> 2.5", require: false
 
   gem "rack-livereload", "~> 0.3.17"
+
+  gem "letter_opener", "~> 1.8"
 end
 
 
