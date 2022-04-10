@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Devise
+module Users
   class ApplicationController < ApplicationController
     skip_verify_authorized
   end
