@@ -119,6 +119,8 @@ gem "dry-initializer-rails", "~> 3.1"
 
 gem "dry-types", "~> 1.5"
 
+gem "dry-struct", "~> 1.4"
+
 gem "hashie", "~> 5.0"
 
 gem "after_commit_everywhere", "~> 1.2"

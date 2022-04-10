@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
 module Changelogs
-  PostCreated = Class.new(RailsEventStore::Event)
-  PostDrafted = Class.new(RailsEventStore::Event)
-  PostPublished = Class.new(RailsEventStore::Event)
+  class Created < Event
+    attribute :id, Types::String
+  end
+
+  class Drafted < Event
+    attribute :id, Types::String
+  end
+
+  class Published < Event
+    attribute :id, Types::String
+  end
 end
