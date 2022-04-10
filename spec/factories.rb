@@ -4,6 +4,12 @@ require 'faker'
 
 FactoryBot.define do
   factory :repository do
+    user
+    account { user.account }
+    name { "#{Faker::App.name.downcase}/#{Faker::App.name.downcase}" }
+    default_branch { :main }
+    provider { :github }
+    provider_id { Faker::Number.number(digits: 10) }
   end
 
   factory :account do
