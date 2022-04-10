@@ -24,7 +24,7 @@ module Changelogs
     end
 
     def user
-      @user ||= changelog.user || params.user
+      changelog.user || params.user
     end
 
     def event
