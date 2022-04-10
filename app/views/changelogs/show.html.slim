@@ -1,4 +1,2 @@
-.w-full data-test-id="show_page"
-  section.overflow-hidden
-    .container.mx-auto
-      = render @changelog
+section.w-full data-test-id="show_page"
+  = component :blog, account: @changelog.account, changelogs: [@changelog]
