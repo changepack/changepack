@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   root 'changelogs#index'
 
-  devise_for :users, controllers: { registrations: 'registrations' }
-  post '/auth/:provider/callback', to: 'sessions#create'
-  get '/auth/failure', to: 'sessions#failure'
+  devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'omniauth_callbacks' }
 
   resources :changelogs do
     member do
@@ -14,7 +12,7 @@ Rails.application.routes.draw do
   get ':id', to: 'accounts#show', as: :account
 
   unless Rails.env.production?
-    scope path: '/__cypress__', controller: 'cypress' do
+    scope path: '__cypress__', controller: 'cypress' do
       post 'authenticate', action: 'authenticate'
     end
   end
