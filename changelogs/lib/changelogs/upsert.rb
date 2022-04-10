@@ -33,8 +33,8 @@ module Changelogs
     end
 
     def event
-      return Published.new(event_attributes) if publish?
-      return Drafted.new(event_attributes) if draft?
+      return Published.new(event_attributes) if published?
+      return Drafted.new(event_attributes) if drafted?
       return Created.new(event_attributes) if created?
     end
 
@@ -51,9 +51,12 @@ module Changelogs
     end
 
     def created?
-      @created ||= changelog.id_previously_changed?
+      changelog.id_previously_changed?
     end
 
     delegate :changelog, :user, to: :params
+
+    alias published? publish?
+    alias drafted? draft?
   end
 end
