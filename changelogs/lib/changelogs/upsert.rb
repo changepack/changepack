@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Changelogs
-  class Upsert < Operation
+  class Upsert < Command
     params changelog: Types::Instance(Changelog),
            user: Types::Instance(User),
            title: Types::String.optional,

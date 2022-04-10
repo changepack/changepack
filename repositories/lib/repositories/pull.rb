@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Repositories
-  class Pull < Operation
+  class Pull < Command
     self.transaction = false
 
     params user: Types::Instance(User)

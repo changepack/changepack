@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Changepack
-  class Operation
+  class Command
     extend Dry::Initializer
     include AfterCommitEverywhere
 

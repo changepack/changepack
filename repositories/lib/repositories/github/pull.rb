@@ -2,8 +2,8 @@
 
 module Repositories
   module Github
-    class Pull < Operation
-      Disconnected = Class.new(Operation::Error)
+    class Pull < Command
+      Disconnected = Class.new(Command::Error)
 
       params user: Types::Instance(User)
 
