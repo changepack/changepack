@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class ChangelogComponent < ApplicationComponent
-  option :changelog
+  option :changelog, model: Changelog
 end

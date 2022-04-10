@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MetadataComponent < ApplicationComponent
-  option :changelog
+  option :changelog, model: Changelog
 
   private
 
