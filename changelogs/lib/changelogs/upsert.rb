@@ -71,7 +71,6 @@ module Changelogs
       params.fetch(:published, false).blank? && changelog.can_transition_to?(:draft)
     end
 
-
     delegate :changelog, :user, to: :params
   end
 end

@@ -84,8 +84,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_10_141842) do
   create_table "event_store_events", force: :cascade do |t|
     t.uuid "event_id", null: false
     t.string "event_type", null: false
-    t.binary "metadata"
-    t.binary "data", null: false
+    t.jsonb "metadata"
+    t.jsonb "data", null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "valid_at", precision: nil
     t.index ["created_at"], name: "index_event_store_events_on_created_at"

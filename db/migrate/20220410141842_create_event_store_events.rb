@@ -18,8 +18,8 @@ class CreateEventStoreEvents < ActiveRecord::Migration[4.2]
       create_table(:event_store_events, id: :bigserial, force: false) do |t|
         t.references  :event,       null: false, type: :uuid
         t.string      :event_type,  null: false
-        t.binary      :metadata
-        t.binary      :data, null: false
+        t.jsonb       :metadata
+        t.jsonb       :data, null: false
         t.datetime    :created_at,  null: false
         t.datetime    :valid_at,    null: true
       end
@@ -41,8 +41,8 @@ class CreateEventStoreEvents < ActiveRecord::Migration[4.2]
       create_table(:event_store_events, force: false) do |t|
         t.references  :event,       null: false, type: :string, limit: 36
         t.string      :event_type,  null: false
-        t.binary      :metadata
-        t.binary      :data,        null: false
+        t.jsonb       :metadata
+        t.jsonb       :data,        null: false
         t.datetime    :created_at,  null: false, precision: 6
         t.datetime    :valid_at,    null: true,  precision: 6
       end
