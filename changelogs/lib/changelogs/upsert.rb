@@ -20,12 +20,7 @@ module Changelogs
     private
 
     def attributes
-      {
-        title: params.title,
-        content: params.content,
-        account: user.account,
-        user:
-      }
+      { title:, content:, account:, user: }
     end
 
     def user
@@ -54,7 +49,8 @@ module Changelogs
       changelog.id_previously_changed?
     end
 
-    delegate :changelog, :user, to: :params
+    delegate :changelog, :title, :content, to: :params
+    delegate :account, to: :user
 
     alias published? publish?
     alias drafted? draft?
