@@ -20,6 +20,7 @@ Bundler.require(*Rails.groups)
 
 module Changepack
   class Application < Rails::Application
+    config.paths.add 'repositories/lib', eager_load: true
     config.paths.add 'changelogs/lib', eager_load: true
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
