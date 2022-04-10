@@ -3,6 +3,9 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :repository do
+  end
+
   factory :account do
     name { Faker::Company.name }
   end

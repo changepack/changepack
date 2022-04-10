@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_10_174850) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_10_213307) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -104,6 +104,32 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_10_174850) do
     t.index ["stream", "position"], name: "index_event_store_events_in_streams_on_stream_and_position", unique: true
   end
 
+  create_table "repositories", id: :string, force: :cascade do |t|
+    t.string "account_id"
+    t.string "user_id"
+    t.string "name", null: false
+    t.string "default_branch", null: false
+    t.string "provider", null: false
+    t.string "provider_id", null: false
+    t.string "status", default: "inactive", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_repositories_on_account_id"
+    t.index ["user_id"], name: "index_repositories_on_user_id"
+  end
+
+  create_table "repository_transitions", id: :string, force: :cascade do |t|
+    t.string "to_state", null: false
+    t.jsonb "metadata", default: {}
+    t.integer "sort_key", null: false
+    t.string "repository_id", null: false
+    t.boolean "most_recent", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repository_id", "most_recent"], name: "index_repository_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["repository_id", "sort_key"], name: "index_repository_transitions_parent_sort", unique: true
+  end
+
   create_table "users", id: :string, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -136,5 +162,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_10_174850) do
   add_foreign_key "changelog_transitions", "changelogs"
   add_foreign_key "changelogs", "accounts"
   add_foreign_key "changelogs", "users"
+  add_foreign_key "repositories", "accounts"
+  add_foreign_key "repositories", "users"
+  add_foreign_key "repository_transitions", "repositories"
   add_foreign_key "users", "accounts"
 end

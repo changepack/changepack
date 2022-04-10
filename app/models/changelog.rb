@@ -6,7 +6,7 @@ class Changelog < ApplicationRecord
   key :log
 
   attribute :title, :string
-  attribute :status, :string, default: 'draft'
+  attribute :status, :string, default: :draft
 
   belongs_to :user, optional: true
   belongs_to :account
@@ -15,6 +15,7 @@ class Changelog < ApplicationRecord
 
   validates :title, length: { maximum: 140 }
   validates :content, presence: true
+  validates :status, presence: true
 
   normalize :title
   inquirer :status

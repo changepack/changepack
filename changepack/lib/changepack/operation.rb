@@ -5,6 +5,8 @@ module Changepack
     extend Dry::Initializer
     include AfterCommitEverywhere
 
+    Error = Class.new(StandardError)
+
     module Params
       def self.prepended(base)
         class << base
@@ -58,5 +60,14 @@ module Changepack
       subclass.prepend Params
       subclass.prepend Transaction
     end
+
+    def valid?
+      validate!
+      true
+    rescue Error
+      false
+    end
+
+    def validate!; end
   end
 end
