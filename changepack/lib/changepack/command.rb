@@ -7,25 +7,6 @@ module Changepack
 
     Error = Class.new(StandardError)
 
-    module Params
-      def self.prepended(base)
-        class << base
-          prepend ClassMethods
-        end
-      end
-
-      module ClassMethods
-        def params(attrs)
-          param :params, type: lambda { |params|
-            Types::Hash.schema(attrs)
-                       .with_key_transform(&:to_sym)
-                       .then { |schema| schema[params.to_h] }
-                       .then { |schema| Hashie::Mash.new(schema) }
-          }
-        end
-      end
-    end
-
     module Transaction
       def perform(*args, **params)
         wrapper = proc { args.present? || params.present? ? super : super() }
@@ -54,20 +35,22 @@ module Changepack
       end
     end
 
+    module Validation
+      def valid?
+        validate!
+        true
+      rescue Error
+        false
+      end
+
+      def validate!; end
+    end
+
     def self.inherited(subclass)
       super
 
-      subclass.prepend Params
       subclass.prepend Transaction
+      subclass.prepend Validation
     end
-
-    def valid?
-      validate!
-      true
-    rescue Error
-      false
-    end
-
-    def validate!; end
   end
 end

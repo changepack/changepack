@@ -5,7 +5,7 @@ module Repositories
     class Pull < Command
       Disconnected = Class.new(Command::Error)
 
-      params user: Types::Instance(User)
+      option :user, model: User
 
       def validate!
         raise Disconnected if user.github_access_token.nil?
@@ -33,8 +33,6 @@ module Repositories
       def client
         @client ||= Octokit::Client.new(access_token: user.github_access_token)
       end
-
-      delegate :user, to: :params
     end
   end
 end

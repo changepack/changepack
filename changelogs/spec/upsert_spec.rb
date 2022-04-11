@@ -7,7 +7,7 @@ module Changelogs
     let!(:user) { create(:user) }
 
     describe '#perform' do
-      subject(:command) { described_class.new(params) }
+      subject(:command) { described_class.new(**params) }
 
       let(:changelog) { build(:changelog, user:) }
       let(:title) { 'Title' }

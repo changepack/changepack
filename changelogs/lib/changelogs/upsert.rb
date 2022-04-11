@@ -2,11 +2,11 @@
 
 module Changelogs
   class Upsert < Command
-    params changelog: Types::Instance(Changelog),
-           user: Types::Instance(User),
-           title: Types::String.optional,
-           content: Types::String,
-           published?: Types::String.optional
+    option :changelog, model: Changelog
+    option :user, model: User
+    option :content, type: Types::String
+    option :title, type: Types::String.optional, optional: true
+    option :published, type: Types::String.optional, optional: true
 
     def perform
       changelog.update(attributes).tap do
@@ -24,7 +24,7 @@ module Changelogs
     end
 
     def user
-      changelog.user || params.user
+      changelog.user || @user
     end
 
     def event
@@ -38,18 +38,17 @@ module Changelogs
     end
 
     def publish?
-      @publish ||= params.fetch(:published, false).present? && changelog.can_transition_to?(:published)
+      @publish ||= published.present? && changelog.can_transition_to?(:published)
     end
 
     def draft?
-      @draft ||= params.fetch(:published, false).blank? && changelog.can_transition_to?(:draft)
+      @draft ||= published.blank? && changelog.can_transition_to?(:draft)
     end
 
     def created?
       changelog.id_previously_changed?
     end
 
-    delegate :changelog, :title, :content, to: :params
     delegate :account, to: :user
 
     alias published? publish?

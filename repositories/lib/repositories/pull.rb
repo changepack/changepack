@@ -4,7 +4,7 @@ module Repositories
   class Pull < Command
     self.transaction = false
 
-    params user: Types::Instance(User)
+    option :user, model: User
 
     def perform
       github.perform if github.valid?
@@ -15,7 +15,5 @@ module Repositories
     def github
       @github ||= ::Repositories::Github::Pull.new(user:)
     end
-
-    delegate :user, to: :params
   end
 end
