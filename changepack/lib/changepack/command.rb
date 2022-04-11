@@ -7,6 +7,26 @@ module Changepack
 
     Error = Class.new(StandardError)
 
+    module Params
+      def self.prepended(base)
+        class << base
+          prepend ClassMethods
+        end
+      end
+
+      module ClassMethods
+        def option(name, type = nil, **opts, &)
+          dry_initializer.option(name, type, **transform_types(opts), &)
+          self
+        end
+
+        def transform_types(opts)
+          opts.merge(type: opts[:optional] ? opts[:type]&.optional : opts[:type])
+              .compact
+        end
+      end
+    end
+
     module Transaction
       def perform(*args, **params)
         wrapper = proc { args.present? || params.present? ? super : super() }
@@ -51,6 +71,7 @@ module Changepack
 
       subclass.prepend Transaction
       subclass.prepend Validation
+      subclass.prepend Params
     end
   end
 end

@@ -5,8 +5,8 @@ module Changelogs
     option :changelog, model: Changelog
     option :user, model: User
     option :content, type: Types::String
-    option :title, type: Types::String.optional, optional: true
-    option :published, type: Types::String.optional, optional: true
+    option :title, type: Types::String, optional: true
+    option :published, type: Types::String, optional: true
 
     def perform
       changelog.update(attributes).tap do
