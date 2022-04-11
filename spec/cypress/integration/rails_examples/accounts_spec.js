@@ -13,7 +13,8 @@ describe('Accounts', function() {
     cy.get('[data-test-id="delete"]').should('not.exist')
 
     cy.get('[data-test-id="show"]').click()
-    cy.location('pathname').should('eq', `/changelogs/log_published`)
+    cy.get('[data-test-id="show_page"]').should('have.length.gt', 0)
+    cy.contains('Published').should('be.visible')
     cy.get('[data-test-id="edit"]').should('not.exist')
     cy.get('[data-test-id="delete"]').should('not.exist')
   })

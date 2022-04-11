@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
   skip_before_action :authenticate_user!
 
   def show
-    @account = Account.find(params.require(:id))
+    @account = Account.friendly.find(params.require(:id))
     @changelogs = @account.changelogs
                           .for(current_user)
                           .includes(:user)

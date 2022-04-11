@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Account < ApplicationRecord
+  extend FriendlyId
+
   key :acc
 
   attribute :name, :string
@@ -9,4 +11,11 @@ class Account < ApplicationRecord
   has_many :changelogs, dependent: :destroy
 
   normalize :name
+  friendly_id :slug_candidates
+
+  private
+
+  def slug_candidates
+    %i[name id]
+  end
 end
