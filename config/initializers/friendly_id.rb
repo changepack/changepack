@@ -54,7 +54,7 @@ FriendlyId.defaults do |config|
   config.use :slugged
   config.use Module.new {
     def normalize_friendly_id(text)
-      text.tr('_', '-').to_slug.normalize! transliterations: [:russian, :latin]
+      text.humanize.to_slug.normalize! transliterations: [:russian, :latin]
     end
   }
 
