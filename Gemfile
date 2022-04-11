@@ -107,7 +107,7 @@ gem "figaro", "~> 1.2"
 
 gem "tailwindcss-rails", "~> 2.0"
 
-gem "prettyid", "~> 0.2.0", require: "pretty_id"
+gem "prettyid", "~> 0.2.0", require: "pretty_id", github: "changepack/pretty_id"
 
 gem "view_component", "~> 2.52"
 

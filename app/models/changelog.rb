@@ -27,10 +27,8 @@ class Changelog < ApplicationRecord
   private
 
   def slug_candidates
-    %i[title_timestamp set_pretty_id]
-  end
-
-  def title_timestamp
-    [title, Time.current.to_i] if title?
+    [
+      %i[title set_pretty_id]
+    ]
   end
 end
