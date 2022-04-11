@@ -16,6 +16,6 @@ class Account < ApplicationRecord
   private
 
   def slug_candidates
-    %i[name id]
+    %i[name set_pretty_id]
   end
 end

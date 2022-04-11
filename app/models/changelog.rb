@@ -27,7 +27,7 @@ class Changelog < ApplicationRecord
   private
 
   def slug_candidates
-    %i[title_timestamp id]
+    %i[title_timestamp set_pretty_id]
   end
 
   def title_timestamp
