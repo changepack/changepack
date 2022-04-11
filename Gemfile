@@ -146,3 +146,5 @@ gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "octokit", "~> 4.0"
 
 gem "friendly_id", "~> 5.4"
+
+gem "babosa", "~> 2.0"

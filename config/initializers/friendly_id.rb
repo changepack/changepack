@@ -52,6 +52,11 @@ FriendlyId.defaults do |config|
   # to do so, uncomment the following line.
 
   config.use :slugged
+  config.use Module.new {
+    def normalize_friendly_id(text)
+      text.tr('_', '-').to_slug.normalize! transliterations: [:russian, :latin]
+    end
+  }
 
   # By default, FriendlyId's :slugged addon expects the slug column to be named
   # 'slug', but you can change it if you wish.
