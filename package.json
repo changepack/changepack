@@ -1,6 +1,6 @@
 {
   "name": "changepack",
   "devDependencies": {
-    "cypress": "^9.5.3"
+    "cypress": "^9.5.4"
   }
 }
