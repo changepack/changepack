@@ -32,6 +32,7 @@
 
 # Ignore application configuration
 /config/application.yml
+/config/storage.yml
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
