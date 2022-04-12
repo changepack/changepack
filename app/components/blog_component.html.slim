@@ -10,7 +10,7 @@
   - if helpers.allowed_to?(:create?, @changelogs, with: ChangelogPolicy)
     .mt-4.md:mt-0
       = link_to new_changelog_path, class: 'button-1', \
-                                    data: { test_id: 'new' } do
+                                    data: { test_id: 'new_changelog_button' } do
         = helpers.icon 'plus', class: 'mr-2'
         | Compose
 
