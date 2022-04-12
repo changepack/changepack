@@ -1,23 +1,22 @@
-.w-full data-test-id="index_page"
-  .block.md:flex.md:justify-between.md:items-center
-    section
-      = link_to account_path(account) do
-        h1.font-bold.text-4xl Changelog
-        h2.mt-3
-          | New updates and improvements
-          - if account.name?
-            span< to #{account.name}
+.block.md:flex.md:justify-between.md:items-center
+  section
+    = link_to account_path(account) do
+      h1.font-bold.text-4xl Changelog
+      h2.mt-3
+        | New updates and improvements
+        - if account.name?
+          span< to #{account.name}
 
-    - if helpers.allowed_to?(:create?, @changelogs, with: ChangelogPolicy)
-      .mt-4.md:mt-0
-        = link_to new_changelog_path, class: 'button-1', \
-                                      data: { test_id: 'new' } do
-          = helpers.icon 'plus', class: 'mr-2'
-          | Compose
+  - if helpers.allowed_to?(:create?, @changelogs, with: ChangelogPolicy)
+    .mt-4.md:mt-0
+      = link_to new_changelog_path, class: 'button-1', \
+                                    data: { test_id: 'new' } do
+        = helpers.icon 'plus', class: 'mr-2'
+        | Compose
 
-  section.overflow-hidden#changelogs
-    .container.py-10.md:py-24.mx-auto
-      .-my-8.divide-y-2.divide-gray-100
-        = render @collection
+section.overflow-hidden#changelogs
+  .py-10.md:py-24
+    .-my-8.divide-y-2.divide-gray-100
+      = render @collection
 
-      == helpers.pagy_nav(@pagy) if @pagy.pages > 1
+    == helpers.pagy_nav(@pagy) if @pagy.pages > 1
