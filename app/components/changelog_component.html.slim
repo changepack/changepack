@@ -5,21 +5,24 @@
         data-test-id="changelog"
       )
         = link_to changelog.title, changelog, \
-                    data: { test_id: 'show', turbo_frame: '_top' }
+                    data: { \
+                      test_id: 'changelog_button', \
+                      turbo_frame: '_top' \
+                    }
 
     article.leading-relaxed.prose.max-w-full == changelog.content
 
     - if helpers.allowed_to?(:manage?, @changelog)
       = link_to edit_changelog_path(@changelog), \
                   class: 'button-2 mt-4 inline-block', \
-                  data: { test_id: 'edit' } do
+                  data: { test_id: 'edit_changelog' } do
         = helpers.icon 'pencil', class: 'mr-2'
         | Edit changelog
       .inline-block.ml-2
         turbo-frame id="confirm_destroy_#{@changelog.id}"
           = link_to confirm_destroy_changelog_path(@changelog), \
                       class: 'button-delete mt-4 inline-block', \
-                      data: { test_id: 'delete' } do
+                      data: { test_id: 'destroy_changelog' } do
             = helpers.icon 'trash', class: 'mr-2'
             | Delete
 
