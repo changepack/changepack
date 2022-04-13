@@ -37,7 +37,6 @@
   "addons": ["heroku-postgresql"],
   "buildpacks": [
     { "url": "heroku/ruby" },
-    { "url": "https://github.com/brandoncc/heroku-buildpack-vips" },
-    { "url": "https://github.com/amitree/heroku-buildpack-poppler" }
+    { "url": "heroku-community/apt" }
   ]
 }
