@@ -148,3 +148,5 @@ gem "octokit", "~> 4.0"
 gem "friendly_id", "~> 5.4"
 
 gem "babosa", "~> 2.0"
+
+gem "aws-sdk-s3", require: false
