@@ -36,8 +36,7 @@
   "image": "heroku/ruby",
   "addons": ["heroku-postgresql"],
   "buildpacks": [
-    {
-      "url": "heroku/ruby"
-    }
+    { "url": "heroku/ruby" },
+    { "url": "https://github.com/brandoncc/heroku-buildpack-vips" }
   ]
 }
