@@ -11,6 +11,7 @@ class User < ApplicationRecord
 
   belongs_to :account
   has_many :changelogs, dependent: :nullify
+
   accepts_nested_attributes_for :account
 
   validates :name, presence: true
