@@ -57,13 +57,11 @@ module Changepack
 
     module Validation
       def valid?
-        validate!
+        validate! if respond_to?(:validate!)
         true
       rescue Error
         false
       end
-
-      def validate!; end
     end
 
     def self.inherited(subclass)

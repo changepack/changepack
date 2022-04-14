@@ -12,6 +12,8 @@ module Repositories
       end
 
       def perform
+        validate!
+
         client.repos.each { |r| upsert_repository!(r) }
       end
 
