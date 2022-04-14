@@ -5,7 +5,6 @@ require 'rails_helper'
 module Repositories
   describe Pull do
     subject(:operation) { described_class.new(user:) }
-
     let(:user) { create(:user) }
     let(:instance) { provider.new(user:) }
 
@@ -25,7 +24,7 @@ module Repositories
       end
 
       context 'with a token' do
-        let(:user) { create(:user, external_ids: { github: { id: 1, access_token: 'access_token' } }) }
+        let(:user) { create(:user, external_ids: { github: { access_token: 'access_token' } }) }
 
         it 'performs' do
           operation.perform

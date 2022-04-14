@@ -77,6 +77,10 @@ group :development, :test do
   gem "faker", "~> 2.20"
 
   gem "bullet", "~> 7.0"
+
+  gem "vcr", "~> 6.1"
+
+  gem "webmock", "~> 3.14"
 end
 
 group :development do
