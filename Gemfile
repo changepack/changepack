@@ -137,7 +137,7 @@ gem "action_policy", "~> 0.6.0"
 
 gem "rails_event_store", "~> 2.3"
 
-gem "omniauth", "~> 2.0"
+gem "omniauth", "~> 2.1"
 
 gem "omniauth-github", "~> 2.0"
 
