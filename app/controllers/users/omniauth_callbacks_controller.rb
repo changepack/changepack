@@ -6,7 +6,7 @@ module Users
 
     def github
       current_user.lock!
-      current_user.external_ids.deep_merge!(github: github_ids)
+      current_user.provider_ids.deep_merge!(github: github_ids)
       current_user.save!
 
       redirect_to root_path, notice: t('devise.omniauth_callbacks.success', kind: 'GitHub')

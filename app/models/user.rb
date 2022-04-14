@@ -7,10 +7,12 @@ class User < ApplicationRecord
 
   attribute :name, :string
   attribute :email, :string
-  attribute :external_ids, :jsonb, default: {}
+  attribute :provider_ids, :jsonb, default: {}
 
   belongs_to :account
+
   has_many :changelogs, dependent: :nullify
+  has_many :repositories, dependent: :delete_all
 
   accepts_nested_attributes_for :account
 
@@ -32,6 +34,6 @@ class User < ApplicationRecord
   end
 
   def github_ids
-    external_ids['github'] || {}
+    provider_ids['github'] || {}
   end
 end
