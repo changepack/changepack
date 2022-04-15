@@ -25,7 +25,7 @@ module Repositories
             user:,
             account: user.account,
             name: repository.full_name,
-            default_branch: repository.default_branch,
+            branch: repository.default_branch,
             provider: :github,
             provider_id: repository.id
           )

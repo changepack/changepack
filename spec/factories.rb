@@ -7,7 +7,7 @@ FactoryBot.define do
     user
     account { user.account }
     name { "#{Faker::App.name.downcase}/#{Faker::App.name.downcase}" }
-    default_branch { :main }
+    branch { :main }
     provider { :github }
     provider_id { Faker::Number.number(digits: 10) }
   end

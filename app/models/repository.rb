@@ -6,7 +6,7 @@ class Repository < ApplicationRecord
   key :rep
 
   attribute :name, :string
-  attribute :default_branch, :string
+  attribute :branch, :string
   attribute :status, :string, default: :inactive
   attribute :provider, :string
   attribute :provider_id, :string
@@ -15,12 +15,12 @@ class Repository < ApplicationRecord
   belongs_to :user
 
   validates :name, presence: true
-  validates :default_branch, presence: true
+  validates :branch, presence: true
   validates :status, presence: true
   validates :provider, presence: true, inclusion: { in: %w[github] }
   validates :provider_id, presence: true
 
   normalize :name
-  normalize :default_branch
+  normalize :branch
   inquirer :status
 end

@@ -9,7 +9,7 @@ RSpec.describe Repository, type: :model do
         account: user.account,
         user:,
         name:,
-        default_branch:,
+        branch:,
         provider:,
         provider_id:
       ).valid?
@@ -17,7 +17,7 @@ RSpec.describe Repository, type: :model do
 
     let(:user) { create(:user) }
     let(:name) { "#{Faker::App.name.downcase}/#{Faker::App.name.downcase}" }
-    let(:default_branch) { :main }
+    let(:branch) { :main }
     let(:provider) { :github }
     let(:provider_id) { Faker::Number.number(digits: 10) }
 
@@ -30,7 +30,7 @@ RSpec.describe Repository, type: :model do
     end
 
     context 'when branch is not present' do
-      let(:default_branch) { nil }
+      let(:branch) { nil }
 
       it { is_expected.to be_falsey }
     end
