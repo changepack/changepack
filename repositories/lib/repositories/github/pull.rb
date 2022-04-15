@@ -33,7 +33,9 @@ module Repositories
       end
 
       def client
-        @client ||= Octokit::Client.new(access_token: user.github_access_token)
+        @client ||= Octokit::Client.new(access_token: user.github_access_token).tap do |client|
+          client.auto_paginate = true
+        end
       end
     end
   end
