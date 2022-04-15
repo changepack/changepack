@@ -2,7 +2,17 @@
 
 require 'faker'
 
+# rubocop:disable Metrics/BlockLength
 FactoryBot.define do
+  factory :commit do
+    message { Faker::Lorem.sentence }
+    url { Faker::Internet.url(host: 'example.com') }
+    commited_at { Faker::Date.in_date_period }
+    author { { name: Faker::Name.name, email: Faker::Internet.email } }
+    repository
+    account { repository.account }
+  end
+
   factory :repository do
     user
     account { user.account }
@@ -31,3 +41,5 @@ FactoryBot.define do
     content { Faker::Lorem.paragraph }
   end
 end
+
+# rubocop:enable Metrics/BlockLength

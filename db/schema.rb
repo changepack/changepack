@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_15_000512) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_15_001732) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -83,6 +83,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_000512) do
     t.index ["account_id"], name: "index_changelogs_on_account_id"
     t.index ["slug"], name: "index_changelogs_on_slug", unique: true
     t.index ["user_id"], name: "index_changelogs_on_user_id"
+  end
+
+  create_table "commits", id: :string, force: :cascade do |t|
+    t.text "message", null: false
+    t.string "url", null: false
+    t.datetime "commited_at", null: false
+    t.jsonb "author", default: {}, null: false
+    t.string "account_id"
+    t.string "repository_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_commits_on_account_id"
+    t.index ["repository_id"], name: "index_commits_on_repository_id"
   end
 
   create_table "event_store_events", force: :cascade do |t|
@@ -178,6 +191,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_000512) do
   add_foreign_key "changelog_transitions", "changelogs"
   add_foreign_key "changelogs", "accounts"
   add_foreign_key "changelogs", "users"
+  add_foreign_key "commits", "accounts"
+  add_foreign_key "commits", "repositories"
   add_foreign_key "repositories", "accounts"
   add_foreign_key "repositories", "users"
   add_foreign_key "repository_transitions", "repositories"
