@@ -471,6 +471,8 @@ GEM
     statesman (9.0.1)
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
+    store_model (0.13.0)
+      activerecord (>= 5.2)
     strscan (3.0.1)
     tailwindcss-rails (2.0.8-arm64-darwin)
       railties (>= 6.0.0)
@@ -567,6 +569,7 @@ DEPENDENCIES
   sprockets-rails
   statesman (~> 9.0)
   stimulus-rails
+  store_model (~> 0.13.0)
   tailwindcss-rails (~> 2.0)
   turbo-rails
   tzinfo-data

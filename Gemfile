@@ -154,3 +154,5 @@ gem "friendly_id", "~> 5.4"
 gem "babosa", "~> 2.0"
 
 gem "aws-sdk-s3", require: false
+
+gem "store_model", "~> 0.13.0"

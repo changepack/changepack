@@ -9,6 +9,7 @@ class Account < ApplicationRecord
 
   has_many :users, dependent: :destroy
   has_many :changelogs, dependent: :destroy
+  has_many :commits, dependent: :destroy
 
   normalize :name
   friendly_id :slug_candidates

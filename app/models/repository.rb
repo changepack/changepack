@@ -14,6 +14,8 @@ class Repository < ApplicationRecord
   belongs_to :account
   belongs_to :user
 
+  has_many :commits, dependent: :destroy
+
   validates :name, presence: true
   validates :branch, presence: true
   validates :status, presence: true

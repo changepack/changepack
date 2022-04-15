@@ -6,7 +6,7 @@ class Commit < ApplicationRecord
   attribute :message, :text
   attribute :url, :string
   attribute :commited_at, :datetime
-  attribute :author, :jsonb, default: {}
+  attribute :author, Commit::Author.to_type, default: {}
 
   belongs_to :account
   belongs_to :repository
@@ -14,5 +14,5 @@ class Commit < ApplicationRecord
   validates :message, presence: true
   validates :url, presence: true
   validates :commited_at, presence: true
-  validates :author, presence: true
+  validates :author, presence: true, store_model: true
 end
