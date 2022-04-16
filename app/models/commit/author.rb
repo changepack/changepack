@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-module Commit
-  class Author
-    include StoreModel::Model
+class Commit::Author # rubocop:disable Style/ClassAndModuleChildren
+  include StoreModel::Model
 
-    attribute :name, :string
-    attribute :email, :string
+  attribute :name, :string
+  attribute :email, :string
 
-    validates :name, presence: true
-    validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  end
+  validates :name, presence: true
+  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 end
