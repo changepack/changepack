@@ -20,14 +20,11 @@ module Repositories
       private
 
       def upsert_repository!(repository)
-        Repository.find_or_initialize_by(provider: :github, provider_id: repository.id) do |r|
+        Repository.find_or_initialize_by(account:, provider: :github, provider_id: repository.id) do |r|
           r.update!(
-            user:,
-            account: user.account,
             name: repository.full_name,
             branch: repository.default_branch,
-            provider: :github,
-            provider_id: repository.id
+            user:
           )
         end
       end
@@ -37,6 +34,8 @@ module Repositories
           client.auto_paginate = true
         end
       end
+
+      delegate :account, to: :user
     end
   end
 end

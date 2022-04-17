@@ -24,5 +24,7 @@ class Repository < ApplicationRecord
 
   normalize :name
   normalize :branch
+
   inquirer :status
+  inquirer :provider
 end

@@ -26,7 +26,7 @@ module Inquirer
       methods.each do |method_name|
         define_method :"#{method_name}" do
           value = super()
-          value.nil? ? ''.extend(NilInquiry) : value.inquiry
+          value.nil? ? String.new.extend(NilInquiry) : value.inquiry # rubocop:disable Performance/UnfreezeString
         end
       end
     end
