@@ -70,7 +70,7 @@ group :development, :test do
 
   gem "rubocop-rspec", "~> 2.9", require: false
 
-  gem "rubocop-performance", "~> 1.13"
+  gem "rubocop-performance", "~> 1.14"
 
   gem "slim_lint", "~> 0.22.1"
 
