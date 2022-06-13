@@ -74,7 +74,7 @@ group :development, :test do
 
   gem "slim_lint", "~> 0.22.1"
 
-  gem "faker", "~> 2.20"
+  gem "faker", "~> 2.21"
 
   gem "bullet", "~> 7.0"
 
