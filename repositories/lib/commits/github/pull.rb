@@ -14,8 +14,6 @@ module Commits
       end
 
       def perform
-        validate!
-
         client.commits(repository.provider_id).each { |c| upsert_commit!(c) }
 
         paginate!

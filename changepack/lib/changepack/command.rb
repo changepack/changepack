@@ -57,18 +57,27 @@ module Changepack
 
     module Validation
       def valid?
-        validate! if respond_to?(:validate!)
+        validate! if validate?
         true
       rescue Error
         false
+      end
+
+      def perform(*args, **params)
+        validate! if validate?
+        super
+      end
+
+      def validate?
+        respond_to?(:validate!)
       end
     end
 
     def self.inherited(subclass)
       super
 
-      subclass.prepend Transaction
       subclass.prepend Validation
+      subclass.prepend Transaction
       subclass.prepend Params
     end
   end

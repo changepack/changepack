@@ -6,13 +6,11 @@ module Repositories
 
     option :user, model: User
 
-    def validate!
+    def validate
       raise Disconnected unless user.git?
     end
 
     def perform
-      validate!
-
       git.repos.each { |r| upsert_repository!(r) }
     end
 
