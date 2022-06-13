@@ -60,7 +60,7 @@ group :development, :test do
 
   gem "rubocop", "~> 1.26", require: false
 
-  gem "cypress-on-rails", "~> 1.12"
+  gem "cypress-on-rails", "~> 1.13"
 
   gem "factory_bot_rails", "~> 6.2"
 
@@ -113,7 +113,7 @@ gem "tailwindcss-rails", "~> 2.0"
 
 gem "prettyid", "~> 0.2.0", require: "pretty_id", github: "changepack/pretty_id"
 
-gem "view_component", "~> 2.52"
+gem "view_component", "~> 2.57"
 
 gem "font-awesome-rails", "~> 4.7"
 
