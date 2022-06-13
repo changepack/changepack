@@ -64,7 +64,7 @@ group :development, :test do
 
   gem "factory_bot_rails", "~> 6.2"
 
-  gem "unparser", "~> 0.6.4"
+  gem "unparser", "~> 0.6.5"
 
   gem "rubocop-rails", "~> 2.14", require: false
 
