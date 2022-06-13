@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Repositories
-  module Github
+  module GitHub
     class Pull < Command
       Disconnected = Class.new(Command::Error)
 

@@ -13,7 +13,7 @@ module Commits
     private
 
     def github
-      @github ||= ::Commits::Github::Pull.new(repository:)
+      @github ||= ::Commits::GitHub::Pull.new(repository:)
     end
   end
 end

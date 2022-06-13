@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Changelog < ApplicationRecord
-  extend FriendlyId
+  include Slug
   include Status
 
   key :log
@@ -18,11 +18,11 @@ class Changelog < ApplicationRecord
   validates :content, presence: true
   validates :status, presence: true
 
-  friendly_id :slug_candidates
   normalize :title
+
   inquirer :status
 
-  scope :for, ->(user) { where(user.nil? && { status: :published }) }
+  scope :for, ->(user) { where(!user && { status: :published }) }
 
   private
 

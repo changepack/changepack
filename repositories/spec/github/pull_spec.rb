@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 module Repositories
-  module Github
+  module GitHub
     describe Pull, :vcr do
       subject(:operation) { described_class.new(user:) }
       let(:user) { create(:user, provider_ids: { github: { access_token: 'access_token' } }) }

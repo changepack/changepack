@@ -29,7 +29,7 @@ module Changepack
 
     module Transaction
       def perform(*args, **params)
-        wrapper = proc { args.present? || params.present? ? super : super() }
+        wrapper = proc { super }
 
         if self.class.transaction?
           ActiveRecord::Base.transaction(&wrapper)

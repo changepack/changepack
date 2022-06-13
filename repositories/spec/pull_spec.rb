@@ -11,7 +11,7 @@ module Repositories
     before { allow(instance).to receive(:perform).and_return(true) }
 
     context 'with a GitHub integration' do
-      let(:provider) { Repositories::Github::Pull }
+      let(:provider) { Repositories::GitHub::Pull }
 
       before { allow(operation).to receive(:github).and_return(instance) }
 

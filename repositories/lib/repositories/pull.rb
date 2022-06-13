@@ -13,7 +13,7 @@ module Repositories
     private
 
     def github
-      @github ||= ::Repositories::Github::Pull.new(user:)
+      @github ||= ::Repositories::GitHub::Pull.new(user:)
     end
   end
 end

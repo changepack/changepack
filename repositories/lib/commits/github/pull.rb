@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 module Commits
-  module Github
+  module GitHub
     class Pull < Command
       Disconnected = Class.new(Command::Error)
-      NotGithub = Class.new(Command::Error)
+      NotGitHub = Class.new(Command::Error)
 
       option :repository, model: Repository
 
       def validate!
         raise Disconnected if user.github_access_token.nil?
-        raise NotGithub unless repository.provider.github?
+        raise NotGitHub unless repository.provider.github?
       end
 
       def perform
