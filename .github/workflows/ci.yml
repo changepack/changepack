@@ -50,3 +50,4 @@ jobs:
           browser: chrome
           headless: true
           project: ./spec
+          config-file: cypress.config.js
