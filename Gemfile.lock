@@ -429,7 +429,7 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
-    rubocop-rspec (2.9.0)
+    rubocop-rspec (2.11.1)
       rubocop (~> 1.19)
     ruby-next-core (0.15.1)
     ruby-progressbar (1.11.0)
@@ -563,7 +563,7 @@ DEPENDENCIES
   rubocop (~> 1.30)
   rubocop-performance (~> 1.14)
   rubocop-rails (~> 2.14)
-  rubocop-rspec (~> 2.9)
+  rubocop-rspec (~> 2.11)
   slim-rails (~> 3.4)
   slim_lint (~> 0.22.1)
   sprockets-rails
