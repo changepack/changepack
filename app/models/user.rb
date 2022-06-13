@@ -25,6 +25,14 @@ class User < ApplicationRecord
     self.account = Account.new if account_id.nil?
   end
 
+  def git?
+    provider_ids.keys.any?
+  end
+
+  def access_token(provider)
+    provider_ids.fetch(provider.to_s, nil)&.fetch('access_token')
+  end
+
   def github_id
     github_ids['id']
   end
