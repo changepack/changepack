@@ -74,7 +74,7 @@ group :development, :test do
 
   gem "slim_lint", "~> 0.22.1"
 
-  gem "faker", "~> 2.20"
+  gem "faker", "~> 2.21"
 
   gem "bullet", "~> 7.0"
 
@@ -113,7 +113,7 @@ gem "tailwindcss-rails", "~> 2.0"
 
 gem "prettyid", "~> 0.2.0", require: "pretty_id", github: "changepack/pretty_id"
 
-gem "view_component", "~> 2.52"
+gem "view_component", "~> 2.57"
 
 gem "font-awesome-rails", "~> 4.7"
 
