@@ -11,7 +11,7 @@ Cypress.Commands.add('appCommands', function (body) {
   }).then((response) => {
     log.end();
     if (response.status !== 201) {
-      expect(response.body.message).to.be.empty
+      expect(response.body.message).to.equal('')
       expect(response.status).to.be.equal(201)
     }
     return response.body
@@ -59,13 +59,13 @@ Cypress.on('fail', (err, runnable) => {
   throw err;
 });
 
-Cypress.Commands.add("login", (details) => {
+Cypress.Commands.add('login', (details) => {
   if(!details)
     details = {}
 
   if(!details.redirect_to)
     details.redirect_to = '/'
 
-  cy.visit("__cypress__/authenticate",
-    { method: "POST", body: { email: details.email, redirect_to: details.redirect_to }  })
+  cy.visit('__cypress__/authenticate',
+    { method: 'POST', body: { email: details.email, redirect_to: details.redirect_to }  })
 });

@@ -60,7 +60,7 @@ group :development, :test do
 
   gem "rubocop", "~> 1.26", require: false
 
-  gem "cypress-on-rails", "~> 1.12"
+  gem "cypress-on-rails", "~> 1.13"
 
   gem "factory_bot_rails", "~> 6.2"
 

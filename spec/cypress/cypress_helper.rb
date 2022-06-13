@@ -38,3 +38,8 @@ CypressOnRails::SmartFactoryWrapper.configure(
     Rails.root.join('spec/factories/**/*.rb')
   ]
 )
+
+require 'vcr'
+VCR.configure do |config|
+  config.hook_into :webmock
+end

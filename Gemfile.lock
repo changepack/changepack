@@ -120,7 +120,7 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
-    cypress-on-rails (1.12.1)
+    cypress-on-rails (1.13.1)
       rack
     database_cleaner-active_record (2.0.1)
       activerecord (>= 5.a)
@@ -525,7 +525,7 @@ DEPENDENCIES
   babosa (~> 2.0)
   bootsnap
   bullet (~> 7.0)
-  cypress-on-rails (~> 1.12)
+  cypress-on-rails (~> 1.13)
   database_cleaner-active_record (~> 2.0)
   debug
   devise (~> 4.8)
