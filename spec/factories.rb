@@ -2,7 +2,6 @@
 
 require 'faker'
 
-# rubocop:disable Metrics/BlockLength
 FactoryBot.define do
   factory :commit do
     message { Faker::Lorem.sentence }
@@ -41,5 +40,3 @@ FactoryBot.define do
     content { Faker::Lorem.paragraph }
   end
 end
-
-# rubocop:enable Metrics/BlockLength
