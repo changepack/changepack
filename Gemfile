@@ -105,7 +105,7 @@ group :development do
 end
 
 
-gem "slim-rails", "~> 3.4"
+gem "slim-rails", "~> 3.5"
 
 gem "figaro", "~> 1.2"
 
@@ -117,7 +117,7 @@ gem "view_component", "~> 2.57"
 
 gem "font-awesome-rails", "~> 4.7"
 
-gem "statesman", "~> 9.0"
+gem "statesman", "~> 10.0"
 
 gem "dry-initializer-rails", "~> 3.1"
 
