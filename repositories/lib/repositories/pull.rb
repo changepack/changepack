@@ -6,7 +6,7 @@ module Repositories
 
     option :user, model: User
 
-    def validate
+    validate do
       raise Disconnected unless user.git?
     end
 

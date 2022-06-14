@@ -8,7 +8,7 @@ module Commits
 
       option :repository, model: Repository
 
-      def validate!
+      validate do
         raise Disconnected if user.github_access_token.nil?
         raise NotGitHub unless repository.provider.github?
       end

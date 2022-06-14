@@ -56,20 +56,38 @@ module Changepack
     end
 
     module Validation
+      def self.prepended(base)
+        class << base
+          prepend ClassMethods
+        end
+      end
+
+      module ClassMethods
+        def validate(&block)
+          @validation = block
+        end
+
+        def validation
+          @validation
+        end
+      end
+
       def valid?
-        validate! if validate?
+        validate!
         true
       rescue Error
         false
       end
 
-      def perform(*args, **params)
-        validate! if validate?
-        super
+      def validate!
+        self.class.validation.tap do |block|
+          instance_exec(&block) if block.present?
+        end
       end
 
-      def validate?
-        respond_to?(:validate!)
+      def perform(*args, **params)
+        validate!
+        super
       end
     end
 
