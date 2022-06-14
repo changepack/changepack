@@ -139,7 +139,7 @@ gem "normalize_attributes", "~> 0.4.0"
 
 gem "action_policy", "~> 0.6.1"
 
-gem "rails_event_store", "~> 2.3"
+gem "rails_event_store", "~> 2.4"
 
 gem "omniauth", "~> 2.1"
 
