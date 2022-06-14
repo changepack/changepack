@@ -448,7 +448,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    statesman (9.0.1)
+    statesman (10.0.0)
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
     store_model (0.13.0)
@@ -547,7 +547,7 @@ DEPENDENCIES
   slim-rails (~> 3.5)
   slim_lint (~> 0.22.1)
   sprockets-rails
-  statesman (~> 9.0)
+  statesman (~> 10.0)
   stimulus-rails
   store_model (~> 0.13.0)
   tailwindcss-rails (~> 2.0)
