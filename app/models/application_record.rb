@@ -2,15 +2,8 @@
 
 class ApplicationRecord < ActiveRecord::Base
   include Inquirer
-  include PrettyId
+  include Identifier
 
   primary_abstract_class
   has_paper_trail
-
-  class << self
-    def key(id)
-      self.id_prefix = id
-      self.id_separator = '_'
-    end
-  end
 end
