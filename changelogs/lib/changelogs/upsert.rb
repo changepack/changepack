@@ -8,7 +8,7 @@ module Changelogs
     option :title, type: Types::String, optional: true
     option :published, type: Types::String, optional: true
 
-    def perform
+    def execute
       changelog.update(attributes).tap do
         changelog.transition_to!(:published) if publish?
         changelog.transition_to!(:draft) if draft?
@@ -28,13 +28,11 @@ module Changelogs
     end
 
     def event
-      return Published.new(event_attributes) if published?
-      return Drafted.new(event_attributes) if drafted?
-      return Created.new(event_attributes) if created?
-    end
+      attrs = { id: changelog.id }
 
-    def event_attributes
-      { id: changelog.id }
+      return Published.new(attrs) if published?
+      return Drafted.new(attrs) if drafted?
+      return Created.new(attrs) if created?
     end
 
     def publish?
@@ -45,13 +43,13 @@ module Changelogs
       @draft ||= published.blank? && changelog.can_transition_to?(:draft)
     end
 
+    alias published? publish?
+    alias drafted? draft?
+
     def created?
       changelog.id_previously_changed?
     end
 
     delegate :account, to: :user
-
-    alias published? publish?
-    alias drafted? draft?
   end
 end

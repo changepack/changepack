@@ -6,8 +6,8 @@ module Commits
 
     option :repository, model: Repository
 
-    def perform
-      github.perform if github.valid?
+    def execute
+      github.execute if github.valid?
     end
 
     private

@@ -13,7 +13,7 @@ module Commits
         raise NotGitHub unless repository.provider.github?
       end
 
-      def perform
+      def execute
         client.commits(repository.provider_id).each { |c| upsert_commit!(c) }
 
         paginate!

@@ -30,7 +30,7 @@ class ChangelogsController < ApplicationController
     @changelog = Changelog.new
 
     respond_to do |format|
-      if Changelogs::Upsert.new(**changelog_params).perform
+      if Changelogs::Upsert.new(**changelog_params).execute
         format.html { redirect_to changelog_url(@changelog) }
         format.json { render :show, status: :created, location: @changelog }
       else
@@ -42,7 +42,7 @@ class ChangelogsController < ApplicationController
 
   def update
     respond_to do |format|
-      if Changelogs::Upsert.new(**changelog_params).perform
+      if Changelogs::Upsert.new(**changelog_params).execute
         format.html { redirect_to changelog_url(@changelog) }
         format.json { render :show, status: :ok, location: @changelog }
       else

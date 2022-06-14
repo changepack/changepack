@@ -28,7 +28,7 @@ module Changepack
     end
 
     module Transaction
-      def perform(*args, **params)
+      def execute(*args, **params)
         wrapper = proc { super }
 
         if self.class.transaction?
@@ -85,7 +85,7 @@ module Changepack
         end
       end
 
-      def perform(*args, **params)
+      def execute(*args, **params)
         validate!
         super
       end

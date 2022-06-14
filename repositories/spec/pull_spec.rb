@@ -9,8 +9,8 @@ module Repositories
 
     context 'with a GitHub integration' do
       context 'without a token' do
-        it "doesn't perform" do
-          expect { operation.perform }.to raise_error Repositories::Pull::Disconnected
+        it "doesn't execute" do
+          expect { operation.execute }.to raise_error Repositories::Pull::Disconnected
         end
       end
 
@@ -18,7 +18,7 @@ module Repositories
         let(:user) { create(:user, provider_ids: { github: { access_token: 'access_token' } }) }
 
         it 'upserts repositories' do
-          expect { operation.perform }.to change(user.repositories, :count)
+          expect { operation.execute }.to change(user.repositories, :count)
         end
       end
     end
