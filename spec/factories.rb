@@ -6,7 +6,7 @@ FactoryBot.define do
   factory :commit do
     message { Faker::Lorem.sentence }
     url { Faker::Internet.url(host: 'example.com') }
-    commited_at { Faker::Date.in_date_period }
+    commited { Faker::Date.in_date_period }
     author { { name: Faker::Name.name, email: Faker::Internet.email } }
     repository
     account { repository.account }

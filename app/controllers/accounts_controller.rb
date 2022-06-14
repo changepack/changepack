@@ -4,12 +4,12 @@ class AccountsController < ApplicationController
   skip_before_action :authenticate_user!
 
   def show
-    @account = Account.friendly.find(params.require(:id))
+    @account = Account.friendly.find(id)
     @changelogs = @account.changelogs
                           .for(current_user)
-                          .includes(:user)
-                          .order(created_at: :desc)
+                          .desc
                           .with_rich_text_content_and_embeds
+                          .includes(:user)
 
     authorize! @account
   end

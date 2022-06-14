@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
   def current_account
     @current_account ||= current_user&.account
   end
+
+  def id
+    params.require(:id)
+  end
 end

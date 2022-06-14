@@ -22,10 +22,10 @@ module Commits
 
     def cursor
       @cursor ||= repository.commits
-                            .where('commited_at > ?', 1.month.ago)
-                            .order(commited_at: :desc)
+                            .where('commited > ?', 1.month.ago)
+                            .order(commited: :desc)
                             .limit(1)
-                            .pick(:commited_at)
+                            .pick(:commited)
     end
 
     def upsert!(commit)
@@ -33,7 +33,7 @@ module Commits
         c.update!(
           message: commit.message,
           url: commit.url,
-          commited_at: commit.commited,
+          commited: commit.commited,
           author: { name: commit.author.name, email: commit.author.email },
           account:
         )

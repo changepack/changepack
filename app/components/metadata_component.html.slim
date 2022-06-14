@@ -1,6 +1,6 @@
 = link_to changelog, class: 'text-gray-400 text-sm', \
                       data: { turbo_frame: '_top' } do
-  = l(published_on.to_date, format: :long)
+  = l(published, format: :long)
   - if user?
     .mt-1.text-gray-300 = user.name
   - if draft?

@@ -17,7 +17,7 @@ class ChangelogsController < ApplicationController
   end
 
   def show
-    @changelog = Changelog.friendly.find(params.require(:id))
+    @changelog = Changelog.friendly.find(id)
   end
 
   def new
@@ -66,7 +66,7 @@ class ChangelogsController < ApplicationController
   private
 
   def set_changelog
-    @changelog = changelogs.friendly.find(params.require(:id))
+    @changelog = changelogs.friendly.find(id)
   end
 
   def changelogs
