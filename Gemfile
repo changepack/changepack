@@ -105,7 +105,7 @@ group :development do
 end
 
 
-gem "slim-rails", "~> 3.4"
+gem "slim-rails", "~> 3.5"
 
 gem "figaro", "~> 1.2"
 
