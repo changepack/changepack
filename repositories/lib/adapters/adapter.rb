@@ -10,7 +10,7 @@ module Adapters
 
     attr_reader :access_token
 
-    def repos
+    def repositories
       raise NotImplemented
     end
 

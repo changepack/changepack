@@ -2,7 +2,7 @@
 
 module Adapters
   class GitHub < Adapter
-    def repos
+    def repositories
       client.repos.map do |repo|
         Hashie::Mash.new(
           id: repo.id,

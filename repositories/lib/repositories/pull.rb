@@ -11,12 +11,12 @@ module Repositories
     end
 
     def perform
-      git.repos.each { |r| upsert_repository!(r) }
+      git.repositories.each { |repository| upsert!(repository) }
     end
 
     private
 
-    def upsert_repository!(repository)
+    def upsert!(repository)
       Repository.find_or_initialize_by(account:, provider: git.provider, provider_id: repository.id) do |r|
         r.update!(
           name: repository.name,
