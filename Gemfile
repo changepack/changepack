@@ -105,7 +105,7 @@ group :development do
 end
 
 
-gem "slim-rails", "~> 3.4"
+gem "slim-rails", "~> 3.5"
 
 gem "figaro", "~> 1.2"
 
@@ -137,7 +137,7 @@ gem "paper_trail", "~> 12.3"
 
 gem "normalize_attributes", "~> 0.4.0"
 
-gem "action_policy", "~> 0.6.0"
+gem "action_policy", "~> 0.6.1"
 
 gem "rails_event_store", "~> 2.3"
 

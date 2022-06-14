@@ -9,8 +9,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    action_policy (0.6.0)
-      ruby-next-core (>= 0.11.0)
+    action_policy (0.6.1)
+      ruby-next-core (>= 0.14.0)
     actioncable (7.0.3)
       actionpack (= 7.0.3)
       activesupport (= 7.0.3)
@@ -454,7 +454,7 @@ GEM
     slim (4.1.0)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
-    slim-rails (3.4.0)
+    slim-rails (3.5.1)
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (>= 3.0, < 5.0)
@@ -518,7 +518,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  action_policy (~> 0.6.0)
+  action_policy (~> 0.6.1)
   active_record_query_trace (~> 1.8)
   after_commit_everywhere (~> 1.2)
   aws-sdk-s3
@@ -564,7 +564,7 @@ DEPENDENCIES
   rubocop-performance (~> 1.14)
   rubocop-rails (~> 2.14)
   rubocop-rspec (~> 2.11)
-  slim-rails (~> 3.4)
+  slim-rails (~> 3.5)
   slim_lint (~> 0.22.1)
   sprockets-rails
   statesman (~> 9.0)
