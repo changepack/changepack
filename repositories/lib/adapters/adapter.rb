@@ -14,6 +14,10 @@ module Adapters
       raise NotImplemented
     end
 
+    def commits(_repository_id)
+      raise NotImplemented
+    end
+
     def provider
       self.class.name.demodulize.downcase.to_sym
     end
