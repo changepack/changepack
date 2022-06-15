@@ -147,7 +147,7 @@ gem "omniauth-github", "~> 2.0"
 
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 
-gem "octokit", "~> 4.24"
+gem "octokit", "~> 4.25"
 
 gem "friendly_id", "~> 5.4"
 
