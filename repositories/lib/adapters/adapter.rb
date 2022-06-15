@@ -39,5 +39,22 @@ module Adapters
     def client
       raise 'Not implemented yet!'
     end
+
+    class Repository < Dry::Struct
+      attribute :id, Types::Integer
+      attribute :name, Types::String
+      attribute :branch, Types::String
+    end
+
+    class Commit < Dry::Struct
+      attribute :sha, Types::String
+      attribute :message, Types::String
+      attribute :url, Types::String
+      attribute :commited, Types::Date
+      attribute :author do
+        attribute :name, Types::String
+        attribute :email, Types::String
+      end
+    end
   end
 end

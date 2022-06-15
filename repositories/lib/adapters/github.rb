@@ -4,7 +4,7 @@ module Adapters
   class GitHub < Adapter
     def repositories
       paginate { client.repos }.map do |repo|
-        Hashie::Mash.new(
+        Repository.new(
           id: repo.id,
           name: repo.full_name,
           branch: repo.default_branch
@@ -14,7 +14,7 @@ module Adapters
 
     def commits(repository_id, after: nil) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
       paginate(after:) { client.commits(repository_id) }.map do |commit|
-        Hashie::Mash.new(
+        Commit.new(
           sha: commit.sha,
           message: commit.commit.message,
           url: commit.commit.url,
