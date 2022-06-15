@@ -2,6 +2,7 @@
 
 class AccountsController < ApplicationController
   skip_before_action :authenticate_user!
+  skip_verify_authorized
 
   def show
     @account = Account.friendly.find(id)
@@ -10,7 +11,5 @@ class AccountsController < ApplicationController
                           .desc
                           .with_rich_text_content_and_embeds
                           .includes(:user)
-
-    authorize! @account
   end
 end

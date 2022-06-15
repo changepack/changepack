@@ -1,0 +1,10 @@
+section#repositories
+  table.w-full.text-sm.text-left.text-gray-500
+    tbody
+      - @repositories.each do |repository|
+        tr.bg-white.border-b.hover:bg-gray-50
+          td
+            = link_to repository do
+              == render repository
+
+= link_to 'New repository', new_repository_path

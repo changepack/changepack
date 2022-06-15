@@ -2,14 +2,14 @@
 
 class ChangelogPolicy < ApplicationPolicy
   alias_rule :edit?, :update?, :confirm_destroy?, :destroy?, to: :manage?
-  alias_rule :show?, to: :index?
+  alias_rule :index?, to: :show?
   alias_rule :new?, to: :create?
 
   relation_scope do |relation|
     relation.where(account_id: user.account_id)
   end
 
-  def index?
+  def show?
     true
   end
 

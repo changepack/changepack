@@ -10,10 +10,7 @@ class ChangelogsController < ApplicationController
   end
 
   def index
-    respond_to do |format|
-      format.html { redirect_to account_path(current_account) }
-      format.json { render :index, locals: { changelogs: } }
-    end
+    redirect_to account_path(current_account)
   end
 
   def show
