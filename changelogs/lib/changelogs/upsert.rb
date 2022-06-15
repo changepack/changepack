@@ -13,7 +13,7 @@ module Changelogs
         changelog.transition_to!(:published) if publish?
         changelog.transition_to!(:draft) if draft?
 
-        after_commit { Event.publish(event) if event.present? }
+        after_commit { event.publish if event.present? }
       end
     end
 
