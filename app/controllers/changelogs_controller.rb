@@ -13,7 +13,9 @@ class ChangelogsController < ApplicationController
   end
 
   def new
-    render locals: { changelog: Changelog.new }
+    @changelog = Changelog.new
+
+    render(**common_locals)
   end
 
   def show
@@ -36,7 +38,7 @@ class ChangelogsController < ApplicationController
         format.html { redirect_to changelog_url(changelog) }
         format.json { render :show, locals: { changelog: }, status: :created, location: changelog }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, locals: { changelog: }, status: :unprocessable_entity }
         format.json { render json: changelog.errors, status: :unprocessable_entity }
       end
     end
@@ -48,9 +50,9 @@ class ChangelogsController < ApplicationController
     respond_to do |format|
       if changelog.valid?
         format.html { redirect_to changelog_url(changelog) }
-        format.json { render :show, status: :ok, location: changelog }
+        format.json { render :show, locals: { changelog: }, status: :ok, location: changelog }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render :edit, locals: { changelog: }, status: :unprocessable_entity }
         format.json { render json: changelog.errors, status: :unprocessable_entity }
       end
     end
@@ -83,6 +85,6 @@ class ChangelogsController < ApplicationController
   end
 
   def common_locals
-    { locals: { changelog: } }
+    { locals: { changelog: @changelog || changelog } }
   end
 end
