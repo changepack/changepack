@@ -3,9 +3,6 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  # Both a public and a private URL to your changelog.
-  get ':id', to: 'accounts#show', as: :account
-
   resources :changelogs do
     member do
       get :confirm_destroy
@@ -19,4 +16,8 @@ Rails.application.routes.draw do
       post 'authenticate', action: 'authenticate'
     end
   end
+
+  # Both a public and a private URL to your changelog.
+  # Has to be at the end so that all other routes are matched first.
+  get ':id', to: 'accounts#show', as: :account
 end

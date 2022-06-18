@@ -3,11 +3,11 @@
 class RepositoryStateMachine
   include Statesman::Machine
 
-  state :active, initial: true
-  state :inactive
+  state :inactive, initial: true
+  state :active
 
-  transition from: :active, to: [:inactive]
   transition from: :inactive, to: [:active]
+  transition from: :active, to: [:inactive]
 
   after_transition(after_commit: true) do |model, transition|
     model.update!(status: transition.to_state)

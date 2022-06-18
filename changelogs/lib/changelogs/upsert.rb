@@ -9,7 +9,8 @@ module Changelogs
     option :published, type: Types::String, optional: true
 
     def execute
-      changelog.update(attributes).tap do
+      changelog.tap do |changelog|
+        changelog.update(attributes)
         changelog.transition_to!(:published) if publish?
         changelog.transition_to!(:draft) if draft?
 

@@ -3,17 +3,18 @@
 # Go to Users::OmniauthCallbacksController for the code that is used
 # to pull repositories from GitHub and other providers after OAuth.
 class RepositoriesController < ApplicationController
-  before_action :set_repository, only: %i[show destroy]
   before_action { authorize! }
 
   def index
-    @repositories = repositories
+    render locals: { repositories: }
   end
 
-  def show; end
+  def show
+    render locals: { repository: }
+  end
 
   def update
-    @repository.transition_to!(:active)
+    repository.transition_to!(:active)
 
     respond_to do |format|
       format.html { redirect_to repositories_url }
@@ -22,7 +23,7 @@ class RepositoriesController < ApplicationController
   end
 
   def destroy
-    @repository.transition_to!(:inactive)
+    repository.transition_to!(:inactive)
 
     respond_to do |format|
       format.html { redirect_to repositories_url }
@@ -32,8 +33,8 @@ class RepositoriesController < ApplicationController
 
   private
 
-  def set_repository
-    @repository = repositories.find(params[:id])
+  def repository
+    @repository ||= repositories.find(params[:id])
   end
 
   def repositories
