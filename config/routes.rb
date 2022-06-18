@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  resources :repositories
   root 'changelogs#index'
 
   devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
+
+  # Both a public and a private URL to your changelog.
+  get ':id', to: 'accounts#show', as: :account
 
   resources :changelogs do
     member do
@@ -10,7 +12,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get ':id', to: 'accounts#show', as: :account
+  resources :repositories, only: [:index, :show, :update, :destroy]
 
   unless Rails.env.production?
     scope path: '__cypress__', controller: 'users/cypress' do

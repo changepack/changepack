@@ -27,4 +27,6 @@ class Repository < ApplicationRecord
 
   inquirer :status
   inquirer :provider
+
+  scope :active, -> { where(status: :active) }
 end
