@@ -156,3 +156,7 @@ gem "babosa", "~> 2.0"
 gem "aws-sdk-s3", require: false
 
 gem "store_model", "~> 0.13.0"
+
+gem "sidekiq", "~> 6.5"
+
+gem "mock_redis", "~> 0.32.0"

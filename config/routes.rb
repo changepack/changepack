@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root 'changelogs#index'
 
@@ -16,6 +18,8 @@ Rails.application.routes.draw do
       post 'authenticate', action: 'authenticate'
     end
   end
+
+  mount Sidekiq::Web => 'sidekiq'
 
   # Both a public and a private URL to your changelog.
   # Has to be at the end so that all other routes are matched first.
