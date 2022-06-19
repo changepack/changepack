@@ -18,13 +18,17 @@
       "description": "Environment for rails middleware.",
       "value": "production"
     },
-    "app_host": {
+    "APP_HOST": {
       "description": "The hostname for the application.",
       "value": "example.com"
     },
-    "app_port": {
+    "APP_PORT": {
       "description": "The port for the application.",
       "value": "80"
+    },
+    "REDIS_OPENSSL_VERIFY_MODE":{
+      "description": "OpenSSL verification mode for Redis connections. ref https://help.heroku.com/HC0F8CUS/redis-connection-issues",
+      "value": "none"
     }
   },
   "formation": {
@@ -34,7 +38,7 @@
     }
   },
   "image": "heroku/ruby",
-  "addons": ["heroku-postgresql"],
+  "addons": ["heroku-postgresql", "heroku-redis"],
   "buildpacks": [
     { "url": "heroku/ruby" },
     { "url": "heroku-community/apt" }

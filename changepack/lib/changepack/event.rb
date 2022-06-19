@@ -43,6 +43,10 @@ module Changepack
         other.data.eql?(data)
     end
 
+    def publish
+      Event.publish(self)
+    end
+
     alias eql? ==
 
     private

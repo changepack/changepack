@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_15_001732) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_14_221053) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,13 +88,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_001732) do
   create_table "commits", id: :string, force: :cascade do |t|
     t.text "message", null: false
     t.string "url", null: false
-    t.datetime "commited_at", null: false
+    t.datetime "commited", null: false
     t.jsonb "author", default: {}, null: false
     t.string "account_id"
     t.string "repository_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "provider", null: false
+    t.string "provider_id", null: false
     t.index ["account_id"], name: "index_commits_on_account_id"
+    t.index ["repository_id", "provider", "provider_id"], name: "index_commits_on_repository_id_and_provider_and_provider_id", unique: true
     t.index ["repository_id"], name: "index_commits_on_repository_id"
   end
 

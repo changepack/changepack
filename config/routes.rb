@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root 'changelogs#index'
 
@@ -9,11 +11,17 @@ Rails.application.routes.draw do
     end
   end
 
-  get ':id', to: 'accounts#show', as: :account
+  resources :repositories, only: [:index, :show, :update, :destroy]
 
   unless Rails.env.production?
     scope path: '__cypress__', controller: 'users/cypress' do
       post 'authenticate', action: 'authenticate'
     end
   end
+
+  mount Sidekiq::Web => 'sidekiq'
+
+  # Both a public and a private URL to your changelog.
+  # Has to be at the end so that all other routes are matched first.
+  get ':id', to: 'accounts#show', as: :account
 end

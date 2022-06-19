@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Account < ApplicationRecord
-  extend FriendlyId
+  include Slug
 
   key :acc
 
@@ -12,7 +12,6 @@ class Account < ApplicationRecord
   has_many :commits, dependent: :destroy
 
   normalize :name
-  friendly_id :slug_candidates
 
   private
 

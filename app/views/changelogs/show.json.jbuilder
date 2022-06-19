@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-json.partial! 'changelogs/changelog', changelog: @changelog
+json.partial! 'changelogs/changelog', changelog:

@@ -2,18 +2,38 @@
 
 module Repositories
   class Pull < Command
-    self.transaction = false
+    Disconnected = Class.new(Command::Error)
 
     option :user, model: User
 
-    def perform
-      github.perform if github.valid?
+    validate do
+      raise Disconnected unless user.git?
+    end
+
+    def execute
+      git.repositories.each do |r|
+        repository = upsert!(r)
+
+        after_commit { Pulled.new(id: repository.id).publish }
+      end
     end
 
     private
 
-    def github
-      @github ||= ::Repositories::Github::Pull.new(user:)
+    def upsert!(repository)
+      Repository.find_or_initialize_by(account:, provider: git.provider, provider_id: repository.id) do |r|
+        r.update!(
+          name: repository.name,
+          branch: repository.branch,
+          user:
+        )
+      end
     end
+
+    def git
+      @git ||= Adapters::Adapter.find_by(user:)
+    end
+
+    delegate :account, to: :user
   end
 end

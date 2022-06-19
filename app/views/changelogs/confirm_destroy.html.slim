@@ -1,5 +1,5 @@
-= turbo_frame_tag "confirm_destroy_#{@changelog.id}" do
-  = button_to changelog_path(@changelog), \
+= turbo_frame_tag "confirm_destroy_#{changelog.id}" do
+  = button_to changelog_path(changelog), \
                 class: 'button-delete mt-4 text-red-600', \
                 data: { test_id: 'confirm_destroy', turbo_frame: '_top' }, \
                 method: :delete do

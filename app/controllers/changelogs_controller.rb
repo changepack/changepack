@@ -4,58 +4,62 @@ class ChangelogsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show]
   skip_verify_authorized
 
-  before_action :set_changelog, only: %i[edit update confirm_destroy destroy]
   before_action only: %i[edit update destroy] do
-    authorize! @changelog
+    authorize! changelog
   end
 
   def index
-    respond_to do |format|
-      format.html { redirect_to account_path(current_account) }
-      format.json { render :index, locals: { changelogs: } }
-    end
-  end
-
-  def show
-    @changelog = Changelog.friendly.find(params.require(:id))
+    redirect_to account_path(current_account)
   end
 
   def new
     @changelog = Changelog.new
+
+    render(**common_locals)
   end
 
-  def edit; end
+  def show
+    render(**common_locals)
+  end
+
+  def edit
+    render(**common_locals)
+  end
+
+  def confirm_destroy
+    render(**common_locals)
+  end
 
   def create
-    @changelog = Changelog.new
+    changelog = Changelogs::Upsert.new(**create_changelog_params).execute
 
     respond_to do |format|
-      if Changelogs::Upsert.new(**changelog_params).perform
-        format.html { redirect_to changelog_url(@changelog) }
-        format.json { render :show, status: :created, location: @changelog }
+      if changelog.valid?
+        format.html { redirect_to changelog_url(changelog) }
+        format.json { render :show, locals: { changelog: }, status: :created, location: changelog }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @changelog.errors, status: :unprocessable_entity }
+        format.html { render :new, locals: { changelog: }, status: :unprocessable_entity }
+        format.json { render json: changelog.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def update
+    changelog = Changelogs::Upsert.new(**update_changelog_params).execute
+
     respond_to do |format|
-      if Changelogs::Upsert.new(**changelog_params).perform
-        format.html { redirect_to changelog_url(@changelog) }
-        format.json { render :show, status: :ok, location: @changelog }
+      if changelog.valid?
+        format.html { redirect_to changelog_url(changelog) }
+        format.json { render :show, locals: { changelog: }, status: :ok, location: changelog }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @changelog.errors, status: :unprocessable_entity }
+        format.html { render :edit, locals: { changelog: }, status: :unprocessable_entity }
+        format.json { render json: changelog.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  def confirm_destroy; end
-
   def destroy
-    @changelog.destroy
+    changelog.destroy
 
     respond_to do |format|
       format.html { redirect_to changelogs_url }
@@ -65,18 +69,22 @@ class ChangelogsController < ApplicationController
 
   private
 
-  def set_changelog
-    @changelog = changelogs.friendly.find(params.require(:id))
+  def changelog
+    @changelog ||= Changelog.friendly.find(id)
   end
 
-  def changelogs
-    @changelogs ||= authorized_scope(Changelog.all)
-  end
-
-  def changelog_params
+  def create_changelog_params
     params.require(:changelog)
           .permit(:title, :content, :published)
-          .merge(changelog: @changelog, user: current_user)
+          .merge(user: current_user, changelog: Changelog.new)
           .to_h
+  end
+
+  def update_changelog_params
+    create_changelog_params.merge(changelog:)
+  end
+
+  def common_locals
+    { locals: { changelog: @changelog || changelog } }
   end
 end

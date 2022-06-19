@@ -114,6 +114,7 @@ GEM
       uniform_notifier (~> 1.11)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
+    connection_pool (2.2.5)
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -176,6 +177,8 @@ GEM
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (2.0.3)
+    faraday-retry (2.0.0)
+      faraday (~> 2.0)
     ffi (1.15.5)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
@@ -239,6 +242,8 @@ GEM
     mini_magick (4.11.0)
     mini_mime (1.1.2)
     minitest (5.16.0)
+    mock_redis (0.32.0)
+      ruby2_keywords
     msgpack (1.5.2)
     multi_json (1.15.0)
     multi_xml (0.6.0)
@@ -421,6 +426,10 @@ GEM
       addressable (>= 2.3.5)
       faraday (>= 0.17.3, < 3)
     shellany (0.0.1)
+    sidekiq (6.5.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     sinatra (2.2.0)
       mustermann (~> 1.0)
       rack (~> 2.2)
@@ -509,6 +518,7 @@ DEPENDENCIES
   dry-types (~> 1.5)
   factory_bot_rails (~> 6.2)
   faker (~> 2.21)
+  faraday-retry (~> 2.0)
   figaro (~> 1.2)
   font-awesome-rails (~> 4.7)
   friendly_id (~> 5.4)
@@ -519,6 +529,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   letter_opener (~> 1.8)
+  mock_redis (~> 0.32.0)
   normalize_attributes (~> 0.4.0)
   octokit (~> 4.25)
   omniauth (~> 2.1)
@@ -539,6 +550,7 @@ DEPENDENCIES
   rubocop-performance (~> 1.14)
   rubocop-rails (~> 2.15)
   rubocop-rspec (~> 2.11)
+  sidekiq (~> 6.5)
   slim-rails (~> 3.5)
   slim_lint (~> 0.22.1)
   sprockets-rails

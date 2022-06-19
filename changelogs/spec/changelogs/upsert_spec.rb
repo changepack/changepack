@@ -6,7 +6,7 @@ module Changelogs
   describe Upsert do
     let!(:user) { create(:user) }
 
-    describe '#perform' do
+    describe '#execute' do
       subject(:command) { described_class.new(**params) }
 
       let(:changelog) { build(:changelog, user:) }
@@ -26,11 +26,11 @@ module Changelogs
 
       context 'when inserting' do
         it 'creates a changelog' do
-          expect { command.perform }.to change(Changelog, :count).by(1)
+          expect { command.execute }.to change(Changelog, :count).by(1)
         end
 
         it 'sets status to published' do
-          expect { command.perform }.to change(changelog, :status).from('draft').to('published')
+          expect { command.execute }.to change(changelog, :status).from('draft').to('published')
         end
       end
 
@@ -42,11 +42,11 @@ module Changelogs
         before { changelog.transition_to!(:published) }
 
         it 'assigns new attributes to a changelog' do
-          expect { command.perform }.to change(changelog, :title).to('Updated title')
+          expect { command.execute }.to change(changelog, :title).to('Updated title')
         end
 
         it 'sets status back to draft' do
-          expect { command.perform }.to change(changelog, :status).from('published').to('draft')
+          expect { command.execute }.to change(changelog, :status).from('published').to('draft')
         end
       end
     end

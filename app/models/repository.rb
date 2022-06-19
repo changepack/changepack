@@ -24,5 +24,9 @@ class Repository < ApplicationRecord
 
   normalize :name
   normalize :branch
+
   inquirer :status
+  inquirer :provider
+
+  scope :active, -> { where(status: :active) }
 end
