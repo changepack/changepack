@@ -56,7 +56,7 @@
   }
 
   .repository {
-    @apply border border-gray-100 rounded-lg;
+    @apply border-2 border-gray-100 rounded-lg;
   }
 
   .repository + .repository {
