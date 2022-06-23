@@ -1,7 +1,6 @@
 table.w-full.whitespace-nowrap
   tbody
-    - items.each do |repository|
-      / TODO: Add pagination
+    - collection.each do |repository|
       / TODO: Add a last pulled date to repositories
       / TODO: Add a blank slate with a GitHub button
       / TODO: Add a double confirm for the synchronization toggle
@@ -34,3 +33,6 @@ table.w-full.whitespace-nowrap
 
       tr.h-3
 
+- if @pagy && @pagy.pages > 1
+  .py-8
+    == helpers.pagy_nav(@pagy)

@@ -6,11 +6,14 @@ class RepositoryComponent < ApplicationComponent
 
   private
 
-  def items
-    [
-      repository,
-      repositories
-    ].compact.flatten
+  def before_render
+    return if repositories.nil?
+
+    @pagy, @collection = repositories.is_a?(Array) ? pagy_array(repositories) : pagy(repositories)
+  end
+
+  def collection
+    @collection ||= [repository, repositories].compact.flatten
   end
 
   def status_class(repository)
