@@ -7,6 +7,7 @@ class Repository < ApplicationRecord
 
   attribute :name, :string
   attribute :branch, :string
+  attribute :pulled, :datetime
   attribute :status, :string, default: :inactive
   attribute :provider, :string
   attribute :provider_id, :string

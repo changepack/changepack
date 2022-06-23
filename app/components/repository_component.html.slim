@@ -1,7 +1,6 @@
 table.w-full.whitespace-nowrap
   tbody
     - collection.each do |repository|
-      / TODO: Add a last pulled date to repositories
       / TODO: Add a blank slate with a GitHub button
       / TODO: Add a double confirm for the synchronization toggle
       / TODO: Add Turbo Frames
@@ -16,6 +15,12 @@ table.w-full.whitespace-nowrap
               = helpers.icon :tag
               p.text-sm.leading-none.ml-2.text-gray-400
                 = repository.branch
+        td
+          - if repository.pulled.present?
+            .flex.items-center.justify-end
+              span.label
+                ' Pulled on
+                = l(repository.pulled, format: :long)
         td
           .flex.items-center.justify-end.pr-5
             - if repository.status.active?
