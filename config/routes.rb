@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :repositories, only: [:index, :show, :update, :destroy]
+  resources :repositories, only: [:index, :update, :destroy]
 
   unless Rails.env.production?
     scope path: '__cypress__', controller: 'users/cypress' do

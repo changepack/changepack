@@ -1,8 +1,13 @@
-section#repositories
-  table.w-full.text-sm.text-left.text-gray-500
-    tbody
-      - repositories.each do |repository|
-        tr.bg-white.border-b.hover:bg-gray-50
-          td
-            = link_to repository do
-              == render repository
+.block.md:flex.md:justify-between.md:items-center
+  section
+    h1.font-bold.text-4xl Repositories
+    h2.mt-3
+      | Pull changes from Git and write changelogs based on your commits
+
+section.overflow-x-auto
+  .py-10.md:py-24
+    .-my-8
+      table.w-full.whitespace-nowrap
+        tbody
+          - repositories.each do |repository|
+            == render repository

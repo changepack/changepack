@@ -9,10 +9,6 @@ class RepositoriesController < ApplicationController
     render locals: { repositories: }
   end
 
-  def show
-    render locals: { repository: }
-  end
-
   def update
     repository.transition_to!(:active)
 
@@ -38,6 +34,6 @@ class RepositoriesController < ApplicationController
   end
 
   def repositories
-    @repositories ||= authorized_scope(Repository.all)
+    @repositories ||= authorized_scope(Repository.desc)
   end
 end
