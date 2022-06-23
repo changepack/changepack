@@ -48,7 +48,7 @@
   }
 
   .label {
-    @apply rounded-lg py-1 px-2 text-xs font-medium text-gray-500 bg-gray-100;
+    @apply rounded-full py-1 px-2.5 text-xs font-medium text-gray-500 bg-gray-100;
   }
 
   .label-danger {

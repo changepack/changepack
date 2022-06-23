@@ -10,7 +10,11 @@
                       turbo_frame: '_top' \
                     }
 
-    article.leading-relaxed.prose.max-w-full == changelog.content
+    - if draft?
+      .mb-2.-mt-1: span.label Draft
+
+    article.leading-relaxed.prose.max-w-full
+      == changelog.content
 
     - if helpers.allowed_to?(:manage?, @changelog)
       = link_to edit_changelog_path(@changelog), \

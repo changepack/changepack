@@ -11,10 +11,6 @@ class MetadataComponent < ApplicationComponent
     user.present?
   end
 
-  def draft?
-    changelog.status.draft? && !changelog.new_record?
-  end
-
   def published
     @published ||= (changelog.created || Time.current).to_date
   end

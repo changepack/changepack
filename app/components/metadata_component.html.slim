@@ -2,6 +2,4 @@
                       data: { turbo_frame: '_top' } do
   = l(published, format: :long)
   - if user?
-    .mt-1.text-gray-300 = user.name
-  - if draft?
-    .mt-2: span.label-danger Draft
+    .mt-1 = user.name
