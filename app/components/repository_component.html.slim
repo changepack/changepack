@@ -36,8 +36,9 @@ table.w-full.whitespace-nowrap
                 = helpers.icon 'plug', class: 'mr-2'
                 | Pull commits
 
-      tr.h-3
+      tr.h-4
 
 - if @pagy && @pagy.pages > 1
-  .py-8
-    == helpers.pagy_nav(@pagy)
+  .py-10.md:py-24
+    .-my-8
+      == helpers.pagy_nav(@pagy)

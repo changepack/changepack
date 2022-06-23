@@ -72,6 +72,10 @@ trix-editor:empty:not(:focus)::before {
   @apply inline-block;
 }
 
+.pagination .prev {
+  @apply mr-1;
+}
+
 .pagination .page.disabled {
   @apply opacity-50;
 }

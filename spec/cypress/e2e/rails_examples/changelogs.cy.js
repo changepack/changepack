@@ -30,7 +30,7 @@ describe('Changelogs', function() {
 
     cy.get('[data-test-id="destroy_changelog"]').click()
     cy.get('[data-test-id="confirm_destroy"]').click()
-    cy.get('[data-test-id="account_changelogs"]').should('have.length.gt', 0)
+    cy.get('[data-test-id="account"]').should('have.length.gt', 0)
     cy.get('[data-test-id="changelog"]').should('have.length', 0)
   })
 })
