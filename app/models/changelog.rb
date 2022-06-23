@@ -29,7 +29,7 @@ class Changelog < ApplicationRecord
 
   def slug_candidates
     [
-      %i[title set_pretty_id]
+      %i[title set_slug_pretty_id]
     ]
   end
 end
