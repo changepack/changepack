@@ -11,8 +11,3 @@ nav.bg-white.drop-shadow-sm.md:drop-shadow-none
           .ml-8.flex.items-baseline.space-x-4
             - link_tos.each do |link_to|
               = link_to
-
-            - if helpers.user_signed_in? && helpers.current_user.github_id.nil?
-              = button_to 'Connect GitHub', \
-                            user_github_omniauth_authorize_path, \
-                            method: :post, class: 'tab', data: { turbo: false }
