@@ -3,6 +3,10 @@
 module ApplicationHelper
   include Pagy::Frontend
 
+  def current_controller
+    params[:controller]&.to_sym
+  end
+
   def component(name, context: nil, **args, &block)
     return render_component_in(context, name, **args, &block) if context
 

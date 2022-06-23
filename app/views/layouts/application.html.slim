@@ -17,8 +17,10 @@ html
     header.w-full.mx-auto
       = component :navigation do |nav|
         - if user_signed_in?
-          - nav.link_to 'Home', root_path, active: true
-          - nav.link_to 'Repositories', repositories_path, active: false
+          - nav.link_to 'Home', root_path, \
+                  active: current_controller.in?(%i[accounts changelogs])
+          - nav.link_to 'Repositories', repositories_path, \
+                  active: current_controller.in?(%i[repositories])
 
     main.lg:container.mx-auto.my-8.md:my-28.px-5
       - flash.each do |type, message|
