@@ -54,6 +54,14 @@
   .label-danger {
     @apply label bg-[#FCEDB9] text-[#A82C2B];
   }
+
+  .repository {
+    @apply border border-gray-100 rounded-lg;
+  }
+
+  .repository + .repository {
+    @apply mt-4;
+  }
 }
 
 trix-editor:empty:not(:focus)::before {
