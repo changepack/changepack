@@ -7,7 +7,4 @@
 section.overflow-x-auto
   .py-10.md:py-24
     .-my-8
-      table.w-full.whitespace-nowrap
-        tbody
-          - repositories.each do |repository|
-            == render repository
+      = component :repository, repositories:
