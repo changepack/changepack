@@ -62,6 +62,30 @@
   .repository + .repository {
     @apply mt-4;
   }
+
+  .accordion .accordion-top h2 {
+    @apply flex justify-between items-center p-5 w-full font-medium text-left rounded-t-xl border border-b-0 border-gray-200;
+  }
+
+  .accordion .accordion-top section {
+    @apply p-5 border border-b-0 border-gray-200 text-gray-600;
+  }
+
+  .accordion .accordion-middle h2 {
+    @apply flex justify-between items-center p-5 w-full font-medium text-left border border-b-0 border-gray-200;
+  }
+
+  .accordion .accordion-middle section {
+    @apply p-5 border border-b-0 border-gray-200 text-gray-600;
+  }
+
+  .accordion .accordion-bottom h2 {
+    @apply flex justify-between items-center p-5 w-full font-medium text-left border border-gray-200;
+  }
+
+  .accordion .accordion-bottom section {
+    @apply p-5 border border-t-0 border-gray-200 rounded-b-xl text-gray-600;
+  }
 }
 
 trix-editor:empty:not(:focus)::before {
