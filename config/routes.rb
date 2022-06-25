@@ -1,17 +1,24 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  root 'changelogs#index'
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
 
-  devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
+  authenticate do
+    root 'changelogs#index'
 
-  resources :changelogs do
-    member do
-      get :confirm_destroy
+    resources :changelogs, except: [:show] do
+      member do
+        get :confirm_destroy
+      end
     end
+
+    resources :repositories, only: [:index, :update, :destroy]
   end
 
-  resources :repositories, only: [:index, :update, :destroy]
+  resources :changelogs, only: [:show]
 
   unless Rails.env.production?
     scope path: '__cypress__', controller: 'users/cypress' do

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ChangelogsController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[show]
   skip_verify_authorized
 
   before_action only: %i[edit update destroy] do

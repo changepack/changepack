@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FlashComponent < ApplicationComponent
-  option :type, type: Types::Coercible::String.default('alert').enum('notice', 'alert')
+  option :type, type: Types::Coercible::String.default('alert').enum('notice', 'alert', 'info')
 
   def call
     content_tag(:div) do
@@ -14,12 +14,11 @@ class FlashComponent < ApplicationComponent
   private
 
   def color
-    case type.to_sym
-    when :notice
-      'bg-green-50 text-green-500'
-    when :alert
-      'bg-yellow-50 text-yellow-500'
-    end
+    {
+      notice: 'bg-green-50 text-green-500',
+      alert: 'bg-yellow-50 text-yellow-500',
+      info: 'bg-gray-50 text-gray-500'
+    }.fetch(type.to_sym)
   end
 
   def render?

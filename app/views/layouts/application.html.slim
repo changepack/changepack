@@ -23,7 +23,8 @@ html
                   active: current_controller.in?(%i[repositories])
 
     main.lg:container.mx-auto.my-8.md:my-28.px-5
-      - flash.each do |type, message|
+      - flash.select { |_, message| message.present? }.each do |type, message|
         = component :flash, type: type do
           = message
+
       = yield

@@ -11,8 +11,8 @@ section.overflow-x-auto
       - if repositories.any?
         = component :repository, repositories:
       - elsif current_user.github_id.present?
-        = component :flash, type: :alert do
-          ' We haven’t pulled any repositories from your GitHub account.
+        = component :flash, type: :info do
+          ' We haven’t pulled any repositories from your GitHub account yet.
       - else
         .accordion.w-4/5
           .accordion-top
