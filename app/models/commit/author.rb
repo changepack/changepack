@@ -8,6 +8,8 @@ class Commit
     attribute :email, :string
 
     validates :name, presence: true
-    validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+    # Do not validate with URI::MailTo::EMAIL_REGEXP as it doesn't work with Dependabot
+    # Example: 49699333+dependabot[bot]@users.noreply.github.com
+    validates :email, presence: true
   end
 end

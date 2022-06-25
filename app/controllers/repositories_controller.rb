@@ -18,6 +18,8 @@ class RepositoriesController < ApplicationController
   def update
     repository.transition_to!(:active)
 
+    Commits::Pull.new(repository:).execute
+
     respond_to do |format|
       format.html { redirect_to repositories_url }
       format.json { head :no_content }

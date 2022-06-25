@@ -17,7 +17,7 @@ module Adapters
         Commit.new(
           sha: commit.sha,
           message: commit.commit.message,
-          url: commit.commit.url,
+          url: commit.html_url,
           commited: commit.commit.author.date,
           author: {
             name: commit.commit.author.name,
