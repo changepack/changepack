@@ -9,3 +9,32 @@ section data-test-id="new_changelog_page"
 
     - content.sidebar do
       = component :metadata, changelog:
+
+  .accordion
+    .accordion-single
+      h2 Recent changes
+      section.overflow-x-scroll.h-80
+        - commits.each do |commit|
+          .flex.items-center.mb-4
+            / slim-lint:disable LineLength
+            input(
+              name=commit.id
+              id=commit.id
+              type="checkbox"
+              class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2"
+            )
+            / slim-lint:enable LineLength
+
+            label for=commit.id class="ml-2"
+              = commit.message
+
+            span.label.ml-2
+              = commit.repository.name
+              | @
+              = commit.repository.branch
+
+            span.label.ml-2
+              = commit.author.name
+
+            span.label.ml-2
+              = l(commit.commited, format: :long)

@@ -86,6 +86,14 @@
   .accordion .accordion-bottom section {
     @apply p-5 border border-t-0 border-gray-200 rounded-b-xl text-gray-600;
   }
+
+  .accordion .accordion-single h2 {
+    @apply flex justify-between items-center p-5 w-full font-medium text-left rounded-t-xl border border-b-0 border-gray-200;
+  }
+
+  .accordion .accordion-single section {
+    @apply p-5 border rounded-b-xl border-gray-200 text-gray-600;
+  }
 }
 
 trix-editor:empty:not(:focus)::before {
