@@ -111,3 +111,7 @@ trix-editor:empty:not(:focus)::before {
 .pagination .page.disabled {
   @apply opacity-50;
 }
+
+.prose .attachment {
+  margin: 0;
+}

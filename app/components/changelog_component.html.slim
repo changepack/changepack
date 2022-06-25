@@ -22,6 +22,7 @@
                   data: { test_id: 'edit_changelog' } do
         = helpers.icon 'pencil', class: 'mr-2'
         | Edit changelog
+
       .inline-block.ml-2
         turbo-frame id="confirm_destroy_#{@changelog.id}"
           = link_to confirm_destroy_changelog_path(@changelog), \
