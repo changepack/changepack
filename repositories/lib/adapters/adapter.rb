@@ -37,7 +37,7 @@ module Adapters
     private
 
     def client
-      raise 'Not implemented yet!'
+      raise NotImplemented
     end
 
     class Repository < Dry::Struct
@@ -50,7 +50,7 @@ module Adapters
       attribute :sha, Types::String
       attribute :message, Types::String
       attribute :url, Types::String
-      attribute :commited, Types::Date
+      attribute :commited, Types::Time
       attribute :author do
         attribute :name, Types::String
         attribute :email, Types::String

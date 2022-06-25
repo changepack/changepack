@@ -13,15 +13,15 @@ module Adapters
     end
 
     def commits(repository_id, after: nil) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-      paginate(after:) { client.commits(repository_id) }.map do |commit|
+      paginate(after:) { client.commits(repository_id.to_i) }.map do |commit|
         Commit.new(
           sha: commit.sha,
           message: commit.commit.message,
           url: commit.commit.url,
           commited: commit.commit.author.date,
           author: {
-            name: commit.commit.name,
-            email: commit.commit.email
+            name: commit.commit.author.name,
+            email: commit.commit.author.email
           }
         )
       end

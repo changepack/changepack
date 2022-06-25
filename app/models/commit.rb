@@ -14,10 +14,10 @@ class Commit < ApplicationRecord
   belongs_to :repository
 
   validates :message, presence: true
-  validates :url, presence: true
+  validates :url, presence: true, url: true
   validates :commited, presence: true
   validates :author, presence: true, store_model: true
-  validates :provider, presence: true
+  validates :provider, presence: true, inclusion: { in: Provider.types }
   validates :provider_id, presence: true
 
   inquirer :provider

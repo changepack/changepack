@@ -16,9 +16,9 @@ FactoryBot.define do
     user
     account { user.account }
     name { "#{Faker::App.name.downcase}/#{Faker::App.name.downcase}" }
-    branch { :main }
-    provider { :github }
-    provider_id { Faker::Number.number(digits: 10) }
+    branch { 'main' }
+    provider { 'github' }
+    provider_id { '1' }
   end
 
   factory :account do

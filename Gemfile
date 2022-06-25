@@ -162,3 +162,5 @@ gem "sidekiq", "~> 6.5"
 gem "mock_redis", "~> 0.32.0"
 
 gem "faraday-retry", "~> 2.0"
+
+gem "validate_url", "~> 1.0"

@@ -20,7 +20,7 @@ class Repository < ApplicationRecord
   validates :name, presence: true
   validates :branch, presence: true
   validates :status, presence: true
-  validates :provider, presence: true, inclusion: { in: %w[github] }
+  validates :provider, presence: true, inclusion: { in: Provider.types }
   validates :provider_id, presence: true
 
   normalize :name
@@ -30,7 +30,7 @@ class Repository < ApplicationRecord
   inquirer :provider
 
   scope :active, -> { where(status: :active) }
-  scope :desc, lambda {
+  scope :by_activity, lambda {
     order(
       Arel.sql("CASE WHEN status = 'active' THEN 0 ELSE 1 END, created_at DESC")
     )
