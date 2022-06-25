@@ -303,7 +303,14 @@ cross-spawn@^7.0.0:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-cypress@^10.2.0:
+cypress-on-rails@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/cypress-on-rails/-/cypress-on-rails-0.1.0.tgz#cddea5d2784024ca3aedef2bf2955eb6662e6103"
+  integrity sha512-0bhD8jXrwD18N0jkpISNEBKfWfXkbJklq8Ot338cIVhsTNZFtbEDaCOZGXfYHxvlw/+IQT7//4x0jYqTQpqhCg==
+  dependencies:
+    cypress "*"
+
+cypress@*, cypress@^10.2.0:
   version "10.2.0"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-10.2.0.tgz#ca078abfceb13be2a33cbba6e0e80ded770f542a"
   integrity sha512-+i9lY5ENlfi2mJwsggzR+XASOIgMd7S/Gd3/13NCpv596n3YSplMAueBTIxNLcxDpTcIksp+9pM3UaDrJDpFqA==

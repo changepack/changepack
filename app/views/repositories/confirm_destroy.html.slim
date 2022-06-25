@@ -1,7 +1,7 @@
-= turbo_frame_tag "confirm_destroy_#{repository.id}" do
+= turbo_frame_tag "stop_tracking_#{repository.id}" do
   = button_to repository, \
                 class: 'button-delete inline-block', \
-                data: { test_id: 'confirm_destroy', turbo_frame: '_top' }, \
+                data: { test_id: 'confirm_stop', turbo_frame: '_top' }, \
                 method: :delete do
     = icon 'trash', class: 'mr-2'
     | I’m sure, do it

@@ -18,11 +18,12 @@ section.overflow-x-auto
               == pagy_nav(pagy)
 
       - elsif current_user.github_id.present?
-        = component :flash, type: :info do
-          ' We haven’t pulled any repositories from your GitHub account yet.
+        section data-test-id="blank"
+          = component :flash, type: :info do
+            ' We haven’t pulled any repositories from your GitHub account yet.
 
       - else
-        .accordion.w-4/5
+        .accordion.w-4/5 data-test-id="intro"
           .accordion-top
             h2 View your commits from GitHub
             section
