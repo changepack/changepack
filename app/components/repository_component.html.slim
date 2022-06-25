@@ -1,42 +1,36 @@
-- collection.each do |repository|
-  .repository
-    table.w-full.whitespace-nowrap
-      tbody
-        tr.focus:outline-none.h-16
-          td
-            .flex.items-center.pl-5
-              p.mr-4
-                = helpers.icon :circle, class: status_class(repository)
-              p.text-base.font-medium.leading-none.mr-2
-                = repository.name
-              p.ml-2.text-gray-400
-                = helpers.icon :tag
-                p.text-sm.leading-none.ml-2.text-gray-400
-                  = repository.branch
-          td
-            - if repository.pulled.present?
-              .flex.items-center.justify-end
-                span.label
-                  ' Pulled on
-                  = l(repository.pulled, format: :long)
-          td
-            .flex.items-center.justify-end.pr-5
-              - if repository.status.active?
-                turbo-frame id="confirm_destroy_#{repository.id}"
-                  = link_to confirm_destroy_repository_path(repository), \
-                              class: 'button-delete inline-block', \
-                              data: { test_id: 'destroy_repository' } do
-                    = helpers.icon 'trash', class: 'mr-2'
-                    | Stop tracking
-              - else
-                turbo-frame id="confirm_update_#{repository.id}"
-                  = link_to confirm_update_repository_path(repository), \
-                              class: 'button-2 inline-block', \
-                              data: { test_id: 'update_repository' } do
-                    = helpers.icon 'plug', class: 'mr-2'
-                    | Pull commits
-
-- if @pagy && @pagy.pages > 1
-  .py-10.md:py-24
-    .-my-8
-      == helpers.pagy_nav(@pagy)
+.repository
+  table.w-full.whitespace-nowrap
+    tbody
+      tr.focus:outline-none.h-16
+        td
+          .flex.items-center.pl-5
+            p.mr-4
+              = helpers.icon :circle, class: status_class(repository)
+            p.text-base.font-medium.leading-none.mr-2
+              = repository.name
+            p.ml-2.text-gray-400
+              = helpers.icon :tag
+              p.text-sm.leading-none.ml-2.text-gray-400
+                = repository.branch
+        td
+          - if repository.pulled.present?
+            .flex.items-center.justify-end
+              span.label
+                ' Pulled on
+                = l(repository.pulled, format: :long)
+        td
+          .flex.items-center.justify-end.pr-5
+            - if repository.status.active?
+              turbo-frame id="confirm_destroy_#{repository.id}"
+                = link_to confirm_destroy_repository_path(repository), \
+                            class: 'button-delete inline-block', \
+                            data: { test_id: 'destroy_repository' } do
+                  = helpers.icon 'trash', class: 'mr-2'
+                  | Stop tracking
+            - else
+              turbo-frame id="confirm_update_#{repository.id}"
+                = link_to confirm_update_repository_path(repository), \
+                            class: 'button-2 inline-block', \
+                            data: { test_id: 'update_repository' } do
+                  = helpers.icon 'plug', class: 'mr-2'
+                  | Pull commits

@@ -9,10 +9,18 @@ section.overflow-x-auto
   .py-10.md:py-24
     .md:-my-8
       - if repositories.any?
-        = component :repository, repositories:
+        - repositories.each do |repository|
+          = component :repository, repository:
+
+        - if pagy && pagy.pages > 1
+          .py-10.md:py-24
+            .-my-8
+              == pagy_nav(pagy)
+
       - elsif current_user.github_id.present?
         = component :flash, type: :info do
           ' We haven’t pulled any repositories from your GitHub account yet.
+
       - else
         .accordion.w-4/5
           .accordion-top

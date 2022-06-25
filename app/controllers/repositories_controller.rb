@@ -6,7 +6,9 @@ class RepositoriesController < ApplicationController
   before_action { authorize! }
 
   def index
-    render locals: { repositories: }
+    pagy, repositories = pagy(scope)
+
+    render locals: { repositories:, pagy: }
   end
 
   def confirm_update
@@ -38,10 +40,10 @@ class RepositoriesController < ApplicationController
   private
 
   def repository
-    @repository ||= repositories.find(params[:id])
+    @repository ||= scope.find(params[:id])
   end
 
-  def repositories
-    @repositories ||= authorized_scope(Repository.desc)
+  def scope
+    @scope ||= authorized_scope(Repository.desc)
   end
 end
