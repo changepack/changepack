@@ -2,8 +2,8 @@
 
 module Adapters
   class GitHub < Adapter
-    def repositories
-      paginate { client.repos }.map do |repo|
+    def repositories(after: nil)
+      paginate(after:) { client.repos }.map do |repo|
         Repository.new(
           id: repo.id,
           name: repo.full_name,

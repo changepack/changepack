@@ -42,7 +42,7 @@ class RepositoriesController < ApplicationController
   private
 
   def repository
-    @repository ||= scope.find(params[:id])
+    @repository ||= scope.find(id)
   end
 
   def scope
