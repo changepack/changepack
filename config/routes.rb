@@ -15,7 +15,12 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :repositories, only: [:index, :update, :destroy]
+    resources :repositories, only: [:index, :update, :destroy] do
+      member do
+        get :confirm_destroy
+        get :confirm_update
+      end
+    end
   end
 
   resources :changelogs, only: [:show]

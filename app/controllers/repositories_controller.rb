@@ -9,6 +9,10 @@ class RepositoriesController < ApplicationController
     render locals: { repositories: }
   end
 
+  def confirm_update
+    render locals: { repository: }
+  end
+
   def update
     repository.transition_to!(:active)
 
@@ -16,6 +20,10 @@ class RepositoriesController < ApplicationController
       format.html { redirect_to repositories_url }
       format.json { head :no_content }
     end
+  end
+
+  def confirm_destroy
+    render locals: { repository: }
   end
 
   def destroy

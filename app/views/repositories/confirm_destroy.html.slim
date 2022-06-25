@@ -1,6 +1,6 @@
-= turbo_frame_tag "confirm_destroy_#{changelog.id}" do
-  = button_to changelog, \
-                class: 'button-delete mt-4 text-red-600', \
+= turbo_frame_tag "confirm_destroy_#{repository.id}" do
+  = button_to repository, \
+                class: 'button-delete inline-block', \
                 data: { test_id: 'confirm_destroy', turbo_frame: '_top' }, \
                 method: :delete do
     = icon 'trash', class: 'mr-2'

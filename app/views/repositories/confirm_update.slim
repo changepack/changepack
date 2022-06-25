@@ -1,0 +1,7 @@
+= turbo_frame_tag "confirm_update_#{repository.id}" do
+  = button_to repository, \
+                class: 'button-2 inline-block', \
+                data: { test_id: 'confirm_destroy', turbo_frame: '_top' }, \
+                method: :put do
+    = icon 'plug', class: 'mr-2'
+    | I’m sure, do it
