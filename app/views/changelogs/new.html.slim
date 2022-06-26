@@ -26,7 +26,8 @@ section data-test-id="new_changelog_page"
             / slim-lint:enable LineLength
 
             label for=commit.id class="ml-2"
-              = commit.message
+              abbr.no-underline title=commit.message
+                = commit.abbr
 
             span.label.ml-2
               = commit.repository.name
