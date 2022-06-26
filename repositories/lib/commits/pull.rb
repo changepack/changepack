@@ -13,9 +13,10 @@ module Commits
     def execute
       git.commits(repository.provider_id, after: cursor).each do |c|
         commit = upsert!(c)
-
         after_commit { Pulled.new(id: commit.id).publish }
       end
+
+      repository.update!(pulled: Time.current)
     end
 
     private
