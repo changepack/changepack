@@ -7,12 +7,15 @@ module Changelogs
     option :content, type: Types::String
     option :title, type: Types::String, optional: true
     option :published, type: Types::String, optional: true
+    option :commit_ids, type: Types::Array.of(Types::String)
 
     def execute
       changelog.tap do |changelog|
         changelog.update(attributes)
         changelog.transition_to!(:published) if publish?
         changelog.transition_to!(:draft) if draft?
+
+        update_commits
 
         after_commit { event.publish if event.present? }
       end
@@ -26,6 +29,17 @@ module Changelogs
 
     def user
       changelog.user || @user
+    end
+
+    def update_commits
+      changelog.commits
+               .where.not(id: commit_ids)
+               .each { |commit| commit.update!(changelog: nil) }
+
+      account.commits
+             .where(id: commit_ids)
+             .includes(:account, :repository)
+             .each { |commit| commit.update!(changelog:) }
     end
 
     def event

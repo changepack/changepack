@@ -12,6 +12,7 @@ class Commit < ApplicationRecord
 
   belongs_to :account
   belongs_to :repository
+  belongs_to :changelog, optional: true
 
   validates :message, presence: true
   validates :url, presence: true, url: true
@@ -23,4 +24,5 @@ class Commit < ApplicationRecord
   inquirer :provider
 
   scope :github, -> { where(provider: :github) }
+  scope :commited, -> { order(commited: :desc) }
 end

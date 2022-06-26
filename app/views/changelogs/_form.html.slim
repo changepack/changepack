@@ -36,18 +36,15 @@
         section.overflow-x-scroll.h-80
           - commits.each do |commit|
             .mb-3
-              / slim-lint:disable LineLength
-              input(
-                name=commit.id
-                id=commit.id
-                type="checkbox"
-                class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2"
-              )
-              / slim-lint:enable LineLength
+              = form.check_box :commit_ids, *commit.checkbox_options(changelog)
 
               label for=commit.id class="ml-2"
                 abbr.no-underline title=commit.message
-                  = commit.abbr
+                  - if commit.disabled?(changelog)
+                    = link_to commit.changelog, data: { turbo_frame: '_top' } do
+                      strike.text-gray-400 = commit.abbr
+                  - else
+                    = commit.abbr
 
                 .mt-1.pl-4
                   span.label

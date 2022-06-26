@@ -72,14 +72,15 @@ class ChangelogsController < ApplicationController
 
   def commits
     @commits ||= current_account.commits
-                                .includes(:repository)
+                                .includes(:repository, :changelog)
                                 .limit(100)
+                                .commited
                                 .decorate
   end
 
   def create_changelog_params
     params.require(:changelog)
-          .permit(:title, :content, :published)
+          .permit(:title, :content, :published, commit_ids: [])
           .merge(user: current_user, changelog: Changelog.new)
           .to_h
   end

@@ -12,6 +12,8 @@ class Changelog < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :account
 
+  has_many :commits, dependent: :nullify
+
   has_rich_text :content
 
   validates :title, length: { maximum: 140 }
