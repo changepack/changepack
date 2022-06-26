@@ -41,7 +41,7 @@
               label for=commit.id class="ml-2"
                 abbr.no-underline title=commit.message
                   - if commit.disabled?(changelog)
-                    = link_to commit.changelog, data: { turbo_frame: '_top' } do
+                    = link_to commit.changelog, target: '_blank', data: { turbo_frame: '_top' } do
                       strike.text-gray-400 = commit.abbr
                   - else
                     = commit.abbr
