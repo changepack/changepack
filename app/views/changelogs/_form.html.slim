@@ -46,7 +46,7 @@
                   - else
                     = commit.abbr
 
-                .mt-1.pl-4
+                .flex.items-center.mt-1.pl-4
                   span.label
                     = commit.repository.name
                     | @
@@ -55,5 +55,5 @@
                   span.label.ml-2
                     = commit.author.name
 
-                  span.label.ml-2
+                  span.text-xs.text-gray-400.ml-3
                     = l(commit.commited, format: :long)
