@@ -4,12 +4,12 @@ class CommitDecorator < ApplicationDecorator
   delegate_all
 
   def abbr
-    object.message.truncate(50)
+    message.truncate(50)
   end
 
   def checkbox_options(changelog)
     [].tap do |opts|
-      true_value = object.id
+      true_value = id
       false_value = nil
 
       opts << checkbox_html_options(changelog)
@@ -19,11 +19,11 @@ class CommitDecorator < ApplicationDecorator
   end
 
   def checked?(changelog)
-    changelog.id && object.changelog == changelog
+    changelog.id && self.changelog == changelog
   end
 
   def disabled?(changelog)
-    object.changelog && object.changelog != changelog
+    self.changelog && self.changelog != changelog
   end
 
   private
@@ -31,7 +31,7 @@ class CommitDecorator < ApplicationDecorator
   def checkbox_html_options(changelog)
     {
       multiple: true,
-      id: object.id,
+      id: id,
       class: 'checkbox',
       checked: checked?(changelog),
       disabled: disabled?(changelog)

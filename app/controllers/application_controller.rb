@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  prepend ActionPolicy::Draper
   include Pagy::Backend
 
   verify_authorized

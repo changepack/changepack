@@ -1,17 +1,16 @@
 = form_with(model: changelog, class: 'contents') do |form|
   .mb-5
-    = form.text_field :title, class: text_field_class(changelog, :title), \
+    = form.text_field :title, class: changelog.title_field_class, \
                               placeholder: 'Title', \
                               data: { test_id: 'title' }
     - changelog.errors.full_messages_for(:title).each do |error_message|
       .text-xs.text-red-500.mt-2 = error_message
 
   .my-5
-    / slim-lint:disable LineLength
-    = form.rich_text_area :content, class: "prose #{text_field_class(changelog, :content)}", \
-                                    data: { test_id: 'content' }, \
-                                    autofocus: true
-    / slim-lint:enable LineLength
+    = form.rich_text_area :content, \
+                          class: changelog.content_field_class, \
+                          data: { test_id: 'content' }, \
+                          autofocus: true
     - changelog.errors.full_messages_for(:content).each do |error_message|
       .text-xs.text-red-500.mt-2 = error_message
 
@@ -24,7 +23,7 @@
         | Save changelog
       = link_to 'Cancel', changelog, class: 'ml-2 button-3'
     .column.text-right
-      = component :toggle, id: ['toggle', changelog.id].compact.join('_'), \
+      = component :toggle, id: changelog.published_field_id, \
                            label: 'Published', \
                            name: 'changelog[published]', \
                            checked: changelog.status.published?

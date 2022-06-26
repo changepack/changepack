@@ -78,7 +78,6 @@ class ChangelogsController < ApplicationController
                                 .includes(:repository, :changelog)
                                 .limit(100)
                                 .commited(changelog)
-                                .decorate
   end
 
   def create_changelog_params
@@ -93,6 +92,11 @@ class ChangelogsController < ApplicationController
   end
 
   def common_locals
-    { locals: { changelog:, commits: } }
+    {
+      locals: {
+        changelog: changelog.decorate,
+        commits: commits.decorate
+      }
+    }
   end
 end
