@@ -94,6 +94,10 @@
   .accordion .accordion-single section {
     @apply p-5 border rounded-b-xl border-gray-200 text-gray-600;
   }
+
+  .checkbox {
+    @apply w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2;
+  }
 }
 
 trix-editor:empty:not(:focus)::before {

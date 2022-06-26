@@ -32,7 +32,7 @@ class CommitDecorator < ApplicationDecorator
     {
       multiple: true,
       id: object.id,
-      class: 'w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2',
+      class: 'checkbox',
       checked: checked?(changelog),
       disabled: disabled?(changelog)
     }
