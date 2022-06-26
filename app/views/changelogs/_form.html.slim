@@ -34,7 +34,7 @@
       .accordion
         .accordion-single
           h2 Recent changes
-          section.overflow-x-scroll.h-80
+          section.overflow-x-scroll.max-h-80
             - commits.each do |commit|
               .mb-3
                 = form.check_box :commit_ids, \
@@ -63,3 +63,4 @@
 
                     span.text-xs.text-gray-400.ml-3
                       = l(commit.commited, format: :long)
+            .-mt-3
