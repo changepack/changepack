@@ -18,7 +18,9 @@ class RepositoriesController < ApplicationController
   def update
     repository.transition_to!(:active)
 
-    Commits::Pull.new(repository:).execute
+    Event.publish(
+      Repositories::Outdated.new(repository_id: repository.id)
+    )
 
     respond_to do |format|
       format.html { redirect_to repositories_url }

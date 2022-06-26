@@ -3,9 +3,10 @@
 module Repositories
   include BoundedContext
 
-  subscribe Commits::OnNewHour, to: Clock::NewHour
-
-  class Pulled < Event
-    attribute :id, Types::String
+  class Outdated < Event
+    attribute :repository_id, Types::String
   end
+
+  subscribe OnNewHour, to: Clock::NewHour
+  subscribe OnOutdated, to: Outdated
 end

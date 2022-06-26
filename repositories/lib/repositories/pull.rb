@@ -11,11 +11,8 @@ module Repositories
     end
 
     def execute
-      git.repositories.each do |r|
-        repository = upsert!(r)
-
-        after_commit { Pulled.new(id: repository.id).publish }
-      end
+      git.repositories
+         .each { |repository| upsert!(repository) }
     end
 
     private

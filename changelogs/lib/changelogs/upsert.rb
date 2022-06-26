@@ -16,8 +16,6 @@ module Changelogs
         changelog.transition_to!(:draft) if draft?
 
         update_commits
-
-        after_commit { event.publish if event.present? }
       end
     end
 
@@ -42,27 +40,12 @@ module Changelogs
              .each { |commit| commit.update!(changelog:) }
     end
 
-    def event
-      attrs = { id: changelog.id }
-
-      return Published.new(attrs) if published?
-      return Drafted.new(attrs) if drafted?
-      return Created.new(attrs) if created?
-    end
-
     def publish?
       @publish ||= published.present? && changelog.can_transition_to?(:published)
     end
 
     def draft?
       @draft ||= published.blank? && changelog.can_transition_to?(:draft)
-    end
-
-    alias published? publish?
-    alias drafted? draft?
-
-    def created?
-      changelog.id_previously_changed?
     end
 
     delegate :account, to: :user

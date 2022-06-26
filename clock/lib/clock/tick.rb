@@ -3,7 +3,9 @@
 module Clock
   class Tick < ApplicationJob
     def perform
-      NewHour.new(hour: Time.current.hour).publish
+      Event.publish(
+        NewHour.new(hour: Time.current.hour)
+      )
     end
   end
 end
