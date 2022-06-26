@@ -3,7 +3,7 @@
     section data-test-id="edit_changelog_page"
       = component :content do |content|
         - content.article do
-          = render 'form', changelog:
+          = render 'form', changelog:, commits:
 
         - content.sidebar do
           = component :metadata, changelog:

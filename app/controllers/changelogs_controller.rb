@@ -12,10 +12,7 @@ class ChangelogsController < ApplicationController
   end
 
   def new
-    render locals: {
-      changelog: Changelog.new,
-      commits: current_account.commits.includes(:repository).limit(100).decorate
-    }
+    render locals: { changelog: Changelog.new, commits: }
   end
 
   def show
@@ -73,6 +70,13 @@ class ChangelogsController < ApplicationController
     @changelog ||= Changelog.friendly.find(id)
   end
 
+  def commits
+    @commits ||= current_account.commits
+                                .includes(:repository)
+                                .limit(100)
+                                .decorate
+  end
+
   def create_changelog_params
     params.require(:changelog)
           .permit(:title, :content, :published)
@@ -85,6 +89,6 @@ class ChangelogsController < ApplicationController
   end
 
   def common_locals
-    { locals: { changelog: } }
+    { locals: { changelog:, commits: } }
   end
 end
