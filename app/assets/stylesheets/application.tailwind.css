@@ -63,8 +63,16 @@
     @apply mt-4;
   }
 
+  .accordion h2 {
+    @apply flex justify-between items-center p-5 w-full font-medium text-left border border-gray-200;
+  }
+
+  .accordion-mini h2 {
+    @apply pt-3 pb-3;
+  }
+
   .accordion .accordion-top h2 {
-    @apply flex justify-between items-center p-5 w-full font-medium text-left rounded-t-xl border border-b-0 border-gray-200;
+    @apply rounded-t-xl border-b-0;
   }
 
   .accordion .accordion-top section {
@@ -72,15 +80,11 @@
   }
 
   .accordion .accordion-middle h2 {
-    @apply flex justify-between items-center p-5 w-full font-medium text-left border border-b-0 border-gray-200;
+    @apply border-b-0;
   }
 
   .accordion .accordion-middle section {
     @apply p-5 border border-b-0 border-gray-200 text-gray-600;
-  }
-
-  .accordion .accordion-bottom h2 {
-    @apply flex justify-between items-center p-5 w-full font-medium text-left border border-gray-200;
   }
 
   .accordion .accordion-bottom section {
@@ -88,7 +92,7 @@
   }
 
   .accordion .accordion-single h2 {
-    @apply flex justify-between items-center p-5 w-full font-medium text-left rounded-t-xl border border-b-0 border-gray-200;
+    @apply rounded-t-xl border-b-0;
   }
 
   .accordion .accordion-single section {

@@ -7,7 +7,7 @@ class RepositoryComponent < ApplicationComponent
 
   def status_class(repository)
     if repository.status.active?
-      'text-green-600'
+      'text-green-500'
     else
       'text-gray-400'
     end
