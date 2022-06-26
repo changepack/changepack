@@ -166,3 +166,5 @@ gem "faraday-retry", "~> 2.0"
 gem "validate_url", "~> 1.0"
 
 gem "draper", "~> 4.0"
+
+gem "sidekiq-cron", "~> 1.5"

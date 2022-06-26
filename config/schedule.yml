@@ -1,0 +1,9 @@
+# https://github.com/ondrejbartas/sidekiq-cron
+# use https://crontab.guru/ to validate
+# validations for this file exist in /spec/configs/schedule_spec.rb
+
+# Every hour
+trigger_scheduled_items_job:
+  cron: '0 * * * *'
+  class: 'Clock::Tick'
+  queue: scheduled_jobs

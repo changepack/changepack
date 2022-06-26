@@ -20,6 +20,7 @@ Bundler.require(*Rails.groups)
 
 module Changepack
   class Application < Rails::Application
+    config.paths.add 'clock/lib', eager_load: true
     config.paths.add 'changepack/lib', eager_load: true
     config.paths.add 'repositories/lib', eager_load: true
     config.paths.add 'changelogs/lib', eager_load: true
@@ -38,6 +39,8 @@ module Changepack
     config.generators.system_tests = nil
     config.generators.template_engine = :slim
     config.generators.orm :active_record, primary_key_type: :string
+
+    config.active_job.queue_adapter = :sidekiq
   end
 
   def self.redis_ssl_verify_mode

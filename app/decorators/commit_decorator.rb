@@ -31,7 +31,7 @@ class CommitDecorator < ApplicationDecorator
   def checkbox_html_options(changelog)
     {
       multiple: true,
-      id: id,
+      id:,
       class: 'checkbox',
       checked: checked?(changelog),
       disabled: disabled?(changelog)

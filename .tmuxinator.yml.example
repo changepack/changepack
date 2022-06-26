@@ -12,4 +12,4 @@ windows:
         - bundle exec rails tailwindcss:watch
         - CYPRESS=1 RAILS_ENV=test bundle exec rails server -p 5017
         - bundle exec guard
-        - bundle exec sidekiq
+        - bundle exec sidekiq -C config/sidekiq.yml

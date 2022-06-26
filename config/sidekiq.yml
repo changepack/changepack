@@ -1,0 +1,17 @@
+---
+:verbose: false
+:concurrency: 5
+:timeout: 25
+:max_retries: 3
+
+:queues:
+  - default
+  - mailers
+  - scheduled_jobs
+  - action_mailbox_routing
+  - action_mailbox_incineration
+  - active_storage_analysis
+  - active_storage_purge
+
+production:
+  :concurrency: 10
