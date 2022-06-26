@@ -46,6 +46,6 @@ class RepositoriesController < ApplicationController
   end
 
   def scope
-    @scope ||= authorized_scope(Repository.by_activity)
+    @scope ||= authorized_scope(Repository.activity)
   end
 end

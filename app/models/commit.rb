@@ -24,5 +24,24 @@ class Commit < ApplicationRecord
   inquirer :provider
 
   scope :github, -> { where(provider: :github) }
-  scope :commited, -> { order(commited: :desc) }
+
+  scope :review, lambda { |changelog|
+    if changelog.new_record?
+      self
+    else
+      where(changelog:).or(
+        where(account: changelog.account)
+      )
+    end
+  }
+
+  scope :commited, lambda { |changelog|
+    if changelog.new_record?
+      order(commited: :desc)
+    else
+      order(
+        Arel.sql("CASE WHEN changelog_id = '#{changelog.id}' THEN 0 ELSE 1 END, commited DESC")
+      )
+    end
+  }
 end

@@ -30,7 +30,7 @@ class Repository < ApplicationRecord
   inquirer :provider
 
   scope :active, -> { where(status: :active) }
-  scope :by_activity, lambda {
+  scope :activity, lambda {
     order(
       Arel.sql("CASE WHEN status = 'active' THEN 0 ELSE 1 END, created_at DESC")
     )

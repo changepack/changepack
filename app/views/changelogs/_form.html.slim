@@ -29,31 +29,37 @@
                            name: 'changelog[published]', \
                            checked: changelog.status.published?
 
-  .mt-10
-    .accordion
-      .accordion-single
-        h2 Recent changes
-        section.overflow-x-scroll.h-80
-          - commits.each do |commit|
-            .mb-3
-              = form.check_box :commit_ids, *commit.checkbox_options(changelog)
+  - if commits.any?
+    .mt-10
+      .accordion
+        .accordion-single
+          h2 Recent changes
+          section.overflow-x-scroll.h-80
+            - commits.each do |commit|
+              .mb-3
+                = form.check_box :commit_ids, \
+                                 *commit.checkbox_options(changelog)
 
-              label for=commit.id class="ml-2"
-                abbr.no-underline title=commit.message
-                  - if commit.disabled?(changelog)
-                    = link_to commit.changelog, target: '_blank', data: { turbo_frame: '_top' } do
-                      strike.text-gray-400 = commit.abbr
-                  - else
-                    = commit.abbr
+                label for=commit.id class="ml-2"
+                  abbr.no-underline title=commit.message
+                    - if commit.disabled?(changelog)
+                      = link_to commit.changelog, \
+                                target: '_blank', \
+                                rel: 'noopener', \
+                                data: { turbo_frame: '_top' } do
+                        strike.text-gray-400
+                          = commit.abbr
+                    - else
+                      = commit.abbr
 
-                .flex.items-center.mt-1.pl-4
-                  span.label
-                    = commit.repository.name
-                    | @
-                    = commit.repository.branch
+                  .flex.items-center.mt-1.pl-4
+                    span.label
+                      = commit.repository.name
+                      | @
+                      = commit.repository.branch
 
-                  span.label.ml-2
-                    = commit.author.name
+                    span.label.ml-2
+                      = commit.author.name
 
-                  span.text-xs.text-gray-400.ml-3
-                    = l(commit.commited, format: :long)
+                    span.text-xs.text-gray-400.ml-3
+                      = l(commit.commited, format: :long)

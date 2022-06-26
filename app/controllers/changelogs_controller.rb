@@ -12,7 +12,9 @@ class ChangelogsController < ApplicationController
   end
 
   def new
-    render locals: { changelog: Changelog.new, commits: }
+    @changelog = Changelog.new
+
+    render(**common_locals)
   end
 
   def show
@@ -72,9 +74,10 @@ class ChangelogsController < ApplicationController
 
   def commits
     @commits ||= current_account.commits
+                                .review(changelog)
                                 .includes(:repository, :changelog)
                                 .limit(100)
-                                .commited
+                                .commited(changelog)
                                 .decorate
   end
 

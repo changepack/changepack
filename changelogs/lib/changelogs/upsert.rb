@@ -7,7 +7,7 @@ module Changelogs
     option :content, type: Types::String
     option :title, type: Types::String, optional: true
     option :published, type: Types::String, optional: true
-    option :commit_ids, type: Types::Array.of(Types::String)
+    option :commit_ids, type: Types::Array.of(Types::String), optional: true
 
     def execute
       changelog.tap do |changelog|
