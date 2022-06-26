@@ -2,7 +2,12 @@
 
 module Changepack
   class EventHandler < ActiveJob::Base # rubocop:disable Rails/ApplicationJob
-    NotImplemented = Class.new(StandardError)
+    Error = Class.new(StandardError)
+    NotImplemented = Class.new(Error)
+
+    def self.subscribe(event)
+      Rails.configuration.event_store.subscribe(self, to: [event])
+    end
 
     def perform(payload)
       @payload = payload

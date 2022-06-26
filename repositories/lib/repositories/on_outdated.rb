@@ -2,6 +2,8 @@
 
 module Repositories
   class OnOutdated < EventHandler
+    subscribe Outdated
+
     def call
       Commits::Pull.new(repository:).execute
     end

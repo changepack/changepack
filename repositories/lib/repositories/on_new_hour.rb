@@ -2,6 +2,8 @@
 
 module Repositories
   class OnNewHour < EventHandler
+    subscribe Clock::NewHour
+
     def call
       Repository.active
                 .pluck(:id)
