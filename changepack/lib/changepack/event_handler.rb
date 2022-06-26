@@ -10,8 +10,8 @@ module Changepack
     end
 
     def perform(payload)
+      @event = payload[:event_type].constantize.new payload[:data]
       @payload = payload
-      @event = payload[:event_type].constantize.new(payload[:data])
 
       call
     end
