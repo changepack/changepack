@@ -7,9 +7,11 @@ Rails.application.routes.draw do
   }
 
   authenticate do
-    root 'changelogs#index'
+    root 'accounts#index'
 
-    resources :changelogs, except: [:show] do
+    resources :accounts, only: [:index]
+
+    resources :changelogs, except: [:index, :show] do
       member do
         get :confirm_destroy
       end

@@ -7,10 +7,6 @@ class ChangelogsController < ApplicationController
     authorize! changelog
   end
 
-  def index
-    redirect_to account_path(current_account)
-  end
-
   def new
     @changelog = Changelog.new
 

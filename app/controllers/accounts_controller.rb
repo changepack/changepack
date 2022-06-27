@@ -3,6 +3,10 @@
 class AccountsController < ApplicationController
   skip_verify_authorized
 
+  def index
+    redirect_to current_account
+  end
+
   def show
     render locals: { account:, changelogs: }
   end
