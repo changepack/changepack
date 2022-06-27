@@ -7,7 +7,7 @@ module Repositories
     def call
       Repository.active
                 .pluck(:id)
-                .map { |id| Repositories::Outdated.new(repository_id: id) }
+                .map { |id| Repositories::Outdated.new(data: { repository_id: id }) }
                 .each { |event| Event.publish(event) }
     end
   end

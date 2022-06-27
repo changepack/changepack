@@ -19,7 +19,7 @@ class RepositoriesController < ApplicationController
     repository.transition_to!(:active)
 
     Event.publish(
-      Repositories::Outdated.new(repository_id: repository.id)
+      Repositories::Outdated.new(data: { repository_id: repository.id })
     )
 
     respond_to do |format|

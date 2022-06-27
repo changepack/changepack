@@ -43,3 +43,6 @@ require 'vcr'
 VCR.configure do |config|
   config.hook_into :webmock
 end
+
+require 'sidekiq/testing'
+Sidekiq::Testing.fake!

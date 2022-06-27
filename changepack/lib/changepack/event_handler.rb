@@ -10,8 +10,11 @@ module Changepack
     end
 
     def perform(payload)
-      @event = payload[:event_type].constantize.new payload[:data]
+      klass = payload.fetch(:event_type).constantize
+      opts = payload.slice(:data, :event_id, :metadata)
+
       @payload = payload
+      @event = klass.new(**opts)
 
       call
     end

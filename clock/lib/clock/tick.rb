@@ -5,7 +5,7 @@ module Clock
     def perform
       Time.current.hour.tap do |hour|
         Event.publish(
-          NewHour.new(hour:)
+          NewHour.new(data: { hour: })
         )
       end
     end
