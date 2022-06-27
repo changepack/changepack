@@ -15,11 +15,9 @@ describe('Repositories', function() {
       cy.visit('/repositories')
       cy.get('[data-test-id="repository"]').should('be.visible')
 
-      cy.vcr_insert_cassette('pull_commits_from_github')
       cy.contains('Pull commits').should('be.visible')
       cy.get('[data-test-id="pull_commits"]').click()
       cy.get('[data-test-id="confirm_pull"]').click()
-      cy.vcr_eject_cassette()
       cy.contains('Stop tracking').should('be.visible')
 
       cy.get('[data-test-id="stop_tracking"]').click()

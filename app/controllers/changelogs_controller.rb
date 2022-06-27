@@ -14,19 +14,19 @@ class ChangelogsController < ApplicationController
   def new
     @changelog = Changelog.new
 
-    render(**common_locals)
+    render(**form_locals)
   end
 
   def show
-    render(**common_locals)
+    render(**show_locals)
   end
 
   def edit
-    render(**common_locals)
+    render(**form_locals)
   end
 
   def confirm_destroy
-    render(**common_locals)
+    render(**show_locals)
   end
 
   def create
@@ -34,10 +34,10 @@ class ChangelogsController < ApplicationController
 
     respond_to do |format|
       if changelog.valid?
-        format.html { redirect_to changelog_url(changelog) }
-        format.json { render :show, locals: { changelog: }, status: :created, location: changelog }
+        format.html { redirect_to changelog }
+        format.json { render :show, **show_locals(status: :created, location: changelog) }
       else
-        format.html { render :new, locals: { changelog: }, status: :unprocessable_entity }
+        format.html { render :new, **form_locals(status: :unprocessable_entity) }
         format.json { render json: changelog.errors, status: :unprocessable_entity }
       end
     end
@@ -48,10 +48,10 @@ class ChangelogsController < ApplicationController
 
     respond_to do |format|
       if changelog.valid?
-        format.html { redirect_to changelog_url(changelog) }
-        format.json { render :show, locals: { changelog: }, status: :ok, location: changelog }
+        format.html { redirect_to changelog }
+        format.json { render :show, **show_locals(status: :ok, location: changelog) }
       else
-        format.html { render :edit, locals: { changelog: }, status: :unprocessable_entity }
+        format.html { render :edit, **form_locals(status: :unprocessable_entity) }
         format.json { render json: changelog.errors, status: :unprocessable_entity }
       end
     end
@@ -91,12 +91,24 @@ class ChangelogsController < ApplicationController
     create_changelog_params.merge(changelog:)
   end
 
-  def common_locals
+  def form_locals(opts = {})
     {
       locals: {
         changelog: changelog.decorate,
         commits: commits.decorate
       }
-    }
+    }.merge(opts)
+  end
+
+  def show_locals(opts = {})
+    {
+      locals: {
+        changelog: changelog.decorate
+      }
+    }.merge(opts)
+  end
+
+  def unprocessable_entity
+    form_locals.merge(status: :unprocessable_entity)
   end
 end
