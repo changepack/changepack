@@ -4,6 +4,10 @@ Changepack is an open-source changelog for your product. Share updates about you
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+# Features
+
+* **Pull commits from GitHub**. Changepack allows you to link changelogs with your GitHub activity, making it easy to track progress.
+
 # Build and run locally
 
 ```
