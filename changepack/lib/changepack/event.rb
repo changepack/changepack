@@ -30,7 +30,7 @@ module Changepack
     end
 
     def data
-      to_h.reject { |k, _| ignore.include?(k) }
+      to_h.except(ignore)
     end
 
     def event_type

@@ -6,7 +6,7 @@ class Commit < ApplicationRecord
   attribute :message, :text
   attribute :url, :string
   attribute :commited, :datetime
-  attribute :author, Commit::Author.to_type, default: {}
+  attribute :author, Commit::Author.to_type, default: -> { {} }
   attribute :provider, :string
   attribute :provider_id, :string
   attribute :discarded, :datetime
