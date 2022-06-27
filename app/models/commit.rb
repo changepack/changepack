@@ -9,6 +9,7 @@ class Commit < ApplicationRecord
   attribute :author, Commit::Author.to_type, default: {}
   attribute :provider, :string
   attribute :provider_id, :string
+  attribute :discarded, :datetime
 
   belongs_to :account
   belongs_to :repository

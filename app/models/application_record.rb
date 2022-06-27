@@ -5,6 +5,10 @@ class ApplicationRecord < ActiveRecord::Base
   include Identifier
   include Timestamp
 
+  include Discard::Model
+
+  self.discard_column = :discarded
+
   primary_abstract_class
   has_paper_trail
 end

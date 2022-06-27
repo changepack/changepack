@@ -10,12 +10,13 @@ class AccountsController < ApplicationController
   private
 
   def account
-    @account ||= Account.friendly.find(id)
+    @account ||= Account.kept.friendly.find(id)
   end
 
   def changelogs
     @changelogs ||= account.changelogs
                            .for(current_user)
+                           .kept
                            .desc
                            .with_rich_text_content_and_embeds
                            .includes(:user)

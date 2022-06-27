@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_26_005034) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_27_200041) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_26_005034) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.datetime "discarded"
+    t.index ["discarded"], name: "index_accounts_on_discarded"
     t.index ["slug"], name: "index_accounts_on_slug", unique: true
   end
 
@@ -80,7 +82,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_26_005034) do
     t.string "user_id"
     t.string "account_id"
     t.string "slug"
+    t.datetime "discarded"
     t.index ["account_id"], name: "index_changelogs_on_account_id"
+    t.index ["discarded"], name: "index_changelogs_on_discarded"
     t.index ["slug"], name: "index_changelogs_on_slug", unique: true
     t.index ["user_id"], name: "index_changelogs_on_user_id"
   end
@@ -97,8 +101,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_26_005034) do
     t.string "provider", null: false
     t.string "provider_id", null: false
     t.string "changelog_id"
+    t.datetime "discarded"
     t.index ["account_id"], name: "index_commits_on_account_id"
     t.index ["changelog_id"], name: "index_commits_on_changelog_id"
+    t.index ["discarded"], name: "index_commits_on_discarded"
     t.index ["repository_id", "provider", "provider_id"], name: "index_commits_on_repository_id_and_provider_and_provider_id", unique: true
     t.index ["repository_id"], name: "index_commits_on_repository_id"
   end
@@ -148,7 +154,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_26_005034) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "pulled"
+    t.datetime "discarded"
     t.index ["account_id"], name: "index_repositories_on_account_id"
+    t.index ["discarded"], name: "index_repositories_on_discarded"
     t.index ["user_id", "provider", "provider_id"], name: "index_repositories_on_user_id_and_provider_and_provider_id", unique: true
     t.index ["user_id"], name: "index_repositories_on_user_id"
   end
@@ -176,7 +184,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_26_005034) do
     t.string "account_id"
     t.string "name"
     t.jsonb "provider_ids", default: {}
+    t.datetime "discarded"
     t.index ["account_id"], name: "index_users_on_account_id"
+    t.index ["discarded"], name: "index_users_on_discarded"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

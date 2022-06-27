@@ -58,7 +58,7 @@ class ChangelogsController < ApplicationController
   end
 
   def destroy
-    changelog.destroy
+    changelog.discard
 
     respond_to do |format|
       format.html { redirect_to changelogs_url }
@@ -69,7 +69,7 @@ class ChangelogsController < ApplicationController
   private
 
   def changelog
-    @changelog ||= Changelog.friendly.find(id)
+    @changelog ||= Changelog.kept.friendly.find(id)
   end
 
   def commits
@@ -78,6 +78,7 @@ class ChangelogsController < ApplicationController
                                 .includes(:repository, :changelog)
                                 .limit(100)
                                 .commited(changelog)
+                                .kept
   end
 
   def create_changelog_params

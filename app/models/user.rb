@@ -8,6 +8,7 @@ class User < ApplicationRecord
   attribute :name, :string
   attribute :email, :string
   attribute :provider_ids, :jsonb, default: {}
+  attribute :discarded, :datetime
 
   belongs_to :account
 
