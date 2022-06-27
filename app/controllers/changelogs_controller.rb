@@ -30,7 +30,7 @@ class ChangelogsController < ApplicationController
   end
 
   def create
-    changelog = Changelogs::Upsert.new(**create_changelog_params).execute
+    changelog = upsert!(create_params)
 
     respond_to do |format|
       if changelog.valid?
@@ -44,7 +44,7 @@ class ChangelogsController < ApplicationController
   end
 
   def update
-    changelog = Changelogs::Upsert.new(**update_changelog_params).execute
+    changelog = upsert!(update_params)
 
     respond_to do |format|
       if changelog.valid?
@@ -81,15 +81,19 @@ class ChangelogsController < ApplicationController
                                 .kept
   end
 
-  def create_changelog_params
-    params.require(:changelog)
-          .permit(:title, :content, :published, commit_ids: [])
-          .merge(user: current_user, changelog: Changelog.new)
-          .to_h
+  def upsert!(params)
+    Changelogs::Upsert.new(**params).execute
   end
 
-  def update_changelog_params
-    create_changelog_params.merge(changelog:)
+  def create_params
+    params.require(:changelog)
+          .permit(:title, :content, :published, commit_ids: [])
+          .to_h
+          .merge(user: current_user, changelog: Changelog.new)
+  end
+
+  def update_params
+    create_params.merge(changelog:)
   end
 
   def form_locals(opts = {})
@@ -107,9 +111,5 @@ class ChangelogsController < ApplicationController
         changelog: changelog.decorate
       }
     }.merge(opts)
-  end
-
-  def unprocessable_entity
-    form_locals.merge(status: :unprocessable_entity)
   end
 end
