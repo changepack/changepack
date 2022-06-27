@@ -91,39 +91,12 @@ module Changepack
       end
     end
 
-    module Asynchronous
-      def self.prepended(base)
-        class << base
-          prepend ClassMethods
-        end
-      end
-
-      module ClassMethods
-        class AsynchronousWrapper
-          def initialize(**params)
-            @params = params
-          end
-
-          def execute
-            # TODO: self.class.name is AsynchronousWrapper, should be command name
-            # TODO: complex params should be serialized
-            CommandJob.perform_async(self.class.name, @params)
-          end
-        end
-
-        def async
-          AsynchronousWrapper
-        end
-      end
-    end
-
     def self.inherited(subclass)
       super
 
       subclass.prepend Validation
       subclass.prepend Transaction
       subclass.prepend Params
-      subclass.prepend Asynchronous
     end
   end
 end
