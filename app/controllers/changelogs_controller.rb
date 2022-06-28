@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
 class ChangelogsController < ApplicationController
-  skip_verify_authorized
+  skip_verify_authorized only: %i[show]
+  skip_before_action :authenticate_user!, only: :show
 
-  before_action only: %i[edit update destroy] do
-    authorize! changelog
+  def index
+    authorize! and redirect_to(current_account)
   end
 
   def new
     @changelog = Changelog.new
 
-    render(**form_locals)
+    authorize! and render(**form_locals)
   end
 
   def show
@@ -18,17 +19,19 @@ class ChangelogsController < ApplicationController
   end
 
   def edit
-    render(**form_locals)
+    authorize! changelog and render(**form_locals)
   end
 
   def confirm_destroy
+    authorize! changelog, to: :destroy?
+
     render(**show_locals)
   end
 
   def create
-    changelog = upsert!(create_params)
+    authorize! and respond_to do |format|
+      changelog = upsert!(create_params)
 
-    respond_to do |format|
       if changelog.valid?
         format.html { redirect_to changelog }
         format.json { render :show, **show_locals(status: :created, location: changelog) }
@@ -39,10 +42,10 @@ class ChangelogsController < ApplicationController
     end
   end
 
-  def update
-    changelog = upsert!(update_params)
+  def update # rubocop:disable Metrics/AbcSize
+    authorize! changelog and respond_to do |format|
+      changelog = upsert!(update_params)
 
-    respond_to do |format|
       if changelog.valid?
         format.html { redirect_to changelog }
         format.json { render :show, **show_locals(status: :ok, location: changelog) }
@@ -54,9 +57,9 @@ class ChangelogsController < ApplicationController
   end
 
   def destroy
-    changelog.discard
+    authorize! changelog and respond_to do |format|
+      changelog.discard
 
-    respond_to do |format|
       format.html { redirect_to changelogs_url }
       format.json { head :no_content }
     end

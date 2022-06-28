@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RepositoryPolicy < ApplicationPolicy
-  alias_rule :new?, :create?, :edit?, :update?, :destroy?, to: :manage?
+  alias_rule :new?, :create?, :edit?, :destroy?, to: :update?
   alias_rule :index?, to: :show?
 
   relation_scope do |relation|
@@ -12,7 +12,7 @@ class RepositoryPolicy < ApplicationPolicy
     true
   end
 
-  def manage?
-    record_is_class? || user.account_id == record.account_id
+  def update?
+    user.account_id == record.account_id
   end
 end
