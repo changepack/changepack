@@ -85,10 +85,9 @@ class ChangelogsController < ApplicationController
   end
 
   def create_params
-    params.require(:changelog)
-          .permit(:title, :content, :published, commit_ids: [])
-          .to_h
-          .merge(user: current_user, changelog: Changelog.new)
+    authorized(params.require(:changelog))
+      .merge(user: current_user, changelog: Changelog.new)
+      .to_h
   end
 
   def update_params
