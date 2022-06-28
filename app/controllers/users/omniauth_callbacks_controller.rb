@@ -9,7 +9,9 @@ module Users
       current_user.provider_ids.deep_merge!(github: github_ids)
       current_user.save!
 
-      Repositories::Pull.new(user: current_user).execute
+      Event.publish(
+        Repositories::Authorized.new(data: { user: current_user.id })
+      )
 
       redirect_to root_path, notice: t('devise.omniauth_callbacks.success', kind: 'GitHub')
     end
