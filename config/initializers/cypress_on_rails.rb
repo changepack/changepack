@@ -16,3 +16,11 @@ if defined?(CypressOnRails)
   #  end
   # end
 end
+
+if ENV['CYPRESS'].present?
+  require 'simplecov'
+
+  SimpleCov.start 'rails' do
+    coverage_dir "coverage/cypress".to_s
+  end
+end

@@ -23,7 +23,7 @@ section.overflow-x-auto
             ' We haven’t pulled any repositories from your GitHub account yet.
             ' Please wait.
 
-      - elsif allowed_to?(:create)
+      - elsif allowed_to?(:new?)
         .accordion.w-4/5 data-test-id="intro"
           .accordion-top
             h2 View your commits from GitHub
