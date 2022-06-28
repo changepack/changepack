@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ChangelogPolicy < ApplicationPolicy
-  alias_rule :edit?, :confirm_destroy?, :destroy?, to: :update?
+  alias_rule :edit?, :destroy?, to: :update?
   alias_rule :index?, to: :show?
   alias_rule :new?, to: :create?
 

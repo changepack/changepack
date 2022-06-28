@@ -21,8 +21,9 @@ section.overflow-x-auto
         section data-test-id="blank"
           = component :flash, type: :info do
             ' We haven’t pulled any repositories from your GitHub account yet.
+            ' Please wait.
 
-      - else
+      - elsif allowed_to?(:create)
         .accordion.w-4/5 data-test-id="intro"
           .accordion-top
             h2 View your commits from GitHub
@@ -43,3 +44,8 @@ section.overflow-x-auto
                           method: :post, \
                           class: 'button-1', \
                           data: { turbo: false }
+
+      - else
+        section data-test-id="blank"
+          = component :flash, type: :info do
+            ' You don’t have any repositories yet.

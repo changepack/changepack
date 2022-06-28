@@ -7,7 +7,7 @@
         - if account.name?
           span< to #{account.name}
 
-  - if helpers.allowed_to?(:create?, collection, with: ChangelogPolicy)
+  - if helpers.allowed_to?(:create?, with: ChangelogPolicy)
     .mt-4.md:mt-0
       = link_to new_changelog_path, class: 'button-1', \
                                     data: { test_id: 'new_changelog_button' } do
