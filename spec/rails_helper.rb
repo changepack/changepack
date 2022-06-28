@@ -9,6 +9,8 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 require 'vcr'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'action_policy/rspec'
+require 'action_policy/rspec/dsl'
 require 'sidekiq/testing'
 Sidekiq::Testing.fake!
 
