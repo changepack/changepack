@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   helper_method :current_account
+  helper_method :pagy_array
+  helper_method :pagy
 
   private
 
