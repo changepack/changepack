@@ -22,8 +22,9 @@ yarn install
 # Update environment variables
 cp config/application.yml.example config/application.yml
 
-# Run application
+# Run the application
 bundle exec rails db:create db:migrate db:seed
+bin/test
 bundle exec rails s
 ```
 

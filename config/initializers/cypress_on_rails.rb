@@ -21,6 +21,7 @@ if ENV['CYPRESS'].present?
   require 'simplecov'
 
   SimpleCov.start 'rails' do
-    coverage_dir "coverage/cypress".to_s
+    coverage_dir 'coverage/cypress'.to_s
+    formatter SimpleCov::Formatter::SimpleFormatter
   end
 end
