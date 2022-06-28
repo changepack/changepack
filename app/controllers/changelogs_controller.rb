@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class ChangelogsController < ApplicationController
-  skip_verify_authorized only: %i[show]
   skip_before_action :authenticate_user!, only: :show
+  skip_verify_authorized only: :show
 
   def index
     authorize! and redirect_to(current_account)

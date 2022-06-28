@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class AccountsController < ApplicationController
-  skip_verify_authorized
   skip_before_action :authenticate_user!, only: :show
+  skip_verify_authorized
 
   def index
     redirect_to current_account
