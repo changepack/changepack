@@ -81,6 +81,10 @@ group :development, :test do
   gem "vcr", "~> 6.1"
 
   gem "webmock", "~> 3.14"
+
+  gem "shoulda-matchers"
+
+  gem "mock_redis", "~> 0.32.0"
 end
 
 group :development do
@@ -158,8 +162,6 @@ gem "aws-sdk-s3", require: false
 gem "store_model", "~> 1.0.0"
 
 gem "sidekiq", "~> 6.5"
-
-gem "mock_redis", "~> 0.32.0"
 
 gem "faraday-retry", "~> 2.0"
 

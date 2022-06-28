@@ -22,6 +22,8 @@ class Commit < ApplicationRecord
   validates :provider, presence: true, inclusion: { in: Provider.types }
   validates :provider_id, presence: true
 
+  normalize :message
+
   inquirer :provider
 
   scope :github, -> { where(provider: :github) }

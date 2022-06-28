@@ -20,7 +20,6 @@ class Repository < ApplicationRecord
 
   validates :name, presence: true
   validates :branch, presence: true
-  validates :status, presence: true
   validates :provider, presence: true, inclusion: { in: Provider.types }
   validates :provider_id, presence: true
 

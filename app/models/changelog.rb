@@ -19,7 +19,6 @@ class Changelog < ApplicationRecord
 
   validates :title, length: { maximum: 140 }
   validates :content, presence: true
-  validates :status, presence: true
 
   normalize :title
 
