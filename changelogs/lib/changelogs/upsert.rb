@@ -41,11 +41,11 @@ module Changelogs
     end
 
     def publish?
-      @publish ||= published.present? && changelog.can_transition_to?(:published)
+      published.present? && changelog.can_transition_to?(:published)
     end
 
     def draft?
-      @draft ||= published.blank? && changelog.can_transition_to?(:draft)
+      published.blank? && changelog.can_transition_to?(:draft)
     end
 
     delegate :account, to: :user
