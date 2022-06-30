@@ -23,6 +23,13 @@ FactoryBot.define do
     provider_id { '1' }
   end
 
+  factory :repository_transition do
+    repository
+    sort_key { (repository.transitions.count + 1) * 10 }
+    to_state { 'active' }
+    most_recent { false }
+  end
+
   factory :account do
     name { Faker::Company.name }
   end
@@ -40,5 +47,12 @@ FactoryBot.define do
     account { user.account }
     title { Faker::Lorem.sentence }
     content { Faker::Lorem.paragraph }
+  end
+
+  factory :changelog_transition do
+    changelog
+    sort_key { (changelog.transitions.count + 1) * 10 }
+    to_state { 'published' }
+    most_recent { false }
   end
 end
