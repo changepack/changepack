@@ -19,8 +19,12 @@ require 'view_component/test_helpers'
 require 'capybara/rspec'
 require 'action_policy/rspec'
 require 'action_policy/rspec/dsl'
+
 require 'sidekiq/testing'
 Sidekiq::Testing.fake!
+
+require 'draper/test/rspec_integration'
+Draper::ViewContext.test_strategy :fast
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are

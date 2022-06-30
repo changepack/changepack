@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class CommitDecorator < ApplicationDecorator
-  delegate_all
-
   def abbr
     message.truncate(50)
   end
