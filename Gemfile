@@ -112,6 +112,9 @@ group :test do
   gem "simplecov", require: false
 
   gem "ruby_event_store-rspec"
+
+  # For testing view components
+  gem "capybara"
 end
 
 gem "slim-rails", "~> 3.5"
