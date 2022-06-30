@@ -6,7 +6,7 @@ class ChangelogPolicy < ApplicationPolicy
   alias_rule :new?, to: :create?
 
   params_filter do |params|
-    params.permit(:title, :content, :published, commit_ids: [])
+    params.permit(:title, :content, :published, commits: [])
   end
 
   def show?

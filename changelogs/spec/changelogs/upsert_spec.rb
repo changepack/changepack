@@ -19,7 +19,7 @@ module Changelogs
           title: 'Title',
           content: 'Content',
           published: 'on',
-          commit_ids: [commit.id]
+          commits: [commit.id]
         }
       end
 

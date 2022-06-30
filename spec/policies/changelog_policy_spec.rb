@@ -14,11 +14,11 @@ describe ChangelogPolicy, type: :policy do
   describe 'with a scope for params' do
     subject do
       ActionController::Parameters
-        .new(title: 'Title', content: 'Content', published: true, commit_ids: [1, 2, 3], unpermitted: 'unpermitted')
+        .new(title: 'Title', content: 'Content', published: true, commits: [1, 2, 3], unpermitted: 'unpermitted')
         .then { |target| policy.apply_scope(target, type: :action_controller_params).to_h.symbolize_keys }
     end
 
-    it { is_expected.to eq({ title: 'Title', content: 'Content', published: true, commit_ids: [1, 2, 3] }) }
+    it { is_expected.to eq({ title: 'Title', content: 'Content', published: true, commits: [1, 2, 3] }) }
   end
 
   describe_rule :show? do

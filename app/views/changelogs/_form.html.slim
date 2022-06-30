@@ -36,7 +36,7 @@
           section.overflow-x-scroll.max-h-80
             - commits.each do |commit|
               .mb-3
-                = form.check_box :commit_ids, \
+                = form.check_box :commits, \
                                  *commit.checkbox_options(changelog)
 
                 label for=commit.id class="ml-2"
