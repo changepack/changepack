@@ -110,6 +110,8 @@ end
 
 group :test do
   gem "simplecov", require: false
+
+  gem "ruby_event_store-rspec"
 end
 
 gem "slim-rails", "~> 3.5"
