@@ -1,5 +1,6 @@
-#!/usr/bin/env ruby
-system 'rm -rf coverage/.resultset.json'
-system 'bundle exec rspec'
-system 'bin/cypress'
-system 'bundle exec rails coverage:report'
+#!/usr/bin/env bash
+
+rm -rf coverage/.resultset.json
+bundle exec rspec
+bin/cypress
+bundle exec rails coverage:report
