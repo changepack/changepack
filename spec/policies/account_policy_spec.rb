@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AccountPolicy, type: :policy do
+describe AccountPolicy, type: :policy do
   let(:user) { build(:user, account: record) }
   let(:record) { build(:account) }
 

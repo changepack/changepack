@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ChangelogPolicy, type: :policy do
+describe ChangelogPolicy, type: :policy do
   let(:user) { build(:user, account:) }
   let(:account) { build(:account) }
   let(:record) { build(:changelog, user:, account:) }

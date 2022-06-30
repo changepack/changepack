@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe RepositoryPolicy, type: :policy do
+describe RepositoryPolicy, type: :policy do
   let(:user) { build(:user, account:) }
   let(:account) { build(:account) }
   let(:record) { build(:repository, user:, account:) }
