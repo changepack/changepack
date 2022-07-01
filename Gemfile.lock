@@ -332,7 +332,7 @@ GEM
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.6.0)
-    rack (2.2.3.1)
+    rack (2.2.4)
     rack-livereload (0.3.17)
       rack
     rack-protection (2.2.0)
@@ -447,7 +447,7 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
-    sidekiq-cron (1.5.1)
+    sidekiq-cron (1.6.0)
       fugit (~> 1)
       sidekiq (>= 4.2.1)
     slim (4.1.0)
@@ -571,7 +571,7 @@ DEPENDENCIES
   rubocop-rails (~> 2.15)
   rubocop-rspec (~> 2.11)
   sidekiq (~> 6.5)
-  sidekiq-cron (~> 1.5)
+  sidekiq-cron (~> 1.6)
   slim-rails (~> 3.5)
   slim_lint (~> 0.22.1)
   sprockets-rails
