@@ -4,7 +4,7 @@ describe('Repositories', function() {
   })
 
   it('happy path', function() {
-    cy.appFactories([['create', 'user', { provider_ids: { github: { access_token: 'access_token' } } }]]).then(users => {
+    cy.appFactories([['create', 'user', { providers: { github: { access_token: 'access_token' } } }]]).then(users => {
       const user = users[0]
 
       cy.login({ email: user.email })

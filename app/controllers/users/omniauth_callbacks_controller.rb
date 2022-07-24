@@ -6,7 +6,7 @@ module Users
 
     def github
       current_user.lock!
-      current_user.provider_ids.deep_merge!(github: github_ids)
+      current_user.providers.deep_merge!(github: github_ids)
       current_user.save!
 
       Event.publish(

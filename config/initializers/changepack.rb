@@ -6,6 +6,7 @@ require_relative '../../changepack/lib/changepack/inquirer'
 require_relative '../../changepack/lib/changepack/slug'
 require_relative '../../changepack/lib/changepack/status'
 require_relative '../../changepack/lib/changepack/timestamp'
+require_relative '../../changepack/lib/changepack/provider'
 
 Event = Changepack::Event
 EventHandler = Changepack::EventHandler
@@ -15,3 +16,4 @@ Inquirer = Changepack::Inquirer
 Slug = Changepack::Slug
 Status = Changepack::Status
 Timestamp = Changepack::Timestamp
+Provider = Changepack::Provider

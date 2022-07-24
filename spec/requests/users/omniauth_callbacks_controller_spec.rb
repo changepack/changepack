@@ -28,7 +28,7 @@ module Users
     end
 
     it 'saves credentials to GitHub' do
-      expect { get '/users/auth/github/callback' }.to change(user, :provider_ids).from({}).to(result)
+      expect { get '/users/auth/github/callback' }.to change(user, :providers).from({}).to(result)
     end
 
     it 'sends an event to pull repositories' do
