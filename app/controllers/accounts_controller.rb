@@ -22,7 +22,7 @@ class AccountsController < ApplicationController
     @changelogs ||= account.changelogs
                            .for(current_user)
                            .kept
-                           .created
+                           .recent
                            .with_rich_text_content_and_embeds
                            .includes(:user)
   end
