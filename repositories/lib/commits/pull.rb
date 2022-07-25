@@ -11,7 +11,7 @@ module Commits
     end
 
     def execute
-      git.commits(repository.provider_id, after: cursor)
+      git.commits(repository.github, after: cursor)
          .each { |commit| upsert!(commit) }
 
       repository.update!(pulled: Time.current)

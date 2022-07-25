@@ -18,7 +18,7 @@ module Repositories
     private
 
     def upsert!(repository)
-      Repository.find_or_initialize_by(account:, provider: git.provider, provider_id: repository.id) do |r|
+      Repository.find_or_initialize_by(account:, providers: { git.provider => repository.id }) do |r|
         r.update!(
           name: repository.name,
           branch: repository.branch,
