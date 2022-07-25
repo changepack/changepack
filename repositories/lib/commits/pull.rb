@@ -32,7 +32,7 @@ module Commits
     end
 
     def upsert!(commit)
-      Commit.find_or_initialize_by(repository:, provider: git.provider, provider_id: commit.sha) do |c|
+      Commit.find_or_initialize_by(repository:, providers: { git.provider => commit.sha }) do |c|
         c.update!(
           message: commit.message,
           url: commit.url,

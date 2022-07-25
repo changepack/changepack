@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 class Commit < ApplicationRecord
+  include Provider
+
   key :com
 
   attribute :message, :text
   attribute :url, :string
   attribute :commited, :datetime
   attribute :author, Commit::Author.to_type, default: -> { {} }
-  attribute :provider, :string
-  attribute :provider_id, :string
   attribute :discarded, :datetime
 
   belongs_to :account
@@ -19,14 +19,12 @@ class Commit < ApplicationRecord
   validates :url, presence: true, url: true
   validates :commited, presence: true
   validates :author, presence: true, store_model: true
-  validates :provider, presence: true, inclusion: { in: Provider.types }
-  validates :provider_id, presence: true
 
   normalize :message
 
   inquirer :provider
 
-  scope :github, -> { where(provider: :github) }
+  scope :github, -> { where("providers -> 'github' IS NOT NULL") }
 
   scope :review, lambda { |changelog|
     if changelog.new_record?

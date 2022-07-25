@@ -9,7 +9,7 @@ describe('Repositories', function() {
 
       cy.login({ email: user.email })
       cy.visit('/repositories')
-      cy.get('[data-test-id="intro"]').should('be.visible')
+      cy.get('[data-test-id="blank"]').should('be.visible')
 
       cy.appFactories([['create', 'repository', { user_id: user.id, account_id: user.account_id }]])
       cy.visit('/repositories')
@@ -23,6 +23,16 @@ describe('Repositories', function() {
       cy.get('[data-test-id="stop_tracking"]').click()
       cy.get('[data-test-id="confirm_stop"]').click()
       cy.contains('Pull commits').should('be.visible')
+    })
+  })
+
+  it('unhappy path', function() {
+    cy.appFactories([['create', 'user']]).then(users => {
+      const user = users[0]
+
+      cy.login({ email: user.email })
+      cy.visit('/repositories')
+      cy.get('[data-test-id="intro"]').should('be.visible')
     })
   })
 })
