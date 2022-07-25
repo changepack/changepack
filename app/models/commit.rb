@@ -22,9 +22,7 @@ class Commit < ApplicationRecord
 
   normalize :message
 
-  inquirer :provider
-
-  scope :github, -> { where("providers -> 'github' IS NOT NULL") }
+  provider :github
 
   scope :review, lambda { |changelog|
     if changelog.new_record?

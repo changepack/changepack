@@ -16,11 +16,27 @@ module Changepack
 
     class_methods do
       def provider(*attrs)
-        name = attrs.join('_')
-        query = attrs.map(&:to_s)
+        define_provider_attr_reader(*attrs)
+        define_provider_scope(*attrs)
+        define_provider_inquirer(*attrs)
+        define_provider_finder(*attrs)
+      end
 
-        define_method(name) { providers.dig(*query) }
-        define_method("#{name}?") { providers.dig(*query).present? }
+      def define_provider_attr_reader(*attrs)
+        define_method(attrs.join('_')) { providers.dig(*attrs.map(&:to_s)) }
+      end
+
+      def define_provider_scope(*attrs)
+        define_singleton_method(attrs.join('_')) do
+          where("providers -> #{attrs.map { |n| "'#{n}'" }.join(' -> ')} IS NOT NULL")
+        end
+      end
+
+      def define_provider_inquirer(*attrs)
+        define_method("#{attrs.join('_')}?") { providers.dig(*attrs.map(&:to_s)).present? }
+      end
+
+      def define_provider_finder(*attrs)
         define_method("find_#{attrs.last}_for") { |provider| providers.dig(provider, attrs.last) }
       end
     end
