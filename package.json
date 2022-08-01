@@ -1,7 +1,7 @@
 {
   "name": "changepack",
   "devDependencies": {
-    "cypress": "^10.2.0",
+    "cypress": "^10.3.1",
     "cypress-on-rails": "^0.1.0"
   }
 }
