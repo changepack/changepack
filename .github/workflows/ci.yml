@@ -4,7 +4,6 @@ env:
   DATABASE_URL: postgresql://rails_github_actions:postgres@localhost:5432/changepack_test
   RAILS_ENV: test
   CI: true
-  CYPRESS: true
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 jobs:
   verify:
@@ -41,7 +40,7 @@ jobs:
           sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
           gem install bundler
           bundle install --jobs 4 --retry 3
-      - name: Run Rubocop
+      - name: Run RuboCop
         run: |
           bundle exec rubocop
       - name: Run slim-lint
@@ -54,6 +53,8 @@ jobs:
         run: bundle exec rspec
       - name: Run Cypress
         uses: cypress-io/github-action@v1
+        env:
+          CYPRESS: true
         with:
           start: bundle exec rails server -e test -p 5017
           wait-on: 'http://localhost:5017'
