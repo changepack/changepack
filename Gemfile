@@ -180,3 +180,5 @@ gem "draper", "~> 4.0"
 gem "sidekiq-cron", "~> 1.7"
 
 gem "discard", "~> 1.2"
+
+gem "brakeman", "~> 5.3"

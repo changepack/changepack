@@ -41,14 +41,13 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
       - name: Run RuboCop
-        run: |
-          bundle exec rubocop
+        run: bundle exec rubocop
+      - name: Run Brakeman
+        run: bundle exec brakeman
       - name: Run slim-lint
-        run: |
-          bundle exec slim-lint app/views app/components
+        run: bundle exec slim-lint app/views app/components
       - name: Setup test database
-        run: |
-          rails db:create db:migrate
+        run: rails db:create db:migrate
       - name: Run RSpec
         run: bundle exec rspec
       - name: Run Cypress

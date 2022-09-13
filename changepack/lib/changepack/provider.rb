@@ -28,7 +28,7 @@ module Changepack
 
       def define_provider_scope(*attrs)
         define_singleton_method(attrs.join('_')) do
-          where("providers -> #{attrs.map { |n| "'#{n}'" }.join(' -> ')} IS NOT NULL")
+          where('providers -> ? IS NOT NULL', attrs.map { |n| "'#{n}'" }.join(' -> '))
         end
       end
 

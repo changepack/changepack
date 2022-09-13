@@ -112,6 +112,7 @@ GEM
     bindex (0.8.1)
     bootsnap (1.12.0)
       msgpack (~> 1.2)
+    brakeman (5.3.1)
     builder (3.2.4)
     bullet (7.0.2)
       activesupport (>= 3.0.0)
@@ -558,6 +559,7 @@ DEPENDENCIES
   aws-sdk-s3
   babosa (~> 2.0)
   bootsnap
+  brakeman (~> 5.3)
   bullet (~> 7.0)
   capybara
   cypress-on-rails (~> 1.13)
