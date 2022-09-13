@@ -4,13 +4,13 @@ require 'rails_helper'
 
 module Repositories
   describe Pull, :vcr do
-    subject(:operation) { described_class.new(user:) }
+    subject(:command) { described_class.new(user:) }
     let(:user) { create(:user) }
 
     context 'with a GitHub integration' do
       context 'without a token' do
         it "doesn't execute" do
-          expect { operation.execute }.to raise_error Repositories::Pull::Disconnected
+          expect { command.run }.to raise_error Repositories::Pull::Disconnected
         end
       end
 
@@ -18,7 +18,7 @@ module Repositories
         let(:user) { create(:user, providers: { github: { access_token: 'access_token' } }) }
 
         it 'upserts repositories' do
-          expect { operation.execute }.to change(user.repositories, :count)
+          expect { command.run }.to change(user.repositories, :count)
         end
       end
     end

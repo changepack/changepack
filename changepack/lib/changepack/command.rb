@@ -7,6 +7,20 @@ module Changepack
 
     Error = Class.new(StandardError)
 
+    module Sugar
+      def self.prepended(base)
+        class << base
+          prepend ClassMethods
+        end
+      end
+
+      module ClassMethods
+        def run(*args, **params)
+          new(*args, **params).run
+        end
+      end
+    end
+
     module Params
       def self.prepended(base)
         class << base
@@ -28,7 +42,7 @@ module Changepack
     end
 
     module Transaction
-      def execute(*args, **params)
+      def run(*args, **params)
         wrapper = proc { super }
 
         if self.class.transaction?
@@ -85,7 +99,7 @@ module Changepack
         end
       end
 
-      def execute(*args, **params)
+      def run(*args, **params)
         validate!
         super
       end
@@ -94,6 +108,7 @@ module Changepack
     def self.inherited(subclass)
       super
 
+      subclass.prepend Sugar
       subclass.prepend Validation
       subclass.prepend Transaction
       subclass.prepend Params

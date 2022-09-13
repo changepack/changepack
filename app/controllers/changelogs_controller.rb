@@ -81,7 +81,7 @@ class ChangelogsController < ApplicationController
   end
 
   def upsert!(params)
-    Changelogs::Upsert.new(**params).execute
+    Changelogs::Upsert.run(**params)
   end
 
   def create_params

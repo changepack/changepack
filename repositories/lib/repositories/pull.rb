@@ -10,7 +10,7 @@ module Repositories
       raise Disconnected unless user.git?
     end
 
-    def execute
+    def run
       git.repositories
          .each { |repository| upsert!(repository) }
     end

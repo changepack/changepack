@@ -5,7 +5,7 @@ module Repositories
     subscribe Authorized
 
     def call
-      Repositories::Pull.new(user:).execute
+      Repositories::Pull.run(user:)
     end
 
     private

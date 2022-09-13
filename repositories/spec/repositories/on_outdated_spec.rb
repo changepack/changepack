@@ -17,11 +17,11 @@ module Repositories
 
     it 'pulls repositories' do
       allow(Commits::Pull).to receive(:new).and_return(double)
-      allow(double).to receive(:execute).and_return(true)
+      allow(double).to receive(:run).and_return(true)
 
       handler.perform(payload)
 
-      expect(double).to have_received(:execute)
+      expect(double).to have_received(:run)
     end
   end
 end

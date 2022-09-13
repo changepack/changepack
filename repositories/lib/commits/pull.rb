@@ -10,7 +10,7 @@ module Commits
       raise Disconnected unless user.git?
     end
 
-    def execute
+    def run
       git.commits(repository.github, after: cursor)
          .each { |commit| upsert!(commit) }
 

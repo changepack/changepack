@@ -25,15 +25,15 @@ module Changelogs
 
       context 'when inserting' do
         it 'creates a changelog' do
-          expect { command.execute }.to change(Changelog, :count).by(1)
+          expect { command.run }.to change(Changelog, :count).by(1)
         end
 
         it 'sets status to published' do
-          expect { command.execute }.to change(changelog, :status).from('draft').to('published')
+          expect { command.run }.to change(changelog, :status).from('draft').to('published')
         end
 
         it 'links the changelog to the commit' do
-          expect { command.execute }.to change { commit.reload.changelog }.from(nil).to(changelog)
+          expect { command.run }.to change { commit.reload.changelog }.from(nil).to(changelog)
         end
       end
 
@@ -48,11 +48,11 @@ module Changelogs
         let(:changelog) { create(:changelog, user:).tap { |c| c.transition_to!(:published) } }
 
         it 'assigns new attributes to a changelog' do
-          expect { command.execute }.to change(changelog, :title).to('Updated title')
+          expect { command.run }.to change(changelog, :title).to('Updated title')
         end
 
         it 'sets status back to draft' do
-          expect { command.execute }.to change(changelog, :status).from('published').to('draft')
+          expect { command.run }.to change(changelog, :status).from('published').to('draft')
         end
       end
     end

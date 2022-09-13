@@ -5,7 +5,7 @@ module Repositories
     subscribe Outdated
 
     def call
-      Commits::Pull.new(repository:).execute
+      Commits::Pull.run(repository:)
     end
 
     private

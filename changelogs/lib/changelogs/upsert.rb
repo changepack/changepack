@@ -9,7 +9,7 @@ module Changelogs
     option :published, type: Types::String, optional: true
     option :commits, type: Types::Array.of(Types::String), optional: true
 
-    def execute
+    def run
       changelog.tap do |changelog|
         changelog.update(attributes)
         changelog.transition_to!(:published) if publish?
