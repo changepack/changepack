@@ -88,6 +88,7 @@ class ChangelogsController < ApplicationController
     authorized(params.require(:changelog))
       .merge(user: current_user, changelog: Changelog.new)
       .to_h
+      .symbolize_keys
   end
 
   def update_params
