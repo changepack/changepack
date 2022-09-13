@@ -15,7 +15,8 @@ module Changelogs
         changelog.transition_to!(:published) if publish?
         changelog.transition_to!(:draft) if draft?
 
-        update_commits
+        deattach_irrelevant_commits
+        attach_new_commits
       end
     end
 
@@ -29,11 +30,13 @@ module Changelogs
       changelog.user || @user
     end
 
-    def update_commits
+    def deattach_irrelevant_commits
       changelog.commits
                .where.not(id: commits)
                .each { |commit| commit.update!(changelog: nil) }
+    end
 
+    def attach_new_commits
       account.commits
              .where(id: commits)
              .includes(:account, :repository)
