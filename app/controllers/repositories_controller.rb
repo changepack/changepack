@@ -19,10 +19,6 @@ class RepositoriesController < ApplicationController
     authorize! repository and respond_to do |format|
       repository.transition_to!(:active)
 
-      Event.publish(
-        Repositories::Outdated.new(data: { repository: repository.id })
-      )
-
       format.html { redirect_to repositories_url }
       format.json { head :no_content }
     end
