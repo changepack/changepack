@@ -10,8 +10,7 @@ FactoryBot.define do
     author { { name: Faker::Name.name, email: Faker::Internet.email } }
     repository
     account { repository.account }
-    provider { 'github' }
-    provider_id { '547f300205087e675a1badf2b148c8b361b25e15' }
+    providers { { 'github' => '547f300205087e675a1badf2b148c8b361b25e15' } }
   end
 
   factory :repository do
@@ -19,8 +18,14 @@ FactoryBot.define do
     account { user.account }
     name { "#{Faker::App.name.downcase}/#{Faker::App.name.downcase}" }
     branch { 'main' }
-    provider { 'github' }
-    provider_id { '1' }
+    providers { { 'github' => '1' } }
+  end
+
+  factory :repository_transition do
+    repository
+    sort_key { (repository.transitions.count + 1) * 10 }
+    to_state { 'active' }
+    most_recent { false }
   end
 
   factory :account do
@@ -40,5 +45,12 @@ FactoryBot.define do
     account { user.account }
     title { Faker::Lorem.sentence }
     content { Faker::Lorem.paragraph }
+  end
+
+  factory :changelog_transition do
+    changelog
+    sort_key { (changelog.transitions.count + 1) * 10 }
+    to_state { 'published' }
+    most_recent { false }
   end
 end

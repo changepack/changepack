@@ -20,6 +20,10 @@ AllCops:
     - 'Rakefile'
     - 'config.ru'
 
+RSpec/EmptyExampleGroup:
+  Exclude:
+    - 'spec/**/*_policy_spec.rb'
+
 Style/Documentation:
   Enabled: false
 

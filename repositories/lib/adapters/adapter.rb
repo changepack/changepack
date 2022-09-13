@@ -24,8 +24,8 @@ module Adapters
 
     def self.find_by(user:)
       providers.keys
-               .find { |provider| provider.to_s.in?(user.provider_ids.keys) }
-               .then { |provider| providers.fetch(provider).new(user.access_token(provider)) }
+               .find { |provider| provider.to_s.in?(user.providers.keys) }
+               .then { |provider| providers.fetch(provider).new(user.find_access_token_for(provider)) }
     end
 
     def self.providers

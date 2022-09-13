@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 class ChangelogPolicy < ApplicationPolicy
-  alias_rule :edit?, :update?, :confirm_destroy?, :destroy?, to: :manage?
+  alias_rule :edit?, :destroy?, to: :update?
   alias_rule :index?, to: :show?
   alias_rule :new?, to: :create?
+
+  params_filter do |params|
+    params.permit(:title, :content, :published, commits: [])
+  end
 
   def show?
     true
@@ -13,9 +17,7 @@ class ChangelogPolicy < ApplicationPolicy
     user.present?
   end
 
-  def manage?
-    return false if user.nil? || record.nil? || record_is_class?
-
-    user.account_id == record.account_id
+  def update?
+    check?(:create?) && user.account_id == record.account_id
   end
 end

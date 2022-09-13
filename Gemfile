@@ -81,6 +81,10 @@ group :development, :test do
   gem "vcr", "~> 6.1"
 
   gem "webmock", "~> 3.14"
+
+  gem "shoulda-matchers"
+
+  gem "mock_redis", "~> 0.32.0"
 end
 
 group :development do
@@ -104,6 +108,14 @@ group :development do
   gem "letter_opener", "~> 1.8"
 end
 
+group :test do
+  gem "simplecov", require: false
+
+  gem "ruby_event_store-rspec"
+
+  # For testing view components
+  gem "capybara"
+end
 
 gem "slim-rails", "~> 3.5"
 
@@ -158,8 +170,6 @@ gem "aws-sdk-s3", require: false
 gem "store_model", "~> 1.0.0"
 
 gem "sidekiq", "~> 6.5"
-
-gem "mock_redis", "~> 0.32.0"
 
 gem "faraday-retry", "~> 2.0"
 

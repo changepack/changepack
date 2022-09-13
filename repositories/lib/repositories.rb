@@ -2,6 +2,10 @@
 
 module Repositories
   class Outdated < Event
-    attribute :repository_id, Types::String
+    attribute :repository, Types::String
+  end
+
+  class Authorized < Event
+    attribute :user, Types::String
   end
 end

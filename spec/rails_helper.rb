@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 
+require 'simplecov'
+SimpleCov.start 'rails' do
+  coverage_dir 'coverage/rspec'.to_s
+  formatter SimpleCov::Formatter::SimpleFormatter
+end
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
@@ -9,8 +15,16 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 require 'vcr'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'view_component/test_helpers'
+require 'capybara/rspec'
+require 'action_policy/rspec'
+require 'action_policy/rspec/dsl'
+
 require 'sidekiq/testing'
 Sidekiq::Testing.fake!
+
+require 'draper/test/rspec_integration'
+Draper::ViewContext.test_strategy :fast
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -47,6 +61,13 @@ VCR.configure do |config|
   end
 end
 
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
 RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -75,6 +96,10 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include ViewComponent::TestHelpers, type: :component
+  config.include Capybara::RSpecMatchers, type: :component
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

@@ -17,23 +17,24 @@ section.overflow-x-auto
             .-my-8
               == pagy_nav(pagy)
 
-      - elsif current_user.github_id.present?
+      - elsif current_user.git?
         section data-test-id="blank"
           = component :flash, type: :info do
-            ' We haven’t pulled any repositories from your GitHub account yet.
+            ' We haven’t pulled any repositories from your Git account yet.
+            ' Please wait.
 
-      - else
+      - elsif allowed_to?(:new?)
         .accordion.w-4/5 data-test-id="intro"
           .accordion-top
-            h2 View your commits from GitHub
+            h2 View your commits from Git
             section
-              ' Connect your account to a GitHub repository
+              ' Connect your account to a Git repository
               ' to see commit diffs when writing updates.
           .accordion-bottom
             h2 Pull changes automatically
             section
               ' Connecting to a repository will allow you
-              ' to pull changes from GitHub in the background
+              ' to pull changes from Git in the background
               ' to make sure your changelog is always up to date.
 
         .py-10.md:py-24
@@ -43,3 +44,8 @@ section.overflow-x-auto
                           method: :post, \
                           class: 'button-1', \
                           data: { turbo: false }
+
+      - else
+        section data-test-id="blank"
+          = component :flash, type: :info do
+            ' You don’t have any repositories yet.

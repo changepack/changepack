@@ -1,20 +1,17 @@
 # frozen_string_literal: true
 
 class ChangelogsController < ApplicationController
-  skip_verify_authorized
-
-  before_action only: %i[edit update destroy] do
-    authorize! changelog
-  end
+  skip_before_action :authenticate_user!, only: :show
+  skip_verify_authorized only: :show
 
   def index
-    redirect_to account_path(current_account)
+    authorize! and redirect_to(current_account)
   end
 
   def new
     @changelog = Changelog.new
 
-    render(**form_locals)
+    authorize! and render(**form_locals)
   end
 
   def show
@@ -22,17 +19,19 @@ class ChangelogsController < ApplicationController
   end
 
   def edit
-    render(**form_locals)
+    authorize! changelog and render(**form_locals)
   end
 
   def confirm_destroy
+    authorize! changelog, to: :destroy?
+
     render(**show_locals)
   end
 
   def create
-    changelog = Changelogs::Upsert.new(**create_changelog_params).execute
+    authorize! and respond_to do |format|
+      changelog = upsert!(create_params)
 
-    respond_to do |format|
       if changelog.valid?
         format.html { redirect_to changelog }
         format.json { render :show, **show_locals(status: :created, location: changelog) }
@@ -43,10 +42,10 @@ class ChangelogsController < ApplicationController
     end
   end
 
-  def update
-    changelog = Changelogs::Upsert.new(**update_changelog_params).execute
+  def update # rubocop:disable Metrics/AbcSize
+    authorize! changelog and respond_to do |format|
+      changelog = upsert!(update_params)
 
-    respond_to do |format|
       if changelog.valid?
         format.html { redirect_to changelog }
         format.json { render :show, **show_locals(status: :ok, location: changelog) }
@@ -58,9 +57,9 @@ class ChangelogsController < ApplicationController
   end
 
   def destroy
-    changelog.discard
+    authorize! changelog and respond_to do |format|
+      changelog.discard
 
-    respond_to do |format|
       format.html { redirect_to changelogs_url }
       format.json { head :no_content }
     end
@@ -81,15 +80,18 @@ class ChangelogsController < ApplicationController
                                 .kept
   end
 
-  def create_changelog_params
-    params.require(:changelog)
-          .permit(:title, :content, :published, commit_ids: [])
-          .merge(user: current_user, changelog: Changelog.new)
-          .to_h
+  def upsert!(params)
+    Changelogs::Upsert.new(**params).execute
   end
 
-  def update_changelog_params
-    create_changelog_params.merge(changelog:)
+  def create_params
+    authorized(params.require(:changelog))
+      .merge(user: current_user, changelog: Changelog.new)
+      .to_h
+  end
+
+  def update_params
+    create_params.merge(changelog:)
   end
 
   def form_locals(opts = {})
@@ -107,9 +109,5 @@ class ChangelogsController < ApplicationController
         changelog: changelog.decorate
       }
     }.merge(opts)
-  end
-
-  def unprocessable_entity
-    form_locals.merge(status: :unprocessable_entity)
   end
 end

@@ -9,5 +9,5 @@ Rails.configuration.to_prepare do
     )
   )
 
-  Dir.glob(Rails.root.join('**', 'on_*.rb'), &method(:require))
+  Dir.glob(Rails.root.join('**', 'on_*.rb')).reject { |f| f =~ /spec\// }.each { |f| require f }
 end

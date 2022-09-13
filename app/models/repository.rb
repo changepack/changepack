@@ -2,6 +2,7 @@
 
 class Repository < ApplicationRecord
   include Status
+  include Provider
 
   key :rep
 
@@ -9,8 +10,6 @@ class Repository < ApplicationRecord
   attribute :branch, :string
   attribute :pulled, :datetime
   attribute :status, :string, default: :inactive
-  attribute :provider, :string
-  attribute :provider_id, :string
   attribute :discarded, :datetime
 
   belongs_to :account
@@ -20,15 +19,13 @@ class Repository < ApplicationRecord
 
   validates :name, presence: true
   validates :branch, presence: true
-  validates :status, presence: true
-  validates :provider, presence: true, inclusion: { in: Provider.types }
-  validates :provider_id, presence: true
 
   normalize :name
   normalize :branch
 
   inquirer :status
-  inquirer :provider
+
+  provider :github
 
   scope :active, -> { kept.where(status: :active) }
   scope :activity, lambda {

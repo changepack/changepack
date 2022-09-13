@@ -19,14 +19,13 @@ class Changelog < ApplicationRecord
 
   validates :title, length: { maximum: 140 }
   validates :content, presence: true
-  validates :status, presence: true
 
   normalize :title
 
   inquirer :status
 
   scope :for, ->(user) { where(!user && { status: :published }) }
-  scope :desc, -> { order(created_at: :desc) }
+  scope :recent, -> { order(created_at: :desc) }
 
   private
 

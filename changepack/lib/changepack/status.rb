@@ -12,6 +12,8 @@ module Changepack
 
         delegate :can_transition_to?, :history, :last_transition, :last_transition_to,
                  :transition_to!, :transition_to, to: :state_machine
+
+        validates :status, presence: true, inclusion: { in: state_machine.states }
       end
 
       module ClassMethods

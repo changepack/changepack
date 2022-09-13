@@ -5,6 +5,10 @@ class BlogComponent < ApplicationComponent
   option :account, model: Account
 
   def before_render
-    @pagy, @collection = changelogs.is_a?(Array) ? pagy_array(changelogs) : pagy(changelogs)
+    @pagy, @collection = changelogs.is_a?(Array) ? helpers.pagy_array(changelogs) : helpers.pagy(changelogs)
   end
+
+  private
+
+  attr_reader :pagy, :collection
 end

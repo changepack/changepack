@@ -7,8 +7,11 @@ class ApplicationController < ActionController::Base
   verify_authorized
 
   before_action :set_paper_trail_whodunnit
+  before_action :authenticate_user!
 
   helper_method :current_account
+  helper_method :pagy_array
+  helper_method :pagy
 
   private
 

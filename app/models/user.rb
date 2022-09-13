@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  include Provider
+
   key :usr
 
   devise :database_authenticatable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:github]
 
   attribute :name, :string
   attribute :email, :string
-  attribute :provider_ids, :jsonb, default: -> { {} }
   attribute :discarded, :datetime
 
   belongs_to :account
@@ -22,27 +23,14 @@ class User < ApplicationRecord
   normalize :name
   normalize :email, with: %i[squish downcase]
 
+  provider :github, :id
+  provider :github, :access_token
+
   after_initialize do
-    self.account = Account.new if account_id.nil?
+    self.account ||= Account.new if account.nil?
   end
 
   def git?
-    provider_ids.keys.any?
-  end
-
-  def access_token(provider)
-    provider_ids.fetch(provider.to_s, nil)&.fetch('access_token')
-  end
-
-  def github_id
-    github_ids['id']
-  end
-
-  def github_access_token
-    github_ids['access_token']
-  end
-
-  def github_ids
-    provider_ids['github'] || {}
+    providers.present?
   end
 end

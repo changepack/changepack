@@ -15,7 +15,7 @@ module Repositories
       end
 
       context 'with a token' do
-        let(:user) { create(:user, provider_ids: { github: { access_token: 'access_token' } }) }
+        let(:user) { create(:user, providers: { github: { access_token: 'access_token' } }) }
 
         it 'upserts repositories' do
           expect { operation.execute }.to change(user.repositories, :count)

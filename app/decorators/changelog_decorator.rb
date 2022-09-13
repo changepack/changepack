@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ChangelogDecorator < ApplicationDecorator
-  delegate_all
-
   def published_field_id
     ['toggle', id].compact.join('_')
   end
