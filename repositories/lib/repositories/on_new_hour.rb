@@ -2,9 +2,9 @@
 
 module Repositories
   class OnNewHour < EventHandler
-    subscribe Clock::NewHour
+    on Clock::NewHour
 
-    def call
+    def run
       Repository.active
                 .pluck(:id)
                 .map { |id| Repositories::Outdated.new(data: { repository: id }) }

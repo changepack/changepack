@@ -13,7 +13,7 @@ module Changepack
 
     let(:handler) do
       Class.new(described_class) do
-        def call
+        def run
           event.data.foo
         end
       end

@@ -2,9 +2,9 @@
 
 module Repositories
   class OnAuthorized < EventHandler
-    subscribe Authorized
+    on Authorized
 
-    def call
+    def run
       Repositories::Pull.run(user:)
     end
 
