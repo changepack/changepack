@@ -177,6 +177,6 @@ gem "validate_url", "~> 1.0"
 
 gem "draper", "~> 4.0"
 
-gem "sidekiq-cron", "~> 1.5"
+gem "sidekiq-cron", "~> 1.7"
 
 gem "discard", "~> 1.2"

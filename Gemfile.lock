@@ -212,7 +212,7 @@ GEM
     formatador (1.1.0)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
-    fugit (1.5.3)
+    fugit (1.6.0)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
     globalid (1.0.0)
@@ -471,7 +471,7 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
-    sidekiq-cron (1.5.1)
+    sidekiq-cron (1.7.0)
       fugit (~> 1)
       sidekiq (>= 4.2.1)
     simplecov (0.21.2)
@@ -606,7 +606,7 @@ DEPENDENCIES
   ruby_event_store-rspec
   shoulda-matchers
   sidekiq (~> 6.5)
-  sidekiq-cron (~> 1.5)
+  sidekiq-cron (~> 1.7)
   simplecov
   slim-rails (~> 3.5)
   slim_lint (~> 0.22.1)
