@@ -11,7 +11,7 @@ module Commits
     end
 
     def run
-      git.commits(repository.github, after: cursor)
+      git.commits(source, after: cursor)
          .each { |commit| upsert!(commit) }
 
       repository.update!(pulled: Time.current)
@@ -40,6 +40,13 @@ module Commits
           author: { name: commit.author.name, email: commit.author.email },
           account:
         )
+      end
+    end
+
+    def source
+      case repository.provider
+      when 'github'
+        repository.github
       end
     end
 
