@@ -20,7 +20,7 @@ module Commits
     private
 
     def git
-      @git ||= Adapters::Adapter.find_by(user:)
+      @git ||= Adapters[user.provider].new(user.access_token)
     end
 
     def cursor

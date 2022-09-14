@@ -28,7 +28,7 @@ module Repositories
     end
 
     def git
-      @git ||= Adapters::Adapter.find_by(user:)
+      @git ||= Adapters[user.provider].new(user.access_token)
     end
 
     delegate :account, to: :user

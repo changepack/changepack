@@ -30,6 +30,10 @@ class User < ApplicationRecord
     self.account ||= Account.new if account.nil?
   end
 
+  def access_token
+    providers.dig(provider, :access_token)
+  end
+
   def git?
     providers.present?
   end

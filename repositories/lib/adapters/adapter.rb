@@ -2,8 +2,6 @@
 
 module Adapters
   class Adapter
-    NotImplemented = Class.new(StandardError)
-
     def initialize(access_token)
       @access_token = access_token
     end
@@ -11,33 +9,21 @@ module Adapters
     attr_reader :access_token
 
     def repositories
-      raise NotImplemented
+      raise 'Not implemented'
     end
 
     def commits(_repository_id)
-      raise NotImplemented
+      raise 'Not implemented'
     end
 
     def provider
       self.class.name.demodulize.downcase.to_sym
     end
 
-    def self.find_by(user:)
-      providers.keys
-               .find { |provider| provider.to_s.in?(user.providers.keys) }
-               .then { |provider| providers.fetch(provider).new(user.find_access_token_for(provider)) }
-    end
-
-    def self.providers
-      {
-        github: Adapters::GitHub
-      }
-    end
-
     private
 
     def client
-      raise NotImplemented
+      raise 'Not implemented'
     end
 
     class Repository < Dry::Struct
