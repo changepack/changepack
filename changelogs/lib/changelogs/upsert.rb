@@ -2,12 +2,12 @@
 
 module Changelogs
   class Upsert < Command
-    option :changelog, model: Changelog
-    option :user, model: User
-    option :content, type: Types::String
-    option :title, type: Types::String, optional: true
-    option :published, type: Types::String, optional: true
-    option :commits, type: Types::Array.of(Types::String), optional: true
+    option :changelog, Types::Instance(Changelog)
+    option :user, Types::Instance(User)
+    option :content, Types::String
+    option :title, Types::String.optional
+    option :published, Types::String.optional
+    option :commits, Types::Array.of(Types::String).optional
 
     def run
       changelog.tap do |changelog|

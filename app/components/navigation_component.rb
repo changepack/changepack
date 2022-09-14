@@ -5,8 +5,8 @@ class NavigationComponent < ApplicationComponent
 
   class LinkToComponent < ApplicationComponent
     option :active, default: -> { false }
-    param :title, type: Types::String
-    param :url, type: Types::String
+    param :title, Types::String
+    param :url, Types::String
 
     def call
       link_to title, url, class: active ? 'tab-active' : 'tab'

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FlashComponent < ApplicationComponent
-  option :type, type: Types::Coercible::String.default('alert').enum('notice', 'alert', 'info')
+  option :type, Types::Coercible::String.default('alert').enum('notice', 'alert', 'info')
 
   def call
     content_tag(:div) do

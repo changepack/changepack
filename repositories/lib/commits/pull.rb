@@ -4,7 +4,7 @@ module Commits
   class Pull < Command
     Disconnected = Class.new(Command::Error)
 
-    option :repository, model: Repository
+    option :repository, Types::Instance(Repository)
 
     validate do
       raise Disconnected unless user.git?

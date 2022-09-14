@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ChangelogComponent < ApplicationComponent
-  option :changelog, model: Changelog
+  option :changelog, Types::Instance(Changelog)
 
   def draft?
     changelog.status.draft? && !changelog.new_record?

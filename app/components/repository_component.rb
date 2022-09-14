@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RepositoryComponent < ApplicationComponent
-  option :repository, model: Repository
+  option :repository, Types::Instance(Repository)
 
   private
 

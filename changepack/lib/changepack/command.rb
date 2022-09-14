@@ -30,12 +30,12 @@ module Changepack
 
       module ClassMethods
         def option(name, type = nil, **opts, &)
-          dry_initializer.option(name, type, **transform_types(opts), &)
+          dry_initializer.option(name, type, **transform_opts(type, opts), &)
           self
         end
 
-        def transform_types(opts)
-          opts.merge(type: opts[:optional] ? opts[:type]&.optional : opts[:type])
+        def transform_opts(type, opts)
+          opts.merge(optional: type.respond_to?(:optional?) ? type.optional? : opts[:optional])
               .compact
         end
       end

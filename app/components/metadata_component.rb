@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MetadataComponent < ApplicationComponent
-  option :changelog, model: Changelog
+  option :changelog, Types::Instance(Changelog)
 
   def user
     @user ||= changelog.user || new_user
