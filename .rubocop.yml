@@ -15,6 +15,7 @@ AllCops:
     - 'lib/**/*'
     - 'node_modules/**/*'
     - 'vendor/**/*'
+    - 'sorbet/**/*'
     - '*.md'
     - 'Gemfile'
     - 'Rakefile'

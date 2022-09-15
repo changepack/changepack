@@ -182,3 +182,7 @@ gem "sidekiq-cron", "~> 1.7"
 gem "discard", "~> 1.2"
 
 gem "brakeman", "~> 5.3"
+
+gem "sorbet-static-and-runtime"
+
+gem "tapioca", require: false, group: :development
