@@ -186,3 +186,5 @@ gem "brakeman", "~> 5.3"
 gem "sorbet-static-and-runtime"
 
 gem "tapioca", require: false, group: :development
+
+gem "sorbet-rails"

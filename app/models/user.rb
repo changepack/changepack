@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# typed: strict
 
 class User < ApplicationRecord
   include Provider
@@ -26,15 +27,22 @@ class User < ApplicationRecord
   provider :github, :id
   provider :github, :access_token
 
-  after_initialize do
-    self.account ||= Account.new if account.nil?
-  end
+  after_initialize :set_account
 
+  sig { returns(T.nilable(String)) }
   def access_token
     providers.dig(provider, :access_token)
   end
 
+  sig { returns(T::Boolean) }
   def git?
     providers.present?
+  end
+
+  private
+
+  sig { returns(Account) }
+  def set_account
+    self.account ||= Account.new
   end
 end
