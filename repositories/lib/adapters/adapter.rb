@@ -2,6 +2,8 @@
 
 module Adapters
   class Adapter
+    extend T::Sig
+
     def initialize(access_token)
       @access_token = access_token
     end

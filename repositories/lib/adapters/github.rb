@@ -1,7 +1,9 @@
 # frozen_string_literal: true
+# typed: true
 
 module Adapters
   class GitHub < Adapter
+    sig { params(after: T.nilable(String)).returns(T::Array[Repository]) }
     def repositories(after: nil)
       paginate(after:) { client.repos }.map do |repo|
         Repository.new(
@@ -12,8 +14,9 @@ module Adapters
       end
     end
 
-    def commits(repository_id, after: nil) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-      paginate(after:) { client.commits(repository_id.to_i) }.map do |commit|
+    sig { params(repository: String, after: T.nilable(String)).returns(T::Array[Commit]) }
+    def commits(repository, after: nil) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+      paginate(after:) { client.commits(repository.to_i) }.map do |commit|
         Commit.new(
           sha: commit.sha,
           message: commit.commit.message,
@@ -29,6 +32,7 @@ module Adapters
 
     private
 
+    sig { params(items: T::Array[T.untyped], after: T.nilable(String)).returns(T::Array[T.untyped]) }
     def paginate(items: [], after: nil)
       items += yield
       next_page = client.last_response.rels[:next]&.href
@@ -39,6 +43,7 @@ module Adapters
       paginate(items:, after:) { client.get(next_page) }
     end
 
+    sig { returns(Octokit::Client) }
     def client
       @client ||= Octokit::Client.new(access_token:).tap { |c| c.per_page = 100 }
     end

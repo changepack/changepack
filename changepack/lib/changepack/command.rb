@@ -3,6 +3,7 @@
 module Changepack
   class Command
     extend Dry::Initializer
+
     include AfterCommitEverywhere
 
     Error = Class.new(StandardError)

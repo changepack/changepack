@@ -28,7 +28,8 @@ module Commits
                             .where('commited > ?', 1.month.ago)
                             .order(commited: :desc)
                             .limit(1)
-                            .pick(:commited)
+                            .first
+                            &.github
     end
 
     def upsert!(commit)
