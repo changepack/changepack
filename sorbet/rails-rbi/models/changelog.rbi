@@ -220,6 +220,9 @@ class Changelog < ApplicationRecord
 
   sig { params(args: T.untyped).returns(Changelog::ActiveRecord_Relation) }
   def self.with_rich_text_content_and_embeds(*args); end
+
+  sig { params(args: T.untyped).returns(NilClass) }
+  def self.has_rich_text(*args); end
 end
 
 class Changelog::ActiveRecord_Relation < ActiveRecord::Relation

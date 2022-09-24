@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# typed: strict
 
 class Account < ApplicationRecord
   include Slug
@@ -16,6 +17,7 @@ class Account < ApplicationRecord
 
   private
 
+  sig { returns(T::Array[Symbol]) }
   def slug_candidates
     %i[name set_pretty_id]
   end

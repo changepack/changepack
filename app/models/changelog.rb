@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# typed: strict
 
 class Changelog < ApplicationRecord
   include Slug
@@ -29,6 +30,7 @@ class Changelog < ApplicationRecord
 
   private
 
+  sig { returns(T::Array[T::Array[Symbol]]) }
   def slug_candidates
     [
       %i[title set_slug_pretty_id]

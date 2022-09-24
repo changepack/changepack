@@ -1,29 +1,36 @@
 # frozen_string_literal: true
+# typed: strict
 
 module Adapters
   class Adapter
     extend T::Sig
 
+    sig { params(access_token: String).void }
     def initialize(access_token)
-      @access_token = access_token
+      @access_token = T.let(access_token, T.untyped)
     end
 
+    sig { returns(String) }
     attr_reader :access_token
 
-    def repositories
+    sig { params(after: T.nilable(String)).returns(T::Array[Repository]) }
+    def repositories(after: nil) # rubocop:disable Lint/UnusedMethodArgument
       raise 'Not implemented'
     end
 
-    def commits(_repository_id)
+    sig { params(repository: String, after: T.nilable(String)).returns(T::Array[Commit]) }
+    def commits(repository, after: nil) # rubocop:disable Lint/UnusedMethodArgument
       raise 'Not implemented'
     end
 
+    sig { returns(Symbol) }
     def provider
-      self.class.name.demodulize.downcase.to_sym
+      T.must(self.class.name).demodulize.downcase.to_sym
     end
 
     private
 
+    sig { returns(Octokit::Client) }
     def client
       raise 'Not implemented'
     end
