@@ -9,7 +9,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    action_policy (0.6.1)
+    action_policy (0.6.4)
       ruby-next-core (>= 0.14.0)
     actioncable (7.0.4)
       actionpack (= 7.0.4)
@@ -450,7 +450,7 @@ GEM
       rubocop (>= 1.7.0, < 2.0)
     rubocop-rspec (2.11.1)
       rubocop (~> 1.19)
-    ruby-next-core (0.15.1)
+    ruby-next-core (0.15.3)
     ruby-progressbar (1.11.0)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
@@ -553,7 +553,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  action_policy (~> 0.6.1)
+  action_policy (~> 0.6.4)
   active_record_query_trace (~> 1.8)
   after_commit_everywhere (~> 1.2)
   aws-sdk-s3

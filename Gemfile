@@ -149,7 +149,7 @@ gem "paper_trail", "~> 12.3"
 
 gem "normalize_attributes", "~> 0.4.0"
 
-gem "action_policy", "~> 0.6.1"
+gem "action_policy", "~> 0.6.4"
 
 gem "rails_event_store", "~> 2.5"
 
