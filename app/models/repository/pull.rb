@@ -27,6 +27,8 @@ class Repository
       end
     end
 
+    # TODO: Refactor this method to use Ruby only, without SQL,
+    # so that N+1 queries can be avoided.
     def cursor
       @cursor ||= commits.where('commited > ?', 1.month.ago)
                          .order(commited: :desc)
