@@ -17,7 +17,7 @@ module Changepack
     end
 
     def run
-      raise 'Not implemented'
+      raise NoMethodError
     end
 
     private

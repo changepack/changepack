@@ -9,11 +9,11 @@ module Adapters
     attr_reader :access_token
 
     def repositories
-      raise 'Not implemented'
+      raise NoMethodError
     end
 
     def commits(_repository_id)
-      raise 'Not implemented'
+      raise NoMethodError
     end
 
     def provider
@@ -23,7 +23,7 @@ module Adapters
     private
 
     def client
-      raise 'Not implemented'
+      raise NoMethodError
     end
 
     class Repository < Dry::Struct
