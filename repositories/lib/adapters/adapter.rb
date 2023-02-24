@@ -45,6 +45,15 @@ module Adapters
         attribute :name, Types::String
         attribute :email, Types::String
       end
+
+      def to_h
+        {
+          message:,
+          url:,
+          commited:,
+          author: { name: author.name, email: author.email }
+        }
+      end
     end
   end
 end

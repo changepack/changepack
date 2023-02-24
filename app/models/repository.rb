@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 class Repository < ApplicationRecord
-  include Pull
+  include Git
   include Active
-
   include Status
-  include Provider
 
   key :rep
 
