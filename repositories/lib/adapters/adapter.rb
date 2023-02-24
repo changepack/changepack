@@ -30,6 +30,10 @@ module Adapters
       attribute :id, Types::Integer
       attribute :name, Types::String
       attribute :branch, Types::String
+
+      def to_h
+        { name:, branch: }
+      end
     end
 
     class Commit < Dry::Struct

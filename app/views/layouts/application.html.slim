@@ -24,7 +24,7 @@ html
 
     main.lg:container.mx-auto.my-8.md:my-28.px-5
       - flash.select { |_, message| message.present? }.each do |type, message|
-        = component :flash, type: type do
+        = component :flash, type: do
           = message
 
       = yield

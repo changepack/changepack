@@ -3,5 +3,6 @@
   "devDependencies": {
     "cypress": "^10.7.0",
     "cypress-on-rails": "^0.1.0"
-  }
+  },
+  "dependencies": {}
 }

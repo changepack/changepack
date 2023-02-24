@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  include Provider
+  include Git
 
   key :usr
 
@@ -28,13 +28,5 @@ class User < ApplicationRecord
 
   after_initialize do
     self.account ||= Account.new if account.nil?
-  end
-
-  def access_token
-    providers.dig(provider, :access_token)
-  end
-
-  def git?
-    providers.present?
   end
 end

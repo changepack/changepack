@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Repository < ApplicationRecord
+  include Pull
+  include Active
+
   include Status
   include Provider
 
@@ -13,8 +16,6 @@ class Repository < ApplicationRecord
   attribute :discarded, :datetime
 
   belongs_to :account
-  belongs_to :user
-
   has_many :commits, dependent: :destroy
 
   validates :name, presence: true
@@ -22,15 +23,5 @@ class Repository < ApplicationRecord
 
   normalize :name
   normalize :branch
-
   inquirer :status
-
-  provider :github
-
-  scope :active, -> { kept.where(status: :active) }
-  scope :activity, lambda {
-    order(
-      Arel.sql("CASE WHEN status = 'active' THEN 0 ELSE 1 END, created_at DESC")
-    )
-  }
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_25_194911) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_24_005301) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -143,7 +143,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_25_194911) do
 
   create_table "repositories", id: :string, force: :cascade do |t|
     t.string "account_id"
-    t.string "user_id"
     t.string "name", null: false
     t.string "branch", null: false
     t.string "status", default: "inactive", null: false
@@ -154,7 +153,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_25_194911) do
     t.jsonb "providers", default: {}, null: false
     t.index ["account_id"], name: "index_repositories_on_account_id"
     t.index ["discarded"], name: "index_repositories_on_discarded"
-    t.index ["user_id"], name: "index_repositories_on_user_id"
   end
 
   create_table "repository_transitions", id: :string, force: :cascade do |t|
@@ -207,7 +205,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_25_194911) do
   add_foreign_key "commits", "changelogs"
   add_foreign_key "commits", "repositories"
   add_foreign_key "repositories", "accounts"
-  add_foreign_key "repositories", "users"
   add_foreign_key "repository_transitions", "repositories"
   add_foreign_key "users", "accounts"
 end
