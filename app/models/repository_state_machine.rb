@@ -14,6 +14,6 @@ class RepositoryStateMachine
   end
 
   after_transition(to: :active, after_commit: true) do |repository, _|
-    Commit.pull(repository)
+    repository.pull
   end
 end

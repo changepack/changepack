@@ -27,12 +27,14 @@ class Repository
       end
     end
 
-    # TODO: Refactor this method to use Ruby only, without SQL,
-    # so that N+1 queries can be avoided.
+    def pull
+      Commit.pull(self)
+    end
+
     def cursor
-      @cursor ||= commits.where('commited > ?', 1.month.ago)
-                         .order(commited: :desc)
-                         .limit(1)
+      @cursor ||= commits.select { |commit| commit.commited > 1.month.ago }
+                         .sort_by(&:commited)
+                         .reverse
                          .pick(:commited)
     end
   end

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# TODO: Consider moving this to `Repository::Pull` module.
 class Commit
   module Pull
     extend ActiveSupport::Concern
