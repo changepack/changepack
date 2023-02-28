@@ -5,13 +5,15 @@ module Repositories
     on Authorized
 
     def run
-      Repository.pull(user.git, account: user.account)
+      Repository.pull(git, account:)
     end
 
     private
 
+    delegate :git, :account, to: :user
+
     def user
-      User.find(event.data.user)
+      @user ||= User.find(event.data.user)
     end
   end
 end

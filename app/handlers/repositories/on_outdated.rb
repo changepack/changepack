@@ -11,7 +11,7 @@ module Repositories
     private
 
     def repository
-      Repository.find(event.data.repository)
+      @repository ||= Repository.find(event.data.repository)
     end
   end
 end
