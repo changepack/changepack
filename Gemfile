@@ -80,7 +80,7 @@ group :development, :test do
 
   gem "vcr", "~> 6.1"
 
-  gem "webmock", "~> 3.14"
+  gem "webmock", "~> 3.18"
 
   gem "shoulda-matchers"
 
