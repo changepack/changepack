@@ -272,6 +272,7 @@ GEM
     method_source (1.0.0)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
+    mini_portile2 (2.8.1)
     minitest (5.16.3)
     mock_redis (0.32.0)
       ruby2_keywords
@@ -294,9 +295,8 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.8-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.13.8-x86_64-linux)
+    nokogiri (1.13.8)
+      mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     normalize_attributes (0.4.0)
       activerecord
@@ -550,6 +550,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  arm64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
@@ -597,7 +598,7 @@ DEPENDENCIES
   pry-rails
   puma (~> 5.0)
   rack-livereload (~> 0.3.17)
-  rails (~> 7.0.2, >= 7.0.2.3)
+  rails (~> 7.0.4)
   rails_event_store (~> 2.5)
   redis (~> 5.0)
   rspec-rails (~> 5.1)
@@ -627,7 +628,7 @@ DEPENDENCIES
   webmock (~> 3.14)
 
 RUBY VERSION
-   ruby 3.1.2p20
+   ruby 3.2.1p31
 
 BUNDLED WITH
    2.3.7
