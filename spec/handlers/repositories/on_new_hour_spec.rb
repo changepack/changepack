@@ -17,7 +17,7 @@ module Repositories
     context 'with inactive repositories' do
       it 'does nothing' do
         expect { handler.perform(payload) }.not_to publish(
-          an_event(Repositories::Outdated)
+          an_event(Repository::Outdated)
         ).in(Rails.configuration.event_store)
       end
     end
@@ -28,7 +28,7 @@ module Repositories
         repository.transition_to!(:active)
 
         expect { handler.perform(payload) }.to publish(
-          an_event(Repositories::Outdated)
+          an_event(Repository::Outdated)
         ).in(Rails.configuration.event_store)
       end
     end

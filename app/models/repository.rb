@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
 class Repository < ApplicationRecord
+  class Outdated < Event
+    attribute :repository, Types::String
+  end
+
+  class Authorized < Event
+    attribute :user, Types::String
+  end
+
   include Git
   include Active
   include Status

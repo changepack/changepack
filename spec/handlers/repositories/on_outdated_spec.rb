@@ -8,7 +8,7 @@ module Repositories
     let(:repository) { create(:repository) }
     let(:payload) do
       {
-        event_type: 'Repositories::Outdated',
+        event_type: 'Repository::Outdated',
         data: { repository: repository.id }
       }
     end

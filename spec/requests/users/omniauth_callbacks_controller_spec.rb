@@ -33,7 +33,7 @@ module Users
 
     it 'sends an event to pull repositories' do
       expect { get '/users/auth/github/callback' }.to publish(
-        an_event(Repositories::Authorized)
+        an_event(Repository::Authorized)
       ).in(Rails.configuration.event_store)
     end
   end

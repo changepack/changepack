@@ -7,7 +7,7 @@ module Repositories
     let(:user) { create(:user) }
     let(:payload) do
       {
-        event_type: 'Repositories::Authorized',
+        event_type: 'Repository::Authorized',
         data: { user: user.id }
       }
     end

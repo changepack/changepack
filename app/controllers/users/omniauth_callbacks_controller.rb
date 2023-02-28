@@ -10,7 +10,7 @@ module Users
       current_user.save!
 
       Event.publish(
-        Repositories::Authorized.new(data: { user: current_user.id })
+        Repository::Authorized.new(data: { user: current_user.id })
       )
 
       redirect_to repositories_path, notice: t('devise.omniauth_callbacks.success', kind: 'GitHub')
