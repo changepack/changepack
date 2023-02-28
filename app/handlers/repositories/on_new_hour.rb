@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Repositories
-  class OnNewHour < EventHandler
+  class OnNewHour < Handler
     on Clock::NewHour
 
     def run

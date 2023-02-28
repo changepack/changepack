@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Changepack
-  class EventHandler < ActiveJob::Base # rubocop:disable Rails/ApplicationJob
+  class Handler < ActiveJob::Base # rubocop:disable Rails/ApplicationJob
     def self.on(event)
       Rails.configuration.event_store.subscribe(self, to: [event])
     end

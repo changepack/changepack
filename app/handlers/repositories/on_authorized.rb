@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Repositories
-  class OnAuthorized < EventHandler
+  class OnAuthorized < Handler
     on Authorized
 
     def run

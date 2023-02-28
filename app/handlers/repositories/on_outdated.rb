@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Repositories
-  class OnOutdated < EventHandler
+  class OnOutdated < Handler
     on Outdated
 
     def run

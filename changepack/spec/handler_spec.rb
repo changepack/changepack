@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 module Changepack
-  describe EventHandler do
+  describe Handler do
     let(:payload) do
       {
         event_type: 'Event',
