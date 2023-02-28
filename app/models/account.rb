@@ -11,6 +11,7 @@ class Account < ApplicationRecord
   has_many :users, dependent: :destroy
   has_many :changelogs, dependent: :destroy
   has_many :commits, dependent: :destroy
+  has_many :repositories, dependent: :destroy
 
   normalize :name
 

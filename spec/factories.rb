@@ -14,11 +14,10 @@ FactoryBot.define do
   end
 
   factory :repository do
-    user
-    account { user.account }
+    account { build(:account) }
     name { "#{Faker::App.name.downcase}/#{Faker::App.name.downcase}" }
     branch { 'main' }
-    providers { { 'github' => '1' } }
+    providers { { 'github' => { 'id' => '1', 'access_token' => 'access_token' } } }
   end
 
   factory :repository_transition do

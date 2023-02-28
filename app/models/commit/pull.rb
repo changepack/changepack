@@ -6,8 +6,9 @@ class Commit
 
     included do
       def self.pull(repository)
-        source = Pull.source(repository)
+        return if repository.git.blank?
 
+        source = Pull.source(repository)
         repository.git
                   .commits(source, after: repository.cursor)
                   .each { |commit| Pull.upsert!(commit, repository:) }

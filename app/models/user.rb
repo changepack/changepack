@@ -12,9 +12,7 @@ class User < ApplicationRecord
   attribute :discarded, :datetime
 
   belongs_to :account
-
   has_many :changelogs, dependent: :nullify
-  has_many :repositories, dependent: :delete_all
 
   accepts_nested_attributes_for :account
 

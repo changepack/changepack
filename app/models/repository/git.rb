@@ -13,6 +13,8 @@ class Repository
     end
 
     def git
+      return if providers.blank?
+
       @git ||= Adapters[provider].new(access_token)
     end
 
