@@ -11,7 +11,7 @@ describe('Repositories', function() {
       cy.visit('/repositories')
       cy.get('[data-test-id="blank"]').should('be.visible')
 
-      cy.appFactories([['create', 'repository', { user_id: user.id, account_id: user.account_id }]])
+      cy.appFactories([['create', 'repository', { account_id: user.account_id }]])
       cy.visit('/repositories')
       cy.get('[data-test-id="repository"]').should('be.visible')
 

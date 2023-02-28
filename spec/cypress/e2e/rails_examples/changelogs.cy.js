@@ -7,7 +7,7 @@ describe('Changelogs', function() {
     cy.appFactories([['create', 'changelog', { title: 'A changelog from another account' }]])
     cy.appFactories([['create', 'user']]).then((records) => {
       const user = records[0]
-      cy.appFactories([['create', 'repository', { account_id: user.account_id, user_id: user.id }]]).then((records) => {
+      cy.appFactories([['create', 'repository', { account_id: user.account_id }]]).then((records) => {
         const repository = records[0]
         cy.appFactories([['create', 'commit', { account_id: user.account_id, repository_id: repository.id }]]).then((records) => {
           const commit = records[0]
