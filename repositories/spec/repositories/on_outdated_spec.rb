@@ -4,7 +4,7 @@ require 'rails_helper'
 
 module Repositories
   describe OnOutdated do
-    let(:double) { instance_double(Commits::Pull) }
+    let(:double) { instance_double(Repository) }
     let(:repository) { create(:repository) }
     let(:payload) do
       {
@@ -16,12 +16,12 @@ module Repositories
     subject(:handler) { described_class.new }
 
     it 'pulls repositories' do
-      allow(Commits::Pull).to receive(:new).and_return(double)
-      allow(double).to receive(:run).and_return(true)
+      allow(handler).to receive(:repository).and_return(double)
+      allow(double).to receive(:pull).and_return(true)
 
       handler.perform(payload)
 
-      expect(double).to have_received(:run)
+      expect(double).to have_received(:pull)
     end
   end
 end

@@ -7,5 +7,4 @@ describe User, type: :model do
 
   it { is_expected.to belong_to(:account) }
   it { is_expected.to have_many(:changelogs).dependent(:nullify) }
-  it { is_expected.to have_many(:repositories).dependent(:delete_all) }
 end

@@ -5,7 +5,7 @@ module Repositories
     on Outdated
 
     def run
-      Commits::Pull.run(repository:)
+      repository.pull
     end
 
     private

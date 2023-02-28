@@ -5,7 +5,7 @@ module Repositories
     on Authorized
 
     def run
-      Repositories::Pull.run(user:)
+      Repository.pull(user.git, account: user.account)
     end
 
     private

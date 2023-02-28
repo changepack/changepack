@@ -23,9 +23,10 @@ module Repositories
     end
 
     context 'with active repositories' do
-      before { repository.transition_to!(:active) }
-
       it 'prepares to pull new data' do
+        allow(Commit).to receive(:pull).and_return([])
+        repository.transition_to!(:active)
+
         expect { handler.perform(payload) }.to publish(
           an_event(Repositories::Outdated)
         ).in(Rails.configuration.event_store)

@@ -5,7 +5,7 @@ require 'rails_helper'
 describe RepositoryPolicy, type: :policy do
   let(:user) { build(:user, account:) }
   let(:account) { build(:account) }
-  let(:record) { build(:repository, user:, account:) }
+  let(:record) { build(:repository, account:) }
 
   let(:context) { { user: } }
 
