@@ -2,7 +2,7 @@
 
 module Repositories
   class OnOutdated < Handler
-    on Outdated
+    on Repository::Outdated
 
     def run
       repository.pull

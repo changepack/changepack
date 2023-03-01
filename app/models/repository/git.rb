@@ -4,7 +4,7 @@ class Repository
   module Git
     extend ActiveSupport::Concern
 
-    include Provider
+    include Provided
     include Pull
 
     included do
@@ -15,7 +15,7 @@ class Repository
     def git
       return if providers.blank?
 
-      @git ||= Adapters[provider].new(access_token)
+      @git ||= Provider[provider].new(access_token)
     end
 
     def access_token

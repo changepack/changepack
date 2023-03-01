@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Provider
+module Provided
   extend ActiveSupport::Concern
 
   TYPES = %w[github].freeze
@@ -45,7 +45,7 @@ module Provider
   end
 
   def ensure_providers_inclusion
-    return if providers.keys.all? { |type| Provider.types.include?(type) }
+    return if providers.keys.all? { |type| Provided.types.include?(type) }
 
     errors.add(:providers, "can't contain invalid types")
   end

@@ -4,7 +4,7 @@ class User
   module Git
     extend ActiveSupport::Concern
 
-    include Provider
+    include Provided
 
     included do
       provider :github
@@ -13,7 +13,7 @@ class User
     def git
       return if providers.blank?
 
-      @git ||= Adapters[provider].new(access_token)
+      @git ||= Provider[provider].new(access_token)
     end
 
     def access_token

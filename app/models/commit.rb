@@ -2,7 +2,7 @@
 
 class Commit < ApplicationRecord
   include Pull
-  include Provider
+  include Provided
 
   key :com
 
