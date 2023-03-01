@@ -5,9 +5,9 @@ class Changelog
     extend ActiveSupport::Concern
 
     def publish(publishable)
-      if can_transition_to?(:published) && publishable.present?
+      if publishable.present? && can_transition_to?(:published)
         transition_to!(:published)
-      elsif can_transition_to?(:draft) && publishable.blank?
+      elsif publishable.blank? && can_transition_to?(:draft)
         transition_to!(:draft)
       end
     end

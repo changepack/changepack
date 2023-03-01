@@ -2,27 +2,24 @@
 
 class Publication
   include ActiveModel::Model
+  include ActiveModel::Attributes
 
-  attr_accessor :changelog, :title, :content, :account, :user, :published, :commits
+  attribute :title, :string
+  attribute :content, :string
+  attribute :published, :boolean
+  attribute :commits, array: true, default: -> { [] }
+  attribute :changelog
+  attribute :account
+  attribute :user
 
-  def create!
+  def update!
     Changelog.transaction do
-      changelog.assign_attributes(title:, content:, account:, user:)
-      changelog.save! if changelog.valid?
-
+      changelog.update(title:, content:, account:, user:)
       changelog.publish(published)
-      handle_commits
+      changelog.detach(except: commits)
+      changelog.attach(commits)
     end
   end
 
-  alias update! create!
-
-  private
-
-  def handle_commits
-    return if commits.blank?
-
-    changelog.detach(except: commits)
-    changelog.attach(commits)
-  end
+  alias create! update!
 end
