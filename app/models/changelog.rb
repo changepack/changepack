@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Changelog < ApplicationRecord
+  include Publish
+
   include Slug
   include Status
 

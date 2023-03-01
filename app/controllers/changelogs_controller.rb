@@ -4,14 +4,19 @@ class ChangelogsController < ApplicationController
   skip_before_action :authenticate_user!, only: :show
   skip_verify_authorized only: :show
 
+  before_action :set_new_changelog, only: %i[new create]
+  before_action only: %i[edit update destroy] do
+    authorize! changelog
+  end
+
   def index
-    authorize! and redirect_to(current_account)
+    authorize!
+
+    redirect_to(current_account)
   end
 
   def new
-    @changelog = Changelog.new
-
-    authorize! and render(**form_locals)
+    render(**form_locals)
   end
 
   def show
@@ -19,7 +24,7 @@ class ChangelogsController < ApplicationController
   end
 
   def edit
-    authorize! changelog and render(**form_locals)
+    render(**form_locals)
   end
 
   def confirm_destroy
@@ -29,43 +34,38 @@ class ChangelogsController < ApplicationController
   end
 
   def create
-    authorize! and respond_to do |format|
-      changelog = upsert!(create_params)
+    Publication.new(permitted).create!
 
-      if changelog.valid?
-        format.html { redirect_to changelog }
-        format.json { render :show, **show_locals(status: :created, location: changelog) }
-      else
-        format.html { render :new, **form_locals(status: :unprocessable_entity) }
-        format.json { render json: changelog.errors, status: :unprocessable_entity }
-      end
+    if changelog.valid?
+      redirect_to changelog
+    else
+      render :new, **form_locals
     end
   end
 
-  def update # rubocop:disable Metrics/AbcSize
-    authorize! changelog and respond_to do |format|
-      changelog = upsert!(update_params)
+  def update
+    Publication.new(permitted).update!
 
-      if changelog.valid?
-        format.html { redirect_to changelog }
-        format.json { render :show, **show_locals(status: :ok, location: changelog) }
-      else
-        format.html { render :edit, **form_locals(status: :unprocessable_entity) }
-        format.json { render json: changelog.errors, status: :unprocessable_entity }
-      end
+    if changelog.valid?
+      redirect_to changelog
+    else
+      render :edit, **form_locals
     end
   end
 
   def destroy
-    authorize! changelog and respond_to do |format|
-      changelog.discard
+    changelog.discard
 
-      format.html { redirect_to changelogs_url }
-      format.json { head :no_content }
-    end
+    redirect_to changelogs_url
   end
 
   private
+
+  def set_new_changelog
+    authorize!
+
+    @changelog = Changelog.new
+  end
 
   def changelog
     @changelog ||= Changelog.kept.friendly.find(id)
@@ -80,19 +80,12 @@ class ChangelogsController < ApplicationController
                                 .kept
   end
 
-  def upsert!(params)
-    Changelogs::Upsert.run(**params)
-  end
-
-  def create_params
-    authorized(params.require(:changelog))
-      .merge(user: current_user, changelog: Changelog.new)
-      .to_h
-      .symbolize_keys
-  end
-
-  def update_params
-    create_params.merge(changelog:)
+  def permitted
+    authorized(params.require(:changelog)).merge(
+      changelog:,
+      user: current_user,
+      account: current_account
+    )
   end
 
   def form_locals(opts = {})

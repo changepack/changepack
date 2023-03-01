@@ -8,8 +8,10 @@ class Repository
       def self.pull(git, account:)
         return if git.nil?
 
-        git.repositories.each do |repository|
-          Pull.upsert!(repository, git:, account:)
+        transaction do
+          git.repositories.each do |repository|
+            Pull.upsert!(repository, git:, account:)
+          end
         end
       end
     end

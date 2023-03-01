@@ -8,12 +8,14 @@ class Commit
       def self.pull(repository)
         return if repository.git.blank?
 
-        source = Pull.source(repository)
-        repository.git
-                  .commits(source, after: repository.cursor)
-                  .each { |commit| Pull.upsert!(commit, repository:) }
+        transaction do
+          source = Pull.source(repository)
+          repository.git
+                    .commits(source, after: repository.cursor)
+                    .each { |commit| Pull.upsert!(commit, repository:) }
 
-        repository.update!(pulled: Time.current)
+          repository.update!(pulled: Time.current)
+        end
       end
     end
 
