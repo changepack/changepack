@@ -85,20 +85,15 @@ class ChangelogsController < ApplicationController
     )
   end
 
-  def form(opts = {})
+  def form
     {
-      locals: {
-        changelog: changelog.decorate,
-        commits: commits.decorate
-      }
-    }.merge(opts)
+      locals: { changelog: changelog.decorate, commits: commits.decorate }
+    }
   end
 
-  def item(opts = {})
+  def item
     {
-      locals: {
-        changelog: changelog.decorate
-      }
-    }.merge(opts)
+      locals: { changelog: changelog.decorate }
+    }
   end
 end
