@@ -55,10 +55,8 @@ class ApplicationLayout < ApplicationView
   end
 
   def flash
-    helpers.flash.select { |_, message| message.present? }.each do |type, message|
-      unsafe_raw helpers.component(:flash, type:) do
-        text message
-      end
+    helpers.flash.each do |type, message|
+      render FlashComponent.new(type:) { text message }
     end
   end
 end

@@ -19,7 +19,7 @@ section.overflow-x-auto
 
       - elsif current_user.git?
         section data-test-id="blank"
-          = component :flash, type: :info do
+          = render FlashComponent.new(type: :info) do
             ' We haven’t pulled any repositories from your Git account yet.
             ' Please wait.
 
@@ -47,5 +47,5 @@ section.overflow-x-auto
 
       - else
         section data-test-id="blank"
-          = component :flash, type: :info do
+          = render FlashComponent.new(type: :info) do
             ' You don’t have any repositories yet.
