@@ -4,7 +4,7 @@ h2
 = form_for(resource, as: resource_name, \
                      url: user_registration_path, \
                      html: { method: :put }) do |f|
-  = render 'devise/shared/error_messages', resource: resource
+  = render 'devise/shared/error_messages', resource:
   .field
     = f.label :email
     br

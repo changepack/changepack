@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ChangelogComponent < ApplicationComponent
+class ChangelogComponent < LegacyApplicationComponent
   option :changelog, Types::Instance(Changelog)
 
   def draft?

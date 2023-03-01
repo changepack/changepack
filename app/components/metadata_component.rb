@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class MetadataComponent < ApplicationComponent
+class MetadataComponent < LegacyApplicationComponent
   option :changelog, Types::Instance(Changelog)
 
   def user

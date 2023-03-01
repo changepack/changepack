@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ContentComponent < ApplicationComponent
+class ContentComponent < LegacyApplicationComponent
   renders_one :article
   renders_one :sidebar
 end

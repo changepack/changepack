@@ -54,37 +54,37 @@ group :development, :test do
 
   gem "pry-rails"
 
-  gem "rspec-rails", "~> 5.1"
+  gem "rspec-rails"
 
-  gem "database_cleaner-active_record", "~> 2.0"
+  gem "database_cleaner-active_record"
 
-  gem "rubocop", "~> 1.36", require: false
+  gem "rubocop", require: false
 
-  gem "cypress-on-rails", "~> 1.13"
+  gem "cypress-on-rails"
 
-  gem "factory_bot_rails", "~> 6.2"
+  gem "factory_bot_rails"
 
-  gem "unparser", "~> 0.6.5"
+  gem "unparser"
 
-  gem "rubocop-rails", "~> 2.15", require: false
+  gem "rubocop-rails", require: false
 
-  gem "rubocop-rspec", "~> 2.11", require: false
+  gem "rubocop-rspec", require: false
 
-  gem "rubocop-performance", "~> 1.14"
+  gem "rubocop-performance"
 
-  gem "slim_lint", "~> 0.22.1"
+  gem "slim_lint"
 
-  gem "faker", "~> 2.21"
+  gem "faker"
 
-  gem "bullet", "~> 7.0"
+  gem "bullet"
 
-  gem "vcr", "~> 6.1"
+  gem "vcr"
 
-  gem "webmock", "~> 3.14"
+  gem "webmock"
 
   gem "shoulda-matchers"
 
-  gem "mock_redis", "~> 0.32.0"
+  gem "mock_redis"
 end
 
 group :development do
@@ -97,15 +97,15 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
-  gem "active_record_query_trace", "~> 1.8"
+  gem "active_record_query_trace"
 
-  gem "guard", "~> 2.18"
+  gem "guard"
 
-  gem "guard-livereload", "~> 2.5", require: false
+  gem "guard-livereload", require: false
 
-  gem "rack-livereload", "~> 0.3.17"
+  gem "rack-livereload"
 
-  gem "letter_opener", "~> 1.8"
+  gem "letter_opener"
 end
 
 group :test do
@@ -117,68 +117,70 @@ group :test do
   gem "capybara"
 end
 
-gem "slim-rails", "~> 3.5"
+gem "slim-rails"
 
-gem "figaro", "~> 1.2"
+gem "figaro"
 
-gem "tailwindcss-rails", "~> 2.0"
+gem "tailwindcss-rails"
 
-gem "prettyid", "~> 0.2.0", require: "pretty_id", github: "changepack/pretty_id"
+gem "prettyid", require: "pretty_id", github: "changepack/pretty_id"
 
-gem "view_component", "~> 2.57"
+gem "view_component"
 
-gem "font-awesome-rails", "~> 4.7"
+gem "font-awesome-rails"
 
-gem "statesman", "~> 10.0"
+gem "statesman"
 
-gem "dry-initializer-rails", "~> 3.1"
+gem "dry-initializer-rails"
 
-gem "dry-types", "~> 1.5"
+gem "dry-types"
 
-gem "dry-struct", "~> 1.4"
+gem "dry-struct"
 
-gem "hashie", "~> 5.0"
+gem "hashie"
 
-gem "after_commit_everywhere", "~> 1.2"
+gem "after_commit_everywhere"
 
-gem "pagy", "~> 5.10"
+gem "pagy"
 
-gem "devise", "~> 4.8"
+gem "devise"
 
-gem "paper_trail", "~> 12.3"
+gem "paper_trail"
 
-gem "normalize_attributes", "~> 0.4.0"
+gem "normalize_attributes"
 
-gem "action_policy", "~> 0.6.5"
+gem "action_policy"
 
-gem "rails_event_store", "~> 2.5"
+gem "rails_event_store"
 
-gem "omniauth", "~> 2.1"
+gem "omniauth"
 
-gem "omniauth-github", "~> 2.0"
+gem "omniauth-github"
 
-gem "omniauth-rails_csrf_protection", "~> 1.0"
+gem "omniauth-rails_csrf_protection"
 
-gem "octokit", "~> 4.25"
+gem "octokit"
 
-gem "friendly_id", "~> 5.4"
+gem "friendly_id"
 
-gem "babosa", "~> 2.0"
+gem "babosa"
 
 gem "aws-sdk-s3", require: false
 
-gem "store_model", "~> 1.0.0"
+gem "store_model"
 
-gem "sidekiq", "~> 6.5"
+gem "sidekiq"
 
-gem "faraday-retry", "~> 2.0"
+gem "faraday-retry"
 
-gem "validate_url", "~> 1.0"
+gem "validate_url"
 
-gem "draper", "~> 4.0"
+gem "draper"
 
-gem "sidekiq-cron", "~> 1.7"
+gem "sidekiq-cron"
 
-gem "discard", "~> 1.2"
+gem "discard"
 
-gem "brakeman", "~> 5.3"
+gem "brakeman"
+
+gem "phlex-rails"

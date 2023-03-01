@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class NavigationComponent < ApplicationComponent
+class NavigationComponent < LegacyApplicationComponent
   renders_many :link_tos, 'LinkToComponent'
 
-  class LinkToComponent < ApplicationComponent
+  class LinkToComponent < LegacyApplicationComponent
     option :active, default: -> { false }
     param :title, Types::String
     param :url, Types::String

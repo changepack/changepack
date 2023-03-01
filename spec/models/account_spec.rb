@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Account, type: :model do
+describe Account do
   it { is_expected.to have_many(:users).dependent(:destroy) }
   it { is_expected.to have_many(:changelogs).dependent(:destroy) }
   it { is_expected.to have_many(:commits).dependent(:destroy) }

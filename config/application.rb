@@ -20,6 +20,9 @@ Bundler.require(*Rails.groups)
 
 module Changepack
   class Application < Rails::Application
+    config.autoload_paths << "#{root}/app/views"
+    config.autoload_paths << "#{root}/app/views/layouts"
+    config.autoload_paths << "#{root}/app/views/components"
     config.paths.add 'clock/lib', eager_load: true
     config.paths.add 'changepack/lib', eager_load: true
     config.paths.add 'repositories/lib', eager_load: true

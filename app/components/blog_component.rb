@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class BlogComponent < ApplicationComponent
+class BlogComponent < LegacyApplicationComponent
   option :changelogs, Types::Relation | Types::Array.of(Types::Instance(Changelog))
   option :account, Types::Instance(Account)
 

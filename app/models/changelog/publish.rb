@@ -15,7 +15,6 @@ class Changelog
     def attach(commits)
       account.commits
              .where(id: commits)
-             .includes(:account, :repository)
              .find_each { |commit| commit.update!(changelog: self) }
     end
 

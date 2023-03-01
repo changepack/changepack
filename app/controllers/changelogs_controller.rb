@@ -14,12 +14,12 @@ class ChangelogsController < ApplicationController
     redirect_to current_account
   end
 
-  def new
-    render form
-  end
-
   def show
     render item
+  end
+
+  def new
+    render form
   end
 
   def edit

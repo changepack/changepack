@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RepositoryComponent < ApplicationComponent
+class RepositoryComponent < LegacyApplicationComponent
   option :repository, Types::Instance(Repository)
 
   private

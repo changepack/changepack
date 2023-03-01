@@ -13,6 +13,8 @@ class ApplicationController < ActionController::Base
   helper_method :pagy_array
   helper_method :pagy
 
+  layout -> { ApplicationLayout }
+
   private
 
   def current_account

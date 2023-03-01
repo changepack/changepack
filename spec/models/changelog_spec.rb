@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Changelog, type: :model do
+describe Changelog do
   it { is_expected.to validate_length_of(:title).is_at_most(140) }
   it { is_expected.to validate_presence_of(:content) }
   it { is_expected.to validate_presence_of(:status) }

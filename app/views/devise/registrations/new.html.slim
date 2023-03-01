@@ -2,7 +2,7 @@ h2
   | Sign up
 = form_for(resource, as: resource_name, \
                      url: user_registration_path) do |f|
-  = render 'devise/shared/error_messages', resource: resource
+  = render 'devise/shared/error_messages', resource:
   .field
     = f.label :email
     br

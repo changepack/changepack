@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 module Users
-  describe OmniauthCallbacksController, type: :request do
+  describe OmniauthCallbacksController do
     let(:user) { create(:user) }
     let(:result) do
       {

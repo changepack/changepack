@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FlashComponent < ApplicationComponent
+class FlashComponent < LegacyApplicationComponent
   option :type, Types::Coercible::String.default('alert').enum('notice', 'alert', 'info')
 
   def call
