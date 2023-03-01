@@ -16,7 +16,6 @@ class ApplicationComponent < Phlex::HTML
         .compact
   end
 
-
   if Rails.env.development?
     def before_template
       comment { "Before #{self.class.name}" }

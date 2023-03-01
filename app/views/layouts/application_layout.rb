@@ -33,30 +33,34 @@ class ApplicationLayout < ApplicationView
 
   def navigation
     header class: 'w-full mx-auto' do
-      unsafe_raw navigation_component
-    end
-  end
-
-  def navigation_component
-    helpers.component :navigation do |nav|
-      if helpers.user_signed_in?
-        nav.link_to 'Home', root_path, active: helpers.current_controller.in?(%i[accounts changelogs])
-        nav.link_to 'Repositories', repositories_path, active: helpers.current_controller.in?(%i[repositories])
+      navigation = NavigationComponent.new do |nav|
+        nav.link_to 'Home', root_path, active: home?, if: user?
+        nav.link_to 'Repositories', repositories_path, active: repositories?, if: user?
       end
+
+      render navigation
     end
   end
 
   def content
     main class: 'lg:container mx-auto my-8 md:my-28 px-5' do
-      flash
+      helpers.flash.each do |type, message|
+        render FlashComponent.new(type:) { text message }
+      end
 
       yield
     end
   end
 
-  def flash
-    helpers.flash.each do |type, message|
-      render FlashComponent.new(type:) { text message }
-    end
+  def home?
+    helpers.current_controller.in?(%i[accounts changelogs])
+  end
+
+  def repositories?
+    helpers.current_controller.in?(%i[repositories])
+  end
+
+  def user?
+    helpers.user_signed_in?
   end
 end
