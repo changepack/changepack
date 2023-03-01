@@ -11,26 +11,24 @@ class ChangelogsController < ApplicationController
 
   def index
     authorize!
-
-    redirect_to(current_account)
+    redirect_to current_account
   end
 
   def new
-    render(**form_locals)
+    render form
   end
 
   def show
-    render(**show_locals)
+    render item
   end
 
   def edit
-    render(**form_locals)
+    render form
   end
 
   def confirm_destroy
     authorize! changelog, to: :destroy?
-
-    render(**show_locals)
+    render item
   end
 
   def create
@@ -39,7 +37,7 @@ class ChangelogsController < ApplicationController
     if changelog.valid?
       redirect_to changelog
     else
-      render :new, **form_locals
+      render :new, form
     end
   end
 
@@ -49,13 +47,12 @@ class ChangelogsController < ApplicationController
     if changelog.valid?
       redirect_to changelog
     else
-      render :edit, **form_locals
+      render :edit, form
     end
   end
 
   def destroy
     changelog.discard
-
     redirect_to changelogs_url
   end
 
@@ -88,7 +85,7 @@ class ChangelogsController < ApplicationController
     )
   end
 
-  def form_locals(opts = {})
+  def form(opts = {})
     {
       locals: {
         changelog: changelog.decorate,
@@ -97,7 +94,7 @@ class ChangelogsController < ApplicationController
     }.merge(opts)
   end
 
-  def show_locals(opts = {})
+  def item(opts = {})
     {
       locals: {
         changelog: changelog.decorate
