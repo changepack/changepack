@@ -37,6 +37,7 @@ jobs:
           ruby-version: 3.2.1
       - name: Install dependencies
         run: |
+          sudo apt-get update
           sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
           gem install bundler
           bundle install --jobs 4 --retry 3
