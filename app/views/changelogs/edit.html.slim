@@ -6,4 +6,4 @@
           = render 'form', changelog:, commits:
 
         - content.sidebar do
-          = component :metadata, changelog:
+          = render MetadataComponent.new(changelog:)

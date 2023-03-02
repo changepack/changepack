@@ -8,4 +8,4 @@ section data-test-id="new_changelog_page"
       = render 'form', changelog:, commits:
 
     - content.sidebar do
-      = component :metadata, changelog:
+      = render MetadataComponent.new(changelog:)
