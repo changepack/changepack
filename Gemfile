@@ -184,3 +184,5 @@ gem "discard"
 gem "brakeman"
 
 gem "phlex-rails"
+
+gem "active_record_extended"
