@@ -23,10 +23,12 @@
         | Save changelog
       = link_to 'Cancel', changelog, class: 'ml-2 button-3'
     .column.text-right
-      = component :toggle, id: changelog.published_field_id, \
-                           label: 'Published', \
-                           name: 'changelog[published]', \
-                           checked: changelog.status.published?
+      = render ToggleComponent.new( \
+                 label_value: 'Published', \
+                 name: 'changelog[published]', \
+                 id: changelog.published_field_id, \
+                 checked: changelog.status.published? \
+               )
 
   - if commits.any?
     .mt-10

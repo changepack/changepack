@@ -51,8 +51,8 @@ class NavigationComponent < ApplicationComponent
     param :url, Types::String
     param :title, Types::String
 
-    option :active, default: -> { false }
-    option :if, default: -> { true }
+    attribute :if, Types::Bool, default: -> { true }
+    attribute :active, Types::Bool, default: -> { false }
 
     def template
       unsafe_raw helpers.link_to url, title, class: activity if display?
