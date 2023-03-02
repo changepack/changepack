@@ -2,7 +2,7 @@
 
 module Repositories
   class OnAuthorized < Handler
-    on Repository::Authorized
+    on ::Repository::Authorized
 
     def run
       Repository.pull(git, account:)

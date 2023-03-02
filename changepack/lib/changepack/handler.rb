@@ -7,10 +7,11 @@ module Changepack
     end
 
     def perform(payload)
-      klass = payload.fetch(:event_type).constantize
-      opts = payload.slice(:data, :event_id, :metadata)
+      @payload = payload.deep_symbolize_keys
 
-      @payload = payload
+      klass = @payload.fetch(:event_type).constantize
+      opts = @payload.slice(:data, :event_id, :metadata)
+
       @event = klass.new(**opts)
 
       run

@@ -6,8 +6,9 @@ module Users
 
     def github
       current_user.lock!
-      current_user.providers.deep_merge!(github: github_ids)
-      current_user.save!
+      current_user.update!(
+        providers: current_user.providers.deep_merge!(github: github_ids)
+      )
 
       Event.publish(
         Repository::Authorized.new(data: { user: current_user.id })

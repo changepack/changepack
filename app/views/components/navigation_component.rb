@@ -6,7 +6,7 @@ class NavigationComponent < ApplicationComponent
   def template
     wrapper do
       logotype
-      pages
+      menu
     end
   end
 
@@ -31,17 +31,20 @@ class NavigationComponent < ApplicationComponent
     end
   end
 
-  def pages
+  def menu
     div class: 'md:block' do
       div class: 'ml-8 flex items-baseline space-x-4' do
-        @pages&.each { |anchor| render anchor }
+        pages.each { |anchor| render anchor }
       end
     end
   end
 
   def link_to(...)
+    pages << Anchor.new(...)
+  end
+
+  def pages
     @pages ||= []
-    @pages << Anchor.new(...)
   end
 
   class Anchor < ApplicationComponent

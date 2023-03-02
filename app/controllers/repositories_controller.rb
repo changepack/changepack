@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-# Go to Users::OmniauthCallbacksController for the code that is used
-# to pull repositories from GitHub and other providers after OAuth.
 class RepositoriesController < ApplicationController
   def index
+    authorize!
     pagy, repositories = pagy(scope)
 
-    authorize! and render locals: { repositories:, pagy: }
+    render locals: { repositories:, pagy: }
   end
 
   def confirm_update
@@ -16,12 +15,11 @@ class RepositoriesController < ApplicationController
   end
 
   def update
-    authorize! repository and respond_to do |format|
-      repository.transition_to!(:active)
+    authorize! repository
 
-      format.html { redirect_to repositories_url }
-      format.json { head :no_content }
-    end
+    repository.transition_to!(:active)
+
+    redirect_to repositories_url
   end
 
   def confirm_destroy
@@ -31,12 +29,11 @@ class RepositoriesController < ApplicationController
   end
 
   def destroy
-    authorize! repository and respond_to do |format|
-      repository.transition_to!(:inactive)
+    authorize! repository
 
-      format.html { redirect_to repositories_url }
-      format.json { head :no_content }
-    end
+    repository.transition_to!(:inactive)
+
+    redirect_to repositories_url
   end
 
   private

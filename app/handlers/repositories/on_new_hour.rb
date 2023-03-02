@@ -2,7 +2,7 @@
 
 module Repositories
   class OnNewHour < Handler
-    on Clock::NewHour
+    on ::Clock::NewHour
 
     def run
       Repository.active

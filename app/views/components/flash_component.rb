@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FlashComponent < ApplicationComponent
-  attribute :type, Types::Params::String.default('alert').enum('notice', 'alert', 'info')
+  attribute :type, Types::Coercible::String.default('alert').enum('notice', 'alert', 'info')
 
   def template(&)
     div do

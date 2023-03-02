@@ -7,9 +7,7 @@ module Provided
 
   included do
     attribute :providers, :jsonb, default: -> { {} }
-
     validate :ensure_providers_inclusion
-
     inquirer :provider
   end
 
