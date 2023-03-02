@@ -22,4 +22,8 @@ class ApplicationComponent < Phlex::HTML
       super
     end
   end
+
+  def icon(name, **attributes)
+    unsafe_raw helpers.icon(name, **attributes)
+  end
 end

@@ -10,7 +10,7 @@ section.overflow-x-auto
     .md:-my-8
       - if repositories.any?
         - repositories.each do |repository|
-          = component :repository, repository:
+          = render RepositoryComponent.new(repository:)
 
         - if pagy && pagy.pages > 1
           .py-10.md:py-24
