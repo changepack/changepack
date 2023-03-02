@@ -12,7 +12,7 @@ class ToggleComponent < ApplicationComponent
   end
 
   def toggle
-    div class: 'relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in' do
+    div(**wrapper_classes) do
       input(
         class: toggle_class,
         type: 'checkbox',
@@ -24,6 +24,10 @@ class ToggleComponent < ApplicationComponent
     end
   end
 
+  def wrapper_classes
+    classes('relative inline-block w-10 align-middle select-none transition duration-200 ease-in', label?: 'mr-2')
+  end
+
   def toggle_class
     %(
       toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4
@@ -31,9 +35,9 @@ class ToggleComponent < ApplicationComponent
     )
   end
 
-  def label_tag
-    return if label_value.blank?
+  def label? = label_value.present?
 
+  def label_tag
     label for: id, data: { test_id: 'toggle' } do
       text label_value
     end

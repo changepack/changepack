@@ -4,30 +4,33 @@ class MetadataComponent < ApplicationComponent
   attribute :changelog, Types::Instance(Changelog)
 
   def template
-    a href:, class: 'text-gray-400 text-sm', data: { turbo_frame: '_top' } do
+    wrapper class: 'text-gray-400 text-sm', data: { turbo_frame: '_top' } do
       published
       author
     end
   end
 
-  def author
-    div(class: 'mt-1') { user.name } if user.present?
+  def wrapper(**attributes, &)
+    if changelog.persisted?
+      a(href: helpers.changelog_path(changelog), **attributes, &)
+    else
+      div(**attributes, &)
+    end
   end
 
-  def href
-    helpers.changelog_path(changelog) if changelog.persisted?
+  def author
+    user.present? && div(class: 'mt-1') { user.name }
   end
 
   def published
-    date = (changelog.created || Time.current).to_date
-    text helpers.l(date, format: :long)
+    text helpers.l(created.to_date, format: :long)
   end
 
-  def new_user
-    helpers.current_user if changelog.new_record?
+  def created
+    changelog.created || Time.current
   end
 
   def user
-    @user ||= changelog.user || new_user
+    @user ||= changelog.user || helpers.current_user
   end
 end
