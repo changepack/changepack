@@ -3,7 +3,7 @@ section data-test-id="new_changelog_page"
       section
         h1.font-bold.text-4xl New changelog
 
-  = component :content do |content|
+  = render ContentComponent.new do |content|
     - content.article do
       = render 'form', changelog:, commits:
 
