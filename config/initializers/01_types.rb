@@ -1,5 +1,7 @@
 module Types
   include Dry.Types()
 
-  Relation = Types::Instance(ActiveRecord::Relation) | Types::Instance(ActiveRecord::AssociationRelation)
+  def self.Relation(model)
+    Types::Instance(ActiveRecord::Relation) | Types::Instance(ActiveRecord::AssociationRelation) | Types::Array.of(Types::Instance(model))
+  end
 end

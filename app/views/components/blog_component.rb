@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class BlogComponent < ApplicationComponent
-  attribute :changelogs, Types::Relation | Types::Array.of(Types::Instance(Changelog))
+  attribute :changelogs, Types.Relation(Changelog)
   attribute :account, Types::Instance(Account)
 
   attr_reader :pagy, :collection
