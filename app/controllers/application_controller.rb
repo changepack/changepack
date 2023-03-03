@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
     params.require(:id)
   end
 
-  def disallowed_to?(action, resource)
-    !helpers.allowed_to?(action, resource)
+  def disallowed_to?(rule, record = :__undef__, **options)
+    !helpers.allowed_to?(rule, record, **options)
   end
 end

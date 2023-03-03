@@ -15,8 +15,6 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 require 'vcr'
 # Add additional requires below this line. Rails is not loaded until this point!
-require 'view_component/test_helpers'
-require 'capybara/rspec'
 require 'action_policy/rspec'
 require 'action_policy/rspec/dsl'
 
@@ -98,8 +96,6 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include Devise::Test::IntegrationHelpers, type: :request
-  config.include ViewComponent::TestHelpers, type: :component
-  config.include Capybara::RSpecMatchers, type: :component
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

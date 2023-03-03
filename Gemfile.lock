@@ -120,15 +120,6 @@ GEM
     bullet (7.0.7)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
-    capybara (3.38.0)
-      addressable
-      matrix
-      mini_mime (>= 0.1.3)
-      nokogiri (~> 1.8)
-      rack (>= 1.6.0)
-      rack-test (>= 0.6.3)
-      regexp_parser (>= 1.5, < 3.0)
-      xpath (~> 3.2)
     coderay (1.1.3)
     concurrent-ruby (1.2.2)
     connection_pool (2.3.0)
@@ -266,7 +257,6 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.2)
-    matrix (0.4.2)
     method_source (1.0.0)
     mini_magick (4.12.0)
     mini_mime (1.1.2)
@@ -534,10 +524,6 @@ GEM
       public_suffix
     vcr (6.1.0)
     version_gem (1.1.1)
-    view_component (2.82.0)
-      activesupport (>= 5.2.0, < 8.0)
-      concurrent-ruby (~> 1.0)
-      method_source (~> 1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -552,8 +538,6 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    xpath (3.2.0)
-      nokogiri (~> 1.8)
     zeitwerk (2.6.7)
 
 PLATFORMS
@@ -571,7 +555,6 @@ DEPENDENCIES
   bootsnap
   brakeman
   bullet
-  capybara
   cypress-on-rails
   database_cleaner-active_record
   debug
@@ -633,7 +616,6 @@ DEPENDENCIES
   unparser
   validate_url
   vcr
-  view_component
   web-console
   webmock
 

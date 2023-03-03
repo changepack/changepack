@@ -3,11 +3,9 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: [
     './app/views/**/*.rb',
-    './app/components/**/*rb',
     './app/helpers/**/*.rb',
     './app/javascript/**/*.js',
     './app/views/**/*.{erb,haml,html,slim}',
-    './app/components/**/*.{erb,haml,html,slim,rb}'
   ],
   corePlugins: {
     container: false

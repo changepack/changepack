@@ -32,7 +32,7 @@ guard 'livereload' do # rubocop:disable Metrics/BlockLength
     # less: :less, # uncomment if you want LESS stylesheets done in browser
   }
 
-  rails_view_exts = %w[erb haml slim]
+  rails_view_exts = %w[erb haml slim rb]
 
   # file types LiveReload may optimize refresh for
   compiled_exts = extensions.values.uniq
@@ -52,7 +52,6 @@ guard 'livereload' do # rubocop:disable Metrics/BlockLength
 
   # file needing a full reload of the page anyway
   watch(%r{app/views/.+\.(#{rails_view_exts * '|'})$})
-  watch(%r{app/components/.+\.(#{rails_view_exts * '|'})$})
   watch(%r{app/helpers/.+\.rb})
   watch(%r{config/locales/.+\.yml})
   watch(%r{app/assets/stylesheets/.+\.css})

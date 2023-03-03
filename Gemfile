@@ -112,9 +112,6 @@ group :test do
   gem "simplecov", require: false
 
   gem "ruby_event_store-rspec"
-
-  # For testing view components
-  gem "capybara"
 end
 
 gem "slim-rails"
@@ -124,8 +121,6 @@ gem "figaro"
 gem "tailwindcss-rails"
 
 gem "prettyid", require: "pretty_id", github: "changepack/pretty_id"
-
-gem "view_component"
 
 gem "font-awesome-rails"
 
