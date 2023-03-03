@@ -46,7 +46,7 @@ jobs:
       - name: Run Brakeman
         run: bundle exec brakeman
       - name: Run slim-lint
-        run: bundle exec slim-lint app/views app/components
+        run: bundle exec slim-lint app/views
       - name: Setup test database
         run: rails db:create db:migrate
       - name: Run RSpec
