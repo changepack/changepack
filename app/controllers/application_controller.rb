@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   helper_method :current_account
+  helper_method :disallowed_to?
   helper_method :pagy_array
   helper_method :pagy
 
@@ -23,5 +24,9 @@ class ApplicationController < ActionController::Base
 
   def id
     params.require(:id)
+  end
+
+  def disallowed_to?(action, resource)
+    !helpers.allowed_to?(action, resource)
   end
 end
