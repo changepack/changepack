@@ -52,7 +52,7 @@ jobs:
       - name: Run RSpec
         run: bundle exec rspec
       - name: Run Cypress
-        uses: cypress-io/github-action@v1
+        uses: cypress-io/github-action@v5
         env:
           CYPRESS: true
         with:
