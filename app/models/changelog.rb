@@ -6,7 +6,7 @@ class Changelog < ApplicationRecord
   include Slug
   include Status
 
-  key :log
+  key :cl
 
   attribute :title, :string
   attribute :status, :string, default: :draft

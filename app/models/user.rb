@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   include Git
 
-  key :usr
+  key :user
 
   devise :database_authenticatable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:github]
 
