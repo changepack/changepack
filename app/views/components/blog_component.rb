@@ -57,7 +57,7 @@ class BlogComponent < ApplicationComponent
   end
 
   def pagination
-    text helpers.pagy_nav(pagy).to_s if pagy.pages > 1
+    unsafe_raw helpers.pagy_nav(pagy).to_s if pagy.pages > 1
   end
 
   def paginate!
