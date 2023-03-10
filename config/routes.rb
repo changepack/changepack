@@ -35,6 +35,10 @@ Rails.application.routes.draw do
 
   mount Sidekiq::Web => 'sidekiq'
 
+  if Rails.env.development?
+    mount Lookbook::Engine, at: "/lookbook"
+  end
+
   # Both a public and a private URL to your changelog.
   # Has to be at the end so that all other routes are matched first.
   get ':id', to: 'accounts#show', as: :account
