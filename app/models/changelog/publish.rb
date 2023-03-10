@@ -4,6 +4,10 @@ class Changelog
   module Publish
     extend ActiveSupport::Concern
 
+    included do
+      after_commit :detach, on: :update, if: :discarded_previously_changed?
+    end
+
     def publish(publishable)
       if publishable.present? && can_transition_to?(:published)
         transition_to!(:published)
@@ -20,7 +24,7 @@ class Changelog
 
     def detach(except: [])
       commits.where.not(id: except)
-             .find_each { |commit| commit.update!(changelog: nil) }
+             .find_each { |commit| commit.update!(changelog_id: nil) }
     end
   end
 end
