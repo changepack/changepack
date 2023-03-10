@@ -6,7 +6,7 @@ class Publication
 
   attribute :title, :string
   attribute :content, :string
-  attribute :published, :boolean
+  attribute :published, :boolean, default: false
   attribute :commits, array: true, default: -> { [] }
   attribute :changelog
   attribute :account
@@ -14,7 +14,7 @@ class Publication
 
   def update!
     Changelog.transaction do
-      changelog.update(title:, content:, account:, user:)
+      changelog.update(content: completion, title:, account:, user:)
       changelog.publish(published)
       changelog.detach(except: commits)
       changelog.attach(commits)
@@ -22,4 +22,18 @@ class Publication
   end
 
   alias create! update!
+
+  private
+
+  def completion
+    if content.present? || commits.none?
+      content
+    else
+      Sydney.new(account:).hallucinate(changes)
+    end
+  end
+
+  def changes
+    account.commits.where(id: commits).pluck(:message)
+  end
 end
