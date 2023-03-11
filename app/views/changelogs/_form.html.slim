@@ -1,24 +1,17 @@
-= form_with(model: changelog, class: 'contents') do |form|
+= form_with(model: changelog, class: 'form contents') do |form|
   .mb-5
-    = form.text_field :title, class: changelog.title_field_class, \
-                              placeholder: 'Title', \
-                              data: { test_id: 'title' }
+    = form.text_field :title, class: changelog.title_field_class, placeholder: 'Title', data: { test_id: 'title' }
     - changelog.errors.full_messages_for(:title).each do |error_message|
       .text-xs.text-red-500.mt-2 = error_message
 
   .my-5
-    = form.rich_text_area :content, \
-                          class: changelog.content_field_class, \
-                          data: { test_id: 'content' }, \
-                          autofocus: true
+    = form.rich_text_area :content, class: changelog.content_field_class, data: { test_id: 'content' }, autofocus: true
     - changelog.errors.full_messages_for(:content).each do |error_message|
       .text-xs.text-red-500.mt-2 = error_message
 
   .columns-2
     .column
-      = form.button class: 'button-1', \
-                    type: 'submit', \
-                    data: { test_id: 'submit' } do
+      = form.button class: 'button-1', type: 'submit', data: { test_id: 'submit' } do
         = icon 'save', class: 'mr-2'
         | Save changelog
       = link_to 'Cancel', changelog, class: 'ml-2 button-3'
@@ -38,16 +31,12 @@
           section.overflow-x-scroll.max-h-80
             - commits.each do |commit|
               .mb-3
-                = form.check_box :commits, \
-                                 *commit.checkbox_options(changelog)
+                = form.check_box :commits, *commit.checkbox_options(changelog)
 
                 label for=commit.id class="ml-2"
                   abbr.no-underline title=commit.message
                     - if commit.disabled?(changelog)
-                      = link_to commit.changelog, \
-                                target: '_blank', \
-                                rel: 'noopener', \
-                                data: { turbo_frame: '_top' } do
+                      = link_to commit.changelog, target: '_blank', rel: 'noopener', data: { turbo_frame: '_top' } do
                         strike.dimmed
                           = commit.abbr
                     - else

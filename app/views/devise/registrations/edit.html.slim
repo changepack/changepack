@@ -16,16 +16,17 @@ section data-test-id="edit_user"
           = render 'devise/shared/error_messages', resource:
 
           .field
-            = f.label :email, class: 'label'
-            = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'text-field'
+            = f.label :email, class: 'label' do
+              | Email address
+            = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'input'
 
           .field
             = f.label :name, class: 'label'
-            = f.text_field :name, autofocus: true, class: 'text-field'
+            = f.text_field :name, autofocus: true, class: 'input'
 
           .field
             = f.label :password, class: 'label'
-            = f.password_field :password, autocomplete: 'new-password', class: 'text-field'
+            = f.password_field :password, autocomplete: 'new-password', class: 'input'
 
             p.help
               ' Leave blank if you don't want to change it
@@ -37,11 +38,11 @@ section data-test-id="edit_user"
 
           .field
             = f.label :password_confirmation, class: 'label'
-            = f.password_field :password_confirmation, autocomplete: 'new-password', class: 'text-field'
+            = f.password_field :password_confirmation, autocomplete: 'new-password', class: 'input'
 
           .field
             = f.label :current_password, class: 'label'
-            = f.password_field :current_password, autocomplete: 'current-password', class: 'text-field'
+            = f.password_field :current_password, autocomplete: 'current-password', class: 'input'
             p.help
               ' We need your current password to confirm your changes
 
@@ -57,12 +58,12 @@ section data-test-id="edit_user"
           = f.fields_for :account do |field|
             .field
               = field.label :name, 'Company name', class: 'label'
-              = field.text_field :name, class: 'text-field'
+              = field.text_field :name, class: 'input'
 
             .field
               = field.label :description, 'Company description', class: 'label'
               .mt-2
-                = field.text_area :description, rows: 3, class: 'text-area'
+                = field.text_area :description, rows: 3, class: 'prose input'
               p.help
                 ' This field helps our AI learn what your company does
 
