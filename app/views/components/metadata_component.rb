@@ -4,7 +4,7 @@ class MetadataComponent < ApplicationComponent
   attribute :changelog, Types::Instance(Changelog)
 
   def template
-    wrapper class: 'text-gray-400 text-sm', data: { turbo_frame: '_top' } do
+    wrapper class: 'dimmed text-sm', data: { turbo_frame: '_top' } do
       published
       author
     end

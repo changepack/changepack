@@ -13,7 +13,7 @@ class BlogComponent < ApplicationComponent
 
   def template
     div class: 'block md:flex md:justify-between md:items-center' do
-      section { title }
+      section(class: 'w-2/3') { title }
       compose!
     end
 
@@ -24,15 +24,18 @@ class BlogComponent < ApplicationComponent
   def title
     a href: account_path(account) do
       h1(class: 'font-bold text-4xl') { text 'Changelog' }
-      h2(class: 'mt-3') do
-        text 'New updates and improvements'
-
-        if account.name?
-          whitespace
-          text "to #{account.name}"
-        end
-      end
+      h2(class: 'mt-3') { title_text }
+      account.description? && div(class: 'mt-1 text-sm dimmed') { text account.description }
     end
+  end
+
+  def title_text
+    text 'New updates and improvements'
+
+    return if account.name.blank?
+
+    whitespace
+    text "to #{account.name}"
   end
 
   def compose!

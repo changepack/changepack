@@ -48,7 +48,7 @@
                                 target: '_blank', \
                                 rel: 'noopener', \
                                 data: { turbo_frame: '_top' } do
-                        strike.text-gray-400
+                        strike.dimmed
                           = commit.abbr
                     - else
                       = commit.abbr
@@ -62,6 +62,6 @@
                     span.tag.ml-2
                       = commit.author.name
 
-                    span.text-xs.text-gray-400.ml-3
+                    span.text-xs.dimmed.ml-3
                       = l(commit.commited, format: :long)
             .-mt-3

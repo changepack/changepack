@@ -8,7 +8,7 @@ section data-test-id="edit_user"
     = render ContentComponent.new do |content|
       - content.sidebar do
           h3.text-base.font-semibold.leading-6 Profile
-          p.mt-1.text-sm.text-gray-400
+          p.mt-1.text-sm.dimmed
             ' Change your email or password to keep
             ' your account information up-to-date
 
@@ -24,11 +24,11 @@ section data-test-id="edit_user"
             = f.label :password, class: 'label'
             = f.password_field :password, autocomplete: 'new-password', class: 'text-field'
 
-            p.mt-2.text-sm.text-gray-400
+            p.mt-2.text-sm.dimmed
               ' Leave blank if you don't want to change it
 
             - if @minimum_password_length
-              p.mt-2.text-sm.text-gray-400
+              p.mt-2.text-sm.dimmed
                 = @minimum_password_length
                 |  characters minimum
 
@@ -39,13 +39,13 @@ section data-test-id="edit_user"
           .col-span-6.sm:col-span-4
             = f.label :current_password, class: 'label'
             = f.password_field :current_password, autocomplete: 'current-password', class: 'text-field'
-            p.mt-2.text-sm.text-gray-400
+            p.mt-2.text-sm.dimmed
               ' We need your current password to confirm your changes
 
     = render ContentComponent.new do |content|
       - content.sidebar do
         h3.text-base.font-semibold.leading-6 Company
-        p.mt-1.text-sm.text-gray-400
+        p.mt-1.text-sm.dimmed
           ' This information will be displayed publicly
           ' so be careful what you share
 
@@ -60,7 +60,7 @@ section data-test-id="edit_user"
               = field.label :description, 'Company description', class: 'label'
               .mt-2
                 = field.text_area :description, rows: 3, class: 'text-area'
-              p.mt-2.text-sm.text-gray-400
+              p.mt-2.text-sm.dimmed
                 ' This field helps our AI learn what your company does
 
     = render ContentComponent.new do |content|

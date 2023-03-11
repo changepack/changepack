@@ -32,7 +32,7 @@ class RepositoryComponent < ApplicationComponent
         text repository.name
       end
 
-      div(class: 'ml-2 text-gray-400') { branch }
+      div(class: 'ml-2 dimmed') { branch }
     end
   end
 
@@ -100,14 +100,14 @@ class RepositoryComponent < ApplicationComponent
     if repository.status.active?
       'text-green-500'
     else
-      'text-gray-400'
+      'dimmed'
     end
   end
 
   def branch
     icon :tag
 
-    div class: 'text-sm leading-none ml-2 text-gray-400 inline-block' do
+    div class: 'text-sm leading-none ml-2 dimmed inline-block' do
       text repository.branch
     end
   end

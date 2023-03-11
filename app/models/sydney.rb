@@ -26,6 +26,7 @@ class Sydney
   private
 
   delegate :name, to: :account, prefix: true
+  delegate :description, to: :account, prefix: true
 
   def client
     @client ||= OpenAI::Client.new
@@ -40,6 +41,8 @@ class Sydney
   end
 
   def prompt(changes)
-    I18n.t('prompt', account_name:, changes: changes.join("\n"))
+    I18n.t(
+      'prompt', account_name:, account_description:, changes: changes.join("\n")
+    )
   end
 end
