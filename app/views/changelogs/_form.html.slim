@@ -14,7 +14,7 @@
       = form.button class: 'button-1', type: 'submit', data: { test_id: 'submit' } do
         = icon 'save', class: 'mr-2'
         | Save changelog
-      = link_to 'Cancel', changelog, class: 'ml-2 button-3'
+      = link_to 'Cancel', changelog, class: 'ml-2 button-3 hidden md:inline-block'
     .column.text-right
       = render ToggleComponent.new( \
                  label_value: 'Published', \
@@ -24,7 +24,7 @@
                )
 
   - if commits.any?
-    .mt-10
+    .mt-10.hidden.md:block
       .accordion.accordion-mini
         .accordion-single
           h2 Recent changes

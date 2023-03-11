@@ -14,7 +14,7 @@ class RepositoryComponent < ApplicationComponent
 
   def wrapper(&)
     div class: 'repository', data: { test_id: 'repository' } do
-      table class: 'w-full whitespace-nowrap' do
+      table class: 'w-full' do
         tbody do
           tr class: 'focus:outline-none h-16', &
         end
@@ -32,14 +32,14 @@ class RepositoryComponent < ApplicationComponent
         text repository.name
       end
 
-      div(class: 'ml-2 dimmed') { branch }
+      div(class: 'ml-2 dimmed hidden md:block') { branch }
     end
   end
 
   def pulled
     return unless repository.pulled?
 
-    div class: 'flex items-center justify-end' do
+    div class: 'flex items-center justify-end hidden md:block' do
       span class: 'tag' do
         text "Pulled at #{pulled_at}"
       end
@@ -60,7 +60,8 @@ class RepositoryComponent < ApplicationComponent
     turbo_frame id: "stop_tracking_#{repository.id}" do
       a href: stop_path, **stop_attrs do
         icon 'trash', class: 'mr-2'
-        text 'Stop tracking'
+        span(class: 'hidden md:inline') { 'Stop tracking' }
+        span(class: 'inline md:hidden') { 'Stop' }
       end
     end
   end
@@ -69,7 +70,8 @@ class RepositoryComponent < ApplicationComponent
     turbo_frame id: "pull_commits_#{repository.id}" do
       a href: track_path, **track_attrs do
         icon 'plug', class: 'mr-2'
-        text 'Pull commits'
+        span(class: 'hidden md:inline') { 'Pull commits' }
+        span(class: 'inline md:hidden') { 'Pull' }
       end
     end
   end
@@ -80,7 +82,7 @@ class RepositoryComponent < ApplicationComponent
 
   def stop_attrs
     {
-      class: 'button-delete inline-block',
+      class: 'button-delete inline-block whitespace-nowrap',
       data: { test_id: 'stop_tracking' }
     }
   end
@@ -91,7 +93,7 @@ class RepositoryComponent < ApplicationComponent
 
   def track_attrs
     {
-      class: 'button-2 inline-block',
+      class: 'button-2 inline-block whitespace-nowrap',
       data: { test_id: 'pull_commits' }
     }
   end

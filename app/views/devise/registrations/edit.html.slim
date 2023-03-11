@@ -6,13 +6,14 @@ section data-test-id="edit_user"
   = form_for(resource, as: resource_name, url: user_registration_path, html: { method: :put, class: 'form' }) do |f|
     = render ContentComponent.new do |content|
       - content.sidebar do
+        .hidden.md:block
           h3.text-base.font-semibold.leading-6 Profile
           p.mt-1.text-sm.dimmed
             ' Change your email or password to keep
             ' your account information up-to-date
 
       - content.article do
-        .fields.ml-12
+        .fields.md:ml-12
           = render 'devise/shared/error_messages', resource:
 
           .field
@@ -48,13 +49,14 @@ section data-test-id="edit_user"
 
     = render ContentComponent.new do |content|
       - content.sidebar do
-        h3.text-base.font-semibold.leading-6 Company
-        p.mt-1.text-sm.dimmed
-          ' This information will be displayed publicly
-          ' so be careful what you share
+        .hidden.md:block
+          h3.text-base.font-semibold.leading-6 Company
+          p.mt-1.text-sm.dimmed
+            ' This information will be displayed publicly
+            ' so be careful what you share
 
       - content.article do
-        .fields.ml-12
+        .fields.md:ml-12
           = f.fields_for :account do |field|
             .field
               = field.label :name, 'Company name', class: 'label'
@@ -69,6 +71,6 @@ section data-test-id="edit_user"
 
     = render ContentComponent.new do |content|
       - content.article do
-        .fields.ml-12
+        .fields.md:ml-12
           .field
             = f.submit 'Update your account', class: 'button-1'
