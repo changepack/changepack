@@ -17,8 +17,6 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :account
 
-  validates :name, presence: true
-
   normalize :name
   normalize :email, with: %i[squish downcase]
 

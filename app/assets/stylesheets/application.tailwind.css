@@ -107,8 +107,16 @@
     @apply w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2;
   }
 
+  .form .fields {
+    @apply grid grid-cols-6 gap-6;
+  }
+
+  .form .field {
+    @apply col-span-6 sm:col-span-4;
+  }
+
   .form .label {
-    @apply block text-sm font-medium leading-6;
+    @apply block text-sm font-medium leading-6 cursor-pointer;
   }
 
   .form .text-field {
@@ -117,6 +125,10 @@
 
   .form .text-area {
     @apply mt-1 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:dimmed focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6;
+  }
+
+  .form .help {
+    @apply mt-2 text-sm dimmed;
   }
 }
 

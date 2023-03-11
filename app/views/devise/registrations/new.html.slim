@@ -1,25 +1,27 @@
-h2
-  | Sign up
-= form_for(resource, as: resource_name, \
-                     url: user_registration_path) do |f|
-  = render 'devise/shared/error_messages', resource:
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: 'email'
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      em
-        | (
-        = @minimum_password_length
-        |  characters minimum)
-    br
-    = f.password_field :password, autocomplete: 'new-password'
-  .field
-    = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, autocomplete: 'new-password'
-  .actions
-    = f.submit 'Sign up'
-= render 'devise/shared/links'
+.max-w-md.mx-auto.my-10.bg-white
+  .text-center
+    h1.my-3.text-3xl.font-semibold.text-gray-700 Create your account
+
+  .m-7
+    = form_for(resource, as: resource_name, url: user_registration_path, html: { class: 'form' }) do |f|
+      = render 'devise/shared/error_messages', resource:
+
+      .mb-6
+        = f.label :email, class: 'block mb-2 text-sm text-gray-600' do
+          | Email address
+        = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'w-full input'
+
+      .mb-6
+        = f.label :password, class: 'block mb-2 text-sm text-gray-600'
+        = f.password_field :password, autocomplete: 'password', class: 'w-full input'
+        - if @minimum_password_length
+            p.help
+              = @minimum_password_length
+              |  characters minimum
+
+      .mb-6
+        = f.label :password_confirmation, class: 'block mb-2 text-sm text-gray-600'
+        = f.password_field :password_confirmation, autocomplete: 'password', class: 'w-full input'
+
+      .mb-6
+        = f.submit 'Continue', class: 'w-full button-1 px-2 py-3'

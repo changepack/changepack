@@ -1,10 +1,9 @@
 section data-test-id="edit_user"
-  .flex.justify-between.items-center
+  .flex.justify-between.items-center data-test-id="edit_user"
       section
         h1.font-bold.text-4xl Your account
 
   = form_for(resource, as: resource_name, url: user_registration_path, html: { method: :put, class: 'form' }) do |f|
-
     = render ContentComponent.new do |content|
       - content.sidebar do
           h3.text-base.font-semibold.leading-6 Profile
@@ -13,33 +12,37 @@ section data-test-id="edit_user"
             ' your account information up-to-date
 
       - content.article do
-        .grid.grid-cols-6.gap-6.ml-12
+        .fields.ml-12
           = render 'devise/shared/error_messages', resource:
 
-          .col-span-6.sm:col-span-4
+          .field
             = f.label :email, class: 'label'
             = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'text-field'
 
-          .col-span-6.sm:col-span-4
+          .field
+            = f.label :name, class: 'label'
+            = f.text_field :name, autofocus: true, class: 'text-field'
+
+          .field
             = f.label :password, class: 'label'
             = f.password_field :password, autocomplete: 'new-password', class: 'text-field'
 
-            p.mt-2.text-sm.dimmed
+            p.help
               ' Leave blank if you don't want to change it
 
             - if @minimum_password_length
-              p.mt-2.text-sm.dimmed
+              p.help
                 = @minimum_password_length
                 |  characters minimum
 
-          .col-span-6.sm:col-span-4
+          .field
             = f.label :password_confirmation, class: 'label'
             = f.password_field :password_confirmation, autocomplete: 'new-password', class: 'text-field'
 
-          .col-span-6.sm:col-span-4
+          .field
             = f.label :current_password, class: 'label'
             = f.password_field :current_password, autocomplete: 'current-password', class: 'text-field'
-            p.mt-2.text-sm.dimmed
+            p.help
               ' We need your current password to confirm your changes
 
     = render ContentComponent.new do |content|
@@ -50,21 +53,21 @@ section data-test-id="edit_user"
           ' so be careful what you share
 
       - content.article do
-        .grid.grid-cols-6.gap-6.ml-12
+        .fields.ml-12
           = f.fields_for :account do |field|
-            .col-span-6.sm:col-span-4
+            .field
               = field.label :name, 'Company name', class: 'label'
               = field.text_field :name, class: 'text-field'
 
-            .col-span-6.sm:col-span-4
+            .field
               = field.label :description, 'Company description', class: 'label'
               .mt-2
                 = field.text_area :description, rows: 3, class: 'text-area'
-              p.mt-2.text-sm.dimmed
+              p.help
                 ' This field helps our AI learn what your company does
 
     = render ContentComponent.new do |content|
       - content.article do
-        .grid.grid-cols-6.gap-6.ml-12
-          .col-span-6.sm:col-span-4
+        .fields.ml-12
+          .field
             = f.submit 'Update your account', class: 'button-1'
