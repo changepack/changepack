@@ -1,2 +1,9 @@
+- if account.name?
+  - content_for(:title) { account.name }
+
+- if account.description?
+  - content_for(:description) do
+    meta name="description" content=account.description
+
 section data-test-id="account"
   = render BlogComponent.new(account:, changelogs:)

@@ -6,7 +6,7 @@ class ApplicationLayout < ApplicationView
   def template(&)
     doctype
     html do
-      head_tag
+      head_tag(&)
       body do
         navigation
         content(&)
@@ -14,21 +14,26 @@ class ApplicationLayout < ApplicationView
     end
   end
 
-  def head_tag
+  def head_tag(&)
     head do
-      title { 'Changepack' }
-
-      meta name: 'viewport', content: 'width=device-width,initial-scale=1'
-      meta name: 'turbo-cache-control', content: 'no-cache'
-
-      csp_meta_tag
-      csrf_meta_tags
+      title { helpers.content_for?(:title) ? yield(:title) : 'Changepack' }
+      meta_tags(&)
 
       stylesheet_link_tag 'application', data_turbo_track: 'reload'
       stylesheet_link_tag 'tailwind', data_turbo_track: 'reload'
 
       javascript_importmap_tags
     end
+  end
+
+  def meta_tags
+    meta name: 'viewport', content: 'width=device-width,initial-scale=1'
+    meta name: 'turbo-cache-control', content: 'no-cache'
+
+    yield(:description) if helpers.content_for?(:description)
+
+    csp_meta_tag
+    csrf_meta_tags
   end
 
   def navigation
