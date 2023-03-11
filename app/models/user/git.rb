@@ -8,6 +8,8 @@ class User
 
     included do
       provider :github
+      provider :github, :id
+      provider :github, :access_token
     end
 
     def git

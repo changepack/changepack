@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_account
   helper_method :disallowed_to?
+  helper_method :user_signed_out?
   helper_method :pagy_array
   helper_method :pagy
 
@@ -19,7 +20,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_account
-    @current_account ||= current_user&.account
+    @current_account ||= current_user.account if user_signed_in?
   end
 
   def id
@@ -27,6 +28,10 @@ class ApplicationController < ActionController::Base
   end
 
   def disallowed_to?(rule, record = :__undef__, **options)
-    !helpers.allowed_to?(rule, record, **options)
+    !allowed_to?(rule, record, **options)
+  end
+
+  def user_signed_out?
+    !user_signed_in?
   end
 end

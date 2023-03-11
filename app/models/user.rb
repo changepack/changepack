@@ -2,11 +2,9 @@
 
 class User < ApplicationRecord
   include Git
+  include Registration
 
   key :user
-
-  devise :database_authenticatable, :rememberable, :validatable, :registerable, :omniauthable,
-         omniauth_providers: [:github]
 
   attribute :name, :string
   attribute :email, :string
@@ -19,11 +17,4 @@ class User < ApplicationRecord
 
   normalize :name
   normalize :email, with: %i[squish downcase]
-
-  provider :github, :id
-  provider :github, :access_token
-
-  after_initialize do
-    self.account ||= Account.new if account.nil?
-  end
 end

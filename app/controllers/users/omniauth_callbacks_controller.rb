@@ -2,13 +2,8 @@
 
 module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-    before_action :authenticate_user!
-
     def github
-      current_user.lock!
-      current_user.update!(
-        providers: current_user.providers.deep_merge!(github: github_ids)
-      )
+      sign_in_from!(:github)
 
       Event.publish(
         Repository::Authorized.new(data: { user: current_user.id })
@@ -19,11 +14,16 @@ module Users
 
     private
 
-    def github_ids
-      {
-        id: auth.uid,
-        access_token: auth.credentials.token
-      }
+    def sign_in_from!(provider)
+      if user_signed_out?
+        User.from!(provider, auth).tap { |user| sign_in(user) }
+      else
+        provider = User.provider(provider, auth)
+        providers = current_user.providers.deep_merge!(provider)
+
+        current_user.lock!
+        current_user.update!(providers:)
+      end
     end
 
     def auth

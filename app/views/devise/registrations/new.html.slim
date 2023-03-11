@@ -7,12 +7,12 @@
       = render 'devise/shared/error_messages', resource:
 
       .mb-6
-        = f.label :email, class: 'block mb-2 text-sm text-gray-600' do
+        = f.label :email, class: 'label' do
           | Email address
         = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'w-full input'
 
       .mb-6
-        = f.label :password, class: 'block mb-2 text-sm text-gray-600'
+        = f.label :password, class: 'label'
         = f.password_field :password, autocomplete: 'password', class: 'w-full input'
         - if @minimum_password_length
             p.help
@@ -20,8 +20,10 @@
               |  characters minimum
 
       .mb-6
-        = f.label :password_confirmation, class: 'block mb-2 text-sm text-gray-600'
+        = f.label :password_confirmation, class: 'label'
         = f.password_field :password_confirmation, autocomplete: 'password', class: 'w-full input'
 
       .mb-6
         = f.submit 'Continue', class: 'w-full button-1 px-2 py-3'
+
+    = render 'devise/shared/links'
