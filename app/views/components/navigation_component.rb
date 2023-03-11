@@ -11,7 +11,7 @@ class NavigationComponent < ApplicationComponent
   end
 
   def wrapper(&)
-    nav class: 'bg-white drop-shadow-sm md:drop-shadow-none' do
+    nav class: 'bg-white drop-shadow-sm md:drop-shadow-none overflow-x-auto' do
       div class: 'w-full mx-auto px-3 md:px-8' do
         div class: 'flex items-center justify-between h-16' do
           div class: 'flex items-center', &

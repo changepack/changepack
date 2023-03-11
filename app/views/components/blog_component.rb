@@ -13,7 +13,7 @@ class BlogComponent < ApplicationComponent
 
   def template
     div class: 'block md:flex md:justify-between md:items-center' do
-      section(class: 'w-2/3') { title }
+      section(class: 'md:w-2/3') { title }
       compose!
     end
 
