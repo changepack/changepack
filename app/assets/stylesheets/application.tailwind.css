@@ -47,11 +47,11 @@
     @apply button-1 rounded-full;
   }
 
-  .label {
+  .tag {
     @apply rounded-full py-1 px-2.5 text-xs font-medium text-gray-500 bg-gray-100;
   }
 
-  .label-danger {
+  .tag-danger {
     @apply label bg-[#FCEDB9] text-[#A82C2B];
   }
 
@@ -101,6 +101,18 @@
 
   .checkbox {
     @apply w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2;
+  }
+
+  .form .label {
+    @apply block text-sm font-medium leading-6;
+  }
+
+  .form .text-field {
+    @apply mt-2 block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6;
+  }
+
+  .form .text-area {
+    @apply mt-1 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6;
   }
 }
 

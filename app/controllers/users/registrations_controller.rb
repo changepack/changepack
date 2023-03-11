@@ -18,7 +18,7 @@ module Users
         :password,
         :password_confirmation,
         :current_password,
-        account_attributes: %i[id name]
+        account_attributes: %i[id name description]
       )
     end
   end

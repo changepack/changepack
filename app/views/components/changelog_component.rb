@@ -42,7 +42,7 @@ class ChangelogComponent < ApplicationComponent
     return if changelog.status.published?
 
     div class: 'mb-2 -mt-1 -ml-1' do
-      span(class: 'label') { text 'Draft' }
+      span(class: 'tag') { text 'Draft' }
     end
   end
 

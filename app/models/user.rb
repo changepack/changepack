@@ -5,7 +5,8 @@ class User < ApplicationRecord
 
   key :user
 
-  devise :database_authenticatable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:github]
+  devise :database_authenticatable, :rememberable, :validatable, :registerable, :omniauthable,
+         omniauth_providers: [:github]
 
   attribute :name, :string
   attribute :email, :string

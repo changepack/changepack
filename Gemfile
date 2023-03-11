@@ -182,4 +182,4 @@ gem "phlex-rails"
 
 gem "active_record_extended"
 
-gem "ruby-openai", "~> 3.5"
+gem "ruby-openai"

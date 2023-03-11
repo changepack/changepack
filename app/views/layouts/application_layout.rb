@@ -36,6 +36,7 @@ class ApplicationLayout < ApplicationView
       navigation = NavigationComponent.new do |nav|
         nav.link_to 'Home', root_path, active: home?, if: user?
         nav.link_to 'Repositories', repositories_path, active: repositories?, if: user?
+        nav.link_to 'Your account', edit_user_registration_path, active: account?, if: user?
       end
 
       render navigation
@@ -58,6 +59,10 @@ class ApplicationLayout < ApplicationView
 
   def repositories?
     helpers.current_controller.in?(%i[repositories])
+  end
+
+  def account?
+    helpers.current_controller.in?(%i[users/registrations])
   end
 
   def user?

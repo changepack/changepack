@@ -40,7 +40,7 @@ class RepositoryComponent < ApplicationComponent
     return unless repository.pulled?
 
     div class: 'flex items-center justify-end' do
-      span class: 'label' do
+      span class: 'tag' do
         text "Pulled at #{pulled_at}"
       end
     end

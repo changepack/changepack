@@ -6,6 +6,7 @@ class Account < ApplicationRecord
   key :acc
 
   attribute :name, :string
+  attribute :description, :string
   attribute :discarded, :datetime
 
   has_many :users, dependent: :destroy
