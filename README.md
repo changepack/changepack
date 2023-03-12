@@ -1,6 +1,6 @@
 ![CI](https://github.com/changepack/changepack/actions/workflows/ci.yml/badge.svg)
 
-Changepack is an open-source changelog for your product. Share updates with your customers and keep people in the loop!
+Changepack is an open-source changelog for your product. Share updates about new features with your customers and keep people in the loop!
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
