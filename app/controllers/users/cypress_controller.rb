@@ -8,17 +8,22 @@ module Users
       return unless Rails.env.test?
 
       sign_in(user)
-      redirect_to URI.parse(params.require(:redirect_to)).path
+      redirect_to path
     end
 
     private
 
     def user
-      @user ||= if params[:email].present?
-                  User.find_by!(email: params.require(:email))
-                else
-                  User.first!
-                end
+      User.find_by(email:)
+    end
+
+    def email
+      params.require(:email)
+    end
+
+    def path
+      params.require(:redirect_to)
+            .then { |path| URI.parse(path).path }
     end
   end
 end
