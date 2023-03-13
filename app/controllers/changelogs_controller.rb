@@ -68,10 +68,9 @@ class ChangelogsController < ApplicationController
 
   def commits
     @commits ||= current_account.commits
-                                .review(changelog)
+                                .options(changelog)
                                 .includes(:repository, :changelog)
                                 .limit(100)
-                                .commited(changelog)
                                 .kept
   end
 

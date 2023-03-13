@@ -1,18 +1,24 @@
 # frozen_string_literal: true
 
 class Commit
-  module Pull
+  module Git
     extend ActiveSupport::Concern
 
+    include Provided
+
     included do
-      def self.pull(repository)
+      provider :github
+    end
+
+    class_methods do
+      def pull(repository)
         return if repository.git.blank?
 
         transaction do
-          source = Pull.source(repository)
+          source = Git.source(repository)
           repository.git
                     .commits(source, after: repository.cursor)
-                    .each { |commit| Pull.upsert!(commit, repository:) }
+                    .each { |commit| Git.upsert!(commit, repository:) }
 
           repository.update!(pulled: Time.current)
         end

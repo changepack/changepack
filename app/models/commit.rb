@@ -1,8 +1,19 @@
 # frozen_string_literal: true
 
 class Commit < ApplicationRecord
-  include Pull
-  include Provided
+  include Git
+
+  OPTIONS = lambda { |cl|
+    Arel.sql(
+      %(
+        CASE
+          WHEN commits.changelog_id = '#{cl.id}' THEN 0
+          ELSE 1
+        END,
+        commits.commited DESC
+      ).strip
+    )
+  }
 
   key :com
 
@@ -23,25 +34,5 @@ class Commit < ApplicationRecord
 
   normalize :message
 
-  provider :github
-
-  scope :review, lambda { |changelog|
-    if changelog.new_record?
-      self
-    else
-      where(changelog:).or(
-        where(account: changelog.account)
-      )
-    end
-  }
-
-  scope :commited, lambda { |changelog|
-    if changelog.new_record?
-      order(commited: :desc)
-    else
-      order(
-        Arel.sql("CASE WHEN changelog_id = '#{changelog.id}' THEN 0 ELSE 1 END, commited DESC")
-      )
-    end
-  }
+  scope :options, ->(cl) { where(changelog: [cl, nil]).order(OPTIONS.call(cl)) }
 end

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 class Commit
-  describe Pull, :vcr do
+  describe Git, :vcr do
     subject(:command) { Commit.pull(repository) }
     let(:repository) { create(:repository, providers:) }
 

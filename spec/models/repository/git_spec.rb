@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 class Repository
-  describe Pull, :vcr do
+  describe Git, :vcr do
     subject(:command) { Repository.pull(user.git, account: user.account) }
     let(:user) { create(:user) }
 
