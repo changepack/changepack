@@ -3,27 +3,41 @@
 class Provider
   class GitHub < Provider
     def repositories(after: nil)
-      paginate(after:) { client.repos }.map { |repo| Repository.map(repo) }
+      repositories = paginate(after:) { client.repos }
+      repositories.map { |repo| Repository.map(repo) }
     end
 
     def commits(repository_id, after: nil)
-      paginate(after:) { client.commits(repository_id.to_i) }.map { |commit| Commit.map(commit) }
+      commits = paginate(after:) { client.commits(repository_id.to_i) }
+      commits.map { |commit| Commit.map(commit) }
     end
 
     private
 
     def paginate(items: [], after: nil)
-      items += yield
-      next_page = client.last_response.rels[:next]&.href
-      ids = items.map(&:sha)
+      new_items = yield
+      paginated_items = items.concat(new_items)
 
-      return items if next_page.nil? || after.in?(ids)
+      if exhausted?(paginated_items, after:)
+        items
+      else
+        paginate(items: paginated_items, after:) { client.get(next_page) }
+      end
+    end
 
-      paginate(items:, after:) { client.get(next_page) }
+    def exhausted?(items, after:)
+      next_page.blank? || items.map(&:sha).include?(after)
+    end
+
+    def next_page
+      client.last_response
+            .rels
+            .fetch(:next, nil)
+            .try(:href)
     end
 
     def client
-      @client ||= Octokit::Client.new(access_token:).tap { |c| c.per_page = 100 }
+      @client ||= Octokit::Client.new(access_token:, per_page: 100)
     end
 
     class Repository < Provider::Repository
