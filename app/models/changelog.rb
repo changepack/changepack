@@ -26,7 +26,7 @@ class Changelog < ApplicationRecord
 
   inquirer :status
 
-  scope :for, ->(user) { where(!user && { status: :published }) }
+  scope :for, ->(user) { where(user.blank? && { status: :published }) }
   scope :recent, -> { order(created_at: :desc) }
 
   private
