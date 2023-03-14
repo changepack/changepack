@@ -12,7 +12,7 @@ class MetadataComponent < ApplicationComponent
 
   def wrapper(**attributes, &)
     if changelog.persisted?
-      a(href: helpers.changelog_path(changelog), **attributes, &)
+      a href: helpers.changelog_path(changelog), **attributes, &
     else
       div(**attributes, &)
     end

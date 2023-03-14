@@ -14,7 +14,7 @@ class ApplicationLayout < ApplicationView
     html do
       head_tag(&)
       body do
-        navigation(&)
+        navigation
         content(&)
       end
     end
@@ -42,11 +42,9 @@ class ApplicationLayout < ApplicationView
     csrf_meta_tags
   end
 
-  def navigation(&) # rubocop:disable Metrics/AbcSize
+  def navigation
     header class: 'w-full mx-auto' do
-      navigation = NavigationComponent.new do |nav|
-        nav.brand = brand
-
+      navigation = NavigationComponent.new(brand:) do |nav|
         nav.link_to 'Home', root_path, active: home?, if: user?
         nav.link_to 'Repositories', repositories_path, active: repositories?, if: user?
         nav.link_to 'Settings', edit_user_registration_path, active: account?, if: user?

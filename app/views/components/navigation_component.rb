@@ -3,13 +3,7 @@
 class NavigationComponent < ApplicationComponent
   include Phlex::DeferredRender
 
-  Brand = Struct.new(:name, :website, :picture) do
-    def merge(other)
-      to_h.merge(other.to_h.compact)
-    end
-  end
-
-  attr_writer :brand
+  attribute :brand, Types::Instance(Struct).optional
 
   def template
     wrapper do
@@ -82,6 +76,12 @@ class NavigationComponent < ApplicationComponent
 
     def display?
       @if
+    end
+  end
+
+  Brand = Struct.new(:name, :website, :picture) do
+    def merge(other)
+      Brand.new(*to_h.merge(other.to_h.compact).values)
     end
   end
 end

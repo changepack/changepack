@@ -2,6 +2,7 @@
 
 class RepositoryComponent < ApplicationComponent
   attribute :repository, Types::Instance(Repository)
+
   register_element :turbo_frame
 
   def template

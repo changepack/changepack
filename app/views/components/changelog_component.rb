@@ -2,6 +2,7 @@
 
 class ChangelogComponent < ApplicationComponent
   attribute :changelog, Types::Instance(Changelog)
+
   register_element :turbo_frame
 
   def template
@@ -42,7 +43,9 @@ class ChangelogComponent < ApplicationComponent
     return if changelog.status.published?
 
     div class: 'mb-2 -mt-1 -ml-1' do
-      span(class: 'tag') { text 'Draft' }
+      span class: 'tag' do
+        text 'Draft'
+      end
     end
   end
 
