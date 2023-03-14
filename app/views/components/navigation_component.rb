@@ -3,9 +3,17 @@
 class NavigationComponent < ApplicationComponent
   include Phlex::DeferredRender
 
-  Account = Struct.new(:name, :website, :picture)
+  Brand = Struct.new(:name, :website, :picture) do
+    def merge(account)
+      dup.tap do |brand|
+        brand.name = account.name if account.name.present?
+        brand.website = account.website if account.website.present?
+        brand.picture = account.picture if account.picture.present?
+      end
+    end
+  end
 
-  attr_writer :account
+  attr_writer :brand
 
   def template
     wrapper do
@@ -25,10 +33,10 @@ class NavigationComponent < ApplicationComponent
   end
 
   def logotype
-    a class: 'flex-shrink-0', href: root do
-      img src: helpers.image_path(picture), **classes('inline h-12 w-12', account_picture?: 'mr-2')
+    a class: 'flex-shrink-0', href: changepack.website do
+      img src: helpers.image_path(changepack.picture), **classes('inline h-12 w-12', brand?: 'mr-2')
       span class: 'text-gray-800.hover:text-gray-800 py-2 text-sm font-bold' do
-        text title
+        text changepack.name
       end
     end
   end
@@ -49,24 +57,16 @@ class NavigationComponent < ApplicationComponent
     @pages ||= []
   end
 
-  def root
-    account.website.presence || root_path
+  def changepack
+    @changepack ||= default_brand.merge(@brand)
   end
 
-  def picture
-    account.picture.presence || 'logo.png'
+  def default_brand
+    @default_brand ||= Brand.new('Changepack', root_path, 'logo.png')
   end
 
-  def title
-    account.name.presence || 'Changepack'
-  end
-
-  def account
-    @account ||= Account.new
-  end
-
-  def account_picture?
-    account.picture.present?
+  def brand?
+    changepack.picture != default_brand.picture
   end
 
   class Anchor < ApplicationComponent

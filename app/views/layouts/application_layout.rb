@@ -3,9 +3,9 @@
 class ApplicationLayout < ApplicationView
   include Phlex::Rails::Layout
 
-  Account = Struct.new(:name, :website, :picture)
+  Brand = Struct.new(:name, :website, :picture)
 
-  attr_reader :account
+  attr_reader :brand
 
   def template(&)
     white_label(&)
@@ -45,7 +45,7 @@ class ApplicationLayout < ApplicationView
   def navigation(&) # rubocop:disable Metrics/AbcSize
     header class: 'w-full mx-auto' do
       navigation = NavigationComponent.new do |nav|
-        nav.account = account
+        nav.brand = brand
 
         nav.link_to 'Home', root_path, active: home?, if: user?
         nav.link_to 'Repositories', repositories_path, active: repositories?, if: user?
@@ -67,7 +67,7 @@ class ApplicationLayout < ApplicationView
   end
 
   def white_label
-    @account = Account.new(
+    @brand = Brand.new(
       helpers.content_for(:account_name),
       helpers.content_for(:account_website),
       helpers.content_for(:account_picture)
