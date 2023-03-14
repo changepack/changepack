@@ -7,12 +7,15 @@ class Account < ApplicationRecord
 
   attribute :name, :string
   attribute :description, :string
+  attribute :website, :string
   attribute :discarded, :datetime
 
   has_many :users, dependent: :destroy
   has_many :changelogs, dependent: :destroy
   has_many :commits, dependent: :destroy
   has_many :repositories, dependent: :destroy
+
+  validates :website, url: true, allow_blank: true
 
   normalize :name
 

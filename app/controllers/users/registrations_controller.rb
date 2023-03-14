@@ -15,10 +15,11 @@ module Users
     def account_update_params
       params.require(:user).permit(
         :email,
+        :name,
         :password,
         :password_confirmation,
         :current_password,
-        account_attributes: %i[id name description]
+        account_attributes: %i[id name description website]
       )
     end
   end

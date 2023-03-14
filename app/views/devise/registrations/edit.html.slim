@@ -3,7 +3,8 @@ section data-test-id="edit_user"
       section
         h1.font-bold.text-4xl Your account
 
-  = form_for(resource, as: resource_name, url: user_registration_path, html: { method: :put, class: 'form' }) do |f|
+  - html = { method: :put, class: 'form', data: { turbo: false } }
+  = form_for(resource, as: resource_name, url: user_registration_path, html:) do |f|
     = render ContentComponent.new do |content|
       - content.sidebar do
         .hidden.md:block
@@ -14,20 +15,24 @@ section data-test-id="edit_user"
 
       - content.article do
         .fields.md:ml-12
-          = render 'devise/shared/error_messages', resource:
-
           .field
             = f.label :email, class: 'label' do
               | Email address
-            = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'input'
+            = f.email_field :email, autofocus: true, autocomplete: 'email', class: text_field_class(resource, :email)
+            - resource.errors.full_messages_for(:email).each do |error_message|
+              .text-xs.text-red-500.mt-2 = error_message
 
           .field
             = f.label :name, class: 'label'
-            = f.text_field :name, autofocus: true, class: 'input'
+            = f.text_field :name, class: text_field_class(resource, :name)
+            - resource.errors.full_messages_for(:name).each do |error_message|
+              .text-xs.text-red-500.mt-2 = error_message
 
           .field
             = f.label :password, class: 'label'
-            = f.password_field :password, autocomplete: 'new-password', class: 'input'
+            = f.password_field :password, autocomplete: 'new-password', class: text_field_class(resource, :password)
+            - resource.errors.full_messages_for(:password).each do |error_message|
+              .text-xs.text-red-500.mt-2 = error_message
 
             p.help
               ' Leave blank if you don't want to change it
@@ -39,11 +44,17 @@ section data-test-id="edit_user"
 
           .field
             = f.label :password_confirmation, class: 'label'
-            = f.password_field :password_confirmation, autocomplete: 'new-password', class: 'input'
+            = f.password_field :password_confirmation, autocomplete: 'new-password', \
+                                                       class: text_field_class(resource, :password_confirmation)
+            - resource.errors.full_messages_for(:password_confirmation).each do |error_message|
+              .text-xs.text-red-500.mt-2 = error_message
 
           .field
             = f.label :current_password, class: 'label'
-            = f.password_field :current_password, autocomplete: 'current-password', class: 'input'
+            = f.password_field :current_password, autocomplete: 'current-password', \
+                                                  class: text_field_class(resource, :current_password)
+            - resource.errors.full_messages_for(:current_password).each do |error_message|
+              .text-xs.text-red-500.mt-2 = error_message
             p.help
               ' We need your current password to confirm your changes
 
@@ -60,12 +71,23 @@ section data-test-id="edit_user"
           = f.fields_for :account do |field|
             .field
               = field.label :name, 'Company name', class: 'label'
-              = field.text_field :name, class: 'input'
+              = field.text_field :name, class: text_field_class(resource.account, :name)
+              - resource.account.errors.full_messages_for(:name).each do |error_message|
+                .text-xs.text-red-500.mt-2 = error_message
+
+            .field
+              = field.label :website, 'Website', class: 'label'
+              = field.text_field :website, class: text_field_class(resource.account, :website)
+              - resource.account.errors.full_messages_for(:website).each do |error_message|
+                .text-xs.text-red-500.mt-2 = error_message
 
             .field
               = field.label :description, 'Company description', class: 'label'
+              - resource.account.errors.full_messages_for(:description).each do |error_message|
+                .text-xs.text-red-500.mt-2 = error_message
               .mt-2
-                = field.text_area :description, rows: 3, class: 'prose input'
+                = field.text_area :description, rows: 3, \
+                                                class: "prose #{text_field_class(resource.account, :description)}"
               p.help
                 ' This field helps our AI learn what your company does
 
