@@ -19,7 +19,7 @@ module Users
         :password,
         :password_confirmation,
         :current_password,
-        account_attributes: %i[id name description website]
+        account_attributes: %i[id name description website picture]
       )
     end
   end

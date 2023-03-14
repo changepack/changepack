@@ -183,3 +183,5 @@ gem "phlex-rails"
 gem "active_record_extended"
 
 gem "ruby-openai"
+
+gem "file_validators"

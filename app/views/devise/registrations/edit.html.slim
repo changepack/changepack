@@ -91,6 +91,17 @@ section data-test-id="edit_user"
               p.help
                 ' This field helps our AI learn what your company does
 
+            .field
+              = field.label :picture, 'Company logo', class: 'label'
+              .mt-3.flex.items-center
+                span.inline-block.h-12.w-12.overflow-hidden.rounded-full.bg-gray-100
+                  = current_account.decorate.picture_tag
+                .ml-4
+                  = field.file_field :picture, class: 'hidden'
+                  = field.label :picture, 'Change', class: 'button-2'
+                  - resource.account.errors.full_messages_for(:picture).each do |error_message|
+                    .text-xs.text-red-500.mt-2 = error_message
+
     = render ContentComponent.new do |content|
       - content.article do
         .fields.md:ml-12
