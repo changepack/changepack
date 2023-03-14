@@ -4,11 +4,6 @@ module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     def github
       sign_in_from!(:github)
-
-      Event.publish(
-        Repository::Authorized.new(data: { user: current_user.id })
-      )
-
       redirect_to repositories_path, notice: t('devise.omniauth_callbacks.success', kind: 'GitHub')
     end
 
@@ -22,8 +17,10 @@ module Users
         providers = current_user.providers.deep_merge!(provider)
 
         current_user.lock!
-        current_user.update!(providers:)
+                    .update!(providers:)
       end
+
+      Repository.pull_async(current_user.git)
     end
 
     def auth

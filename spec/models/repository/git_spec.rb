@@ -4,7 +4,7 @@ require 'rails_helper'
 
 class Repository
   describe Git, :vcr do
-    subject(:command) { Repository.pull(user.git, account: user.account) }
+    subject(:command) { Repository.pull(user.git) }
     let(:user) { create(:user) }
 
     context 'with a GitHub integration' do

@@ -8,7 +8,11 @@ module Repositories
     let(:payload) do
       {
         event_type: 'Repository::Authorized',
-        data: { user: user.id }
+        data: {
+          provider: :github,
+          access_token: 'access_token',
+          account: user.account_id
+        }
       }
     end
 

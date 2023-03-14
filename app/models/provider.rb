@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class Provider
-  def initialize(access_token)
-    @access_token = access_token
-  end
+  include ActiveModel::Model
+  include ActiveModel::Attributes
 
-  attr_reader :access_token
+  attribute :access_token, :string
+  attribute :account, :string
 
   def repositories
     raise NoMethodError

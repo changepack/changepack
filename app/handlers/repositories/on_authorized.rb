@@ -5,15 +5,16 @@ module Repositories
     on ::Repository::Authorized
 
     def run
-      Repository.pull(git, account:)
+      Repository.pull(git)
     end
 
     private
 
-    delegate :git, :account, to: :user
+    delegate :provider, :access_token, :account, to: :data
+    delegate :data, to: :event
 
-    def user
-      @user ||= User.find(event.data.user)
+    def git
+      @git ||= Provider[provider].new(access_token:, account:)
     end
   end
 end

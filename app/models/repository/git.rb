@@ -12,18 +12,31 @@ class Repository
     end
 
     class_methods do
-      def pull(git, account:)
+      def pull(git)
         return if git.nil?
 
         transaction do
           git.repositories.each do |repository|
-            Git.upsert!(repository, git:, account:)
+            Git.upsert!(repository, git:)
           end
         end
       end
+
+      def pull_async(git)
+        Event.publish(
+          Repository::Authorized.new(
+            data: {
+              provider: git.provider,
+              access_token: git.access_token,
+              account: git.account
+            }
+          )
+        )
+      end
     end
 
-    def self.upsert!(repository, git:, account:)
+    def self.upsert!(repository, git:)
+      account_id = git.account
       providers = {
         git.provider => {
           id: repository.id,
@@ -31,7 +44,7 @@ class Repository
         }
       }
 
-      Repository.find_or_initialize_by(account:, providers:) do |repo|
+      Repository.find_or_initialize_by(account_id:, providers:) do |repo|
         repo.update!(repository.to_h)
       end
     end
@@ -50,7 +63,7 @@ class Repository
     def git
       return if providers.blank?
 
-      @git ||= Provider[provider].new(access_token)
+      @git ||= Provider[provider].new(access_token:, account: account_id)
     end
 
     def access_token

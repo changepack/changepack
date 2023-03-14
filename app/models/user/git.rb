@@ -15,7 +15,7 @@ class User
     def git
       return if providers.blank?
 
-      @git ||= Provider[provider].new(access_token)
+      @git ||= Provider[provider].new(access_token:, account: account_id)
     end
 
     def access_token
