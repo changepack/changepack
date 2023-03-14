@@ -12,8 +12,8 @@ class AccountDecorator < ApplicationDecorator
 
   def picture_tag
     if picture.blank?
-      content_tag(:svg, class: 'h-full w-full text-gray-300', fill: 'currentColor', view_box: '0 0 24 24') do
-        content_tag(:path, d: DEFAULT_PICTURE)
+      helpers.content_tag(:svg, class: 'h-full w-full text-gray-300', fill: 'currentColor', view_box: '0 0 24 24') do
+        helpers.content_tag(:path, d: DEFAULT_PICTURE)
       end
     else
       helpers.image_tag(display_picture)
