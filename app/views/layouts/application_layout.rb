@@ -8,7 +8,7 @@ class ApplicationLayout < ApplicationView
   attr_reader :brand
 
   def template(&)
-    white_label(&)
+    white_label
 
     doctype
     html do

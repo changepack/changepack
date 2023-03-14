@@ -7,7 +7,7 @@ class AccountDecorator < ApplicationDecorator
   def display_picture
     return picture if picture.blank?
 
-    picture.variant(resize_to_fill: SIZE)
+    @display_picture ||= picture.variant(resize_to_fill: SIZE)
   end
 
   def picture_tag

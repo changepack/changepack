@@ -4,12 +4,8 @@ class NavigationComponent < ApplicationComponent
   include Phlex::DeferredRender
 
   Brand = Struct.new(:name, :website, :picture) do
-    def merge(account)
-      dup.tap do |brand|
-        brand.name = account.name if account.name.present?
-        brand.website = account.website if account.website.present?
-        brand.picture = account.picture if account.picture.present?
-      end
+    def merge(other)
+      to_h.merge(other.to_h.compact)
     end
   end
 
@@ -35,7 +31,7 @@ class NavigationComponent < ApplicationComponent
   def logotype
     a class: 'flex-shrink-0', href: changepack.website do
       img src: helpers.image_path(changepack.picture), **classes('inline h-12 w-12', brand?: 'mr-2')
-      span class: 'text-gray-800.hover:text-gray-800 py-2 text-sm font-bold' do
+      span class: 'hover:text-gray-800 py-2 text-sm font-bold' do
         text changepack.name
       end
     end
