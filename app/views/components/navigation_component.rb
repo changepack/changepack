@@ -3,6 +3,10 @@
 class NavigationComponent < ApplicationComponent
   include Phlex::DeferredRender
 
+  Account = Struct.new(:name, :website, :picture)
+
+  attr_writer :account
+
   def template
     wrapper do
       logotype
@@ -21,12 +25,10 @@ class NavigationComponent < ApplicationComponent
   end
 
   def logotype
-    a class: 'flex-shrink-0', href: root_path do
-      img class: 'inline h-12 w-12', src: helpers.image_path('logo.png')
-      span class: 'text-gray-800.hover:text-gray-800.py-2.text-sm.font-bold' do
-        span class: 'text-gray-800 hover:text-gray-800 py-2 text-sm font-bold' do
-          text 'Changepack'
-        end
+    a class: 'flex-shrink-0', href: root do
+      img src: helpers.image_path(picture), **classes('inline h-12 w-12', account_picture?: 'mr-2')
+      span class: 'text-gray-800.hover:text-gray-800 py-2 text-sm font-bold' do
+        text title
       end
     end
   end
@@ -45,6 +47,26 @@ class NavigationComponent < ApplicationComponent
 
   def pages
     @pages ||= []
+  end
+
+  def root
+    account.website.presence || root_path
+  end
+
+  def picture
+    account.picture.presence || 'logo.png'
+  end
+
+  def title
+    account.name.presence || 'Changepack'
+  end
+
+  def account
+    @account ||= Account.new
+  end
+
+  def account_picture?
+    account.picture.present?
   end
 
   class Anchor < ApplicationComponent

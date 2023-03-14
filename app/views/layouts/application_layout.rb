@@ -3,12 +3,18 @@
 class ApplicationLayout < ApplicationView
   include Phlex::Rails::Layout
 
+  Account = Struct.new(:name, :website, :picture)
+
+  attr_reader :account
+
   def template(&)
+    white_label(&)
+
     doctype
     html do
       head_tag(&)
       body do
-        navigation
+        navigation(&)
         content(&)
       end
     end
@@ -36,9 +42,11 @@ class ApplicationLayout < ApplicationView
     csrf_meta_tags
   end
 
-  def navigation
+  def navigation(&) # rubocop:disable Metrics/AbcSize
     header class: 'w-full mx-auto' do
       navigation = NavigationComponent.new do |nav|
+        nav.account = account
+
         nav.link_to 'Home', root_path, active: home?, if: user?
         nav.link_to 'Repositories', repositories_path, active: repositories?, if: user?
         nav.link_to 'Settings', edit_user_registration_path, active: account?, if: user?
@@ -56,6 +64,14 @@ class ApplicationLayout < ApplicationView
 
       yield
     end
+  end
+
+  def white_label
+    @account = Account.new(
+      helpers.content_for(:account_name),
+      helpers.content_for(:account_website),
+      helpers.content_for(:account_picture)
+    )
   end
 
   def home?
