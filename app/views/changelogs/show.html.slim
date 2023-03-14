@@ -1,7 +1,4 @@
-- if current_account != changelog.account
-  - content_for(:account_name) { changelog.account.name }
-  - content_for(:account_website) { changelog.account.website }
-  - content_for(:account_picture) { changelog.account.decorate.display_picture.url }
+- brand(changelog.account)
 
 section data-test-id="changelog_page"
   = render BlogComponent.new( \

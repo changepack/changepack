@@ -1,0 +1,8 @@
+- if current_account != account
+  - content_for(:account_name) { account.name }
+  - content_for(:account_website) { account.website }
+  - content_for(:account_picture) { account.decorate.display_picture.url }
+
+  - content_for(:title) { account.name }
+  - content_for(:description) do
+    meta name="description" content=account.description

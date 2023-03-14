@@ -14,4 +14,8 @@ module ApplicationHelper
   def text_field_class(model, field)
     "input #{'input-invalid' if model.errors.include?(field.to_sym)}"
   end
+
+  def brand(account)
+    render 'accounts/brand', account:
+  end
 end
