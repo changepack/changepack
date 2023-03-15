@@ -88,7 +88,7 @@ class ChangelogsController < ApplicationController
 
   def item
     {
-      locals: { changelog: changelog.decorate }
+      locals: { changelog: }
     }
   end
 end

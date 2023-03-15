@@ -1,7 +1,4 @@
 - brand(changelog.account)
 
 section data-test-id="changelog_page"
-  = render BlogComponent.new( \
-    account: changelog.account, \
-    changelogs: [changelog] \
-  )
+  = render BlogComponent.new(changelog:)

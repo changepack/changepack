@@ -41,7 +41,7 @@ class ToggleComponent < ApplicationComponent
     %(
       toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4
       border-gray-200 appearance-none cursor-pointer
-    )
+    ).strip
   end
 
   def label? = label_value.present?

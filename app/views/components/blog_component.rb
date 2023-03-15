@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
 class BlogComponent < ApplicationComponent
-  attribute :changelogs, Types.Relation(Changelog)
-  attribute :account, Types::Instance(Account)
+  # You can pass a changelog or a collection of changelogs
+  attribute :changelogs, Types.Relation(Changelog).optional
+  attribute :changelog, Types::Instance(Changelog).optional
+  # If not present, account will be inferred from the changelog
+  attribute :account, Types::Instance(Account).optional
 
   attr_reader :pagy, :collection
 
   def before_template
+    instance_variable_set(:@account, changelog.account) if account.nil?
     @pagy, @collection = paginate!
     super
   end
@@ -64,6 +68,8 @@ class BlogComponent < ApplicationComponent
   end
 
   def paginate!
+    instance_variable_set(:@changelogs, [changelog].compact) if changelogs.nil?
+
     if changelogs.is_a?(Array)
       helpers.pagy_array(changelogs)
     else
