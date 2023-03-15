@@ -5,6 +5,8 @@ class AccountPictureComponent < ApplicationComponent
 
   attribute :account, Types::Instance(Account)
 
+  register_element :path
+
   def template
     span class: 'inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100 text-gray-300' do
       picture
