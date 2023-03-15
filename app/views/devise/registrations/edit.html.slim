@@ -94,8 +94,7 @@ section data-test-id="edit_user"
             .field
               = field.label :picture, 'Company logo', class: 'label'
               .mt-3.flex.items-center
-                span.inline-block.h-12.w-12.overflow-hidden.rounded-full.bg-gray-100.text-gray-300
-                  = current_account.decorate.picture_tag
+                = render AccountPictureComponent.new(account: resource.account)
                 .ml-4
                   = field.file_field :picture, class: 'hidden'
                   = field.label :picture, 'Change', class: 'button-2'
