@@ -3,8 +3,6 @@
 class ChangelogComponent < ApplicationComponent
   attribute :changelog, Types::Instance(Changelog)
 
-  register_element :turbo_frame
-
   def template
     render ContentComponent.new do |content|
       content.article { body }

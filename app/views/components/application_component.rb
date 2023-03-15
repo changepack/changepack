@@ -6,6 +6,8 @@ class ApplicationComponent < Phlex::HTML
 
   extend Dry::Initializer
 
+  register_element :turbo_frame
+
   def self.attribute(name, type = nil, **opts, &)
     dry_initializer.option(name, type, **transform_opts(type, opts), &)
     self
