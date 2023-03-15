@@ -145,7 +145,7 @@ trix-editor:empty:not(:focus)::before {
 }
 
 .pagination .page.disabled {
-  @apply opacity-50;
+  @apply opacity-50 cursor-default hover:shadow-none;
 }
 
 .prose .attachment {
