@@ -16,12 +16,7 @@
         | Save changelog
       = link_to 'Cancel', changelog, class: 'ml-2 button-3 hidden md:inline-block'
     .column.text-right
-      = render ToggleComponent.new( \
-                 label_value: 'Published', \
-                 name: 'changelog[published]', \
-                 id: changelog.published_field_id, \
-                 checked: changelog.status.published? \
-               )
+      = render ToggleComponent.with(model: changelog, attribute: :published)
 
   - if commits.any?
     .mt-10.hidden.md:block

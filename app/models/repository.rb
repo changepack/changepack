@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Repository < ApplicationRecord
-  include Git
   include Events
+  include Git
 
   include Active
   include Status

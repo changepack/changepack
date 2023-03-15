@@ -25,6 +25,7 @@ class Changelog < ApplicationRecord
   normalize :title
 
   inquirer :status
+  delegate :published?, to: :status
 
   scope :for, ->(user) { where(user.blank? && { status: :published }) }
   scope :recent, -> { order(created_at: :desc) }

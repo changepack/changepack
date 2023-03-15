@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class ChangelogDecorator < ApplicationDecorator
-  def published_field_id
-    ['toggle', id].compact.join('_')
-  end
-
   def title_field_class
     h.text_field_class(self, :title)
   end

@@ -6,6 +6,15 @@ class ToggleComponent < ApplicationComponent
   attribute :checked, Types::Bool.optional
   attribute :id, Types::String, default: -> { 'toggle' }
 
+  def self.with(model:, attribute:)
+    new(
+      label_value: attribute.to_s.humanize,
+      name: "#{model.model_name.singular}[#{attribute}]",
+      id: ['toggle', model.id].compact.join('_'),
+      checked: model.public_send("#{attribute}?")
+    )
+  end
+
   def template
     toggle
     label_tag
