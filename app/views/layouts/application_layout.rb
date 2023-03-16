@@ -43,11 +43,11 @@ class ApplicationLayout < ApplicationView
   end
 
   def navigation
-    header class: 'w-full mx-auto' do
+    header class: 'lg:container mx-auto' do
       navigation = NavigationComponent.new(brand:) do |nav|
         nav.link_to 'Home', root_path, active: home?, if: user?
         nav.link_to 'Repositories', repositories_path, active: repositories?, if: user?
-        nav.link_to 'Settings', edit_user_registration_path, active: account?, if: user?
+        nav.link_to 'Settings', edit_user_registration_path, active: account?, if: user?, position: :right
       end
 
       render navigation
