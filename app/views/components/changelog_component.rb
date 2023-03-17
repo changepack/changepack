@@ -12,7 +12,6 @@ class ChangelogComponent < ApplicationComponent
 
   def body
     title
-    draft
 
     article class: 'leading-relaxed prose max-w-full' do
       text changelog.content.to_s
@@ -35,16 +34,6 @@ class ChangelogComponent < ApplicationComponent
 
   def title_class
     'text-2xl font-medium text-gray-900 title-font mb-2'
-  end
-
-  def draft
-    return if changelog.status.published?
-
-    div class: 'mb-2 -mt-1 -ml-1' do
-      span class: 'tag' do
-        text 'Draft'
-      end
-    end
   end
 
   def actions

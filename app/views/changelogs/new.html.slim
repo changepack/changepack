@@ -1,8 +1,4 @@
 section data-test-id="new_changelog_page"
-  .flex.justify-between.items-center
-      section
-        h1.font-bold.text-4xl New changelog
-
   = render ContentComponent.new do |content|
     - content.article do
       = render 'form', changelog:, commits:

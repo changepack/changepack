@@ -45,9 +45,10 @@ class ApplicationLayout < ApplicationView
   def navigation
     header class: 'lg:container mx-auto' do
       navigation = NavigationComponent.new(brand:) do |nav|
-        nav.link_to 'Home', root_path, active: home?, if: user?
-        nav.link_to 'Repositories', repositories_path, active: repositories?, if: user?
-        nav.link_to 'Settings', edit_user_registration_path, active: account?, if: user?, position: :right
+        next if helpers.user_signed_out?
+
+        nav.link_to 'Home', root_path, active: home?
+        nav.link_to 'Repositories', repositories_path, active: repositories?
       end
 
       render navigation
@@ -55,7 +56,7 @@ class ApplicationLayout < ApplicationView
   end
 
   def content
-    main class: 'lg:container mx-auto my-8 md:my-28 px-5' do
+    main class: 'lg:container mx-auto my-8 md:my-32 px-5' do
       helpers.flash.each do |type, message|
         render FlashComponent.new(type:) { text message }
       end
@@ -80,11 +81,7 @@ class ApplicationLayout < ApplicationView
     helpers.current_controller.in?(%i[repositories])
   end
 
-  def account?
-    helpers.current_controller.in?(%i[users/registrations])
-  end
-
-  def user?
+  def settings
     helpers.user_signed_in?
   end
 end

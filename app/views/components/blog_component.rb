@@ -17,7 +17,10 @@ class BlogComponent < ApplicationComponent
 
   def template
     div class: 'block md:flex md:justify-between md:items-center' do
-      section(class: 'md:w-2/3') { title }
+      section class: 'md:w-1/2' do
+        title
+      end
+
       compose!
     end
 
@@ -27,9 +30,21 @@ class BlogComponent < ApplicationComponent
 
   def title
     a href: account_path(account) do
-      h1(class: 'font-bold text-4xl') { text 'Changelog' }
-      h2(class: 'mt-3') { title_text }
-      account.description? && div(class: 'mt-1 text-sm dimmed') { text account.description }
+      h1 class: 'font-semibold text-5xl' do
+        text 'Changelog'
+      end
+
+      h2(class: 'mt-8') do
+        title_text
+      end
+
+      account.description? && description
+    end
+  end
+
+  def description
+    div class: 'mt-2 text-sm dimmed' do
+      text account.description
     end
   end
 
@@ -55,7 +70,7 @@ class BlogComponent < ApplicationComponent
 
   def posts
     section class: 'overflow-hidden', id: 'changelogs' do
-      div class: 'py-10 md:py-24' do
+      div class: 'py-12 md:py-32' do
         div class: '-my-8 divide-y-2 divide-gray-100' do
           render collection if collection.present?
         end

@@ -7,6 +7,7 @@ class MetadataComponent < ApplicationComponent
     wrapper class: 'dimmed text-sm', data: { turbo_frame: '_top' } do
       published
       author
+      draft
     end
   end
 
@@ -15,6 +16,16 @@ class MetadataComponent < ApplicationComponent
       a href: helpers.changelog_path(changelog), **attributes, &
     else
       div(**attributes, &)
+    end
+  end
+
+  def draft
+    return if changelog.status.published?
+
+    div class: 'mt-4' do
+      span class: 'tag' do
+        text 'Draft'
+      end
     end
   end
 
