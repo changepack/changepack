@@ -23,15 +23,15 @@ class RepositoryComponent < ApplicationComponent
 
   def name
     div class: 'flex items-center pl-5' do
-      div class: 'mr-4' do
-        icon :circle, class: status_class
-      end
+      icon :circle, class: status_class
 
-      div class: 'text-base font-medium leading-none mr-2' do
+      div class: 'text-base font-medium leading-none ml-4 mr-2' do
         text repository.name
       end
 
-      div(class: 'ml-2 dimmed hidden md:block') { branch }
+      div class: 'ml-2 dimmed hidden md:block' do
+        branch
+      end
     end
   end
 

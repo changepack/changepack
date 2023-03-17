@@ -34,7 +34,7 @@ class BlogComponent < ApplicationComponent
         text 'Changelog'
       end
 
-      h2(class: 'mt-8') do
+      h2 class: 'mt-8' do
         title_text
       end
 
