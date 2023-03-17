@@ -46,8 +46,8 @@ class NavigationComponent < ApplicationComponent
 
     a href: helpers.edit_user_registration_path, class: 'ml-auto', title: 'Settings' do
       div class: 'flex items-center' do
-        icon 'cog', **classes('text-gray-400 mr-2', account?: 'text-orange-900')
-        img src: helpers.image_path(changepack.picture), class: 'inline h-7 w-7 rounded-full mr-2'
+        icon 'cog', **classes('text-gray-400 mr-2', account?: 'bg-orange-900 text-white rounded-full p-2')
+        render AccountPictureComponent.new(account: helpers.current_account)
       end
     end
   end
@@ -65,7 +65,7 @@ class NavigationComponent < ApplicationComponent
   end
 
   def changepack
-    @changepack ||= default_brand.merge(@brand)
+    @changepack ||= default_brand.merge(brand)
   end
 
   def default_brand
