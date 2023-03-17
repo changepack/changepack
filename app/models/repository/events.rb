@@ -5,13 +5,13 @@ class Repository
     extend ActiveSupport::Concern
 
     class Outdated < Event
-      attribute :repository, Types::String
+      attribute :repository_id, Types::String
     end
 
     class Authorized < Event
       attribute :provider, Types::Coercible::String
       attribute :access_token, Types::String
-      attribute :account, Types::String
+      attribute :account_id, Types::String
     end
   end
 end

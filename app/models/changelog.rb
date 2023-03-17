@@ -10,7 +10,6 @@ class Changelog < ApplicationRecord
 
   attribute :title, :string
   attribute :status, :string, default: :draft
-  attribute :discarded, :datetime
 
   belongs_to :user, optional: true
   belongs_to :account

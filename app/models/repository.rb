@@ -13,7 +13,6 @@ class Repository < ApplicationRecord
   attribute :branch, :string
   attribute :pulled, :datetime
   attribute :status, :string, default: :inactive
-  attribute :discarded, :datetime
 
   belongs_to :account
   has_many :commits, dependent: :destroy

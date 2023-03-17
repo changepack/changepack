@@ -10,11 +10,11 @@ module Repositories
 
     private
 
-    delegate :provider, :access_token, :account, to: :data
+    delegate :provider, :access_token, :account_id, to: :data
     delegate :data, to: :event
 
     def git
-      @git ||= Provider[provider].new(access_token:, account:)
+      @git ||= Provider[provider].new(access_token:, account_id:)
     end
   end
 end

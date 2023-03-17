@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_14_190953) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_17_212708) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,10 +19,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_190953) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
-    t.datetime "discarded"
+    t.datetime "discarded_at"
     t.string "description"
     t.string "website"
-    t.index ["discarded"], name: "index_accounts_on_discarded"
+    t.index ["discarded_at"], name: "index_accounts_on_discarded_at"
     t.index ["slug"], name: "index_accounts_on_slug", unique: true
   end
 
@@ -84,9 +84,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_190953) do
     t.string "user_id"
     t.string "account_id"
     t.string "slug"
-    t.datetime "discarded"
+    t.datetime "discarded_at"
     t.index ["account_id"], name: "index_changelogs_on_account_id"
-    t.index ["discarded"], name: "index_changelogs_on_discarded"
+    t.index ["discarded_at"], name: "index_changelogs_on_discarded_at"
     t.index ["slug"], name: "index_changelogs_on_slug", unique: true
     t.index ["user_id"], name: "index_changelogs_on_user_id"
   end
@@ -94,18 +94,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_190953) do
   create_table "commits", id: :string, force: :cascade do |t|
     t.text "message", null: false
     t.string "url", null: false
-    t.datetime "commited", null: false
+    t.datetime "commited_at", null: false
     t.jsonb "author", default: {}, null: false
     t.string "account_id"
     t.string "repository_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "changelog_id"
-    t.datetime "discarded"
+    t.datetime "discarded_at"
     t.jsonb "providers", default: {}, null: false
     t.index ["account_id"], name: "index_commits_on_account_id"
     t.index ["changelog_id"], name: "index_commits_on_changelog_id"
-    t.index ["discarded"], name: "index_commits_on_discarded"
+    t.index ["discarded_at"], name: "index_commits_on_discarded_at"
     t.index ["repository_id"], name: "index_commits_on_repository_id"
   end
 
@@ -151,10 +151,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_190953) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "pulled"
-    t.datetime "discarded"
+    t.datetime "discarded_at"
     t.jsonb "providers", default: {}, null: false
     t.index ["account_id"], name: "index_repositories_on_account_id"
-    t.index ["discarded"], name: "index_repositories_on_discarded"
+    t.index ["discarded_at"], name: "index_repositories_on_discarded_at"
   end
 
   create_table "repository_transitions", id: :string, force: :cascade do |t|

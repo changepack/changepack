@@ -11,7 +11,7 @@ module Repositories
         data: {
           provider: :github,
           access_token: 'access_token',
-          account: user.account_id
+          account_id: user.account_id
         }
       }
     end

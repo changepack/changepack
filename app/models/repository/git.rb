@@ -28,7 +28,7 @@ class Repository
             data: {
               provider: git.provider,
               access_token: git.access_token,
-              account: git.account
+              account_id: git.account_id
             }
           )
         )
@@ -36,7 +36,7 @@ class Repository
     end
 
     def self.upsert!(repository, git:)
-      account_id = git.account
+      account_id = git.account_id
       providers = {
         git.provider => {
           id: repository.id,
@@ -54,16 +54,16 @@ class Repository
     end
 
     def cursor
-      @cursor ||= commits.select { |commit| commit.commited > 1.month.ago }
-                         .sort_by(&:commited)
+      @cursor ||= commits.select { |commit| commit.commited_at > 1.month.ago }
+                         .sort_by(&:commited_at)
                          .reverse
-                         .pick(:commited)
+                         .pick(:commited_at)
     end
 
     def git
       return if providers.blank?
 
-      @git ||= Provider[provider].new(access_token:, account: account_id)
+      @git ||= Provider[provider].new(access_token:, account_id:)
     end
 
     def access_token

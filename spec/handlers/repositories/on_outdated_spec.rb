@@ -9,7 +9,7 @@ module Repositories
     let(:payload) do
       {
         event_type: 'Repository::Outdated',
-        data: { repository: repository.id }
+        data: { repository_id: repository.id }
       }
     end
 

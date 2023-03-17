@@ -5,7 +5,7 @@ class Provider
   include ActiveModel::Attributes
 
   attribute :access_token, :string
-  attribute :account, :string
+  attribute :account_id, :string
 
   def repositories
     raise NoMethodError
@@ -53,7 +53,7 @@ class Provider
     attribute :sha, Types::String
     attribute :message, Types::String
     attribute :url, Types::String
-    attribute :commited, Types::Time
+    attribute :commited_at, Types::Time
     attribute :author do
       attribute :name, Types::String
       attribute :email, Types::String
@@ -63,7 +63,7 @@ class Provider
       {
         message:,
         url:,
-        commited:,
+        commited_at:,
         author: { name: author.name, email: author.email }
       }
     end

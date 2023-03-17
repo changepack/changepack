@@ -56,7 +56,7 @@ class Provider
           sha: commit.sha,
           message: commit.commit.message,
           url: commit.html_url,
-          commited: commit.commit.author.date,
+          commited_at: commit.commit.author.date,
           author: {
             name: commit.commit.author.name,
             email: commit.commit.author.email

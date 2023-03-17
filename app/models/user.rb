@@ -8,7 +8,6 @@ class User < ApplicationRecord
 
   attribute :name, :string
   attribute :email, :string
-  attribute :discarded, :datetime
 
   belongs_to :account
   has_many :changelogs, dependent: :nullify

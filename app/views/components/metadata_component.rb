@@ -5,7 +5,7 @@ class MetadataComponent < ApplicationComponent
 
   def template
     wrapper class: 'dimmed text-sm', data: { turbo_frame: '_top' } do
-      published
+      published_at
       author
       draft
     end
@@ -33,12 +33,12 @@ class MetadataComponent < ApplicationComponent
     user.present? && div(class: 'mt-1') { user.name }
   end
 
-  def published
-    text helpers.l(created.to_date, format: :long)
+  def published_at
+    text helpers.l(created_at.to_date, format: :long)
   end
 
-  def created
-    changelog.created || Time.current
+  def created_at
+    changelog.created_at || Time.current
   end
 
   def user

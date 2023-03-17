@@ -5,7 +5,7 @@ class Changelog
     extend ActiveSupport::Concern
 
     included do
-      after_commit :detach, on: :update, if: :discarded_previously_changed?
+      after_commit :detach, on: :update, if: :discarded_at_previously_changed?
     end
 
     def publish(publishable)
