@@ -44,9 +44,20 @@ class NavigationComponent < ApplicationComponent
   def edit_user_registration
     return if helpers.user_signed_out?
 
-    a href: helpers.edit_user_registration_path, class: 'ml-auto', title: 'Settings' do
+    edit_user_registration_sm
+    edit_user_registration_md
+  end
+
+  def edit_user_registration_sm
+    a href: helpers.edit_user_registration_path, **classes('tab inline md:hidden', account?: 'tab-active') do
+      text 'Settings'
+    end
+  end
+
+  def edit_user_registration_md
+    a href: helpers.edit_user_registration_path, class: 'ml-auto hidden md:inline', title: 'Settings' do
       div class: 'flex items-center' do
-        icon 'cog', **classes('text-gray-400 mr-2', account?: 'bg-orange-900 text-white rounded-full p-2')
+        icon 'cog', **classes('text-gray-400 mr-2 p-2', account?: 'bg-orange-900 text-white rounded-full')
         render AccountPictureComponent.new(account: helpers.current_account)
       end
     end

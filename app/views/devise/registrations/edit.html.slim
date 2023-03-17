@@ -1,7 +1,7 @@
 section data-test-id="edit_user"
-  .flex.justify-between.items-center.mb-12 data-test-id="edit_user"
+  .flex.justify-between.items-center.md:mb-12 data-test-id="edit_user"
       section
-        h1.font-semibold.text-5xl Your account
+        h1.font-semibold.text-4xl Your account
 
   - html = { method: :put, class: 'form', data: { turbo: false } }
   = form_for(resource, as: resource_name, url: user_registration_path, html:) do |f|
@@ -18,7 +18,7 @@ section data-test-id="edit_user"
           .field
             = f.label :email, class: 'label' do
               | Email address
-            = f.email_field :email, autofocus: true, autocomplete: 'email', class: text_field_class(resource, :email)
+            = f.email_field :email, autocomplete: 'email', class: text_field_class(resource, :email)
             - resource.errors.full_messages_for(:email).each do |error_message|
               .text-xs.text-red-500.mt-2 = error_message
 
