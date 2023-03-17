@@ -2,7 +2,11 @@
 
 Changepack is an open-source changelog for your product. Share updates about new features with your customers and keep people in the loop!
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+<a href="https://render.com/deploy?repo=https://github.com/changepack/changepack">
+  <img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render" height="32">
+</a>
+<!-- HTML is required to rescale the image so that the button isn’t bigger than Heroku’s -->
 
 # Features
 

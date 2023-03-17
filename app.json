@@ -11,11 +11,11 @@
   "success_url": "/",
   "env": {
     "RACK_ENV": {
-      "description": "Environment for rack middleware.",
+      "description": "Environment for Rack middleware.",
       "value": "production"
     },
     "RAILS_ENV": {
-      "description": "Environment for rails middleware.",
+      "description": "Environment for Rails middleware.",
       "value": "production"
     },
     "APP_HOST": {
@@ -27,8 +27,48 @@
       "value": "80"
     },
     "REDIS_OPENSSL_VERIFY_MODE":{
-      "description": "OpenSSL verification mode for Redis connections. ref https://help.heroku.com/HC0F8CUS/redis-connection-issues",
+      "description": "OpenSSL verification mode for Redis connections. Ref: https://help.heroku.com/HC0F8CUS/redis-connection-issues",
       "value": "none"
+    },
+    "GITHUB_KEY": {
+      "description": "GitHub OAuth key for authentication.",
+      "value": "example"
+    },
+    "GITHUB_SECRET": {
+      "description": "GitHub OAuth secret for authentication.",
+      "value": "example"
+    },
+    "AWS_ACCESS_KEY_ID": {
+      "description": "AWS access key for ActiveStorage.",
+      "value": "example"
+    },
+    "AWS_SECRET_ACCESS_KEY": {
+      "description": "AWS secret key for ActiveStorage.",
+      "value": "example"
+    },
+    "AWS_REGION": {
+      "description": "AWS region for ActiveStorage.",
+      "value": "example"
+    },
+    "AWS_BUCKET": {
+      "description": "AWS bucket for ActiveStorage.",
+      "value": "example"
+    },
+    "ACTIVE_STORAGE_SERVICE": {
+      "description": "Active Storage service.",
+      "value": "amazon"
+    },
+    "OPENAI_ACCESS_TOKEN": {
+      "description": "OpenAI API access token.",
+      "value": "example"
+    },
+    "SIDEKIQ_USER": {
+      "description": "Sidekiq username for basic auth.",
+      "value": "example"
+    },
+    "SIDEKIQ_PASSWORD": {
+      "description": "Sidekiq password for basic auth.",
+      "value": "example"
     }
   },
   "formation": {

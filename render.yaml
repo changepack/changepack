@@ -1,0 +1,79 @@
+services:
+  - type: web
+    name: changepack-web
+    env: ruby
+    buildCommand: "bundle install --jobs=4 --retry=3 && yarn install && bundle exec rake assets:precompile"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: RACK_ENV
+        value: production
+      - key: RAILS_ENV
+        value: production
+      - key: APP_HOST
+        value: example.com
+      - key: APP_PORT
+        value: 80
+      - key: REDIS_OPENSSL_VERIFY_MODE
+        value: none
+      - key: GITHUB_KEY
+        value: example
+      - key: GITHUB_SECRET
+        value: example
+      - key: AWS_ACCESS_KEY_ID
+        value: example
+      - key: AWS_SECRET_ACCESS_KEY
+        value: example
+      - key: AWS_REGION
+        value: example
+      - key: AWS_BUCKET
+        value: example
+      - key: ACTIVE_STORAGE_SERVICE
+        value: amazon
+      - key: OPENAI_ACCESS_TOKEN
+        value: example
+      - key: SIDEKIQ_USER
+        value: example
+      - key: SIDEKIQ_PASSWORD
+        value: example
+  - type: worker
+    name: changepack-worker
+    env: ruby
+    startCommand: "bundle exec sidekiq -C config/sidekiq.yml"
+    envVars:
+      - key: RACK_ENV
+        value: production
+      - key: RAILS_ENV
+        value: production
+      - key: APP_HOST
+        value: example.com
+      - key: APP_PORT
+        value: 80
+      - key: REDIS_OPENSSL_VERIFY_MODE
+        value: none
+      - key: GITHUB_KEY
+        value: example
+      - key: GITHUB_SECRET
+        value: example
+      - key: AWS_ACCESS_KEY_ID
+        value: example
+      - key: AWS_SECRET_ACCESS_KEY
+        value: example
+      - key: AWS_REGION
+        value: example
+      - key: AWS_BUCKET
+        value: example
+      - key: ACTIVE_STORAGE_SERVICE
+        value: amazon
+      - key: OPENAI_ACCESS_TOKEN
+        value: example
+      - key: SIDEKIQ_USER
+        value: example
+      - key: SIDEKIQ_PASSWORD
+        value: example
+
+databases:
+  - name: changepack-postgres
+    type: postgres
+
+  - name: changepack-redis
+    type: redis
