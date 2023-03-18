@@ -195,5 +195,6 @@ end
 module Dry
   class Struct
     extend T::Sig
+    include T::Changepack::ClassMethods
   end
 end
