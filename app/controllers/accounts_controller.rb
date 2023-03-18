@@ -15,10 +15,12 @@ class AccountsController < ApplicationController
 
   private
 
+  sig { returns(Account) }
   def account
     @account ||= Account.kept.friendly.find(id)
   end
 
+  sig { returns(T::Changelog.relation) }
   def changelogs
     @changelogs ||= account.changelogs
                            .for(current_user)

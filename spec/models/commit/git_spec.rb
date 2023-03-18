@@ -18,7 +18,7 @@ class Commit
       end
 
       context 'with a token' do
-        let(:providers) { { github: { id: '1', access_token: 'access_token' } } }
+        let(:providers) { { github: { id: 1, access_token: 'access_token' } } }
 
         it 'upserts repositories' do
           expect { command }.to change(repository.commits, :count)

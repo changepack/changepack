@@ -63,12 +63,13 @@ class Repository
       Commit.pull(self)
     end
 
-    sig { returns T.nilable(ActiveSupport::TimeWithZone) }
+    sig { returns T::Integer.nilable }
     def cursor
       @cursor ||= commits.select { |commit| commit.commited_at > 1.month.ago }
                          .sort_by(&:commited_at)
                          .reverse
                          .pick(:commited_at)
+                         .try(:to_i)
     end
 
     sig { returns T::Provider.nilable }

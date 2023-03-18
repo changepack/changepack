@@ -4,7 +4,7 @@
 class Provider
   class GitHub < Provider
     Result = T.type_alias { T.any(Provider::Repository, Provider::Commit) }
-    Cursor = T.type_alias { T::String.nilable }
+    Cursor = T.type_alias { T::Integer.nilable }
 
     sig { params(after: Cursor).returns T::Array[Provider::Repository] }
     def repositories(after: nil)
@@ -12,9 +12,9 @@ class Provider
       repositories.map { |repo| Repository.map(repo) }
     end
 
-    sig { params(repository_id: String, after: Cursor).returns T::Array[Provider::Commit] }
+    sig { params(repository_id: Integer, after: Cursor).returns T::Array[Provider::Commit] }
     def commits(repository_id, after: nil)
-      commits = paginate(after:) { client.commits(repository_id.to_i) }
+      commits = paginate(after:) { client.commits(repository_id) }
       commits.map { |commit| Commit.map(commit) }
     end
 

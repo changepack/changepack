@@ -18,6 +18,16 @@ module T
       def array
         ::T::Array[superclass]
       end
+
+      def relation
+        T.any(
+          superclass::const_get(:ActiveRecord_Associations_CollectionProxy),
+          superclass::const_get(:ActiveRecord_Relation),
+          ActiveRecord::AssociationRelation,
+          ActiveRecord::Relation,
+          ::T::Array[superclass]
+        )
+      end
     end
   end
 

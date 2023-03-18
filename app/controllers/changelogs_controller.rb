@@ -58,21 +58,23 @@ class ChangelogsController < ApplicationController
 
   private
 
-  def set_new_changelog
-    authorize!
-    @changelog = Changelog.new
-  end
-
+  sig { returns(Changelog) }
   def changelog
     @changelog ||= Changelog.kept.friendly.find(id)
   end
 
+  sig { returns(T::Commit.relation) }
   def commits
     @commits ||= current_account.commits
                                 .options(changelog)
                                 .includes(:repository, :changelog)
                                 .limit(100)
                                 .kept
+  end
+
+  def set_new_changelog
+    authorize!
+    @changelog = Changelog.new
   end
 
   def permitted

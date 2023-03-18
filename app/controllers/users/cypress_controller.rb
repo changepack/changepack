@@ -14,14 +14,17 @@ module Users
 
     private
 
+    sig { returns(User) }
     def user
       User.find_by(email:)
     end
 
+    sig { returns(String) }
     def email
       params.require(:email)
     end
 
+    sig { returns(String) }
     def path
       params.require(:redirect_to)
             .then { |path| URI.parse(path).path }

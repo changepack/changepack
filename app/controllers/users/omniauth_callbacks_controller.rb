@@ -10,6 +10,7 @@ module Users
 
     private
 
+    sig { params(provider: Symbol).returns(T::Boolean) }
     def sign_in_from!(provider)
       if user_signed_out?
         User.from!(provider, auth).tap { |user| sign_in(user) }
@@ -24,10 +25,12 @@ module Users
       Repository.pull_async(current_user.git)
     end
 
+    sig { returns(OmniAuth::AuthHash) }
     def auth
       request.env['omniauth.auth']
     end
 
+    sig { returns(String) }
     def after_omniauth_failure_path_for(_)
       root_path
     end

@@ -4,6 +4,7 @@
 class ApplicationController < ActionController::Base
   prepend ActionPolicy::Draper
   include Pagy::Backend
+  extend T::Sig
 
   verify_authorized
 
