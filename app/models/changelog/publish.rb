@@ -21,14 +21,14 @@ class Changelog
       false
     end
 
-    sig { params(commits: T::Array[String]).void }
+    sig { params(commits: T::String.array).void }
     def attach(commits)
       account.commits
              .where(id: commits)
              .find_each { |commit| commit.update!(changelog: self) }
     end
 
-    sig { params(except: T::Array[String]).void }
+    sig { params(except: T::String.array).void }
     def detach(except: [])
       commits.where.not(id: except)
              .find_each { |commit| commit.update!(changelog_id: nil) }

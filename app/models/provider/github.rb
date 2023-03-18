@@ -6,7 +6,7 @@ class Provider
     extend T::Sig
 
     Result = T.type_alias { T.any(Provider::Repository, Provider::Commit) }
-    Cursor = T.type_alias { T.nilable(String) }
+    Cursor = T.type_alias { T::String.nilable }
 
     sig { params(after: Cursor).returns T::Array[Provider::Repository] }
     def repositories(after: nil)
@@ -39,7 +39,7 @@ class Provider
       next_page.blank? || items.map(&:sha).include?(after)
     end
 
-    sig { returns T.nilable(String) }
+    sig { returns T::String.nilable }
     def next_page
       client.last_response
             .rels

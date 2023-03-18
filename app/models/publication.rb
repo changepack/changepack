@@ -31,7 +31,7 @@ class Publication
 
   private
 
-  sig { returns T.nilable(String) }
+  sig { returns T::String.nilable }
   def completion
     if content.present? || commits.none?
       content
@@ -40,7 +40,7 @@ class Publication
     end
   end
 
-  sig { returns T::Array[String] }
+  sig { returns T::String.array }
   def changes
     account.commits.where(id: commits).pluck(:message)
   end

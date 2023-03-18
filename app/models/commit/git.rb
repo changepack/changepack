@@ -42,7 +42,7 @@ class Commit
       end
     end
 
-    sig { params(repository: Repository).returns T.nilable(String) }
+    sig { params(repository: Repository).returns(T::String.nilable) }
     def self.source(repository)
       case repository.provider
       when 'github'
