@@ -12,25 +12,29 @@ module T
       extend ActiveSupport::Concern
 
       class_methods do
+        def __type_target
+          superclass
+        end
+
         def |(other)
-          T.any(superclass, other)
+          T.any(__type_target, other)
         end
 
         def nilable
-          ::T.nilable(superclass)
+          ::T.nilable(__type_target)
         end
 
         def array
-          ::T::Array[superclass]
+          ::T::Array[__type_target]
         end
 
         def relation
           T.any(
-            superclass::const_get(:ActiveRecord_Associations_CollectionProxy),
-            superclass::const_get(:ActiveRecord_Relation),
+            __type_target::const_get(:ActiveRecord_Associations_CollectionProxy),
+            __type_target::const_get(:ActiveRecord_Relation),
             ActiveRecord::AssociationRelation,
             ActiveRecord::Relation,
-            ::T::Array[superclass]
+            ::T::Array[__type_target]
           )
         end
       end
@@ -59,7 +63,7 @@ module T
   module Array
     include Changepack::ClassMethods
 
-    def self.superclass
+    def self.__type_target
       self
     end
   end
@@ -67,7 +71,7 @@ module T
   module Hash
     include Changepack::ClassMethods
 
-    def self.superclass
+    def self.__type_target
       self
     end
   end
@@ -75,7 +79,7 @@ module T
   module Enumerable
     include Changepack::ClassMethods
 
-    def self.superclass
+    def self.__type_target
       self
     end
   end
@@ -83,14 +87,14 @@ module T
   module Enumerator
     include Changepack::ClassMethods
 
-    def self.superclass
+    def self.__type_target
       self
     end
 
     module Lazy
       include Changepack::ClassMethods
 
-      def self.superclass
+      def self.__type_target
         self
       end
     end
@@ -98,7 +102,7 @@ module T
     module Chain
       include Changepack::ClassMethods
 
-      def self.superclass
+      def self.__type_target
         self
       end
     end
@@ -107,7 +111,7 @@ module T
   module Range
     include Changepack::ClassMethods
 
-    def self.superclass
+    def self.__type_target
       self
     end
   end
@@ -115,7 +119,17 @@ module T
   module Set
     include Changepack::ClassMethods
 
-    def self.superclass
+    def self.__type_target
+      self
+    end
+  end
+
+  class Struct
+    include Changepack::ClassMethods
+
+    extend T::Sig
+
+    def self.__type_target
       self
     end
   end
