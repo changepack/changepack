@@ -6,13 +6,13 @@ class Provider
     Results = T.type_alias { T.any(Provider::Repository, Provider::Commit).array }
     Cursor = T.type_alias { T::Integer.nilable }
 
-    sig { params(after: Cursor).returns T::Array[Provider::Repository] }
+    sig { params(after: Cursor).returns(Provider::Repository.array) }
     def repositories(after: nil)
       repositories = paginate(after:) { client.repos }
       repositories.map { |repo| Repository.map(repo) }
     end
 
-    sig { params(repository_id: T::Integer, after: Cursor).returns T::Array[Provider::Commit] }
+    sig { params(repository_id: T::Integer, after: Cursor).returns(Provider::Commit.array) }
     def commits(repository_id, after: nil)
       commits = paginate(after:) { client.commits(repository_id) }
       commits.map { |commit| Commit.map(commit) }

@@ -195,5 +195,9 @@ end
 module Dry
   class Struct
     extend T::Sig
+    # Dry::Struct works similar to how T::Struct works in the Sorbet runtime library.
+    # Given that T::Struct can be used as a Sorbet type, it makes sense to treat
+    # Dry::Struct like a Sorbet type as well.
+    include T::Changepack::ClassMethods
   end
 end
