@@ -21,12 +21,12 @@ module Status
       delegate :initial_state, to: :state_machine
     end
 
-    sig { params(state: T.any(String, Symbol)).returns(T::Boolean) }
+    sig { params(state: T::String | T::Symbol).returns(T::Boolean) }
     def in_state?(state)
       current_state.to_sym == state.to_sym
     end
 
-    sig { params(state: T.any(String, Symbol)).returns(T::Boolean) }
+    sig { params(state: T::String | T::Symbol).returns(T::Boolean) }
     def not_in_state?(state)
       current_state.to_sym != state.to_sym
     end

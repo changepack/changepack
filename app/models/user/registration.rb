@@ -6,8 +6,6 @@ class User
     extend ActiveSupport::Concern
     extend T::Sig
 
-    Provider = T.type_alias { T.any(Symbol, String) }
-
     included do
       devise :database_authenticatable, :rememberable, :validatable, :registerable, :omniauthable,
              omniauth_providers: [:github]
@@ -20,7 +18,7 @@ class User
     class_methods do
       extend T::Sig
 
-      sig { params(provider: Provider, auth: OmniAuth::AuthHash).returns(User) }
+      sig { params(provider: T::Symbol | T::String, auth: OmniAuth::AuthHash).returns(User) }
       def from!(provider, auth)
         case provider.to_sym
         when :github
@@ -38,7 +36,7 @@ class User
         end
       end
 
-      sig { params(provider: Provider, auth: OmniAuth::AuthHash).returns T::Hash[Symbol, T.untyped] }
+      sig { params(provider: T::Symbol | T::String, auth: OmniAuth::AuthHash).returns T::Hash[Symbol, T.untyped] }
       def provider(provider, auth)
         case provider.to_sym
         when :github

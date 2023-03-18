@@ -14,7 +14,7 @@ class Provider
     self.class.name.demodulize.downcase.to_sym
   end
 
-  sig { params(provider: T.any(String, Symbol)).returns(T.untyped) }
+  sig { params(provider: T::String | T::Symbol).returns(T.untyped) }
   def self.[](provider)
     providers.fetch(provider.to_sym)
   end
@@ -65,7 +65,7 @@ class Provider
       attribute :email, Types::String
     end
 
-    sig { returns T::Hash[Symbol, T.any(String, Time, T::Hash[Symbol, String])] }
+    sig { returns T::Hash[T::Symbol, T.any(T::String, T::Hash[Symbol, String], T::Time)] }
     def to_h
       {
         message:,
