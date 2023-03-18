@@ -3,7 +3,7 @@
 
 class Provider
   class GitHub < Provider
-    Result = T.type_alias { T.any(Provider::Repository, Provider::Commit) }
+    Results = T.type_alias { T.any(Provider::Repository, Provider::Commit).array }
     Cursor = T.type_alias { T::Integer.nilable }
 
     sig { params(after: Cursor).returns T::Array[Provider::Repository] }
@@ -12,7 +12,7 @@ class Provider
       repositories.map { |repo| Repository.map(repo) }
     end
 
-    sig { params(repository_id: Integer, after: Cursor).returns T::Array[Provider::Commit] }
+    sig { params(repository_id: T::Integer, after: Cursor).returns T::Array[Provider::Commit] }
     def commits(repository_id, after: nil)
       commits = paginate(after:) { client.commits(repository_id) }
       commits.map { |commit| Commit.map(commit) }
@@ -20,7 +20,7 @@ class Provider
 
     private
 
-    sig { params(items: T::Array[Result], after: Cursor).returns T::Array[Result] }
+    sig { params(items: Results, after: Cursor).returns(Results) }
     def paginate(items: [], after: nil)
       new_items = yield
       paginated_items = items.concat(new_items)
@@ -32,7 +32,7 @@ class Provider
       end
     end
 
-    sig { params(items: T::Array[Result], after: Cursor).returns(T::Boolean) }
+    sig { params(items: Results, after: Cursor).returns(T::Boolean) }
     def exhausted?(items, after:)
       next_page.blank? || items.map(&:sha).include?(after)
     end

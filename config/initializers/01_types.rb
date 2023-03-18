@@ -51,30 +51,9 @@ module T
     end
   end
 
-  module String
-    include Changepack::ClassMethods
-
-    def self.superclass
-      ::String
-    end
-  end
-
-  module Symbol
-    include Changepack::ClassMethods
-
-    def self.superclass
-      ::Symbol
-    end
-  end
-
-  module Integer
-    include Changepack::ClassMethods
-
-    def self.superclass
-      ::Integer
-    end
-  end
-
+  String = T.type_alias { ::String }
+  Symbol = T.type_alias { ::Symbol }
+  Integer = T.type_alias { ::Integer }
   Time = T.type_alias { T.any(::Time, DateTime, ActiveSupport::TimeWithZone) }
 
   module Array
@@ -149,12 +128,30 @@ module T
     class TypedArray
       include Changepack::Instance
     end
+
+    class Union
+      include Changepack::Instance
+    end
   end
 
   module Private
     module Types
       class SimplePairUnion
         include Changepack::Instance
+      end
+
+      class TypeAlias
+        def |(other)
+          T.any(aliased_type, other)
+        end
+
+        def nilable
+          ::T.nilable(aliased_type)
+        end
+
+        def array
+          ::T::Array[aliased_type]
+        end
       end
     end
   end

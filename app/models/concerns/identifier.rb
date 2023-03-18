@@ -11,7 +11,7 @@ module Identifier
   class_methods do
     extend T::Sig
 
-    sig { params(id: Symbol).returns(String) }
+    sig { params(id: T::Symbol).returns(T::String) }
     def key(id)
       self.id_prefix = id
       self.id_separator = '_'

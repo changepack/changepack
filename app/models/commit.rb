@@ -18,7 +18,7 @@ class Commit < ApplicationRecord
         SQL
       )
     },
-    T.proc.params(cl: Changelog).returns(String)
+    T.proc.params(cl: Changelog).returns(T::String)
   )
 
   key :com

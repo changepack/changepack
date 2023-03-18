@@ -33,12 +33,12 @@ class RepositoriesController < ApplicationController
 
   private
 
-  sig { returns(Repository) }
+  sig { returns Repository }
   def repository
     @repository ||= collection.find(id)
   end
 
-  sig { returns(T::Repository.relation) }
+  sig { returns T::Repository.relation }
   def collection
     authorized(Repository.activity.kept)
   end
