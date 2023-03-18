@@ -161,14 +161,35 @@ module ActiveModel
   module T
     extend ActiveSupport::Concern
 
+    def self.create_nested_module(mod, name_parts)
+      if name_parts.count == 1
+        return mod
+      else
+        next_part = name_parts.shift
+        next_mod = mod.const_get(next_part) rescue nil
+
+        unless next_mod
+          next_mod = Module.new
+          mod.const_set(next_part, next_mod)
+        end
+
+        create_nested_module(next_mod, name_parts)
+      end
+    end
+
     included do
       extend ::T::Sig
       # Define the nested T::[Model] class within the T module
-      ::T.const_set("#{name}", Class.new(self) do
+      nested_mod = ActiveModel::T.create_nested_module(::T, name.split('::'))
+      nested_mod.const_set("#{name.demodulize}", Class.new(self) do
         include ::T::Changepack::ClassMethods
       end)
     end
   end
+end
+
+module StoreModel
+  T = ActiveModel::T
 end
 
 module Dry

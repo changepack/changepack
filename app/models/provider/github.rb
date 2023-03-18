@@ -51,7 +51,7 @@ class Provider
     end
 
     class Repository < Provider::Repository
-      sig { params(repository: Sawyer::Resource).returns(Repository) }
+      sig { params(repository: Sawyer::Resource).returns(Provider::Repository) }
       def self.map(repository)
         new(
           id: repository.id,
@@ -62,7 +62,7 @@ class Provider
     end
 
     class Commit < Provider::Commit
-      sig { params(commit: Sawyer::Resource).returns(Commit) }
+      sig { params(commit: Sawyer::Resource).returns(Provider::Commit) }
       def self.map(commit)
         new(
           sha: commit.sha,

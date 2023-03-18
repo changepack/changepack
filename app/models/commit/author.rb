@@ -4,6 +4,7 @@
 class Commit
   class Author
     include StoreModel::Model
+    include StoreModel::T
 
     attribute :name, :string
     attribute :email, :string
