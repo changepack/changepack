@@ -1,6 +1,9 @@
+# typed: false
 # frozen_string_literal: true
 
 class ApplicationRecord < ActiveRecord::Base
+  extend T::Sig
+
   include Inquirer
   include Identifier
 
@@ -10,4 +13,8 @@ class ApplicationRecord < ActiveRecord::Base
 
   primary_abstract_class
   has_paper_trail
+
+  def self.typed_scope(name, block, sig:)
+    scope(name, T.let(block, sig)) # rubocop:disable Rails/ScopeArgs
+  end
 end

@@ -1,3 +1,4 @@
+# typed: false
 # frozen_string_literal: true
 
 class ApplicationComponent < Phlex::HTML

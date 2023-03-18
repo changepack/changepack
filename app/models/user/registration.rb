@@ -1,8 +1,12 @@
+# typed: false
 # frozen_string_literal: true
 
 class User
   module Registration
     extend ActiveSupport::Concern
+    extend T::Sig
+
+    Provider = T.type_alias { T.any(Symbol, String) }
 
     included do
       devise :database_authenticatable, :rememberable, :validatable, :registerable, :omniauthable,
@@ -14,6 +18,9 @@ class User
     end
 
     class_methods do
+      extend T::Sig
+
+      sig { params(provider: Provider, auth: OmniAuth::AuthHash).returns(User) }
       def from!(provider, auth)
         case provider.to_sym
         when :github
@@ -21,6 +28,7 @@ class User
         end
       end
 
+      sig { params(auth: OmniAuth::AuthHash).returns(User) }
       def from_github!(auth)
         where.contains(providers: { github: { id: auth.uid } }).first_or_create! do |user|
           user.name = auth.info.name
@@ -30,12 +38,11 @@ class User
         end
       end
 
+      sig { params(provider: Provider, auth: OmniAuth::AuthHash).returns T::Hash[Symbol, T.untyped] }
       def provider(provider, auth)
         case provider.to_sym
         when :github
-          {
-            github: { id: auth.uid, access_token: auth.credentials.token }
-          }
+          { github: { id: auth.uid, access_token: auth.credentials.token } }
         end
       end
     end

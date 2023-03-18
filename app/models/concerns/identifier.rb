@@ -1,3 +1,4 @@
+# typed: false
 # frozen_string_literal: true
 
 module Identifier
@@ -8,6 +9,9 @@ module Identifier
   end
 
   class_methods do
+    extend T::Sig
+
+    sig { params(id: Symbol).returns(String) }
     def key(id)
       self.id_prefix = id
       self.id_separator = '_'

@@ -1,3 +1,4 @@
+# typed: false
 # frozen_string_literal: true
 
 module Changepack
@@ -9,7 +10,7 @@ module Changepack
     def perform(payload)
       @payload = payload.deep_symbolize_keys
 
-      klass = @payload.fetch(:event_type).constantize
+      klass = @payload.fetch(:event_type).constantize # rubocop:disable Sorbet/ConstantsFromStrings
       opts = @payload.slice(:data, :event_id, :metadata)
 
       @event = klass.new(**opts)

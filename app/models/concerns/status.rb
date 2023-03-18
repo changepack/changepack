@@ -1,3 +1,4 @@
+# typed: false
 # frozen_string_literal: true
 
 module Status
@@ -5,6 +6,7 @@ module Status
 
   module Base
     extend ActiveSupport::Concern
+    extend T::Sig
 
     included do
       has_many transition_name, class_name: transition_class.to_s, autosave: false, dependent: :delete_all
@@ -15,14 +17,16 @@ module Status
       validates :status, presence: true, inclusion: { in: state_machine.states }
     end
 
-    module ClassMethods
+    class_methods do
       delegate :initial_state, to: :state_machine
     end
 
+    sig { params(state: T.any(String, Symbol)).returns(T::Boolean) }
     def in_state?(state)
       current_state.to_sym == state.to_sym
     end
 
+    sig { params(state: T.any(String, Symbol)).returns(T::Boolean) }
     def not_in_state?(state)
       current_state.to_sym != state.to_sym
     end
@@ -35,6 +39,7 @@ module Status
       )
     end
 
+    sig { returns String }
     def current_state
       self['status'].presence || state_machine.current_state
     end
@@ -48,8 +53,8 @@ module Status
     end
 
     included do |base|
-      @transition_class = "#{base.name}Transition".constantize
-      @state_machine = "#{base.name}StateMachine".constantize
+      @transition_class = "#{base.name}Transition".constantize # rubocop:disable Sorbet/ConstantsFromStrings
+      @state_machine = "#{base.name}StateMachine".constantize # rubocop:disable Sorbet/ConstantsFromStrings
       @transition_name = :transitions
     end
   end

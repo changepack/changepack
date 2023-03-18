@@ -1,3 +1,4 @@
+# typed: false
 # frozen_string_literal: true
 
 # > Earlier this month, Microsoft unleashed a newly ChatGPT-powered Bing search
@@ -12,11 +13,14 @@
 # Rest in peace, Sydney.
 
 class Sydney
+  extend T::Sig
+
   include ActiveModel::Model
   include ActiveModel::Attributes
 
   attribute :account
 
+  sig { params(changes: T::Array[String]).returns(String) }
   def hallucinate(changes)
     client.chat(parameters: parameters(changes))
           .dig('choices', 0, 'message', 'content')
@@ -28,10 +32,12 @@ class Sydney
   delegate :name, to: :account, prefix: true
   delegate :description, to: :account, prefix: true
 
+  sig { returns OpenAI::Client }
   def client
     @client ||= OpenAI::Client.new
   end
 
+  sig { params(changes: T::Array[String]).returns(Hash) }
   def parameters(changes)
     {
       model: 'gpt-3.5-turbo',
@@ -40,6 +46,7 @@ class Sydney
     }
   end
 
+  sig { params(changes: T::Array[String]).returns(String) }
   def prompt(changes)
     I18n.t(
       'prompt', account_name:, account_description:, changes: changes.join("\n")

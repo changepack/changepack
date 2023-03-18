@@ -1,6 +1,9 @@
+# typed: false
 # frozen_string_literal: true
 
 class Publication
+  extend T::Sig
+
   include ActiveModel::Model
   include ActiveModel::Attributes
 
@@ -12,6 +15,7 @@ class Publication
   attribute :account
   attribute :user
 
+  sig { returns T::Boolean }
   def update!
     Changelog.transaction do
       changelog.update(content: completion, title:, account:, user:)
@@ -19,12 +23,15 @@ class Publication
       changelog.detach(except: commits)
       changelog.attach(commits)
     end
+
+    true
   end
 
   alias create! update!
 
   private
 
+  sig { returns T.nilable(String) }
   def completion
     if content.present? || commits.none?
       content
@@ -33,6 +40,7 @@ class Publication
     end
   end
 
+  sig { returns T::Array[String] }
   def changes
     account.commits.where(id: commits).pluck(:message)
   end

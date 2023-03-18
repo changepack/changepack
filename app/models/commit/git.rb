@@ -1,8 +1,10 @@
+# typed: false
 # frozen_string_literal: true
 
 class Commit
   module Git
     extend ActiveSupport::Concern
+    extend T::Sig
 
     include Provided
 
@@ -11,8 +13,11 @@ class Commit
     end
 
     class_methods do
+      extend T::Sig
+
+      sig { params(repository: Repository).returns(T::Boolean) }
       def pull(repository)
-        return if repository.git.blank?
+        return false if repository.git.blank?
 
         transaction do
           source = Git.source(repository)
@@ -22,9 +27,12 @@ class Commit
 
           repository.update!(pulled: Time.current)
         end
+
+        true
       end
     end
 
+    sig { params(commit: Provider::Commit, repository: Repository).returns(Commit) }
     def self.upsert!(commit, repository:)
       providers = { repository.provider => commit.sha }
 
@@ -34,6 +42,7 @@ class Commit
       end
     end
 
+    sig { params(repository: Repository).returns T.nilable(String) }
     def self.source(repository)
       case repository.provider
       when 'github'

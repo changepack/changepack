@@ -1,3 +1,4 @@
+# typed: false
 # frozen_string_literal: true
 
 class ChangelogTransition < ApplicationRecord
@@ -9,6 +10,7 @@ class ChangelogTransition < ApplicationRecord
 
   private
 
+  sig { returns T::Boolean }
   def update_most_recent
     last_transition = changelog.transitions.order(:sort_key).last
     return if last_transition.blank?

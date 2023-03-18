@@ -1,12 +1,20 @@
+# typed: false
 # frozen_string_literal: true
 
 class Provider
   class GitHub < Provider
+    extend T::Sig
+
+    Result = T.type_alias { T.any(Provider::Repository, Provider::Commit) }
+    Cursor = T.type_alias { T.nilable(String) }
+
+    sig { params(after: Cursor).returns T::Array[Provider::Repository] }
     def repositories(after: nil)
       repositories = paginate(after:) { client.repos }
       repositories.map { |repo| Repository.map(repo) }
     end
 
+    sig { params(repository_id: String, after: Cursor).returns T::Array[Provider::Commit] }
     def commits(repository_id, after: nil)
       commits = paginate(after:) { client.commits(repository_id.to_i) }
       commits.map { |commit| Commit.map(commit) }
@@ -14,6 +22,7 @@ class Provider
 
     private
 
+    sig { params(items: T::Array[Result], after: Cursor).returns T::Array[Result] }
     def paginate(items: [], after: nil)
       new_items = yield
       paginated_items = items.concat(new_items)
@@ -25,10 +34,12 @@ class Provider
       end
     end
 
+    sig { params(items: T::Array[Result], after: Cursor).returns(T::Boolean) }
     def exhausted?(items, after:)
       next_page.blank? || items.map(&:sha).include?(after)
     end
 
+    sig { returns T.nilable(String) }
     def next_page
       client.last_response
             .rels
@@ -36,11 +47,13 @@ class Provider
             .try(:href)
     end
 
+    sig { returns Octokit::Client }
     def client
       @client ||= Octokit::Client.new(access_token:, per_page: 100)
     end
 
     class Repository < Provider::Repository
+      sig { params(repository: Sawyer::Resource).returns(Repository) }
       def self.map(repository)
         new(
           id: repository.id,
@@ -51,6 +64,7 @@ class Provider
     end
 
     class Commit < Provider::Commit
+      sig { params(commit: Sawyer::Resource).returns(Commit) }
       def self.map(commit)
         new(
           sha: commit.sha,

@@ -70,6 +70,8 @@ group :development, :test do
 
   gem "rubocop-rspec", require: false
 
+  gem "rubocop-sorbet", require: false
+
   gem "rubocop-performance"
 
   gem "slim_lint"
@@ -185,3 +187,5 @@ gem "active_record_extended"
 gem "ruby-openai"
 
 gem "file_validators"
+
+gem "sorbet-runtime"

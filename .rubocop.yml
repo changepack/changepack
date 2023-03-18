@@ -2,6 +2,7 @@ require:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-performance
+  - rubocop-sorbet
 
 AllCops:
   TargetRubyVersion: 3.1

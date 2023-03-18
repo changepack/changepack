@@ -1,11 +1,31 @@
+# typed: false
 # frozen_string_literal: true
 
 class Provider
+  extend T::Sig
+
   include ActiveModel::Model
   include ActiveModel::Attributes
 
   attribute :access_token, :string
   attribute :account_id, :string
+
+  sig { returns(Symbol) }
+  def provider
+    self.class.name.demodulize.downcase.to_sym
+  end
+
+  sig { params(provider: T.any(String, Symbol)).returns(T.untyped) }
+  def self.[](provider)
+    providers.fetch(provider.to_sym)
+  end
+
+  sig { returns T::Hash[Symbol, Class] }
+  def self.providers
+    {
+      github: GitHub
+    }
+  end
 
   def repositories
     raise NoMethodError
@@ -15,20 +35,6 @@ class Provider
     raise NoMethodError
   end
 
-  def provider
-    self.class.name.demodulize.downcase.to_sym
-  end
-
-  def self.[](provider)
-    providers.fetch(provider.to_sym)
-  end
-
-  def self.providers
-    {
-      github: GitHub
-    }
-  end
-
   private
 
   def client
@@ -36,10 +42,13 @@ class Provider
   end
 
   class Repository < Dry::Struct
+    extend T::Sig
+
     attribute :id, Types::Integer
     attribute :name, Types::String
     attribute :branch, Types::String
 
+    sig { returns T::Hash[Symbol, String] }
     def to_h
       { name:, branch: }
     end
@@ -50,6 +59,8 @@ class Provider
   end
 
   class Commit < Dry::Struct
+    extend T::Sig
+
     attribute :sha, Types::String
     attribute :message, Types::String
     attribute :url, Types::String
@@ -59,6 +70,7 @@ class Provider
       attribute :email, Types::String
     end
 
+    sig { returns T::Hash[Symbol, T.any(String, Time, T::Hash[Symbol, String])] }
     def to_h
       {
         message:,

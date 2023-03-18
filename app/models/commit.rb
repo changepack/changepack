@@ -1,19 +1,23 @@
+# typed: false
 # frozen_string_literal: true
 
 class Commit < ApplicationRecord
   include Git
 
-  OPTIONS = lambda { |cl|
-    Arel.sql(
-      %(
-        CASE
-          WHEN commits.changelog_id = '#{cl.id}' THEN 0
-          ELSE 1
-        END,
-        commits.commited_at DESC
-      ).strip
-    )
-  }
+  OPTIONS = T.let(
+    lambda { |cl|
+      Arel.sql(
+        <<-SQL.squish
+          CASE
+            WHEN commits.changelog_id = '#{cl.id}' THEN 0
+            ELSE 1
+          END,
+          commits.commited_at DESC
+        SQL
+      )
+    },
+    T.proc.params(cl: Changelog).returns(String)
+  )
 
   key :com
 
@@ -33,5 +37,7 @@ class Commit < ApplicationRecord
 
   normalize :message
 
-  scope :options, ->(cl) { where(changelog: [cl, nil]).order(OPTIONS.call(cl)) }
+  typed_scope :options,
+              ->(cl) { where(changelog: [cl, nil]).order(OPTIONS.call(cl)) },
+              sig: T.proc.params(cl: Changelog).returns(ActiveRecord::Relation)
 end
