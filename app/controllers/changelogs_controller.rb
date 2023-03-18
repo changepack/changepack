@@ -2,14 +2,9 @@
 # frozen_string_literal: true
 
 class ChangelogsController < ApplicationController
-  SET_NEW = %i[new create].freeze
-  AUTHORIZE_ITEM = %i[edit update destroy].freeze
-
-  skip_before_action :authenticate_user!, only: :show
   skip_verify_authorized only: :show
-
-  before_action :set_new_changelog, only: SET_NEW
-  before_action(only: AUTHORIZE_ITEM) { authorize! changelog }
+  skip_before_action :authenticate_user!, only: :show
+  before_action :set_new_changelog, only: %i[new create]
 
   def index
     authorize! and redirect_to current_account
@@ -20,11 +15,11 @@ class ChangelogsController < ApplicationController
   end
 
   def new
-    render form
+    authorize! and render form
   end
 
   def edit
-    render form
+    authorize! changelog and render form
   end
 
   def confirm_destroy
@@ -32,6 +27,8 @@ class ChangelogsController < ApplicationController
   end
 
   def create
+    authorize!
+
     Publication.new(permitted).create!
 
     if changelog.valid?
@@ -42,6 +39,8 @@ class ChangelogsController < ApplicationController
   end
 
   def update
+    authorize! changelog
+
     Publication.new(permitted).update!
 
     if changelog.valid?
@@ -52,6 +51,8 @@ class ChangelogsController < ApplicationController
   end
 
   def destroy
+    authorize! changelog
+
     changelog.discard
     redirect_to changelogs_url
   end
@@ -72,8 +73,8 @@ class ChangelogsController < ApplicationController
                                 .kept
   end
 
+  sig { returns Changelog }
   def set_new_changelog
-    authorize!
     @changelog = Changelog.new
   end
 
