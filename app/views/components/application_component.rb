@@ -6,6 +6,7 @@ class ApplicationComponent < Phlex::HTML
   include Pagy::Backend
 
   extend Dry::Initializer
+  extend T::Sig
 
   register_element :turbo_frame
 

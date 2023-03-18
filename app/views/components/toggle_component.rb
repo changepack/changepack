@@ -7,6 +7,7 @@ class ToggleComponent < ApplicationComponent
   attribute :checked, Types::Bool.optional
   attribute :id, Types::String, default: -> { 'toggle' }
 
+  sig { params(model: ApplicationRecord, attribute: T::Symbol | T::String).returns(T.self_type) }
   def self.with(model:, attribute:)
     new(
       label_value: attribute.to_s.humanize,

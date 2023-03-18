@@ -30,3 +30,6 @@ Style/Documentation:
 
 Metrics/BlockLength:
   AllowedMethods: ['describe', 'context']
+
+Naming/BlockForwarding:
+  Enabled: false
