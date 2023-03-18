@@ -47,3 +47,9 @@ module ActiveModel
     end
   end
 end
+
+module Dry
+  class Struct
+    extend T::Sig
+  end
+end

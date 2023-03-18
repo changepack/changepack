@@ -41,8 +41,6 @@ class Provider
   end
 
   class Repository < Dry::Struct
-    extend ::T::Sig
-
     attribute :id, Types::Integer
     attribute :name, Types::String
     attribute :branch, Types::String
@@ -58,8 +56,6 @@ class Provider
   end
 
   class Commit < Dry::Struct
-    extend ::T::Sig
-
     attribute :sha, Types::String
     attribute :message, Types::String
     attribute :url, Types::String
