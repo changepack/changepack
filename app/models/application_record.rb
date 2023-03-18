@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 class ApplicationRecord < ActiveRecord::Base
-  extend T::Sig
+  include ActiveModel::T
 
   include Inquirer
   include Identifier

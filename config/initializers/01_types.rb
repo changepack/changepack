@@ -8,11 +8,9 @@ end
 
 module T
   module Changepack
-    def self.included(base)
-      base.extend ClassMethods
-    end
+    extend ActiveSupport::Concern
 
-    module ClassMethods
+    class_methods do
       def nilable
         ::T.nilable(superclass)
       end
@@ -33,5 +31,19 @@ module T
 
   class Integer < ::Integer
     include Changepack
+  end
+end
+
+module ActiveModel
+  module T
+    extend ActiveSupport::Concern
+
+    included do
+      extend ::T::Sig
+      # Define the nested T::[Model] class within the T module
+      ::T.const_set("#{name}", Class.new(self) do
+        include ::T::Changepack
+      end)
+    end
   end
 end

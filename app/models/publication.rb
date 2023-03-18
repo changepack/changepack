@@ -2,10 +2,9 @@
 # frozen_string_literal: true
 
 class Publication
-  extend T::Sig
-
   include ActiveModel::Model
   include ActiveModel::Attributes
+  include ActiveModel::T
 
   attribute :title, :string
   attribute :content, :string

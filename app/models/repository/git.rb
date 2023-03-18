@@ -16,7 +16,7 @@ class Repository
     class_methods do
       extend T::Sig
 
-      sig { params(git: T.nilable(Provider)).returns(T::Boolean) }
+      sig { params(git: T::Provider.nilable).returns(T::Boolean) }
       def pull(git)
         return false if git.nil?
 
@@ -29,7 +29,7 @@ class Repository
         true
       end
 
-      sig { params(git: T.nilable(Provider)).returns(T::Boolean) }
+      sig { params(git: T::Provider.nilable).returns(T::Boolean) }
       def pull_async(git)
         return false if git.nil?
 
@@ -43,7 +43,7 @@ class Repository
       end
     end
 
-    sig { params(repository: Provider::Repository, git: T.nilable(Provider)).returns(Repository) }
+    sig { params(repository: Provider::Repository, git: T::Provider.nilable).returns(Repository) }
     def self.upsert!(repository, git:)
       account_id = git.account_id
       providers = {
@@ -71,7 +71,7 @@ class Repository
                          .pick(:commited_at)
     end
 
-    sig { returns T.nilable(Provider) }
+    sig { returns T::Provider.nilable }
     def git
       return if providers.blank?
 

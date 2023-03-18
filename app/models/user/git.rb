@@ -14,7 +14,7 @@ class User
       provider :github, :access_token
     end
 
-    sig { returns T.nilable(Provider) }
+    sig { returns T::Provider.nilable }
     def git
       return if providers.blank?
 

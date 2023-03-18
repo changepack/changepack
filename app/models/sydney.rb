@@ -13,10 +13,9 @@
 # Rest in peace, Sydney.
 
 class Sydney
-  extend T::Sig
-
   include ActiveModel::Model
   include ActiveModel::Attributes
+  include ActiveModel::T
 
   attribute :account
 

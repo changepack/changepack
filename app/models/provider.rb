@@ -2,10 +2,9 @@
 # frozen_string_literal: true
 
 class Provider
-  extend T::Sig
-
   include ActiveModel::Model
   include ActiveModel::Attributes
+  include ActiveModel::T
 
   attribute :access_token, :string
   attribute :account_id, :string
@@ -42,7 +41,7 @@ class Provider
   end
 
   class Repository < Dry::Struct
-    extend T::Sig
+    extend ::T::Sig
 
     attribute :id, Types::Integer
     attribute :name, Types::String
@@ -59,7 +58,7 @@ class Provider
   end
 
   class Commit < Dry::Struct
-    extend T::Sig
+    extend ::T::Sig
 
     attribute :sha, Types::String
     attribute :message, Types::String
