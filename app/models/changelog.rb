@@ -2,6 +2,8 @@
 # frozen_string_literal: true
 
 class Changelog < ApplicationRecord
+  include ActiveModel::T
+
   include Publish
 
   include Slug
@@ -27,7 +29,9 @@ class Changelog < ApplicationRecord
   inquirer :status
   delegate :published?, to: :status
 
-  scope :for, ->(user) { where(user.blank? && { status: :published }) }
+  scope :for, ->(user) { where(user.blank? && { status: :published }) },
+        sig: T.proc.params(user: T::User.nilable)
+
   scope :recent, -> { order(created_at: :desc) }
 
   private

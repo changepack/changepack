@@ -2,6 +2,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  include ActiveModel::T
+
   include Git
   include Registration
 

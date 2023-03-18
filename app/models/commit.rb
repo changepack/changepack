@@ -2,6 +2,8 @@
 # frozen_string_literal: true
 
 class Commit < ApplicationRecord
+  include ActiveModel::T
+
   include Git
 
   OPTIONS = T.let(
@@ -37,7 +39,6 @@ class Commit < ApplicationRecord
 
   normalize :message
 
-  typed_scope :options,
-              ->(cl) { where(changelog: [cl, nil]).order(OPTIONS.call(cl)) },
-              sig: T.proc.params(cl: Changelog).returns(ActiveRecord::Relation)
+  scope :options, ->(cl) { where(changelog: [cl, nil]).order(OPTIONS.call(cl)) },
+        sig: T.proc.params(cl: Changelog)
 end

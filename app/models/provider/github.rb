@@ -3,8 +3,6 @@
 
 class Provider
   class GitHub < Provider
-    extend T::Sig
-
     Result = T.type_alias { T.any(Provider::Repository, Provider::Commit) }
     Cursor = T.type_alias { T::String.nilable }
 

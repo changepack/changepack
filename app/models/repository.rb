@@ -2,6 +2,8 @@
 # frozen_string_literal: true
 
 class Repository < ApplicationRecord
+  include ActiveModel::T
+
   include Events
   include Git
 

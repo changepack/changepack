@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 class ApplicationRecord < ActiveRecord::Base
-  include ActiveModel::T
+  extend T::Sig
 
   include Inquirer
   include Identifier
@@ -14,7 +14,7 @@ class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
   has_paper_trail
 
-  def self.typed_scope(name, block, sig:)
-    scope(name, T.let(block, sig)) # rubocop:disable Rails/ScopeArgs
+  def self.scope(name, block, sig: T.proc)
+    super(name, T.let(block, sig.returns(ActiveRecord::Relation)))
   end
 end

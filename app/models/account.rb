@@ -2,6 +2,8 @@
 # frozen_string_literal: true
 
 class Account < ApplicationRecord
+  include ActiveModel::T
+
   include Slug
 
   PICTURES = %w[image/jpeg image/png image/gif].freeze
