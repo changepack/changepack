@@ -9,13 +9,13 @@ class Provider
     sig { params(after: Cursor).returns(Provider::Repository.array) }
     def repositories(after: nil)
       repositories = paginate(after:) { client.repos }
-      repositories.map { |repo| Repository.map(repo) }
+      repositories.map { |repo| Mapper.repository(repo) }
     end
 
     sig { params(repository_id: T::Integer, after: Cursor).returns(Provider::Commit.array) }
     def commits(repository_id, after: nil)
       commits = paginate(after:) { client.commits(repository_id) }
-      commits.map { |commit| Commit.map(commit) }
+      commits.map { |commit| Mapper.commit(commit) }
     end
 
     private
@@ -50,21 +50,21 @@ class Provider
       @client ||= Octokit::Client.new(access_token:, per_page: 100)
     end
 
-    class Repository < Provider::Repository
+    class Mapper
+      extend T::Sig
+
       sig { params(repository: Sawyer::Resource).returns(Provider::Repository) }
-      def self.map(repository)
-        new(
+      def self.repository(repository)
+        Provider::Repository.new(
           id: repository.id,
           name: repository.full_name,
           branch: repository.default_branch
         )
       end
-    end
 
-    class Commit < Provider::Commit
       sig { params(commit: Sawyer::Resource).returns(Provider::Commit) }
-      def self.map(commit)
-        new(
+      def self.commit(commit)
+        Provider::Commit.new(
           sha: commit.sha,
           message: commit.commit.message,
           url: commit.html_url,

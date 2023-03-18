@@ -49,10 +49,6 @@ class Provider
     def to_h
       { name:, branch: }
     end
-
-    def self.map(_source)
-      raise NoMethodError
-    end
   end
 
   class Commit < Dry::Struct
@@ -73,10 +69,6 @@ class Provider
         commited_at:,
         author: { name: author.name, email: author.email }
       }
-    end
-
-    def self.map(_source)
-      raise NoMethodError
     end
   end
 end
