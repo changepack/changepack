@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 class CommitDecorator < ApplicationDecorator
-  sig { returns(T::String) }
+  sig { returns T::String }
   def abbr
     message.truncate(50)
   end
