@@ -3,12 +3,17 @@
 
 module Changepack
   class Handler < ActiveJob::Base # rubocop:disable Rails/ApplicationJob
+    extend T::Helpers
     extend T::Sig
 
+    abstract!
+
+    sig { params(event: T.class_of(Changepack::Event)).void }
     def self.on(event)
       Rails.configuration.event_store.subscribe(self, to: [event])
     end
 
+    sig { params(payload: T::Hash[T::Symbol | T::String, T.untyped]).returns(T.untyped) }
     def perform(payload)
       @payload = payload.deep_symbolize_keys
 
@@ -20,9 +25,8 @@ module Changepack
       run
     end
 
-    def run
-      raise NoMethodError
-    end
+    sig { abstract.returns T.untyped }
+    def run; end
 
     private
 

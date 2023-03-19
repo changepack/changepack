@@ -5,7 +5,7 @@ module Repositories
   class OnAuthorized < Handler
     on ::Repository::Authorized
 
-    sig { returns T::Boolean }
+    sig { override.returns T::Boolean }
     def run
       Repository.pull(git)
     end

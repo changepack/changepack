@@ -6,13 +6,13 @@ class Provider
     Results = T.type_alias { T.any(Provider::Repository, Provider::Commit).array }
     Cursor = T.type_alias { T::Integer.nilable }
 
-    sig { params(after: Cursor).returns(Provider::Repository.array) }
+    sig { override.params(after: Cursor).returns(Provider::Repository.array) }
     def repositories(after: nil)
       repositories = paginate(after:) { client.repos }
       repositories.map { |repo| Mapper.repository(repo) }
     end
 
-    sig { params(repository_id: T::Integer, after: Cursor).returns(Provider::Commit.array) }
+    sig { override.params(repository_id: T::Integer, after: Cursor).returns(Provider::Commit.array) }
     def commits(repository_id, after: nil)
       commits = paginate(after:) { client.commits(repository_id) }
       commits.map { |commit| Mapper.commit(commit) }
@@ -45,7 +45,7 @@ class Provider
             .try(:href)
     end
 
-    sig { returns Octokit::Client }
+    sig { override.returns(Octokit::Client) }
     def client
       @client ||= Octokit::Client.new(access_token:, per_page: 100)
     end

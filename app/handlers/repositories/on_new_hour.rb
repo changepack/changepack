@@ -5,7 +5,7 @@ module Repositories
   class OnNewHour < Handler
     on ::Clock::NewHour
 
-    sig { returns T::Array[String] }
+    sig { override.returns T::String.array }
     def run
       Repository.active
                 .pluck(:id)

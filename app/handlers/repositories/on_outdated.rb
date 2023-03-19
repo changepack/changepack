@@ -5,7 +5,7 @@ module Repositories
   class OnOutdated < Handler
     on ::Repository::Outdated
 
-    sig { returns T::Boolean }
+    sig { override.returns T::Boolean }
     def run
       repository.pull
     end

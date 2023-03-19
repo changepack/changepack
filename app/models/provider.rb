@@ -2,17 +2,16 @@
 # frozen_string_literal: true
 
 class Provider
+  extend T::Helpers
+
   include ActiveModel::Model
   include ActiveModel::Attributes
   include ActiveModel::T
 
+  abstract!
+
   attribute :access_token, :string
   attribute :account_id, :string
-
-  sig { returns Symbol }
-  def provider
-    self.class.name.demodulize.downcase.to_sym
-  end
 
   sig { params(provider: T::String | T::Symbol).returns(T.untyped) }
   def self.[](provider)
@@ -26,19 +25,21 @@ class Provider
     }
   end
 
-  def repositories
-    raise NoMethodError
-  end
+  sig { abstract.returns Provider::Repository.array }
+  def repositories; end
 
-  def commits(_repository_id)
-    raise NoMethodError
+  sig { abstract.params(_repository_id: T.untyped).returns(Provider::Commit.array) }
+  def commits(_repository_id); end
+
+  sig { returns Symbol }
+  def provider
+    self.class.name.demodulize.downcase.to_sym
   end
 
   private
 
-  def client
-    raise NoMethodError
-  end
+  sig { abstract.returns T.untyped }
+  def client; end
 
   class Repository < T::Struct
     extend T::Sig
