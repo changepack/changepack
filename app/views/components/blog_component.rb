@@ -3,10 +3,10 @@
 
 class BlogComponent < ApplicationComponent
   # You can pass a changelog or a collection of changelogs
-  attribute :changelogs, Types.Relation(Changelog).optional
-  attribute :changelog, Types::Instance(Changelog).optional
+  attribute :changelogs, T::Changelog.relation.nilable
+  attribute :changelog, T::Changelog.nilable
   # If not present, account will be inferred from the changelog
-  attribute :account, Types::Instance(Account).optional
+  attribute :account, T::Account.nilable
 
   attr_reader :pagy, :collection
 

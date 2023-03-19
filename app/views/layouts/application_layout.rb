@@ -4,7 +4,11 @@
 class ApplicationLayout < ApplicationView
   include Phlex::Rails::Layout
 
-  Brand = Struct.new(:name, :website, :picture)
+  class Brand < T::Struct
+    attribute :name, T::String.nilable
+    attribute :website, T::String.nilable
+    attribute :picture, T::String.nilable
+  end
 
   attr_reader :brand
 
@@ -68,9 +72,9 @@ class ApplicationLayout < ApplicationView
 
   def white_label
     @brand = Brand.new(
-      helpers.content_for(:account_name),
-      helpers.content_for(:account_website),
-      helpers.content_for(:account_picture)
+      name: helpers.content_for(:account_name),
+      website: helpers.content_for(:account_website),
+      picture: helpers.content_for(:account_picture)
     )
   end
 

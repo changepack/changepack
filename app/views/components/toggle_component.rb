@@ -2,10 +2,10 @@
 # frozen_string_literal: true
 
 class ToggleComponent < ApplicationComponent
-  attribute :name, Types::String.optional
-  attribute :label_value, Types::String.optional
-  attribute :checked, Types::Bool.optional
-  attribute :id, Types::String, default: -> { 'toggle' }
+  attribute :name, T::String.nilable
+  attribute :label_value, T::String.nilable
+  attribute :checked, T::Boolean.nilable
+  attribute :id, T::String, default: -> { 'toggle' }
 
   sig { params(model: ApplicationRecord, attribute: T::Symbol | T::String).returns(T.self_type) }
   def self.with(model:, attribute:)

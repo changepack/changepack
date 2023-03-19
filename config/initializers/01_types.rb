@@ -1,11 +1,3 @@
-module Types
-  include Dry.Types()
-
-  def self.Relation(model)
-    Types::Instance(ActiveRecord::Relation) | Types::Instance(ActiveRecord::AssociationRelation) | Types::Array.of(Types::Instance(model))
-  end
-end
-
 module T
   def self.instance(__typed)
     ar_type_value = Class.new(ActiveRecord::Type::Value) do
@@ -76,6 +68,10 @@ module T
             ::T::Array[__typed]
           )
         end
+
+        def call(val)
+          T.let(val, __typed)
+        end
       end
     end
 
@@ -90,6 +86,10 @@ module T
 
       def array
         ::T::Array[self]
+      end
+
+      def call(val)
+        T.let(val, self)
       end
     end
   end
@@ -213,6 +213,10 @@ module T
 
         def array
           ::T::Array[aliased_type]
+        end
+
+        def call(val)
+          T.let(val, self)
         end
       end
     end

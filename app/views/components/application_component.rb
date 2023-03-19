@@ -16,8 +16,14 @@ class ApplicationComponent < Phlex::HTML
   end
 
   def self.transform_opts(type, opts)
-    opts.merge(optional: type.respond_to?(:optional?) ? type.optional? : opts[:optional])
-        .compact
+    nilable = T::Utils.coerce(NilClass)
+    optional = if type.respond_to?(:types) && type.types.is_a?(Array) && nilable.in?(type.types)
+                 true
+               else
+                 opts[:optional]
+               end
+
+    opts.merge(optional:).compact
   end
 
   if Rails.env.development?

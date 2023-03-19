@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 class ChangelogComponent < ApplicationComponent
-  attribute :changelog, Types::Instance(Changelog)
+  attribute :changelog, T::Changelog
 
   def template
     render ContentComponent.new do |content|

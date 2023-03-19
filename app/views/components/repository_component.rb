@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 class RepositoryComponent < ApplicationComponent
-  attribute :repository, Types::Instance(Repository)
+  attribute :repository, T::Repository
 
   def template
     wrapper do

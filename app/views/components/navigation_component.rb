@@ -4,7 +4,7 @@
 class NavigationComponent < ApplicationComponent
   include Phlex::DeferredRender
 
-  attribute :brand, Types::Instance(Struct).optional
+  attribute :brand, T::Struct.nilable
 
   def template
     wrapper do
@@ -81,12 +81,16 @@ class NavigationComponent < ApplicationComponent
   end
 
   def default_brand
-    @default_brand ||= Brand.new('Changepack', root_path, 'logo.png')
+    @default_brand ||= Brand.new(name: 'Changepack', website: root_path, picture: 'logo.png')
   end
 
-  Brand = Struct.new(:name, :website, :picture) do
+  class Brand < T::Struct
+    attribute :name, String
+    attribute :website, String
+    attribute :picture, String
+
     def merge(other)
-      Brand.new(*to_h.merge(other.to_h.compact).values)
+      Brand.new(**serialize.merge(other.serialize.compact).deep_symbolize_keys)
     end
   end
 
@@ -95,9 +99,8 @@ class NavigationComponent < ApplicationComponent
     param :options, default: -> {}
     param :html_options, default: -> { {} }
 
-    attribute :if, Types::Bool, as: :show, default: -> { true }
-    attribute :active, Types::Bool, default: -> { false }
-    attribute :position, Types::Coercible::Symbol, default: -> { :left }
+    attribute :if, T::Boolean, as: :show, default: -> { true }
+    attribute :active, T::Boolean, default: -> { false }
 
     def template(&)
       return if hide?

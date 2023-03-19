@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 class MetadataComponent < ApplicationComponent
-  attribute :changelog, Types::Instance(Changelog)
+  attribute :changelog, T::Changelog
 
   def template
     wrapper class: 'dimmed text-sm', data: { turbo_frame: '_top' } do
