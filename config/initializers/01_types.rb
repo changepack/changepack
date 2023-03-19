@@ -31,6 +31,21 @@ module T
     ar_type_value.new(__typed:)
   end
 
+  def self.const_missing(name)
+    model_name = name
+    type_name = "T::#{name}"
+
+    if const_defined?(model_name)
+      # This is a bit hacky, but we use standard Rails autoload to load
+      # the model and then `ActiveModel::T` automatically defines the
+      # associated type for it.
+      const_get(model_name)
+      return const_get(type_name) if const_defined?(type_name)
+    end
+
+    super(name)
+  end
+
   module Changepack
     module ClassMethods
       extend ActiveSupport::Concern
