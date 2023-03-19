@@ -10,9 +10,9 @@ class Publication
   attribute :content, :string
   attribute :published, :boolean, default: false
   attribute :commits, array: true, default: -> { [] }
-  attribute :changelog
-  attribute :account
-  attribute :user
+  attribute :changelog, T.instance(Changelog)
+  attribute :account, T.instance(Account)
+  attribute :user, T.instance(User)
 
   sig { returns T::Boolean }
   def update!

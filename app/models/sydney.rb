@@ -17,7 +17,7 @@ class Sydney
   include ActiveModel::Attributes
   include ActiveModel::T
 
-  attribute :account
+  attribute :account, T.instance(Account)
 
   sig { params(changes: T::String.array).returns(T::String) }
   def hallucinate(changes)

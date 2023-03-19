@@ -7,34 +7,58 @@ module Types
 end
 
 module T
+  def self.instance(__typed)
+    ar_type_value = Class.new(ActiveRecord::Type::Value) do
+      attr_reader :__typed
+
+      def initialize(__typed:, **opts)
+        @__typed = __typed
+        super(**opts)
+      end
+
+      def cast(value)
+        return value if value.is_a?(__typed)
+        raise ArgumentError, "Value must be an instance of #{__typed}"
+      end
+
+      # These methods are required by ActiveRecord::Type::Value,
+      # but we don't need to implement them since we're not
+      # storing instances in the database.
+      def serialize(value); end
+      def deserialize(value); end
+    end
+
+    ar_type_value.new(__typed:)
+  end
+
   module Changepack
     module ClassMethods
       extend ActiveSupport::Concern
 
       class_methods do
-        def __type_target
+        def __typed
           superclass
         end
 
         def |(other)
-          T.any(__type_target, other)
+          T.any(__typed, other)
         end
 
         def nilable
-          ::T.nilable(__type_target)
+          ::T.nilable(__typed)
         end
 
         def array
-          ::T::Array[__type_target]
+          ::T::Array[__typed]
         end
 
         def relation
           T.any(
-            __type_target::const_get(:ActiveRecord_Associations_CollectionProxy),
-            __type_target::const_get(:ActiveRecord_Relation),
+            __typed::const_get(:ActiveRecord_Associations_CollectionProxy),
+            __typed::const_get(:ActiveRecord_Relation),
             ActiveRecord::AssociationRelation,
             ActiveRecord::Relation,
-            ::T::Array[__type_target]
+            ::T::Array[__typed]
           )
         end
       end
@@ -63,7 +87,7 @@ module T
   module Array
     include Changepack::ClassMethods
 
-    def self.__type_target
+    def self.__typed
       self
     end
   end
@@ -71,7 +95,7 @@ module T
   module Hash
     include Changepack::ClassMethods
 
-    def self.__type_target
+    def self.__typed
       self
     end
   end
@@ -79,7 +103,7 @@ module T
   module Enumerable
     include Changepack::ClassMethods
 
-    def self.__type_target
+    def self.__typed
       self
     end
   end
@@ -87,14 +111,14 @@ module T
   module Enumerator
     include Changepack::ClassMethods
 
-    def self.__type_target
+    def self.__typed
       self
     end
 
     module Lazy
       include Changepack::ClassMethods
 
-      def self.__type_target
+      def self.__typed
         self
       end
     end
@@ -102,7 +126,7 @@ module T
     module Chain
       include Changepack::ClassMethods
 
-      def self.__type_target
+      def self.__typed
         self
       end
     end
@@ -111,7 +135,7 @@ module T
   module Range
     include Changepack::ClassMethods
 
-    def self.__type_target
+    def self.__typed
       self
     end
   end
@@ -119,7 +143,7 @@ module T
   module Set
     include Changepack::ClassMethods
 
-    def self.__type_target
+    def self.__typed
       self
     end
   end
@@ -129,7 +153,7 @@ module T
 
     extend T::Sig
 
-    def self.__type_target
+    def self.__typed
       self
     end
   end
