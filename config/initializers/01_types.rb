@@ -79,7 +79,7 @@ module T
       end
     end
 
-    module Instance
+    module ClassEval
       def |(other)
         T.any(self, other)
       end
@@ -175,22 +175,22 @@ module T
 
   module Types
     class TypedHash
-      include Changepack::Instance
+      include Changepack::ClassEval
     end
 
     class TypedArray
-      include Changepack::Instance
+      include Changepack::ClassEval
     end
 
     class Union
-      include Changepack::Instance
+      include Changepack::ClassEval
     end
   end
 
   module Private
     module Types
       class SimplePairUnion
-        include Changepack::Instance
+        include Changepack::ClassEval
       end
 
       class TypeAlias
