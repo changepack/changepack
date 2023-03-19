@@ -3,6 +3,8 @@
 
 module Changepack
   class Handler < ActiveJob::Base # rubocop:disable Rails/ApplicationJob
+    extend T::Sig
+
     def self.on(event)
       Rails.configuration.event_store.subscribe(self, to: [event])
     end

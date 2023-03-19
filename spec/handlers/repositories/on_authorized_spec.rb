@@ -20,7 +20,7 @@ module Repositories
     subject(:handler) { described_class.new }
 
     it 'pulls repositories' do
-      allow(Repository).to receive(:pull).and_return([])
+      allow(Repository).to receive(:pull).and_return(true)
 
       handler.perform(payload)
 
