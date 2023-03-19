@@ -185,6 +185,10 @@ module T
     class Union
       include Changepack::ClassEval
     end
+
+    class Untyped
+      include Changepack::ClassEval
+    end
   end
 
   module Private

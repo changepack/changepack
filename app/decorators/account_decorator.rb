@@ -4,6 +4,7 @@
 class AccountDecorator < ApplicationDecorator
   SIZE = [48, 48].freeze
 
+  sig { returns T.nilable(ActiveStorage::VariantWithRecord) }
   def thumb
     return picture if picture.blank?
 
