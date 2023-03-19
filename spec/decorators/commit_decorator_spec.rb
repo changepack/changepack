@@ -39,15 +39,15 @@ RSpec.describe CommitDecorator, type: :decorator do
   end
 
   it 'disables checkboxes for commits with other changelogs assigned' do
-    changelog1 = create(:changelog)
-    changelog2 = create(:changelog)
+    changelog1 = create(:changelog).decorate
+    changelog2 = create(:changelog).decorate
     commit.changelog = changelog1
 
     expect(decorator.checkbox_options(changelog2)).to eq(disabled)
   end
 
   it 'checks checkboxes for commits assigned to the current changelog' do
-    changelog = create(:changelog)
+    changelog = create(:changelog).decorate
     commit.changelog = changelog
 
     expect(decorator.checkbox_options(changelog)).to eq(checked)
