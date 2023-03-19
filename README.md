@@ -8,12 +8,12 @@ Changepack is an open-source changelog for your product. Share updates about new
 </a>
 <!-- HTML is required to rescale the image so that the button isn’t bigger than Heroku’s -->
 
-# Features
+## Features
 
 * **Pull commits from GitHub**. Changepack allows you to link changelogs with your GitHub activity, making it easy to track progress.
 * **Write release notes 10x faster with AI.** Leverage OpenAI’s [ChatGPT](https://openai.com/blog/chatgpt) to write your content in seconds.
 
-# Build and run locally
+## Build and run locally
 
 ```
 git clone https://github.com/changepack/changepack.git
@@ -33,3 +33,9 @@ bundle exec rails s
 ```
 
 Use `tmuxinator` or `foreman` to run backgrounds processes like `guard`, a `cypruss` server, or a `tailwindcss` watcher.
+
+## Contributors 🎉
+
+Looking to contribute? Please refer our [CONTRIBUTING.md](./CONTRIBUTING.md) file.
+
+<!-- <a href="https://github.com/changepack/changepack/graphs/contributors"><img src="https://opencollective.com/changepack/contributors.svg?width=890&button=false" /></a> -->
