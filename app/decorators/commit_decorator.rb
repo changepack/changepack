@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 class CommitDecorator < ApplicationDecorator
-  sig { returns T::String }
+  sig { returns String }
   def abbr
     message.truncate(50)
   end
@@ -31,7 +31,7 @@ class CommitDecorator < ApplicationDecorator
 
   private
 
-  sig { params(changelog: ChangelogDecorator).returns T::Hash[T::Symbol, T::Boolean | T::String] }
+  sig { params(changelog: ChangelogDecorator).returns T::Hash[Symbol, T::Boolean | T::String] }
   def checkbox_html_options(changelog)
     {
       multiple: true,

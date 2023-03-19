@@ -9,7 +9,7 @@ class Provider
   attribute :access_token, :string
   attribute :account_id, :string
 
-  sig { returns T::Symbol }
+  sig { returns Symbol }
   def provider
     self.class.name.demodulize.downcase.to_sym
   end
@@ -67,7 +67,7 @@ class Provider
     attribute :commited_at, Time
     attribute :author, Author
 
-    sig { returns T::Hash[T::Symbol, T::String | T::Hash[Symbol, String] | T::Time] }
+    sig { returns T::Hash[Symbol, T::String | T::Hash[Symbol, String] | T::Time] }
     def to_h
       {
         message:,

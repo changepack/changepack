@@ -10,7 +10,7 @@ module Users
 
     private
 
-    sig { params(provider: T::Symbol).returns(T::Boolean) }
+    sig { params(provider: Symbol).returns(T::Boolean) }
     def sign_in_from!(provider)
       if user_signed_out?
         User.from!(provider, auth).tap { |user| sign_in(user) }
@@ -30,7 +30,7 @@ module Users
       request.env['omniauth.auth']
     end
 
-    sig { returns T::String }
+    sig { returns String }
     def after_omniauth_failure_path_for(_)
       root_path
     end

@@ -21,7 +21,7 @@ class User
       @git ||= Provider[provider].new(access_token:, account_id:)
     end
 
-    sig { returns T::String }
+    sig { returns String }
     def access_token
       providers.dig(provider, :access_token)
     end

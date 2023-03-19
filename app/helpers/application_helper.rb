@@ -16,7 +16,7 @@ module ApplicationHelper
     fa_icon(name, **args)
   end
 
-  sig { params(model: ApplicationRecord, field: T::Symbol | T::String).returns(T::String) }
+  sig { params(model: ApplicationRecord, field: T::Symbol | T::String).returns(String) }
   def text_field_class(model, field)
     "input #{'input-invalid' if model.errors.include?(field.to_sym)}"
   end

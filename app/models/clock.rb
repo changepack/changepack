@@ -9,7 +9,7 @@ module Clock
   end
 
   class Tick < ApplicationJob
-    sig { returns T::Integer }
+    sig { returns Integer }
     def perform
       Time.current.hour.tap do |hour|
         Event.publish(

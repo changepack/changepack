@@ -39,7 +39,7 @@ module Status
       )
     end
 
-    sig { returns T::String }
+    sig { returns String }
     def current_state
       self['status'].presence || state_machine.current_state
     end
