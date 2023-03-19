@@ -168,6 +168,11 @@ module T
 
     extend T::Sig
 
+    class << self
+      # Consistency with `ActiveRecord::Attributes` and `Event`
+      alias attribute const
+    end
+
     def self.__typed
       self
     end
@@ -247,14 +252,4 @@ end
 
 module StoreModel
   T = ActiveModel::T
-end
-
-module Dry
-  class Struct
-    extend T::Sig
-    # Dry::Struct works similar to how T::Struct works in the Sorbet runtime library.
-    # Given that T::Struct can be used as a Sorbet type, it makes sense to treat
-    # Dry::Struct like a Sorbet type as well.
-    include T::Changepack::ClassMethods
-  end
 end

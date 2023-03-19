@@ -132,8 +132,6 @@ gem "dry-initializer-rails"
 
 gem "dry-types"
 
-gem "dry-struct"
-
 gem "hashie"
 
 gem "after_commit_everywhere"

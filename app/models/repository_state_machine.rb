@@ -16,7 +16,7 @@ class RepositoryStateMachine
 
   after_transition(to: :active, after_commit: true) do |repository, _|
     Event.publish(
-      Repository::Outdated.new(data: { repository_id: repository.id })
+      Repository::Outdated.new(repository_id: repository.id)
     )
   end
 end

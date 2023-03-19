@@ -12,8 +12,7 @@ module Repositories
 
     private
 
-    delegate :provider, :access_token, :account_id, to: :data
-    delegate :data, to: :event
+    delegate :provider, :access_token, :account_id, to: :event
 
     sig { returns Provider }
     def git

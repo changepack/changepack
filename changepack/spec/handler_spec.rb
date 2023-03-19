@@ -3,11 +3,15 @@
 
 require 'rails_helper'
 
+class TestEvent < Event
+  attribute :foo, String
+end
+
 module Changepack
   describe Handler do
     let(:payload) do
       {
-        event_type: 'Event',
+        event_type: 'TestEvent',
         data: { foo: 'bar' }
       }
     end
@@ -15,7 +19,7 @@ module Changepack
     let(:handler) do
       Class.new(described_class) do
         def run
-          event.data.foo
+          event.foo
         end
       end
     end

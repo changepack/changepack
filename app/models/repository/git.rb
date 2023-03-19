@@ -35,7 +35,7 @@ class Repository
 
         Event.publish(
           Repository::Authorized.new(
-            data: { provider: git.provider, access_token: git.access_token, account_id: git.account_id }
+            provider: git.provider, access_token: git.access_token, account_id: git.account_id
           )
         )
 

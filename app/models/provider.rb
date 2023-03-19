@@ -40,10 +40,12 @@ class Provider
     raise NoMethodError
   end
 
-  class Repository < Dry::Struct
-    attribute :id, Types::Integer
-    attribute :name, Types::String
-    attribute :branch, Types::String
+  class Repository < T::Struct
+    extend T::Sig
+
+    attribute :id, Integer
+    attribute :name, String
+    attribute :branch, String
 
     sig { returns T::Hash[Symbol, String] }
     def to_h
@@ -51,15 +53,19 @@ class Provider
     end
   end
 
-  class Commit < Dry::Struct
-    attribute :sha, Types::String
-    attribute :message, Types::String
-    attribute :url, Types::String
-    attribute :commited_at, Types::Time
-    attribute :author do
-      attribute :name, Types::String
-      attribute :email, Types::String
+  class Commit < T::Struct
+    extend T::Sig
+
+    class Author < T::Struct
+      attribute :name, String
+      attribute :email, String
     end
+
+    attribute :sha, String
+    attribute :message, String
+    attribute :url, String
+    attribute :commited_at, Time
+    attribute :author, Author
 
     sig { returns T::Hash[T::Symbol, T::String | T::Hash[Symbol, String] | T::Time] }
     def to_h

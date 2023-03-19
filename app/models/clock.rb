@@ -5,7 +5,7 @@ module Clock
   extend T::Sig
 
   class NewHour < Event
-    attribute :hour, Types::Integer
+    attribute :hour, Integer
   end
 
   class Tick < ApplicationJob
@@ -13,7 +13,7 @@ module Clock
     def perform
       Time.current.hour.tap do |hour|
         Event.publish(
-          NewHour.new(data: { hour: })
+          NewHour.new(hour:)
         )
       end
     end

@@ -14,7 +14,7 @@ module Repositories
 
     sig { returns Repository }
     def repository
-      @repository ||= Repository.find(event.data.repository_id)
+      @repository ||= Repository.find(event.repository_id)
     end
   end
 end

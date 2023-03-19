@@ -15,7 +15,7 @@ module Changepack
       klass = @payload.fetch(:event_type).constantize # rubocop:disable Sorbet/ConstantsFromStrings
       opts = @payload.slice(:data, :event_id, :metadata)
 
-      @event = klass.new(**opts)
+      @event = klass.new(**opts[:data], **opts)
 
       run
     end

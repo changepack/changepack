@@ -69,10 +69,10 @@ class Provider
           message: commit.commit.message,
           url: commit.html_url,
           commited_at: commit.commit.author.date,
-          author: {
+          author: Provider::Commit::Author.new(
             name: commit.commit.author.name,
             email: commit.commit.author.email
-          }
+          )
         )
       end
     end
