@@ -51,10 +51,6 @@ module T
           T.any(__typed, other)
         end
 
-        def array
-          ::T::Array[__typed]
-        end
-
         def call(val)
           T.let(val, __typed)
         end
@@ -64,10 +60,6 @@ module T
     module ClassEval
       def |(other)
         T.any(self, other)
-      end
-
-      def array
-        ::T::Array[self]
       end
 
       def call(val)
@@ -189,10 +181,6 @@ module T
       class TypeAlias
         def |(other)
           T.any(aliased_type, other)
-        end
-
-        def array
-          ::T::Array[aliased_type]
         end
 
         def call(val)

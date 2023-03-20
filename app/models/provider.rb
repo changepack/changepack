@@ -13,6 +13,9 @@ class Provider
   attribute :access_token, :string
   attribute :account_id, :string
 
+  Result = T.type_alias { T.any(Provider::Repository, Provider::Commit) }
+  Results = T.type_alias { T::Array[Result] }
+
   sig { params(provider: T::Key).returns(T.untyped) }
   def self.[](provider)
     providers.fetch(provider.to_sym)
@@ -25,10 +28,10 @@ class Provider
     }
   end
 
-  sig { abstract.returns Provider::Repository.array }
+  sig { abstract.returns Results }
   def repositories; end
 
-  sig { abstract.params(_repository_id: T.untyped).returns(Provider::Commit.array) }
+  sig { abstract.params(_repository_id: T.untyped).returns(Results) }
   def commits(_repository_id); end
 
   sig { returns Symbol }

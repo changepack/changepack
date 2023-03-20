@@ -3,16 +3,15 @@
 
 class Provider
   class GitHub < Provider
-    Results = T.type_alias { T.any(Provider::Repository, Provider::Commit).array }
     Cursor = T.type_alias { T.nilable(T::Integer) }
 
-    sig { override.params(after: Cursor).returns(Provider::Repository.array) }
+    sig { override.params(after: Cursor).returns(Results) }
     def repositories(after: nil)
       repositories = paginate(after:) { client.repos }
       repositories.map { |repo| Mapper.repository(repo) }
     end
 
-    sig { override.params(repository_id: T::Integer, after: Cursor).returns(Provider::Commit.array) }
+    sig { override.params(repository_id: Integer, after: Cursor).returns(Results) }
     def commits(repository_id, after: nil)
       commits = paginate(after:) { client.commits(repository_id) }
       commits.map { |commit| Mapper.commit(commit) }

@@ -29,7 +29,7 @@ class Account < ApplicationRecord
 
   private
 
-  sig { returns T::Symbol.array }
+  sig { returns T::Array[Symbol] }
   def slug_candidates
     %i[name set_pretty_id]
   end

@@ -39,7 +39,7 @@ class Publication
     end
   end
 
-  sig { returns T::String.array }
+  sig { returns T::Array[String] }
   def changes
     account.commits.where(id: commits).pluck(:message)
   end

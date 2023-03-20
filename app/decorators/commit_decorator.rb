@@ -2,12 +2,15 @@
 # frozen_string_literal: true
 
 class CommitDecorator < ApplicationDecorator
+  Option = T.type_alias { T.any(NilClass, String, Hash) }
+  Options = T.type_alias { T::Array[Option] }
+
   sig { returns String }
   def abbr
     message.truncate(50)
   end
 
-  sig { params(changelog: ChangelogDecorator).returns(T.untyped.array) }
+  sig { params(changelog: ChangelogDecorator).returns(Options) }
   def checkbox_options(changelog)
     [].tap do |opts|
       true_value = id

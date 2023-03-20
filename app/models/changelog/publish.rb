@@ -6,6 +6,8 @@ class Changelog
     extend ActiveSupport::Concern
     extend T::Sig
 
+    Commits = T.type_alias { T::Array[String] }
+
     included do
       after_commit :detach, on: :update, if: :discarded_at_previously_changed?
     end
@@ -21,14 +23,14 @@ class Changelog
       false
     end
 
-    sig { params(commits: T::String.array).void }
+    sig { params(commits: Commits).void }
     def attach(commits)
       account.commits
              .where(id: commits)
              .find_each { |commit| commit.update!(changelog: self) }
     end
 
-    sig { params(except: T::String.array).void }
+    sig { params(except: Commits).void }
     def detach(except: [])
       commits.where.not(id: except)
              .find_each { |commit| commit.update!(changelog_id: nil) }
