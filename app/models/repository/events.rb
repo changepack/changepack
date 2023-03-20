@@ -10,7 +10,7 @@ class Repository
     end
 
     class Authorized < Event
-      attribute :provider, T::String | T::Symbol
+      attribute :provider, T::Key
       attribute :access_token, String
       attribute :account_id, String
     end

@@ -7,8 +7,6 @@ module Changepack
     extend T::Helpers
     extend ActiveSupport::Concern
 
-    Key = T.type_alias { T::String | T::Symbol }
-
     sig { params(event: T.untyped).returns(String) }
     def self.publish(event)
       Rails.configuration.event_store.publish(event)
@@ -26,10 +24,10 @@ module Changepack
     end
 
     prop :event_id, T.nilable(String), factory: -> { SecureRandom.uuid }
-    prop :metadata, T.nilable(T::Hash[Key, T.untyped]), default: {}
-    prop :data, T.nilable(T::Hash[Key, T.untyped])
+    prop :metadata, T.nilable(T::Hash[T::Key, T.untyped]), default: {}
+    prop :data, T.nilable(T::Hash[T::Key, T.untyped])
 
-    sig { returns T::Hash[Key, T.untyped] }
+    sig { returns T::Hash[T::Key, T.untyped] }
     def data
       @data&.as_json || serialize.except('event_id', 'metadata', 'data')
     end

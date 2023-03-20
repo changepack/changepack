@@ -13,7 +13,7 @@ module Changepack
       Rails.configuration.event_store.subscribe(self, to: [event])
     end
 
-    sig { params(payload: T::Hash[T::Symbol | T::String, T.untyped]).returns(T.untyped) }
+    sig { params(payload: T::Hash[T::Key, T.untyped]).returns(T.untyped) }
     def perform(payload)
       @payload = payload.deep_symbolize_keys
 

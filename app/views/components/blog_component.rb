@@ -3,7 +3,7 @@
 
 class BlogComponent < ApplicationComponent
   # You can pass a changelog or a collection of changelogs
-  attribute :changelogs, T::Changelog.relation.nilable
+  attribute :changelogs, T.nilable(T::Relation)
   attribute :changelog, T::Changelog.nilable
   # If not present, account will be inferred from the changelog
   attribute :account, T::Account.nilable

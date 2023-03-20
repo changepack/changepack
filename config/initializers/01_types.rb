@@ -59,16 +59,6 @@ module T
           ::T::Array[__typed]
         end
 
-        def relation
-          T.any(
-            __typed::const_get(:ActiveRecord_Associations_CollectionProxy),
-            __typed::const_get(:ActiveRecord_Relation),
-            ActiveRecord::AssociationRelation,
-            ActiveRecord::Relation,
-            ::T::Array[__typed]
-          )
-        end
-
         def call(val)
           T.let(val, __typed)
         end
@@ -98,6 +88,8 @@ module T
   Symbol = T.type_alias { ::Symbol }
   Integer = T.type_alias { ::Integer }
   Time = T.type_alias { T.any(::Time, DateTime, ActiveSupport::TimeWithZone) }
+  Key = T.type_alias { T.any(String, Symbol) }
+  Relation = T.type_alias { T.any(ActiveRecord::Associations::CollectionProxy, ActiveRecord::Relation, Array) }
 
   module Array
     include Changepack::ClassMethods

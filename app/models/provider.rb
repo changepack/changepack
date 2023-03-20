@@ -13,7 +13,7 @@ class Provider
   attribute :access_token, :string
   attribute :account_id, :string
 
-  sig { params(provider: T::String | T::Symbol).returns(T.untyped) }
+  sig { params(provider: T::Key).returns(T.untyped) }
   def self.[](provider)
     providers.fetch(provider.to_sym)
   end

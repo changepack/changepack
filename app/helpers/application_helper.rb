@@ -11,12 +11,12 @@ module ApplicationHelper
     params.fetch(:controller, nil).try(:to_sym)
   end
 
-  sig { params(name: T::Symbol | T::String, args: T.untyped).returns(T.untyped) }
+  sig { params(name: T::Key, args: T.untyped).returns(T.untyped) }
   def icon(name, **args)
     fa_icon(name, **args)
   end
 
-  sig { params(model: ApplicationRecord, field: T::Symbol | T::String).returns(String) }
+  sig { params(model: ApplicationRecord, field: T::Key).returns(String) }
   def text_field_class(model, field)
     "input #{'input-invalid' if model.errors.include?(field.to_sym)}"
   end
