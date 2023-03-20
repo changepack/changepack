@@ -51,10 +51,6 @@ module T
           T.any(__typed, other)
         end
 
-        def nilable
-          ::T.nilable(__typed)
-        end
-
         def array
           ::T::Array[__typed]
         end
@@ -68,10 +64,6 @@ module T
     module ClassEval
       def |(other)
         T.any(self, other)
-      end
-
-      def nilable
-        ::T.nilable(self)
       end
 
       def array
@@ -197,10 +189,6 @@ module T
       class TypeAlias
         def |(other)
           T.any(aliased_type, other)
-        end
-
-        def nilable
-          ::T.nilable(aliased_type)
         end
 
         def array

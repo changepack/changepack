@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 class FlashComponent < ApplicationComponent
-  attribute :type, T.any(String, Symbol).nilable
+  attribute :type, T.nilable(T::Key)
 
   def template(&)
     div do

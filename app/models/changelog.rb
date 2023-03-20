@@ -30,7 +30,7 @@ class Changelog < ApplicationRecord
   delegate :published?, to: :status
 
   scope :for, ->(user) { where(user.blank? && { status: :published }) },
-        sig: T.proc.params(user: T::User.nilable)
+        sig: T.proc.params(user: T.nilable(User))
 
   scope :recent, -> { order(created_at: :desc) }
 

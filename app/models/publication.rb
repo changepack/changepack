@@ -30,7 +30,7 @@ class Publication
 
   private
 
-  sig { returns T::String.nilable }
+  sig { returns T.nilable(String) }
   def completion
     if content.present? || commits.none?
       content

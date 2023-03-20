@@ -5,9 +5,9 @@ class ApplicationLayout < ApplicationView
   include Phlex::Rails::Layout
 
   class Brand < T::Struct
-    attribute :name, T::String.nilable
-    attribute :website, T::String.nilable
-    attribute :picture, T::String.nilable
+    attribute :name, T.nilable(String)
+    attribute :website, T.nilable(String)
+    attribute :picture, T.nilable(String)
   end
 
   attr_reader :brand

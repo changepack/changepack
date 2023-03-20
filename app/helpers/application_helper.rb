@@ -6,7 +6,7 @@ module ApplicationHelper
 
   include Pagy::Frontend
 
-  sig { returns T::Symbol.nilable }
+  sig { returns T.nilable(Symbol) }
   def current_controller
     params.fetch(:controller, nil).try(:to_sym)
   end

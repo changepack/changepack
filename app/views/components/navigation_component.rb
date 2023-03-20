@@ -4,7 +4,7 @@
 class NavigationComponent < ApplicationComponent
   include Phlex::DeferredRender
 
-  attribute :brand, T::Struct.nilable
+  attribute :brand, T.nilable(T::Struct)
 
   def template
     wrapper do

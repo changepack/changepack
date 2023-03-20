@@ -42,12 +42,12 @@ module Changepack
       metadata[:event_type] || self.class.name
     end
 
-    sig { returns T::Time.nilable }
+    sig { returns T.nilable(T::Time) }
     def timestamp
       metadata[:timestamp] || Time.current
     end
 
-    sig { returns T::Time.nilable }
+    sig { returns T.nilable(T::Time) }
     def valid_at
       metadata[:valid_at]
     end
@@ -67,7 +67,7 @@ module Changepack
       ].hash
     end
 
-    sig { returns T::String.nilable }
+    sig { returns T.nilable(String) }
     def correlation_id
       metadata[:correlation_id]
     end
@@ -77,7 +77,7 @@ module Changepack
       metadata[:correlation_id] = val
     end
 
-    sig { returns T::String.nilable }
+    sig { returns T.nilable(String) }
     def causation_id
       metadata[:causation_id]
     end

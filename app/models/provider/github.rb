@@ -4,7 +4,7 @@
 class Provider
   class GitHub < Provider
     Results = T.type_alias { T.any(Provider::Repository, Provider::Commit).array }
-    Cursor = T.type_alias { T::Integer.nilable }
+    Cursor = T.type_alias { T.nilable(T::Integer) }
 
     sig { override.params(after: Cursor).returns(Provider::Repository.array) }
     def repositories(after: nil)
@@ -37,7 +37,7 @@ class Provider
       next_page.blank? || items.map(&:sha).include?(after)
     end
 
-    sig { returns T::String.nilable }
+    sig { returns T.nilable(String) }
     def next_page
       client.last_response
             .rels
