@@ -47,10 +47,6 @@ module T
           superclass
         end
 
-        def |(other)
-          T.any(__typed, other)
-        end
-
         def call(val)
           T.let(val, __typed)
         end
@@ -58,10 +54,6 @@ module T
     end
 
     module ClassEval
-      def |(other)
-        T.any(self, other)
-      end
-
       def call(val)
         T.let(val, self)
       end
@@ -76,81 +68,45 @@ module T
   Relation = T.type_alias { T.any(ActiveRecord::Associations::CollectionProxy, ActiveRecord::Relation, Array) }
 
   module Array
-    include Changepack::ClassMethods
-
-    def self.__typed
-      self
-    end
+    include Changepack::ClassEval
   end
 
   module Hash
-    include Changepack::ClassMethods
-
-    def self.__typed
-      self
-    end
+    include Changepack::ClassEval
   end
 
   module Enumerable
-    include Changepack::ClassMethods
-
-    def self.__typed
-      self
-    end
+    include Changepack::ClassEval
   end
 
   module Enumerator
-    include Changepack::ClassMethods
-
-    def self.__typed
-      self
-    end
+    include Changepack::ClassEval
 
     module Lazy
-      include Changepack::ClassMethods
-
-      def self.__typed
-        self
-      end
+      include Changepack::ClassEval
     end
 
     module Chain
-      include Changepack::ClassMethods
-
-      def self.__typed
-        self
-      end
+      include Changepack::ClassEval
     end
   end
 
   module Range
-    include Changepack::ClassMethods
-
-    def self.__typed
-      self
-    end
+    include Changepack::ClassEval
   end
 
   module Set
-    include Changepack::ClassMethods
-
-    def self.__typed
-      self
-    end
+    include Changepack::ClassEval
   end
 
   class Struct
-    include Changepack::ClassMethods
+    include Changepack::ClassEval
 
     extend T::Sig
 
     class << self
       # Consistency with `ActiveRecord::Attributes` and `Event`
       alias attribute const
-    end
-
-    def self.__typed
-      self
     end
   end
 
@@ -179,13 +135,7 @@ module T
       end
 
       class TypeAlias
-        def |(other)
-          T.any(aliased_type, other)
-        end
-
-        def call(val)
-          T.let(val, self)
-        end
+        include Changepack::ClassEval
       end
     end
   end

@@ -61,9 +61,13 @@ class Provider
     extend T::Sig
 
     class Author < T::Struct
+      Value = T.type_alias { T::Hash[Symbol, String] }
+
       attribute :name, String
       attribute :email, String
     end
+
+    Value = T.type_alias { T.any(String, T::Time, Author::Value) }
 
     attribute :sha, String
     attribute :message, String
@@ -71,7 +75,7 @@ class Provider
     attribute :commited_at, Time
     attribute :author, Author
 
-    sig { returns T::Hash[Symbol, T::String | T::Hash[Symbol, String] | T::Time] }
+    sig { returns T::Hash[T::Key, Value] }
     def to_h
       {
         message:,
