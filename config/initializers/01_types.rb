@@ -3,9 +3,11 @@ module T
   Symbol = T.type_alias { ::Symbol }
   Integer = T.type_alias { ::Integer }
   Time = T.type_alias { T.any(::Time, DateTime, ActiveSupport::TimeWithZone) }
-  Key = T.type_alias { T.any(String, Symbol) }
+  Key = T.type_alias { T.any(::String, ::Symbol) }
   Shape = T.type_alias { T::Hash[Key, Class] }
   Payload = T.type_alias { T::Hash[T::Key, T.untyped] }
+  Params = T.type_alias { T.any(::Hash, ActionController::Parameters) }
+  Locals = T.type_alias { { locals: ::Hash } }
 
   def self.instance(__typed)
     ar_type_value = Class.new(ActiveRecord::Type::Value) do
@@ -32,7 +34,7 @@ module T
   end
 
   def self.const_missing(name)
-    model_name = name.singularize
+    model_name = name.to_s.singularize
     type_name = "T::#{name}"
 
     if const_defined?(model_name)

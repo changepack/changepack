@@ -21,10 +21,12 @@ class ApplicationController < ActionController::Base
 
   private
 
+  sig { returns T.nilable(Account) }
   def current_account
     @current_account ||= current_user.account if user_signed_in?
   end
 
+  sig { returns T.nilable(String) }
   def id
     params.require(:id)
   end
@@ -33,6 +35,7 @@ class ApplicationController < ActionController::Base
     !allowed_to?(rule, record, **options)
   end
 
+  sig { returns T::Boolean }
   def user_signed_out?
     !user_signed_in?
   end

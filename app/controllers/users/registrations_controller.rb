@@ -5,6 +5,7 @@ module Users
   class RegistrationsController < Devise::RegistrationsController
     private
 
+    sig { returns T::Params }
     def sign_up_params
       params.require(:user).permit(
         :email,
@@ -13,6 +14,7 @@ module Users
       )
     end
 
+    sig { returns T::Params }
     def account_update_params
       params.require(:user).permit(
         :email,

@@ -78,18 +78,21 @@ class ChangelogsController < ApplicationController
     @changelog = Changelog.new
   end
 
+  sig { returns T::Params }
   def permitted
     params.require(:changelog)
           .then { |permitted| authorized(permitted) }
           .merge(changelog:, user: current_user, account: current_account)
   end
 
+  sig { returns T::Locals }
   def form
     {
       locals: { changelog: changelog.decorate, commits: commits.decorate }
     }
   end
 
+  sig { returns T::Locals }
   def item
     {
       locals: { changelog: }

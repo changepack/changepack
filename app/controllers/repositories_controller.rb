@@ -43,6 +43,7 @@ class RepositoriesController < ApplicationController
     authorized(Repository.activity.kept)
   end
 
+  sig { returns T::Locals }
   def item
     {
       locals: { repository: }
