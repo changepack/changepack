@@ -64,7 +64,7 @@ class ChangelogsController < ApplicationController
     @changelog ||= Changelog.kept.friendly.find(id)
   end
 
-  sig { returns T::Relation }
+  sig { returns T::Commits }
   def commits
     @commits ||= current_account.commits
                                 .options(changelog)

@@ -1,9 +1,12 @@
 # typed: false
 # frozen_string_literal: true
 
-class Commit < ApplicationRecord
-  include ActiveModel::T
+module T
+  Commit = T.type_alias { ::Commit }
+  Commits = T.type_alias { ::Commit::RelationType }
+end
 
+class Commit < ApplicationRecord
   include Git
 
   OPTIONS = T.let(

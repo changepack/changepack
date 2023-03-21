@@ -185,3 +185,5 @@ gem "ruby-openai"
 gem "file_validators"
 
 gem "sorbet-runtime"
+
+gem "sorbet-rails"

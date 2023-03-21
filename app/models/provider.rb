@@ -1,12 +1,18 @@
 # typed: false
 # frozen_string_literal: true
 
+module T
+  Provider = T.type_alias { ::Provider }
+  Providers = T.type_alias { Array[::Provider] }
+end
+
 class Provider
   extend T::Helpers
 
   include ActiveModel::Model
   include ActiveModel::Attributes
-  include ActiveModel::T
+
+  extend T::Sig
 
   abstract!
 

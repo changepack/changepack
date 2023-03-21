@@ -4,7 +4,8 @@
 class Publication
   include ActiveModel::Model
   include ActiveModel::Attributes
-  include ActiveModel::T
+
+  extend T::Sig
 
   attribute :title, :string
   attribute :content, :string

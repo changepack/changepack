@@ -1,9 +1,12 @@
 # typed: false
 # frozen_string_literal: true
 
-class User < ApplicationRecord
-  include ActiveModel::T
+module T
+  User = T.type_alias { ::User }
+  Users = T.type_alias { ::User::RelationType }
+end
 
+class User < ApplicationRecord
   include Git
   include Registration
 

@@ -1,9 +1,12 @@
 # typed: false
 # frozen_string_literal: true
 
-class Repository < ApplicationRecord
-  include ActiveModel::T
+module T
+  Repository = T.type_alias { ::Repository }
+  Repositories = T.type_alias { ::Repository::RelationType }
+end
 
+class Repository < ApplicationRecord
   include Events
   include Git
 

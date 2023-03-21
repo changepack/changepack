@@ -38,7 +38,7 @@ class RepositoriesController < ApplicationController
     @repository ||= collection.find(id)
   end
 
-  sig { returns T::Relation }
+  sig { returns T::Repositories }
   def collection
     authorized(Repository.activity.kept)
   end

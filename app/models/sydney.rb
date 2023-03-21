@@ -15,7 +15,8 @@
 class Sydney
   include ActiveModel::Model
   include ActiveModel::Attributes
-  include ActiveModel::T
+
+  extend T::Sig
 
   attribute :account, T.instance(Account)
 

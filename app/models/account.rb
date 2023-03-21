@@ -1,8 +1,13 @@
 # typed: false
 # frozen_string_literal: true
 
+module T
+  Account = T.type_alias { ::Account }
+  Accounts = T.type_alias { ::Account::RelationType }
+end
+
 class Account < ApplicationRecord
-  include ActiveModel::T
+  extend T::Sig
 
   include Slug
 
