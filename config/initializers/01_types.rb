@@ -48,84 +48,12 @@ module T
     super(name)
   end
 
-  module Changepack
-    module Callable
-      def call(val)
-        T.let(val, self)
-      end
-    end
-  end
-
-  module Array
-    include Changepack::Callable
-  end
-
-  module Hash
-    include Changepack::Callable
-  end
-
-  module Enumerable
-    include Changepack::Callable
-  end
-
-  module Enumerator
-    include Changepack::Callable
-
-    module Lazy
-      include Changepack::Callable
-    end
-
-    module Chain
-      include Changepack::Callable
-    end
-  end
-
-  module Range
-    include Changepack::Callable
-  end
-
-  module Set
-    include Changepack::Callable
-  end
-
   class Struct
-    include Changepack::Callable
-
     extend T::Sig
 
     class << self
       # Consistency with `ActiveRecord::Attributes` and `Event`
       alias attribute const
-    end
-  end
-
-  module Types
-    class TypedHash
-      include Changepack::Callable
-    end
-
-    class TypedArray
-      include Changepack::Callable
-    end
-
-    class Union
-      include Changepack::Callable
-    end
-
-    class Untyped
-      include Changepack::Callable
-    end
-  end
-
-  module Private
-    module Types
-      class SimplePairUnion
-        include Changepack::Callable
-      end
-
-      class TypeAlias
-        include Changepack::Callable
-      end
     end
   end
 end

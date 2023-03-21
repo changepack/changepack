@@ -3,9 +3,9 @@
 
 module Changepack
   class Event < T::InexactStruct
-    extend T::Sig
-    extend T::Helpers
     extend ActiveSupport::Concern
+    extend T::Helpers
+    extend T::Sig
 
     sig { params(event: T.untyped).returns(String) }
     def self.publish(event)

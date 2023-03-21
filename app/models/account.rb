@@ -7,8 +7,6 @@ module T
 end
 
 class Account < ApplicationRecord
-  extend T::Sig
-
   include Slug
 
   PICTURES = %w[image/jpeg image/png image/gif].freeze

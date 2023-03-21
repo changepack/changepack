@@ -11,7 +11,7 @@ class ApplicationComponent < Phlex::HTML
   register_element :turbo_frame
 
   def self.attribute(name, type = nil, **opts, &)
-    dry_initializer.option(name, type, **transform_opts(type, opts), &)
+    dry_initializer.option(name, ->(val) { T.let(val, type) }, **transform_opts(type, opts), &)
     self
   end
 

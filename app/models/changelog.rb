@@ -7,8 +7,6 @@ module T
 end
 
 class Changelog < ApplicationRecord
-  extend T::Sig
-
   include Publish
 
   include Slug
