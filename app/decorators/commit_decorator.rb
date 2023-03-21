@@ -2,11 +2,19 @@
 # frozen_string_literal: true
 
 class CommitDecorator < ApplicationDecorator
-  Option = T.type_alias { T.any(T::Boolean, String) }
-  Options = T.type_alias { T::Hash[Symbol, Option] }
-
-  Element = T.type_alias { T.any(NilClass, String, Options) }
+  Element = T.type_alias { T.any(NilClass, String, CommitDecorator.to_options_shape) }
   Splat = T.type_alias { T::Array[Element] }
+
+  sig { returns T::Shape }
+  def self.to_options_shape
+    {
+      multiple: T::Boolean,
+      id: T.nilable(String),
+      class: String,
+      checked: T::Boolean,
+      disabled: T::Boolean
+    }
+  end
 
   sig { returns String }
   def abbr
@@ -37,7 +45,7 @@ class CommitDecorator < ApplicationDecorator
 
   private
 
-  sig { params(changelog: ChangelogDecorator).returns(Options) }
+  sig { params(changelog: ChangelogDecorator).returns(CommitDecorator.to_options_shape) }
   def checkbox_html_options(changelog)
     {
       multiple: true,

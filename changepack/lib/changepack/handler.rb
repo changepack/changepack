@@ -13,7 +13,7 @@ module Changepack
       Rails.configuration.event_store.subscribe(self, to: [event])
     end
 
-    sig { params(payload: T::Hash[T::Key, T.untyped]).returns(T.untyped) }
+    sig { params(payload: T::Payload).returns(T::Boolean) }
     def perform(payload)
       @payload = payload.deep_symbolize_keys
 
@@ -23,6 +23,8 @@ module Changepack
       @event = klass.new(**opts[:data], **opts)
 
       run
+
+      true
     end
 
     sig { abstract.returns T.untyped }

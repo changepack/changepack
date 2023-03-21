@@ -52,7 +52,7 @@ class Provider
     class Mapper
       extend T::Sig
 
-      sig { params(repository: Sawyer::Resource).returns(Provider::Repository) }
+      sig { params(repository: Sawyer::Resource).returns(Result) }
       def self.repository(repository)
         Provider::Repository.new(
           id: repository.id,
@@ -61,7 +61,7 @@ class Provider
         )
       end
 
-      sig { params(commit: Sawyer::Resource).returns(Provider::Commit) }
+      sig { params(commit: Sawyer::Resource).returns(Result) }
       def self.commit(commit)
         Provider::Commit.new(
           sha: commit.sha,

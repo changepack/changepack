@@ -8,19 +8,18 @@ end
 
 class Provider
   extend T::Helpers
+  extend T::Sig
 
   include ActiveModel::Model
   include ActiveModel::Attributes
 
-  extend T::Sig
+  Result = T.type_alias { T.any(Provider::Repository, Provider::Commit) }
+  Results = T.type_alias { T::Array[Result] }
 
   abstract!
 
   attribute :access_token, :string
   attribute :account_id, :string
-
-  Result = T.type_alias { T.any(Provider::Repository, Provider::Commit) }
-  Results = T.type_alias { T::Array[Result] }
 
   sig { params(provider: T::Key).returns(T.untyped) }
   def self.[](provider)
@@ -32,6 +31,17 @@ class Provider
     {
       github: GitHub
     }
+  end
+
+  sig { returns T::Shape }
+  def self.to_shapes
+    # TODO: Uncomment once we add more providers
+    # T.any(
+    #   { github: { id: String, access_token: String } },
+    #   { ... }
+    # )
+
+    { github: { id: String, access_token: String } }
   end
 
   sig { abstract.returns Results }
@@ -57,7 +67,7 @@ class Provider
     attribute :name, String
     attribute :branch, String
 
-    sig { returns T::Hash[Symbol, String] }
+    sig { returns(name: String, branch: String) }
     def to_h
       { name:, branch: }
     end
@@ -67,21 +77,27 @@ class Provider
     extend T::Sig
 
     class Author < T::Struct
-      Value = T.type_alias { T::Hash[Symbol, String] }
-
       attribute :name, String
       attribute :email, String
-    end
 
-    Value = T.type_alias { T.any(String, T::Time, Author::Value) }
+      sig { returns T::Shape }
+      def self.to_shape
+        { name: String, email: String }
+      end
+    end
 
     attribute :sha, String
     attribute :message, String
     attribute :url, String
-    attribute :commited_at, Time
+    attribute :commited_at, T::Time
     attribute :author, Author
 
-    sig { returns T::Hash[T::Key, Value] }
+    sig { returns T::Shape }
+    def self.to_shape
+      { message: String, url: String, commited_at: T::Time, author: Author.to_shape }
+    end
+
+    sig { returns Commit.to_shape }
     def to_h
       {
         message:,

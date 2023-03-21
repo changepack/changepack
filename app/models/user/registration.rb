@@ -36,7 +36,7 @@ class User
         end
       end
 
-      sig { params(provider: T::Key, auth: OmniAuth::AuthHash).returns T::Hash[Symbol, T.untyped] }
+      sig { params(provider: T::Key, auth: OmniAuth::AuthHash).returns(Provider.to_shapes) }
       def provider(provider, auth)
         case provider.to_sym
         when :github

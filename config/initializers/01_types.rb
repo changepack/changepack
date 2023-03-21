@@ -1,4 +1,12 @@
 module T
+  String = T.type_alias { ::String }
+  Symbol = T.type_alias { ::Symbol }
+  Integer = T.type_alias { ::Integer }
+  Time = T.type_alias { T.any(::Time, DateTime, ActiveSupport::TimeWithZone) }
+  Key = T.type_alias { T.any(String, Symbol) }
+  Shape = T.type_alias { T::Hash[Key, Class] }
+  Payload = T.type_alias { T::Hash[T::Key, T.untyped] }
+
   def self.instance(__typed)
     ar_type_value = Class.new(ActiveRecord::Type::Value) do
       attr_reader :__typed
@@ -118,10 +126,4 @@ module T
       end
     end
   end
-
-  String = T.type_alias { ::String }
-  Symbol = T.type_alias { ::Symbol }
-  Integer = T.type_alias { ::Integer }
-  Time = T.type_alias { T.any(::Time, DateTime, ActiveSupport::TimeWithZone) }
-  Key = T.type_alias { T.any(String, Symbol) }
 end

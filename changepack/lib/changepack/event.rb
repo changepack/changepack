@@ -24,10 +24,10 @@ module Changepack
     end
 
     prop :event_id, T.nilable(String), factory: -> { SecureRandom.uuid }
-    prop :metadata, T.nilable(T::Hash[T::Key, T.untyped]), default: {}
-    prop :data, T.nilable(T::Hash[T::Key, T.untyped])
+    prop :metadata, T.nilable(T::Payload), default: {}
+    prop :data, T.nilable(T::Payload)
 
-    sig { returns T::Hash[T::Key, T.untyped] }
+    sig { returns T::Payload }
     def data
       @data&.as_json || serialize.except('event_id', 'metadata', 'data')
     end
