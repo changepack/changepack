@@ -21,6 +21,7 @@ class Account < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :commits, dependent: :destroy
   has_many :repositories, dependent: :destroy
+  has_many :changelogs, dependent: :destroy
 
   has_one_attached :picture
 
@@ -29,6 +30,10 @@ class Account < ApplicationRecord
                       file_content_type: { allow: PICTURES }
 
   normalize :name
+
+  after_initialize do
+    changelogs << Changelog.new(name:)
+  end
 
   private
 

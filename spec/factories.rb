@@ -4,6 +4,11 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :changelog do
+    name { account.name }
+    account
+  end
+
   factory :commit do
     message { Faker::Lorem.sentence }
     url { Faker::Internet.url(host: 'example.com') }
@@ -43,6 +48,7 @@ FactoryBot.define do
   factory :post do
     user
     account { user.account }
+    changelog { account.changelogs.first }
     title { Faker::Lorem.sentence }
     content { Faker::Lorem.paragraph }
   end

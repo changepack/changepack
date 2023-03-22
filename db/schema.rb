@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_22_000203) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_22_012119) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,6 +62,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_000203) do
     t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "changelogs", id: :string, force: :cascade do |t|
+    t.string "name"
+    t.string "slug", null: false
+    t.string "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_changelogs_on_account_id"
   end
 
   create_table "commits", id: :string, force: :cascade do |t|
@@ -137,7 +146,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_000203) do
     t.string "account_id"
     t.string "slug"
     t.datetime "discarded_at"
+    t.string "changelog_id"
     t.index ["account_id"], name: "index_posts_on_account_id"
+    t.index ["changelog_id"], name: "index_posts_on_changelog_id"
     t.index ["discarded_at"], name: "index_posts_on_discarded_at"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
@@ -200,11 +211,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_000203) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "changelogs", "accounts"
   add_foreign_key "commits", "accounts"
   add_foreign_key "commits", "posts"
   add_foreign_key "commits", "repositories"
   add_foreign_key "post_transitions", "posts"
   add_foreign_key "posts", "accounts"
+  add_foreign_key "posts", "changelogs"
   add_foreign_key "posts", "users"
   add_foreign_key "repositories", "accounts"
   add_foreign_key "repository_transitions", "repositories"

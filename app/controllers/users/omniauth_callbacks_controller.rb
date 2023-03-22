@@ -15,8 +15,9 @@ module Users
       if user_signed_out?
         User.from!(provider, auth).tap { |user| sign_in(user) }
       else
-        provider = User.provider(provider, auth)
-        providers = current_user.providers.deep_merge!(provider)
+        providers = current_user.providers.deep_merge!(
+          User::Registration.provider(provider, auth)
+        )
 
         current_user.lock!
                     .update!(providers:)

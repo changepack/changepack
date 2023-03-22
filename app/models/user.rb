@@ -7,8 +7,8 @@ module T
 end
 
 class User < ApplicationRecord
-  include Git
   include Registration
+  include Git
 
   key :user
 

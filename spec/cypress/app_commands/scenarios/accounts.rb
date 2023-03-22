@@ -6,11 +6,9 @@ module Cypress
     extend FactoryBot::Syntax::Methods
 
     def self.seed
-      account = create(:account).tap { |a| a.update!(id: 'acc_test') }
+      account = create(:account, slug: 'acc_test')
       user = create(:user, account:)
-      create(:post, account:, user:, status: :published, title: 'Published').tap do |c|
-        c.update!(id: 'log_published')
-      end
+      create(:post, account:, user:, status: :published, title: 'Published', slug: 'log_published')
       create(:post, account:, user:, status: :draft, title: 'Draft')
     end
   end

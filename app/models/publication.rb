@@ -18,7 +18,7 @@ class Publication
   sig { returns T::Boolean }
   def update!
     Post.transaction do
-      post.update(content: completion, title:, account:, user:)
+      post.update(content: completion, title:, account:, user:, changelog:)
       post.publish(published)
       post.detach(except: commits)
       post.attach(commits)
@@ -43,5 +43,10 @@ class Publication
   sig { returns T::Array[String] }
   def changes
     account.commits.where(id: commits).pluck(:message)
+  end
+
+  sig { returns Changelog }
+  def changelog
+    @changelog ||= account.changelogs.first!
   end
 end

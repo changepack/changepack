@@ -8,9 +8,8 @@ end
 
 class Post < ApplicationRecord
   include Publish
-
-  include Slug
   include Status
+  include Slug
 
   key :pt
 
@@ -18,6 +17,7 @@ class Post < ApplicationRecord
   attribute :status, :string, default: :draft
 
   belongs_to :user, optional: true
+  belongs_to :changelog, optional: true
   belongs_to :account
 
   has_many :commits, dependent: :nullify
