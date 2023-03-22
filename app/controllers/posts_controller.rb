@@ -1,10 +1,10 @@
 # typed: false
 # frozen_string_literal: true
 
-class ChangelogsController < ApplicationController
+class PostsController < ApplicationController
   skip_verify_authorized only: :show
   skip_before_action :authenticate_user!, only: :show
-  before_action :set_new_changelog, only: %i[new create]
+  before_action :set_new_post, only: %i[new create]
 
   def index
     authorize! and redirect_to current_account
@@ -19,11 +19,11 @@ class ChangelogsController < ApplicationController
   end
 
   def edit
-    authorize! changelog and render form
+    authorize! post and render form
   end
 
   def confirm_destroy
-    authorize! changelog, to: :destroy? and render item
+    authorize! post, to: :destroy? and render item
   end
 
   def create
@@ -31,71 +31,71 @@ class ChangelogsController < ApplicationController
 
     Publication.new(permitted).create!
 
-    if changelog.valid?
-      redirect_to changelog
+    if post.valid?
+      redirect_to post
     else
       render :new, form
     end
   end
 
   def update
-    authorize! changelog
+    authorize! post
 
     Publication.new(permitted).update!
 
-    if changelog.valid?
-      redirect_to changelog
+    if post.valid?
+      redirect_to post
     else
       render :edit, form
     end
   end
 
   def destroy
-    authorize! changelog
+    authorize! post
 
-    changelog.discard
-    redirect_to changelogs_url
+    post.discard
+    redirect_to posts_url
   end
 
   private
 
-  sig { returns Changelog }
-  def changelog
-    @changelog ||= Changelog.kept.friendly.find(id)
+  sig { returns Post }
+  def post
+    @post ||= Post.kept.friendly.find(id)
   end
 
   sig { returns T::Commits }
   def commits
     @commits ||= current_account.commits
-                                .options(changelog)
-                                .includes(:repository, :changelog)
+                                .options(post)
+                                .includes(:repository, :post)
                                 .limit(100)
                                 .kept
   end
 
-  sig { returns Changelog }
-  def set_new_changelog
-    @changelog = Changelog.new
+  sig { returns Post }
+  def set_new_post
+    @post = Post.new
   end
 
   sig { returns T::Params }
   def permitted
-    params.require(:changelog)
+    params.require(:post)
           .then { |permitted| authorized(permitted) }
-          .merge(changelog:, user: current_user, account: current_account)
+          .merge(post:, user: current_user, account: current_account)
   end
 
   sig { returns T::Locals }
   def form
     {
-      locals: { changelog: changelog.decorate, commits: commits.decorate }
+      locals: { post: post.decorate, commits: commits.decorate }
     }
   end
 
   sig { returns T::Locals }
   def item
     {
-      locals: { changelog: }
+      locals: { post: }
     }
   end
 end

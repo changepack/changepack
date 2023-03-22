@@ -1,7 +1,7 @@
 # typed: false
 # frozen_string_literal: true
 
-class Changelog
+class Post
   module Publish
     extend ActiveSupport::Concern
     extend T::Sig
@@ -27,13 +27,13 @@ class Changelog
     def attach(commits)
       account.commits
              .where(id: commits)
-             .find_each { |commit| commit.update!(changelog: self) }
+             .find_each { |commit| commit.update!(post: self) }
     end
 
     sig { params(except: Commits).void }
     def detach(except: [])
       commits.where.not(id: except)
-             .find_each { |commit| commit.update!(changelog_id: nil) }
+             .find_each { |commit| commit.update!(post_id: nil) }
     end
   end
 end

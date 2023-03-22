@@ -40,16 +40,16 @@ FactoryBot.define do
     password_confirmation { password }
   end
 
-  factory :changelog do
+  factory :post do
     user
     account { user.account }
     title { Faker::Lorem.sentence }
     content { Faker::Lorem.paragraph }
   end
 
-  factory :changelog_transition do
-    changelog
-    sort_key { (changelog.transitions.count + 1) * 10 }
+  factory :post_transition do
+    post
+    sort_key { (post.transitions.count + 1) * 10 }
     to_state { 'published' }
     most_recent { false }
   end

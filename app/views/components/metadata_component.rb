@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 class MetadataComponent < ApplicationComponent
-  attribute :changelog, T::Changelog
+  attribute :post, T::Post
 
   def template
     wrapper class: 'dimmed text-sm', data: { turbo_frame: '_top' } do
@@ -13,15 +13,15 @@ class MetadataComponent < ApplicationComponent
   end
 
   def wrapper(**attributes, &)
-    if changelog.persisted?
-      a href: helpers.changelog_path(changelog), **attributes, &
+    if post.persisted?
+      a href: helpers.post_path(post), **attributes, &
     else
       div(**attributes, &)
     end
   end
 
   def draft
-    return if changelog.status.published?
+    return if post.status.published?
 
     div class: 'mt-4' do
       span class: 'tag' do
@@ -39,10 +39,10 @@ class MetadataComponent < ApplicationComponent
   end
 
   def created_at
-    changelog.created_at || Time.current
+    post.created_at || Time.current
   end
 
   def user
-    @user ||= changelog.user || helpers.current_user
+    @user ||= post.user || helpers.current_user
   end
 end

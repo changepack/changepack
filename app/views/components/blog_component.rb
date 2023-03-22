@@ -2,16 +2,18 @@
 # frozen_string_literal: true
 
 class BlogComponent < ApplicationComponent
-  # You can pass a changelog or a collection of changelogs
-  attribute :changelogs, T.nilable(T::Changelogs)
-  attribute :changelog, T.nilable(Changelog)
-  # If not present, account will be inferred from the changelog
+  # You can pass a post or a collection of posts
+  attribute :posts, T.nilable(T::Posts)
+  attribute :post, T.nilable(Post)
+  # If not present, account will be inferred from the post
   attribute :account, T.nilable(Account)
 
   attr_reader :pagy, :collection
 
   def before_template
-    instance_variable_set(:@account, changelog.account) if account.nil?
+    instance_variable_set(:@account, post.account) if account.nil?
+    instance_variable_set(:@posts, [post].compact) if posts.nil?
+
     @pagy, @collection = paginate!
     super
   end
@@ -25,7 +27,7 @@ class BlogComponent < ApplicationComponent
       compose!
     end
 
-    posts
+    content
     pagination
   end
 
@@ -59,18 +61,18 @@ class BlogComponent < ApplicationComponent
   end
 
   def compose!
-    return if helpers.disallowed_to?(:create?, with: ChangelogPolicy)
+    return if helpers.disallowed_to?(:create?, with: PostPolicy)
 
     div class: 'mt-4 md:mt-0' do
-      a href: new_changelog_path, class: 'button-1', data: { test_id: 'new_changelog_button' } do
+      a href: new_post_path, class: 'button-1', data: { test_id: 'new_post_button' } do
         icon 'plus', class: 'mr-2'
         text 'Compose'
       end
     end
   end
 
-  def posts
-    section class: 'overflow-hidden', id: 'changelogs' do
+  def content
+    section class: 'overflow-hidden', id: 'posts' do
       div class: 'py-12 md:py-32' do
         div class: '-my-8 divide-y-2 divide-gray-100' do
           render collection if collection.present?
@@ -84,12 +86,10 @@ class BlogComponent < ApplicationComponent
   end
 
   def paginate!
-    instance_variable_set(:@changelogs, [changelog].compact) if changelogs.nil?
-
-    if changelogs.is_a?(Array)
-      helpers.pagy_array(changelogs)
+    if posts.is_a?(Array)
+      helpers.pagy_array(posts)
     else
-      helpers.pagy(changelogs)
+      helpers.pagy(posts)
     end
   end
 end

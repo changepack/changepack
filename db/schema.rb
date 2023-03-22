@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_17_212708) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_22_000203) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,33 +64,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_212708) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "changelog_transitions", id: :string, force: :cascade do |t|
-    t.string "to_state", null: false
-    t.jsonb "metadata", default: {}
-    t.integer "sort_key", null: false
-    t.string "changelog_id", null: false
-    t.boolean "most_recent", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["changelog_id", "most_recent"], name: "index_changelog_transitions_parent_most_recent", unique: true, where: "most_recent"
-    t.index ["changelog_id", "sort_key"], name: "index_changelog_transitions_parent_sort", unique: true
-  end
-
-  create_table "changelogs", id: :string, force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "status", default: "draft", null: false
-    t.string "user_id"
-    t.string "account_id"
-    t.string "slug"
-    t.datetime "discarded_at"
-    t.index ["account_id"], name: "index_changelogs_on_account_id"
-    t.index ["discarded_at"], name: "index_changelogs_on_discarded_at"
-    t.index ["slug"], name: "index_changelogs_on_slug", unique: true
-    t.index ["user_id"], name: "index_changelogs_on_user_id"
-  end
-
   create_table "commits", id: :string, force: :cascade do |t|
     t.text "message", null: false
     t.string "url", null: false
@@ -100,12 +73,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_212708) do
     t.string "repository_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "changelog_id"
+    t.string "post_id"
     t.datetime "discarded_at"
     t.jsonb "providers", default: {}, null: false
     t.index ["account_id"], name: "index_commits_on_account_id"
-    t.index ["changelog_id"], name: "index_commits_on_changelog_id"
     t.index ["discarded_at"], name: "index_commits_on_discarded_at"
+    t.index ["post_id"], name: "index_commits_on_post_id"
     t.index ["repository_id"], name: "index_commits_on_repository_id"
   end
 
@@ -141,6 +114,33 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_212708) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "post_transitions", id: :string, force: :cascade do |t|
+    t.string "to_state", null: false
+    t.jsonb "metadata", default: {}
+    t.integer "sort_key", null: false
+    t.string "post_id", null: false
+    t.boolean "most_recent", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id", "most_recent"], name: "index_changelog_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["post_id", "sort_key"], name: "index_changelog_transitions_parent_sort", unique: true
+  end
+
+  create_table "posts", id: :string, force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "status", default: "draft", null: false
+    t.string "user_id"
+    t.string "account_id"
+    t.string "slug"
+    t.datetime "discarded_at"
+    t.index ["account_id"], name: "index_posts_on_account_id"
+    t.index ["discarded_at"], name: "index_posts_on_discarded_at"
+    t.index ["slug"], name: "index_posts_on_slug", unique: true
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "repositories", id: :string, force: :cascade do |t|
@@ -200,12 +200,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_212708) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "changelog_transitions", "changelogs"
-  add_foreign_key "changelogs", "accounts"
-  add_foreign_key "changelogs", "users"
   add_foreign_key "commits", "accounts"
-  add_foreign_key "commits", "changelogs"
+  add_foreign_key "commits", "posts"
   add_foreign_key "commits", "repositories"
+  add_foreign_key "post_transitions", "posts"
+  add_foreign_key "posts", "accounts"
+  add_foreign_key "posts", "users"
   add_foreign_key "repositories", "accounts"
   add_foreign_key "repository_transitions", "repositories"
   add_foreign_key "users", "accounts"

@@ -3,11 +3,11 @@
 
 require 'rails_helper'
 
-describe Changelog do
+describe Post do
   it { is_expected.to validate_length_of(:title).is_at_most(140) }
   it { is_expected.to validate_presence_of(:content) }
   it { is_expected.to validate_presence_of(:status) }
-  it { is_expected.to validate_inclusion_of(:status).in_array(ChangelogStateMachine.states) }
+  it { is_expected.to validate_inclusion_of(:status).in_array(PostStateMachine.states) }
 
   it { is_expected.to have_many(:commits).dependent(:nullify) }
   it { is_expected.to belong_to(:user).optional }

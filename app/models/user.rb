@@ -16,7 +16,7 @@ class User < ApplicationRecord
   attribute :email, :string
 
   belongs_to :account
-  has_many :changelogs, dependent: :nullify
+  has_many :posts, dependent: :nullify
 
   accepts_nested_attributes_for :account
 

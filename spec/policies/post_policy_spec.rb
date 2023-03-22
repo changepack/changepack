@@ -3,10 +3,10 @@
 
 require 'rails_helper'
 
-describe ChangelogPolicy, type: :policy do
+describe PostPolicy, type: :policy do
   let(:user) { build(:user, account:) }
   let(:account) { build(:account) }
-  let(:record) { build(:changelog, user:, account:) }
+  let(:record) { build(:post, user:, account:) }
 
   let(:context) { { user: } }
 

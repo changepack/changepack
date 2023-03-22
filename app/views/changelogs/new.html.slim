@@ -1,8 +1,0 @@
-section data-test-id="new_changelog_page"
-  = render ContentComponent.new do |content|
-    - content.article do
-      = render 'form', changelog:, commits:
-
-    - content.sidebar do
-      .hidden.md:block
-        = render MetadataComponent.new(changelog:)

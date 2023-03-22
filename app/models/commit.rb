@@ -10,18 +10,18 @@ class Commit < ApplicationRecord
   include Git
 
   OPTIONS = T.let(
-    lambda { |cl|
+    lambda { |pt|
       Arel.sql(
         <<-SQL.squish
           CASE
-            WHEN commits.changelog_id = '#{cl.id}' THEN 0
+            WHEN commits.post_id = '#{pt.id}' THEN 0
             ELSE 1
           END,
           commits.commited_at DESC
         SQL
       )
     },
-    T.proc.params(cl: Changelog).returns(String)
+    T.proc.params(pt: Post).returns(String)
   )
 
   key :com
@@ -33,7 +33,7 @@ class Commit < ApplicationRecord
 
   belongs_to :account
   belongs_to :repository
-  belongs_to :changelog, optional: true
+  belongs_to :post, optional: true
 
   validates :message, presence: true
   validates :url, presence: true, url: true
@@ -42,6 +42,6 @@ class Commit < ApplicationRecord
 
   normalize :message
 
-  scope :options, ->(cl) { where(changelog: [cl, nil]).order(OPTIONS.call(cl)) },
-        sig: T.proc.params(cl: Changelog)
+  scope :options, ->(pt) { where(post: [pt, nil]).order(OPTIONS.call(pt)) },
+        sig: T.proc.params(cl: Post)
 end

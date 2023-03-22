@@ -1,0 +1,9 @@
+.-my-8
+  = turbo_frame_tag dom_id(post) do
+    section data-test-id="edit_post_page"
+      = render ContentComponent.new do |content|
+        - content.article do
+          = render 'form', post:, commits:
+
+        - content.sidebar do
+          = render MetadataComponent.new(post:)

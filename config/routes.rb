@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
     resources :accounts, only: [:index]
 
-    resources :changelogs, except: [:show] do
+    resources :posts, except: [:show] do
       member do
         get :confirm_destroy
       end
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :changelogs, only: [:show]
+  resources :posts, only: [:show]
 
   unless Rails.env.production?
     scope path: '__cypress__', controller: 'users/cypress' do

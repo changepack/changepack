@@ -11,17 +11,17 @@ class Publication
   attribute :content, :string
   attribute :published, :boolean, default: false
   attribute :commits, array: true, default: -> { [] }
-  attribute :changelog, T.instance(Changelog)
+  attribute :post, T.instance(Post)
   attribute :account, T.instance(Account)
   attribute :user, T.instance(User)
 
   sig { returns T::Boolean }
   def update!
-    Changelog.transaction do
-      changelog.update(content: completion, title:, account:, user:)
-      changelog.publish(published)
-      changelog.detach(except: commits)
-      changelog.attach(commits)
+    Post.transaction do
+      post.update(content: completion, title:, account:, user:)
+      post.publish(published)
+      post.detach(except: commits)
+      post.attach(commits)
     end
 
     true

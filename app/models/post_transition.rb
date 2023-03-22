@@ -1,10 +1,10 @@
 # typed: false
 # frozen_string_literal: true
 
-class ChangelogTransition < ApplicationRecord
-  key :ctr
+class PostTransition < ApplicationRecord
+  key :ptt
 
-  belongs_to :changelog, inverse_of: :transitions
+  belongs_to :post, inverse_of: :transitions
 
   after_destroy :update_most_recent, if: :most_recent?
 
@@ -12,7 +12,7 @@ class ChangelogTransition < ApplicationRecord
 
   sig { returns T::Boolean }
   def update_most_recent
-    last_transition = changelog.transitions.order(:sort_key).last
+    last_transition = post.transitions.order(:sort_key).last
     return if last_transition.blank?
 
     last_transition.update!(most_recent: true)

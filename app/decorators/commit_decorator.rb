@@ -21,38 +21,38 @@ class CommitDecorator < ApplicationDecorator
     message.truncate(50)
   end
 
-  sig { params(changelog: ChangelogDecorator).returns(Splat) }
-  def checkbox_options(changelog)
+  sig { params(post: PostDecorator).returns(Splat) }
+  def checkbox_options(post)
     [].tap do |opts|
       true_value = id
       false_value = nil
 
-      opts << checkbox_html_options(changelog)
+      opts << checkbox_html_options(post)
       opts << true_value
       opts << false_value
     end
   end
 
-  sig { params(changelog: ChangelogDecorator).returns(T::Boolean) }
-  def checked?(changelog)
-    changelog.id.present? && self.changelog == changelog
+  sig { params(post: PostDecorator).returns(T::Boolean) }
+  def checked?(post)
+    post.persisted? && self.post == post
   end
 
-  sig { params(changelog: ChangelogDecorator).returns(T::Boolean) }
-  def disabled?(changelog)
-    self.changelog.present? && self.changelog != changelog
+  sig { params(post: PostDecorator).returns(T::Boolean) }
+  def disabled?(post)
+    self.post.present? && self.post != post
   end
 
   private
 
-  sig { params(changelog: ChangelogDecorator).returns(CommitDecorator.to_options_shape) }
-  def checkbox_html_options(changelog)
+  sig { params(post: PostDecorator).returns(CommitDecorator.to_options_shape) }
+  def checkbox_html_options(post)
     {
       multiple: true,
       id:,
       class: 'checkbox',
-      checked: checked?(changelog),
-      disabled: disabled?(changelog)
+      checked: checked?(post),
+      disabled: disabled?(post)
     }
   end
 end

@@ -1,22 +1,22 @@
-= form_with(model: changelog, class: 'form contents') do |form|
+= form_with(model: post, class: 'form contents') do |form|
   .mb-5
-    = form.text_field :title, class: changelog.title_field_class, placeholder: 'Title', data: { test_id: 'title' }
-    - changelog.errors.full_messages_for(:title).each do |error_message|
+    = form.text_field :title, class: post.title_field_class, placeholder: 'Title', data: { test_id: 'title' }
+    - post.errors.full_messages_for(:title).each do |error_message|
       .text-xs.text-red-500.mt-2 = error_message
 
   .my-5
-    = form.rich_text_area :content, class: changelog.content_field_class, data: { test_id: 'content' }, autofocus: true
-    - changelog.errors.full_messages_for(:content).each do |error_message|
+    = form.rich_text_area :content, class: post.content_field_class, data: { test_id: 'content' }, autofocus: true
+    - post.errors.full_messages_for(:content).each do |error_message|
       .text-xs.text-red-500.mt-2 = error_message
 
   .columns-2
     .column
       = form.button class: 'button-1', type: 'submit', data: { test_id: 'submit' } do
         = icon 'save', class: 'mr-2'
-        | Save changelog
-      = link_to 'Cancel', changelog, class: 'ml-2 button-3 hidden md:inline-block'
+        | Save post
+      = link_to 'Cancel', post, class: 'ml-2 button-3 hidden md:inline-block'
     .column.text-right
-      = render ToggleComponent.with(model: changelog, attribute: :published)
+      = render ToggleComponent.with(model: post, attribute: :published)
 
   - if commits.any?
     .mt-10.hidden.md:block
@@ -26,12 +26,12 @@
           section.overflow-x-scroll.max-h-80
             - commits.each do |commit|
               .mb-3
-                = form.check_box :commits, *commit.checkbox_options(changelog)
+                = form.check_box :commits, *commit.checkbox_options(post)
 
                 label for=commit.id class="ml-2"
                   abbr.no-underline title=commit.message
-                    - if commit.disabled?(changelog)
-                      = link_to commit.changelog, target: '_blank', rel: 'noopener', data: { turbo_frame: '_top' } do
+                    - if commit.disabled?(post)
+                      = link_to commit.post, target: '_blank', rel: 'noopener', data: { turbo_frame: '_top' } do
                         strike.dimmed
                           = commit.abbr
                     - else

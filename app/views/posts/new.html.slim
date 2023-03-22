@@ -1,0 +1,8 @@
+section data-test-id="new_post_page"
+  = render ContentComponent.new do |content|
+    - content.article do
+      = render 'form', post:, commits:
+
+    - content.sidebar do
+      .hidden.md:block
+        = render MetadataComponent.new(post:)

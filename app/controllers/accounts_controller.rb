@@ -10,7 +10,7 @@ class AccountsController < ApplicationController
   end
 
   def show
-    render locals: { account:, changelogs: }
+    render locals: { account:, posts: }
   end
 
   private
@@ -20,13 +20,13 @@ class AccountsController < ApplicationController
     @account ||= Account.kept.friendly.find(id)
   end
 
-  sig { returns T::Changelogs }
-  def changelogs
-    @changelogs ||= account.changelogs
-                           .for(current_user)
-                           .kept
-                           .recent
-                           .with_rich_text_content_and_embeds
-                           .includes(:user)
+  sig { returns T::Posts }
+  def posts
+    @posts ||= account.posts
+                      .for(current_user)
+                      .kept
+                      .recent
+                      .with_rich_text_content_and_embeds
+                      .includes(:user)
   end
 end

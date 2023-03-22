@@ -1,7 +1,7 @@
 # typed: false
 # frozen_string_literal: true
 
-class ChangelogDecorator < ApplicationDecorator
+class PostDecorator < ApplicationDecorator
   sig { returns String }
   def title_field_class
     h.text_field_class(self, :title)

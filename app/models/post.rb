@@ -2,17 +2,17 @@
 # frozen_string_literal: true
 
 module T
-  Changelog = T.type_alias { ::Changelog }
-  Changelogs = T.type_alias { ::Changelog::RelationType }
+  Post = T.type_alias { ::Post }
+  Posts = T.type_alias { ::Post::RelationType }
 end
 
-class Changelog < ApplicationRecord
+class Post < ApplicationRecord
   include Publish
 
   include Slug
   include Status
 
-  key :cl
+  key :pt
 
   attribute :title, :string
   attribute :status, :string, default: :draft

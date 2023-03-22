@@ -79,7 +79,7 @@ class ApplicationLayout < ApplicationView
   end
 
   def home?
-    helpers.current_controller.in?(%i[accounts changelogs])
+    helpers.current_controller.in?(%i[accounts posts])
   end
 
   def repositories?

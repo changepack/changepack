@@ -1,7 +1,7 @@
 # typed: false
 # frozen_string_literal: true
 
-class ChangelogStateMachine
+class PostStateMachine
   include Statesman::Machine
 
   state :draft, initial: true
