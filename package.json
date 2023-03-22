@@ -4,5 +4,9 @@
     "cypress": "^12.7.0",
     "cypress-on-rails": "^0.1.0"
   },
-  "dependencies": {}
+  "engines": {
+    "node": ">=18.x",
+    "npm": ">=6.x",
+    "yarn": ">=1.x"
+  }
 }

@@ -75,8 +75,16 @@ class BlogComponent < ApplicationComponent
     section class: 'overflow-hidden', id: 'posts' do
       div class: 'py-12 md:py-32' do
         div class: '-my-8 divide-y-2 divide-gray-100' do
-          render collection if collection.present?
+          collection.each { |post| article(post) }
         end
+      end
+    end
+  end
+
+  def article(post)
+    super() do
+      turbo_frame id: helpers.dom_id(post) do
+        render PostComponent.new(post:)
       end
     end
   end
