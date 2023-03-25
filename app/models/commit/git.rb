@@ -25,7 +25,7 @@ class Commit
                     .commits(source, after: repository.cursor)
                     .each { |commit| Git.upsert!(commit, repository:) }
 
-          repository.update!(pulled: Time.current)
+          repository.update!(pulled_at: Time.current)
         end
 
         true

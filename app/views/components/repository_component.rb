@@ -37,7 +37,7 @@ class RepositoryComponent < ApplicationComponent
   end
 
   def pulled
-    return unless repository.pulled?
+    return if repository.pulled_at.blank?
 
     div class: 'flex items-center justify-end hidden md:block' do
       span class: 'tag' do
@@ -115,6 +115,6 @@ class RepositoryComponent < ApplicationComponent
   end
 
   def pulled_at
-    helpers.l(repository.pulled, format: :long)
+    helpers.l(repository.pulled_at, format: :long)
   end
 end

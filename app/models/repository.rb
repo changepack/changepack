@@ -17,7 +17,7 @@ class Repository < ApplicationRecord
 
   attribute :name, :string
   attribute :branch, :string
-  attribute :pulled, :datetime
+  attribute :pulled_at, :datetime
   attribute :status, :string, default: :inactive
 
   belongs_to :account
