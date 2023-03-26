@@ -27,7 +27,7 @@ class NavigationComponent < ApplicationComponent
     a class: 'flex-shrink-0 flex items-center', href: changepack.website do
       img src: helpers.image_path(changepack.picture), class: 'inline h-7 w-7 rounded-full mr-2'
       span class: 'hover:text-gray-800 text-m font-semibold' do
-        text changepack.name
+        plain changepack.name
       end
     end
   end
@@ -51,7 +51,7 @@ class NavigationComponent < ApplicationComponent
 
   def edit_user_registration_sm
     a href: helpers.edit_user_registration_path, **classes('tab inline md:hidden', account?: 'tab-active') do
-      text 'Settings'
+      plain 'Settings'
     end
   end
 

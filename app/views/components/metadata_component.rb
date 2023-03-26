@@ -25,7 +25,7 @@ class MetadataComponent < ApplicationComponent
 
     div class: 'mt-4' do
       span class: 'tag' do
-        text 'Draft'
+        plain 'Draft'
       end
     end
   end
@@ -35,7 +35,7 @@ class MetadataComponent < ApplicationComponent
   end
 
   def published_at
-    text helpers.l(created_at.to_date, format: :long)
+    plain helpers.l(created_at.to_date, format: :long)
   end
 
   def created_at

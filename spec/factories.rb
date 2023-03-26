@@ -4,6 +4,15 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :access_token do
+    uid { '1' }
+    provider { 'github' }
+    token { 'access_token' }
+    user
+    account { user.account }
+    changelog { build(:changelog, account:) }
+  end
+
   factory :changelog do
     name { account.name }
     account
@@ -16,11 +25,13 @@ FactoryBot.define do
     author { { name: Faker::Name.name, email: Faker::Internet.email } }
     repository
     account { repository.account }
+    changelog { build(:changelog, account:) }
     providers { { 'github' => '547f300205087e675a1badf2b148c8b361b25e15' } }
   end
 
   factory :repository do
-    account { build(:account) }
+    account { create(:account) }
+    changelog { build(:changelog, account:) }
     name { "#{Faker::App.name.downcase}/#{Faker::App.name.downcase}" }
     branch { 'main' }
     providers { { 'github' => { 'id' => '1', 'access_token' => 'access_token' } } }
@@ -48,7 +59,7 @@ FactoryBot.define do
   factory :post do
     user
     account { user.account }
-    changelog { account.changelogs.first }
+    changelog { build(:changelog, account:) }
     title { Faker::Lorem.sentence }
     content { Faker::Lorem.paragraph }
   end

@@ -63,7 +63,7 @@ class ApplicationLayout < ApplicationView
   def content
     main class: 'lg:container mx-auto my-8 md:my-32 px-5' do
       helpers.flash.each do |type, message|
-        render FlashComponent.new(type:) { text message }
+        render FlashComponent.new(type:) { plain message }
       end
 
       yield

@@ -15,7 +15,7 @@ class PostComponent < ApplicationComponent
     title
 
     article class: 'leading-relaxed prose max-w-full' do
-      text post.content.to_s
+      plain post.content.to_s
     end
 
     actions
@@ -27,7 +27,7 @@ class PostComponent < ApplicationComponent
     h2 class: title_class, data: { test_id: 'post' } do
       a href: post_path(post), data: { turbo_frame: '_top' } do
         span data: { test_id: 'post_button' } do
-          text post.title
+          plain post.title
         end
       end
     end
@@ -47,7 +47,7 @@ class PostComponent < ApplicationComponent
   def edit!
     a href: edit_path, **edit_attrs do
       icon 'pencil', class: 'mr-2'
-      text 'Edit post'
+      plain 'Edit post'
     end
   end
 
@@ -67,7 +67,7 @@ class PostComponent < ApplicationComponent
       turbo_frame id: "confirm_destroy_#{post.id}" do
         a href: destroy_path, **destroy_attrs do
           icon 'trash', class: 'mr-2'
-          text 'Delete'
+          plain 'Delete'
         end
       end
     end

@@ -27,7 +27,7 @@ class RepositoryComponent < ApplicationComponent
       icon :circle, class: status_class
 
       div class: 'text-base font-medium leading-none ml-4 mr-2' do
-        text repository.name
+        plain repository.name
       end
 
       div class: 'ml-2 dimmed hidden md:block' do
@@ -41,7 +41,7 @@ class RepositoryComponent < ApplicationComponent
 
     div class: 'flex items-center justify-end hidden md:block' do
       span class: 'tag' do
-        text "Pulled at #{pulled_at}"
+        plain "Pulled at #{pulled_at}"
       end
     end
   end
@@ -110,7 +110,7 @@ class RepositoryComponent < ApplicationComponent
     icon :tag
 
     div class: 'text-sm leading-none ml-2 dimmed inline-block' do
-      text repository.branch
+      plain repository.branch
     end
   end
 

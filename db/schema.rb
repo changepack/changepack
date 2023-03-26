@@ -10,9 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_26_013559) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_26_124445) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "access_tokens", id: :string, force: :cascade do |t|
+    t.string "provider", null: false
+    t.string "uid", null: false
+    t.string "token", null: false
+    t.string "user_id", null: false
+    t.string "account_id", null: false
+    t.string "changelog_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id", "provider", "token"], name: "index_access_tokens_on_account_id_and_provider_and_token", unique: true
+    t.index ["account_id"], name: "index_access_tokens_on_account_id"
+    t.index ["changelog_id"], name: "index_access_tokens_on_changelog_id"
+    t.index ["user_id"], name: "index_access_tokens_on_user_id"
+  end
 
   create_table "accounts", id: :string, force: :cascade do |t|
     t.string "name"
@@ -67,7 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_26_013559) do
   create_table "changelogs", id: :string, force: :cascade do |t|
     t.string "name"
     t.string "slug", null: false
-    t.string "account_id"
+    t.string "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_changelogs_on_account_id"
@@ -78,14 +93,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_26_013559) do
     t.string "url", null: false
     t.datetime "commited_at", null: false
     t.jsonb "author", default: {}, null: false
-    t.string "account_id"
-    t.string "repository_id"
+    t.string "account_id", null: false
+    t.string "repository_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "post_id"
     t.datetime "discarded_at"
     t.jsonb "providers", default: {}, null: false
-    t.string "changelog_id"
+    t.string "changelog_id", null: false
     t.index ["account_id"], name: "index_commits_on_account_id"
     t.index ["changelog_id"], name: "index_commits_on_changelog_id"
     t.index ["discarded_at"], name: "index_commits_on_discarded_at"
@@ -145,10 +160,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_26_013559) do
     t.datetime "updated_at", null: false
     t.string "status", default: "draft", null: false
     t.string "user_id"
-    t.string "account_id"
+    t.string "account_id", null: false
     t.string "slug"
     t.datetime "discarded_at"
-    t.string "changelog_id"
+    t.string "changelog_id", null: false
     t.index ["account_id"], name: "index_posts_on_account_id"
     t.index ["changelog_id"], name: "index_posts_on_changelog_id"
     t.index ["discarded_at"], name: "index_posts_on_discarded_at"
@@ -157,7 +172,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_26_013559) do
   end
 
   create_table "repositories", id: :string, force: :cascade do |t|
-    t.string "account_id"
+    t.string "account_id", null: false
     t.string "name", null: false
     t.string "branch", null: false
     t.string "status", default: "inactive", null: false
@@ -166,7 +181,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_26_013559) do
     t.datetime "pulled_at"
     t.datetime "discarded_at"
     t.jsonb "providers", default: {}, null: false
-    t.string "changelog_id"
+    t.string "changelog_id", null: false
     t.index ["account_id"], name: "index_repositories_on_account_id"
     t.index ["changelog_id"], name: "index_repositories_on_changelog_id"
     t.index ["discarded_at"], name: "index_repositories_on_discarded_at"
@@ -192,7 +207,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_26_013559) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "account_id"
+    t.string "account_id", null: false
     t.string "name"
     t.jsonb "providers", default: {}
     t.datetime "discarded"
@@ -213,6 +228,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_26_013559) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  add_foreign_key "access_tokens", "accounts"
+  add_foreign_key "access_tokens", "changelogs"
+  add_foreign_key "access_tokens", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "changelogs", "accounts"

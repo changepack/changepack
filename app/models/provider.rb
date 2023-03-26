@@ -23,14 +23,19 @@ class Provider
 
   sig { params(provider: T::Key).returns(T.untyped) }
   def self.[](provider)
-    providers.fetch(provider.to_sym)
+    to_h.fetch(provider.to_sym)
   end
 
   sig { returns T::Hash[Symbol, Class] }
-  def self.providers
+  def self.to_h
     {
       github: GitHub
     }
+  end
+
+  sig { returns T::Array[String] }
+  def self.to_a
+    to_h.keys.map(&:to_s)
   end
 
   sig { returns T::Shape }

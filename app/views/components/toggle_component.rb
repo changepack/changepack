@@ -50,7 +50,7 @@ class ToggleComponent < ApplicationComponent
 
   def label_tag
     label for: id, data: { test_id: 'toggle' } do
-      text label_value
+      plain label_value
     end
   end
 end

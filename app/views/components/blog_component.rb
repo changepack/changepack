@@ -34,7 +34,7 @@ class BlogComponent < ApplicationComponent
   def title
     a href: account_path(account) do
       h1 class: 'font-semibold text-5xl' do
-        text 'Changelog'
+        plain 'Changelog'
       end
 
       h2 class: 'mt-8' do
@@ -47,17 +47,17 @@ class BlogComponent < ApplicationComponent
 
   def description
     div class: 'mt-2 text-sm dimmed' do
-      text account.description
+      plain account.description
     end
   end
 
   def title_text
-    text 'New updates and improvements'
+    plain 'New updates and improvements'
 
     return if account.name.blank?
 
     whitespace
-    text "to #{account.name}"
+    plain "to #{account.name}"
   end
 
   def compose!
@@ -66,7 +66,7 @@ class BlogComponent < ApplicationComponent
     div class: 'mt-4 md:mt-0' do
       a href: new_post_path, class: 'button-1', data: { test_id: 'new_post_button' } do
         icon 'plus', class: 'mr-2'
-        text 'Compose'
+        plain 'Compose'
       end
     end
   end

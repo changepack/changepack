@@ -21,8 +21,9 @@ class Repository < ApplicationRecord
   attribute :status, :string, default: :inactive
 
   belongs_to :account
-  belongs_to :changelog, optional: true
+  belongs_to :changelog
   has_many :commits, dependent: :destroy
+  has_many :access_tokens, dependent: :destroy
 
   validates :name, presence: true
   validates :branch, presence: true
