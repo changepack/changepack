@@ -9,12 +9,18 @@ end
 class Changelog < ApplicationRecord
   include Slug
 
+  DEFAULT = 'Changelog'
+
   key :cl
 
   attribute :name, :string
 
   belongs_to :account
   has_many :posts, dependent: :destroy
+
+  after_initialize do
+    self.name ||= DEFAULT
+  end
 
   private
 

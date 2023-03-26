@@ -31,8 +31,8 @@ class Account < ApplicationRecord
 
   normalize :name
 
-  after_initialize do
-    changelogs << Changelog.new(name:)
+  after_create do
+    changelogs << Changelog.new
   end
 
   private
