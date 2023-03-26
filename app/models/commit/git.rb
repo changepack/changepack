@@ -17,8 +17,6 @@ class Commit
 
       sig { params(repository: Repository).returns(T::Boolean) }
       def pull(repository)
-        return false if repository.git.blank?
-
         transaction do
           source = Git.source(repository)
           repository.git
@@ -37,8 +35,12 @@ class Commit
       providers = { repository.provider => commit.sha }
 
       Commit.find_or_initialize_by(repository:, providers:) do |record|
-        attributes = commit.to_h.merge(account: repository.account)
-        record.update!(attributes)
+        record.update!(
+          commit.to_h.merge(
+            account: repository.account,
+            changelog: repository.changelog
+          )
+        )
       end
     end
 

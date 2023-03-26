@@ -9,18 +9,10 @@ class Repository
     let(:user) { create(:user) }
 
     context 'with a GitHub integration' do
-      context 'without a token' do
-        it "doesn't execute" do
-          expect { command }.not_to change(user.account.repositories, :count)
-        end
-      end
+      let(:user) { create(:user, providers: { github: { access_token: 'access_token' } }) }
 
-      context 'with a token' do
-        let(:user) { create(:user, providers: { github: { access_token: 'access_token' } }) }
-
-        it 'upserts repositories' do
-          expect { command }.to change(user.account.repositories, :count)
-        end
+      it 'upserts repositories' do
+        expect { command }.to change(user.account.repositories, :count)
       end
     end
   end

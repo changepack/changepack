@@ -32,6 +32,7 @@ class Commit < ApplicationRecord
   attribute :author, Commit::Author.to_type, default: -> { {} }
 
   belongs_to :account
+  belongs_to :changelog, optional: true
   belongs_to :repository
   belongs_to :post, optional: true
 

@@ -11,5 +11,6 @@ describe Post do
 
   it { is_expected.to have_many(:commits).dependent(:nullify) }
   it { is_expected.to belong_to(:user).optional }
+  it { is_expected.to belong_to(:changelog) }
   it { is_expected.to belong_to(:account) }
 end

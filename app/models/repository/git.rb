@@ -16,10 +16,8 @@ class Repository
     class_methods do
       extend T::Sig
 
-      sig { params(git: T.nilable(Provider)).returns(T::Boolean) }
+      sig { params(git: Provider).returns(T::Boolean) }
       def pull(git)
-        return false if git.nil?
-
         transaction do
           git.repositories.each do |repository|
             Git.upsert!(repository, git:)
@@ -29,13 +27,13 @@ class Repository
         true
       end
 
-      sig { params(git: T.nilable(Provider)).returns(T::Boolean) }
+      sig { params(git: Provider).returns(T::Boolean) }
       def pull_async(git)
-        return false if git.nil?
-
         Event.publish(
           Repository::Authorized.new(
-            provider: git.provider, access_token: git.access_token, account_id: git.account_id
+            provider: git.provider,
+            access_token: git.access_token,
+            account_id: git.account_id
           )
         )
 
@@ -43,18 +41,19 @@ class Repository
       end
     end
 
-    sig { params(repository: Provider::Repository, git: T.nilable(Provider)).returns(Repository) }
+    sig { params(repository: Provider::Repository, git: Provider).returns(Repository) }
     def self.upsert!(repository, git:)
       account_id = git.account_id
+      # TODO: Get rid of this once we introduce the `AccessToken` model
+      changelog_id = Changelog.where(account_id:).pick(:id)
       providers = {
-        git.provider => {
-          id: repository.id,
-          access_token: git.access_token
-        }
+        git.provider => { id: repository.id, access_token: git.access_token }
       }
 
       Repository.find_or_initialize_by(account_id:, providers:) do |repo|
-        repo.update!(repository.to_h)
+        repo.update!(
+          repository.to_h.merge(changelog_id:)
+        )
       end
     end
 
@@ -72,10 +71,8 @@ class Repository
                          .try(:to_i)
     end
 
-    sig { returns T.nilable(Provider) }
+    sig { returns Provider }
     def git
-      return if providers.blank?
-
       @git ||= Provider[provider].new(access_token:, account_id:)
     end
 

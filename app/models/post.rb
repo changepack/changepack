@@ -17,7 +17,7 @@ class Post < ApplicationRecord
   attribute :status, :string, default: :draft
 
   belongs_to :user, optional: true
-  belongs_to :changelog, optional: true
+  belongs_to :changelog
   belongs_to :account
 
   has_many :commits, dependent: :nullify

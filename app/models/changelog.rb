@@ -17,6 +17,8 @@ class Changelog < ApplicationRecord
 
   belongs_to :account
   has_many :posts, dependent: :destroy
+  has_many :repositories, dependent: :destroy
+  has_many :commits, dependent: :destroy
 
   after_initialize do
     self.name ||= DEFAULT
