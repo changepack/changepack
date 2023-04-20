@@ -12,13 +12,11 @@ module I
     end
 
     def color
-      (type || :alert).then do |type|
-        {
-          notice: 'bg-green-50 text-green-500',
-          alert: 'bg-yellow-50 text-yellow-500',
-          info: 'bg-gray-50 text-gray-500'
-        }.fetch(type.to_sym)
-      end
+      {
+        notice: 'bg-green-50 text-green-500',
+        alert: 'bg-yellow-50 text-yellow-500',
+        info: 'bg-gray-50 text-gray-500'
+      }.fetch(type&.to_sym || :alert)
     end
   end
 end

@@ -1,7 +1,7 @@
 # typed: false
 # frozen_string_literal: true
 
-module U
+module I
   class Toggle < ApplicationComponent
     attribute :name, T.nilable(String)
     attribute :label_value, T.nilable(String)

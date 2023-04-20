@@ -3,9 +3,20 @@
 
 module I
   class Blog < ApplicationComponent
+    class Compose < ApplicationComponent
+      def template
+        div class: 'mt-4 md:mt-0' do
+          a href: new_post_path, class: 'button-1', data: { test_id: 'new_post_button' } do
+            icon 'plus', class: 'mr-2'
+            plain 'Compose'
+          end
+        end
+      end
+    end
+
     # You can pass a post or a collection of posts
     attribute :posts, T.nilable(T::Posts)
-    attribute :post, T.nilable(Post)
+    attribute :post, T.nilable(::Post)
     # If not present, account will be inferred from the post
     attribute :account, T.nilable(Account)
 
@@ -25,7 +36,7 @@ module I
           title
         end
 
-        compose!
+        render Compose.new if helpers.allowed_to?(:create?, with: PostPolicy)
       end
 
       content
@@ -59,17 +70,6 @@ module I
 
       whitespace
       plain "to #{account.name}"
-    end
-
-    def compose!
-      return if helpers.disallowed_to?(:create?, with: PostPolicy)
-
-      div class: 'mt-4 md:mt-0' do
-        a href: new_post_path, class: 'button-1', data: { test_id: 'new_post_button' } do
-          icon 'plus', class: 'mr-2'
-          plain 'Compose'
-        end
-      end
     end
 
     def content

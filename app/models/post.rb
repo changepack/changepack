@@ -30,7 +30,7 @@ class Post < ApplicationRecord
   normalize :title
 
   inquirer :status
-  delegate :published?, to: :status
+  delegate :draft?, :published?, to: :status
 
   scope :for, ->(user) { where(user.blank? && { status: :published }) },
         sig: T.proc.params(user: T.nilable(User))
