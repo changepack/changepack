@@ -49,7 +49,7 @@ class ApplicationLayout < ApplicationView
 
   def navigation
     header class: 'lg:container mx-auto' do
-      navigation = NavigationComponent.new(brand:) do |nav|
+      navigation = I::Navigation.new(brand:) do |nav|
         next if helpers.user_signed_out?
 
         nav.link_to 'Home', root_path, active: home?
@@ -63,7 +63,7 @@ class ApplicationLayout < ApplicationView
   def content
     main class: 'lg:container mx-auto my-8 md:my-32 px-5' do
       helpers.flash.each do |type, message|
-        render FlashComponent.new(type:) { plain message }
+        render I::Flash.new(type:) { plain message }
       end
 
       yield

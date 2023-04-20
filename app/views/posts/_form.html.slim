@@ -16,7 +16,7 @@
         | Save post
       = link_to 'Cancel', post, class: 'ml-2 button-3 hidden md:inline-block'
     .column.text-right
-      = render ToggleComponent.with(model: post, attribute: :published)
+      = render U::Toggle.with(model: post, attribute: :published)
 
   - if commits.any?
     .mt-10.hidden.md:block

@@ -5,7 +5,7 @@ section data-test-id="edit_user"
 
   - html = { method: :put, class: 'form', data: { turbo: false } }
   = form_for(resource, as: resource_name, url: user_registration_path, html:) do |f|
-    = render ContentComponent.new do |content|
+    = render I::Content.new do |content|
       - content.sidebar do
         .hidden.md:block
           h3.text-base.font-semibold.leading-6 Profile
@@ -58,7 +58,7 @@ section data-test-id="edit_user"
             p.help
               ' We need your current password to confirm your changes
 
-    = render ContentComponent.new do |content|
+    = render I::Content.new do |content|
       - content.sidebar do
         .hidden.md:block
           h3.text-base.font-semibold.leading-6 Company
@@ -94,14 +94,14 @@ section data-test-id="edit_user"
             .field
               = field.label :picture, 'Company logo', class: 'label'
               .mt-3.flex.items-center
-                = render AccountPictureComponent.new(account: resource.account)
+                = render I::AccountPicture.new(account: resource.account)
                 .ml-4
                   = field.file_field :picture, class: 'hidden'
                   = field.label :picture, 'Change', class: 'button-2'
                   - resource.account.errors.full_messages_for(:picture).each do |error_message|
                     .text-xs.text-red-500.mt-2 = error_message
 
-    = render ContentComponent.new do |content|
+    = render I::Content.new do |content|
       - content.article do
         .fields.md:ml-12
           .field

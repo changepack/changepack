@@ -1,5 +1,5 @@
 # typed: false
 # frozen_string_literal: true
 
-class ApplicationView < ApplicationComponent
+class ApplicationView < I::ApplicationComponent
 end

@@ -10,7 +10,7 @@ section.overflow-x-auto
     .md:-my-8
       - if repositories.any?
         - repositories.each do |repository|
-          = render RepositoryComponent.new(repository:)
+          = render I::Repository.new(repository:)
 
         - if pagy && pagy.pages > 1
           .py-10.md:py-24
@@ -19,7 +19,7 @@ section.overflow-x-auto
 
       - elsif current_user.git?
         section data-test-id="blank"
-          = render FlashComponent.new(type: :info) do
+          = render I::Flash.new(type: :info) do
             ' We haven’t pulled any repositories from your Git account yet.
             ' Please wait.
 
@@ -47,5 +47,5 @@ section.overflow-x-auto
 
       - else
         section data-test-id="blank"
-          = render FlashComponent.new(type: :info) do
+          = render I::Flash.new(type: :info) do
             ' You don’t have any repositories yet.
