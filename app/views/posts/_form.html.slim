@@ -19,33 +19,7 @@
       = render I::Toggle.with(model: post, attribute: :published)
 
   - if commits.any?
-    .mt-10.hidden.md:block
-      .accordion.accordion-mini
-        .accordion-single
-          h2 Recent changes
-          section.overflow-x-scroll.max-h-80
-            - commits.each do |commit|
-              .mb-3
-                = form.check_box :commits, *commit.checkbox_options(post)
-
-                label for=commit.id class="ml-2"
-                  abbr.no-underline title=commit.message
-                    - if commit.disabled?(post)
-                      = link_to commit.post, target: '_blank', rel: 'noopener', data: { turbo_frame: '_top' } do
-                        strike.dimmed
-                          = commit.abbr
-                    - else
-                      = commit.abbr
-
-                  .flex.items-center.mt-1.pl-4
-                    span.tag
-                      = commit.repository.name
-                      | @
-                      = commit.repository.branch
-
-                    span.tag.ml-2
-                      = commit.author.name
-
-                    span.text-xs.dimmed.ml-3
-                      = l(commit.commited_at, format: :long)
-            .-mt-3
+    = render I::Picker.new(title: 'Recent changes') do |picker|
+      - commits.each do |commit|
+        - picker.choice(id: commit.id, attribute: :commits, opts: commit.checkbox_options(post), form:) do
+          = render I::Commit.new(commit:, post:)

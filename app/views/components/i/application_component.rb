@@ -37,5 +37,9 @@ module I
     def icon(name, **attributes)
       unsafe_raw helpers.icon(name, **attributes)
     end
+
+    def tag(class: nil, &)
+      render ::I::Tag.new(class: binding.local_variable_get(:class), &)
+    end
   end
 end

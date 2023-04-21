@@ -51,7 +51,7 @@ module I
 
     def label_tag
       label for: id, data: { test_id: 'toggle' } do
-        plain label_value
+        label_value
       end
     end
   end
