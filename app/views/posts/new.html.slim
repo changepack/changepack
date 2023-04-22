@@ -5,4 +5,4 @@ section data-test-id="new_post_page"
 
     - content.sidebar do
       .hidden.md:block
-        = render I::Metadata.new(post:)
+        = render I::Post::Metadata.new(post:)

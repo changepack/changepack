@@ -6,4 +6,4 @@
           = render 'form', post:, commits:
 
         - content.sidebar do
-          = render I::Metadata.new(post:)
+          = render I::Post::Metadata.new(post:)
