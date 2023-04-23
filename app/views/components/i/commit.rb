@@ -31,20 +31,27 @@ module I
 
     def template
       render Message.new(commit:, post:)
-      metadata
+
+      div class: 'flex items-center mt-1 pl-4' do
+        repository
+        author
+        commited_at
+      end
     end
 
-    def metadata
-      div class: 'flex items-center mt-1 pl-4' do
-        tag { "#{commit.repository.name}@#{commit.repository.branch}" }
+    def repository
+      tag { "#{commit.repository.name}@#{commit.repository.branch}" }
+    end
 
-        tag class: 'ml-2' do
-          commit.author.name
-        end
+    def author
+      tag class: 'ml-2' do
+        commit.author.name
+      end
+    end
 
-        tag class: 'ml-2' do
-          helpers.l(commit.commited_at, format: :long)
-        end
+    def commited_at
+      tag class: 'ml-2' do
+        helpers.l(commit.commited_at, format: :long)
       end
     end
   end

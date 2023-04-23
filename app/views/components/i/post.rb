@@ -4,39 +4,13 @@
 module I
   class Post < ApplicationComponent
     class Metadata < ApplicationComponent
-      class Date < ApplicationComponent
-        attribute :date, T.any(Date, T::Time)
-
-        def template
-          plain helpers.l(date.to_date, format: :long)
-        end
-      end
-
-      class Author < ApplicationComponent
-        attribute :user, T::User
-
-        def template
-          user.present? && div(class: 'mt-1') { user.name }
-        end
-      end
-
-      class Draft < ApplicationComponent
-        def template
-          div class: 'mt-4' do
-            span class: 'tag' do
-              plain 'Draft'
-            end
-          end
-        end
-      end
-
       attribute :post, T::Post
 
       def template
         wrapper class: 'dimmed text-sm', data: { turbo_frame: '_top' } do
-          render Date.new(date:)
-          render Author.new(user:) if user.present?
-          render Draft.new if post.draft?
+          date
+          author
+          status
         end
       end
 
@@ -49,6 +23,23 @@ module I
       end
 
       def date
+        plain helpers.l(created_at.to_date, format: :long)
+      end
+
+      def author
+        div(class: 'mt-1') { user.name } if user.present?
+      end
+
+      def status
+        case post.status
+        when 'draft'
+          div class: 'mt-4' do
+            tag { 'Draft' }
+          end
+        end
+      end
+
+      def created_at
         post.created_at || Time.current
       end
 
