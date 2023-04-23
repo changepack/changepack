@@ -4,6 +4,13 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :change do
+    message { Faker::Lorem.sentence }
+    type { 'commit' }
+    account { commit.account }
+    commit
+  end
+
   factory :access_token do
     uid { '1' }
     provider { 'github' }

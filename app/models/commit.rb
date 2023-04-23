@@ -7,6 +7,7 @@ module T
 end
 
 class Commit < ApplicationRecord
+  include Events
   include Git
 
   OPTIONS = T.let(
@@ -45,4 +46,14 @@ class Commit < ApplicationRecord
 
   scope :options, ->(pt) { where(post: [pt, nil]).order(OPTIONS.call(pt)) },
         sig: T.proc.params(cl: Post)
+
+  after_commit :created!, on: :create
+
+  private
+
+  def created!
+    Event.publish(
+      Created.new(id:, account_id:, message:)
+    )
+  end
 end
