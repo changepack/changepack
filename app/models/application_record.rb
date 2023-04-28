@@ -17,4 +17,9 @@ class ApplicationRecord < ActiveRecord::Base
   def self.scope(name, block, sig: T.proc)
     super(name, T.let(block, sig.returns(ActiveRecord::Relation)))
   end
+
+  sig { params(event: Event).returns(String) }
+  def pub(event)
+    Event.publish(event)
+  end
 end

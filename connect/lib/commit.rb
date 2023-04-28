@@ -52,8 +52,6 @@ class Commit < ApplicationRecord
   private
 
   def created!
-    Event.publish(
-      Created.new(id:, account_id:, message:)
-    )
+    pub Created.new(id:, account_id:, message:)
   end
 end
