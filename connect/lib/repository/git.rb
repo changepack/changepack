@@ -44,16 +44,12 @@ class Repository
     sig { params(repository: Provider::Repository, git: Provider).returns(Repository) }
     def self.upsert!(repository, git:)
       account_id = git.account_id
-      # TODO: Get rid of this once we introduce the `AccessToken` model
-      changelog_id = Changelog.where(account_id:).pick(:id)
       providers = {
         git.provider => { id: repository.id, access_token: git.access_token }
       }
 
       Repository.find_or_initialize_by(account_id:, providers:) do |repo|
-        repo.update!(
-          repository.to_h.merge(changelog_id:)
-        )
+        repo.update!(repository.to_h)
       end
     end
 

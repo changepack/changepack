@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_28_225334) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_28_231551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -177,9 +177,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_225334) do
     t.datetime "pulled_at"
     t.datetime "discarded_at"
     t.jsonb "providers", default: {}, null: false
-    t.string "changelog_id", null: false
     t.index ["account_id"], name: "index_repositories_on_account_id"
-    t.index ["changelog_id"], name: "index_repositories_on_changelog_id"
     t.index ["discarded_at"], name: "index_repositories_on_discarded_at"
   end
 
@@ -252,7 +250,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_225334) do
   add_foreign_key "posts", "changelogs"
   add_foreign_key "posts", "users"
   add_foreign_key "repositories", "accounts"
-  add_foreign_key "repositories", "changelogs"
   add_foreign_key "repository_transitions", "repositories"
   add_foreign_key "updates", "accounts"
   add_foreign_key "updates", "commits"
