@@ -6,8 +6,7 @@ require 'rails_helper'
 class Post
   describe Publish do
     let!(:user) { create(:user) }
-    let(:repository) { create(:repository, account: user.account) }
-    let(:commit) { create(:commit, repository:, account: user.account) }
+    let(:update) { create(:update, account: user.account) }
     let(:post) { create(:post, user:) }
 
     describe '#publish' do
@@ -29,29 +28,29 @@ class Post
     end
 
     describe '#attach' do
-      subject(:command) { post.attach(commits) }
-      let(:commits) { [commit.id] }
+      subject(:command) { post.attach(updates) }
+      let(:updates) { [update.id] }
 
-      it 'sets post on commits' do
-        expect { command }.to change { commit.reload.post_id }.from(nil).to(post.id)
+      it 'sets post on updates' do
+        expect { command }.to change { update.reload.post_id }.from(nil).to(post.id)
       end
     end
 
     describe '#detach' do
-      subject(:command) { post.detach(except: commits) }
-      let(:commits) { [] }
+      subject(:command) { post.detach(except: updates) }
+      let(:updates) { [] }
 
-      before { commit.update!(post:) }
+      before { update.update!(post:) }
 
-      it 'removes post from commits' do
-        expect { command }.to change { commit.reload.post_id }.from(post.id).to(nil)
+      it 'removes post from updates' do
+        expect { command }.to change { update.reload.post_id }.from(post.id).to(nil)
       end
 
-      context 'when excepting commits' do
-        let(:commits) { [commit.id] }
+      context 'when excepting updates' do
+        let(:updates) { [update.id] }
 
-        it 'does not remove post from commits' do
-          expect { command }.not_to change(commit, :post_id)
+        it 'does not remove post from updates' do
+          expect { command }.not_to change(update, :post_id)
         end
       end
     end

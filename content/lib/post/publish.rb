@@ -6,7 +6,7 @@ class Post
     extend ActiveSupport::Concern
     extend T::Sig
 
-    Commits = T.type_alias { T::Array[String] }
+    Updates = T.type_alias { T::Array[String] }
 
     included do
       after_commit :detach, on: :update, if: :discarded_at_previously_changed?
@@ -23,17 +23,17 @@ class Post
       false
     end
 
-    sig { params(commits: Commits).void }
-    def attach(commits)
-      account.commits
-             .where(id: commits)
-             .find_each { |commit| commit.update!(post: self) }
+    sig { params(updates: Updates).void }
+    def attach(updates)
+      account.updates
+             .where(id: updates)
+             .find_each { |update| update.update!(post: self) }
     end
 
-    sig { params(except: Commits).void }
+    sig { params(except: Updates).void }
     def detach(except: [])
-      commits.where.not(id: except)
-             .find_each { |commit| commit.update!(post_id: nil) }
+      updates.where.not(id: except)
+             .find_each { |update| update.update!(post_id: nil) }
     end
   end
 end

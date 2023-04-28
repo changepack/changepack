@@ -5,32 +5,32 @@ module I
   class Commit < ApplicationComponent
     class Message < ApplicationComponent
       attribute :commit, T::Commit
-      attribute :post, T.nilable(::Post)
+      attribute :url, T.nilable(String)
 
       def template
         abbr class: 'no-underline', title: commit.message do
-          link_to? ? unsafe_raw(link_to) : plain(commit.abbr)
+          url.present? ? unsafe_raw(link_to) : plain(message)
         end
       end
 
       def link_to
-        helpers.link_to commit.post, target: '_blank', rel: 'noopener', data: { turbo_frame: '_top' } do
+        helpers.link_to url, target: '_blank', rel: 'noopener', data: { turbo_frame: '_top' } do
           del class: 'dimmed' do
-            commit.abbr
+            message
           end
         end
       end
 
-      def link_to?
-        post.present? && commit.disabled?(post)
+      def message
+        commit.message.truncate(50)
       end
     end
 
     attribute :commit, T::Commit
-    attribute :post, T.nilable(::Post)
+    attribute :url, T.nilable(String)
 
     def template
-      render Message.new(commit:, post:)
+      render Message.new(commit:, url:)
 
       div class: 'flex items-center mt-1 pl-4' do
         repository

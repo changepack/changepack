@@ -13,5 +13,5 @@ en:
     You mustn’t reply with content that violates copyrights.
     Use HTML to format the result.
 
-    Here are the changes:
-    %{changes}
+    Here are the updates:
+    %{updates}

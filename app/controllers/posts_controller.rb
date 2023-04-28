@@ -68,7 +68,7 @@ class PostsController < ApplicationController
   def updates
     @updates ||= current_account.updates
                                 .options(post)
-                                .includes(commit: %i[repository post])
+                                .includes(:post, commit: %i[repository])
                                 .limit(100)
                                 .kept
   end
@@ -88,7 +88,7 @@ class PostsController < ApplicationController
   sig { returns T::Locals }
   def form
     {
-      locals: { post: post.decorate, updates: }
+      locals: { post: post.decorate, updates: updates.decorate }
     }
   end
 

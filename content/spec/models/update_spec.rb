@@ -8,6 +8,7 @@ RSpec.describe Update do
 
   it { is_expected.to belong_to(:account) }
   it { is_expected.to belong_to(:commit) }
+  it { is_expected.to belong_to(:post).optional }
 
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:type) }

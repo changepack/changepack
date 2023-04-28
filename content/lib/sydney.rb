@@ -20,11 +20,11 @@ class Sydney
 
   attribute :account, T.instance(Account)
 
-  Changes = T.type_alias { T::Array[String] }
+  Updates = T.type_alias { T::Array[String] }
 
-  sig { params(changes: Changes).returns(String) }
-  def hallucinate(changes)
-    client.chat(parameters: parameters(changes))
+  sig { params(updates: Updates).returns(String) }
+  def hallucinate(updates)
+    client.chat(parameters: parameters(updates))
           .dig('choices', 0, 'message', 'content')
           .strip
   end
@@ -39,19 +39,19 @@ class Sydney
     @client ||= OpenAI::Client.new
   end
 
-  sig { params(changes: Changes).returns(Hash) }
-  def parameters(changes)
+  sig { params(updates: Updates).returns(Hash) }
+  def parameters(updates)
     {
       model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: prompt(changes) }],
+      messages: [{ role: 'user', content: prompt(updates) }],
       temperature: 0.7
     }
   end
 
-  sig { params(changes: Changes).returns(String) }
-  def prompt(changes)
+  sig { params(updates: Updates).returns(String) }
+  def prompt(updates)
     I18n.t(
-      'prompt', account_name:, account_description:, changes: changes.join("\n")
+      'prompt', account_name:, account_description:, updates: updates.join("\n")
     )
   end
 end

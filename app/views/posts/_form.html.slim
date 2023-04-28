@@ -21,7 +21,5 @@
   - if updates.any?
     = render I::Picker.new(title: 'Recent updates') do |picker|
       - updates.each do |update|
-        - if update.commit.present?
-          - commit = update.commit.decorate
-          - picker.choice(id: commit.id, attribute: :commits, opts: commit.checkbox_options(post), form:) do
-            = render I::Commit.new(commit:, post:)
+        - picker.choice(id: update.id, attribute: :updates, opts: update.checkbox_options(post), form:) do
+          = render I::Update.new(update:, post:)

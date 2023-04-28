@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-class CommitDecorator < ApplicationDecorator
-  Element = T.type_alias { T.any(NilClass, String, CommitDecorator.to_options_shape) }
+class UpdateDecorator < ApplicationDecorator
+  Element = T.type_alias { T.any(NilClass, String, UpdateDecorator.to_options_shape) }
   Splat = T.type_alias { T::Array[Element] }
 
   sig { returns T::Shape }
@@ -14,11 +14,6 @@ class CommitDecorator < ApplicationDecorator
       checked: T::Boolean,
       disabled: T::Boolean
     }
-  end
-
-  sig { returns String }
-  def abbr
-    message.truncate(50)
   end
 
   sig { params(post: PostDecorator).returns(Splat) }
@@ -45,7 +40,7 @@ class CommitDecorator < ApplicationDecorator
 
   private
 
-  sig { params(post: PostDecorator).returns(CommitDecorator.to_options_shape) }
+  sig { params(post: PostDecorator).returns(UpdateDecorator.to_options_shape) }
   def checkbox_html_options(post)
     {
       multiple: true,

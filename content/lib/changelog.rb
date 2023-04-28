@@ -19,7 +19,6 @@ class Changelog < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :access_tokens, dependent: :destroy
   has_many :repositories, dependent: :destroy
-  has_many :commits, dependent: :destroy
 
   validates :name, presence: true
 

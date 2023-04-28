@@ -32,7 +32,6 @@ FactoryBot.define do
     author { { name: Faker::Name.name, email: Faker::Internet.email } }
     repository
     account { repository.account }
-    changelog { build(:changelog, account:) }
     providers { { 'github' => '547f300205087e675a1badf2b148c8b361b25e15' } }
   end
 

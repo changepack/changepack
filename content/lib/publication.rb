@@ -10,7 +10,7 @@ class Publication
   attribute :title, :string
   attribute :content, :string
   attribute :published, :boolean, default: false
-  attribute :commits, array: true, default: -> { [] }
+  attribute :updates, array: true, default: -> { [] }
   attribute :post, T.instance(Post)
   attribute :account, T.instance(Account)
   attribute :user, T.instance(User)
@@ -20,8 +20,8 @@ class Publication
     Post.transaction do
       post.update(content: completion, title:, account:, user:, changelog:)
       post.publish(published)
-      post.detach(except: commits)
-      post.attach(commits)
+      post.detach(except: updates)
+      post.attach(updates)
     end
 
     true
@@ -33,7 +33,7 @@ class Publication
 
   sig { returns T.nilable(String) }
   def completion
-    if content.present? || commits.none?
+    if content.present? || updates.none?
       content
     else
       Sydney.new(account:).hallucinate(changes)
@@ -42,7 +42,7 @@ class Publication
 
   sig { returns T::Array[String] }
   def changes
-    account.commits.where(id: commits).pluck(:message)
+    account.updates.where(id: updates).pluck(:name)
   end
 
   sig { returns Changelog }

@@ -20,7 +20,6 @@ class Post < ApplicationRecord
   belongs_to :changelog
   belongs_to :account
 
-  has_many :commits, dependent: :nullify
   has_many :updates, dependent: :nullify
 
   has_rich_text :content

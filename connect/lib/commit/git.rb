@@ -36,10 +36,7 @@ class Commit
 
       Commit.find_or_initialize_by(repository:, providers:) do |record|
         record.update!(
-          commit.to_h.merge(
-            account: repository.account,
-            changelog: repository.changelog
-          )
+          commit.to_h.merge(account: repository.account)
         )
       end
     end
