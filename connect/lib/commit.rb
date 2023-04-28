@@ -10,21 +10,6 @@ class Commit < ApplicationRecord
   include Events
   include Git
 
-  OPTIONS = T.let(
-    lambda { |pt|
-      Arel.sql(
-        <<-SQL.squish
-          CASE
-            WHEN commits.post_id = '#{pt.id}' THEN 0
-            ELSE 1
-          END,
-          commits.commited_at DESC
-        SQL
-      )
-    },
-    T.proc.params(pt: Post).returns(String)
-  )
-
   key :com
 
   attribute :message, :text
@@ -43,9 +28,6 @@ class Commit < ApplicationRecord
   validates :author, presence: true, store_model: true
 
   normalize :message
-
-  scope :options, ->(pt) { where(post: [pt, nil]).order(OPTIONS.call(pt)) },
-        sig: T.proc.params(cl: Post)
 
   after_commit :created!, on: :create
 

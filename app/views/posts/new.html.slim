@@ -1,7 +1,7 @@
 section data-test-id="new_post_page"
   = render I::Content.new do |content|
     - content.article do
-      = render 'form', post:, commits:
+      = render 'form', post:, changes:
 
     - content.sidebar do
       .hidden.md:block

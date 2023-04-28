@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_23_201445) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_28_210841) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -89,15 +89,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_23_201445) do
   end
 
   create_table "changes", id: :string, force: :cascade do |t|
-    t.string "message", null: false
+    t.string "name", null: false
     t.string "type", null: false
     t.string "account_id"
     t.string "commit_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "post_id"
     t.index ["account_id", "commit_id"], name: "index_changes_on_account_id_and_commit_id", unique: true
     t.index ["account_id"], name: "index_changes_on_account_id"
     t.index ["commit_id"], name: "index_changes_on_commit_id"
+    t.index ["post_id"], name: "index_changes_on_post_id"
   end
 
   create_table "commits", id: :string, force: :cascade do |t|
@@ -248,6 +250,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_23_201445) do
   add_foreign_key "changelogs", "accounts"
   add_foreign_key "changes", "accounts"
   add_foreign_key "changes", "commits"
+  add_foreign_key "changes", "posts"
   add_foreign_key "commits", "accounts"
   add_foreign_key "commits", "changelogs"
   add_foreign_key "commits", "posts"

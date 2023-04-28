@@ -66,9 +66,9 @@ class PostsController < ApplicationController
 
   sig { returns T::Commits }
   def commits
-    @commits ||= current_account.commits
+    @commits ||= current_account.changes
                                 .options(post)
-                                .includes(:repository, :post)
+                                .includes(commits: %i[repository post])
                                 .limit(100)
                                 .kept
   end
