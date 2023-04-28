@@ -1,7 +1,10 @@
-ENV["RAILS_ENV"] = "test"
+# typed: false
+# frozen_string_literal: true
 
-$LOAD_PATH.push File.expand_path("../../../spec", __FILE__)
-require File.expand_path("../../../config/environment", __FILE__)
-require File.expand_path("../../../spec/rails_helper", __FILE__)
+ENV['RAILS_ENV'] = 'test'
 
-require_relative "../lib/content"
+$LOAD_PATH.push File.expand_path('../../spec', __dir__)
+require File.expand_path('../../config/environment', __dir__)
+require File.expand_path('../../spec/rails_helper', __dir__)
+
+require_relative '../lib/content'
