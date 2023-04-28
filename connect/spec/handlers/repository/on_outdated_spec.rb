@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-module Repositories
+class Repository
   describe OnOutdated do
     let(:double) { instance_double(Repository) }
     let(:repository) { create(:repository) }

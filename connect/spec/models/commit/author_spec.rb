@@ -3,7 +3,9 @@
 
 require 'rails_helper'
 
-describe Commit::Author do
-  it { is_expected.to validate_presence_of(:name) }
-  it { is_expected.to validate_presence_of(:email) }
+class Commit
+  describe Author do
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:email) }
+  end
 end

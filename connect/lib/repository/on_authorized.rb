@@ -1,7 +1,7 @@
 # typed: false
 # frozen_string_literal: true
 
-module Repositories
+class Repository
   class OnAuthorized < Handler
     on ::Repository::Authorized
 

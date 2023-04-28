@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-module Repositories
+class Repository
   describe OnAuthorized do
     let(:user) { create(:user) }
     let(:payload) do

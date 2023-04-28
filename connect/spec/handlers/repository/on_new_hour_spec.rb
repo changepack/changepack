@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-module Repositories
+class Repository
   describe OnNewHour do
     let!(:repository) { create(:repository) }
     let(:payload) do

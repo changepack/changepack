@@ -1,7 +1,7 @@
 # typed: false
 # frozen_string_literal: true
 
-module Repositories
+class Repository
   class OnOutdated < Handler
     on ::Repository::Outdated
 
