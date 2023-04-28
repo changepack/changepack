@@ -20,6 +20,8 @@ Bundler.require(*Rails.groups)
 
 module Changepack
   class Application < Rails::Application
+    config.paths.add 'connect/lib', eager_load: true
+    config.paths.add 'changepack/lib', eager_load: true
     config.autoload_paths << Rails.root.join("app/views")
     config.autoload_paths << Rails.root.join("app/views/layouts")
     config.autoload_paths << Rails.root.join("app/views/components")
@@ -32,7 +34,6 @@ module Changepack
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
-    config.eager_load_paths << Rails.root.join("changepack/lib")
 
     # Don't generate system test files.
     config.generators.system_tests = nil
