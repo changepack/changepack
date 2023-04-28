@@ -15,7 +15,7 @@ module I
 
       def link_to
         helpers.link_to commit.post, target: '_blank', rel: 'noopener', data: { turbo_frame: '_top' } do
-          strike class: 'dimmed' do
+          del class: 'dimmed' do
             commit.abbr
           end
         end

@@ -3,8 +3,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Change do
-  subject { build(:change) }
+RSpec.describe Update do
+  subject { build(:update) }
 
   it { is_expected.to belong_to(:account) }
   it { is_expected.to belong_to(:commit) }

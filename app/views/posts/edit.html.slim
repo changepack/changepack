@@ -3,7 +3,7 @@
     section data-test-id="edit_post_page"
       = render I::Content.new do |content|
         - content.article do
-          = render 'form', post:, changes:
+          = render 'form', post:, updates:
 
         - content.sidebar do
           = render I::Post::Metadata.new(post:)

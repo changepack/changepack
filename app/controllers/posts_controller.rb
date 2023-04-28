@@ -64,11 +64,11 @@ class PostsController < ApplicationController
     @post ||= Post.kept.friendly.find(id)
   end
 
-  sig { returns T::Commits }
-  def commits
-    @commits ||= current_account.changes
+  sig { returns T::Updates }
+  def updates
+    @updates ||= current_account.updates
                                 .options(post)
-                                .includes(commits: %i[repository post])
+                                .includes(commit: %i[repository post])
                                 .limit(100)
                                 .kept
   end
@@ -88,7 +88,7 @@ class PostsController < ApplicationController
   sig { returns T::Locals }
   def form
     {
-      locals: { post: post.decorate, commits: commits.decorate }
+      locals: { post: post.decorate, updates: }
     }
   end
 

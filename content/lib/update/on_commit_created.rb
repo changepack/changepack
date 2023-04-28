@@ -1,7 +1,7 @@
 # typed: false
 # frozen_string_literal: true
 
-class Change
+class Update
   class OnCommitCreated < Handler
     on ::Commit::Created
 

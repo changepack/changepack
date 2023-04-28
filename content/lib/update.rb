@@ -2,21 +2,21 @@
 # frozen_string_literal: true
 
 module T
-  Change = T.type_alias { ::Change }
-  Changes = T.type_alias { ::Change::RelationType }
+  Update = T.type_alias { ::Update }
+  Updates = T.type_alias { ::Update::RelationType }
 end
 
-class Change < ApplicationRecord
+class Update < ApplicationRecord
   TYPES = %w[commit].freeze
   OPTIONS = T.let(
     lambda { |pt|
       Arel.sql(
         <<-SQL.squish
           CASE
-            WHEN commits.post_id = '#{pt.id}' THEN 0
+            WHEN updates.post_id = '#{pt.id}' THEN 0
             ELSE 1
           END,
-          commits.commited_at DESC
+          updates.created_at DESC
         SQL
       )
     },
@@ -25,7 +25,7 @@ class Change < ApplicationRecord
 
   self.inheritance_column = false
 
-  key :cha
+  key :upd
 
   attribute :name, :string
   attribute :type, :string
@@ -39,5 +39,5 @@ class Change < ApplicationRecord
   validates :commit_id, uniqueness: { scope: :account_id }
 
   scope :options, ->(pt) { where(post: [pt, nil]).order(OPTIONS.call(pt)) },
-        sig: T.proc.params(cl: Post)
+        sig: T.proc.params(pt: Post)
 end

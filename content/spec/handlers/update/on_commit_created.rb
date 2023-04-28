@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-class Change
+class Update
   describe OnCommitCreated do
     let(:user) { create(:user) }
     let(:commit) { create(:commit) }
@@ -20,18 +20,18 @@ class Change
 
     subject(:handler) { described_class.new }
 
-    it 'creates a change for the commit' do
+    it 'creates an update for the commit' do
       expect { handler.perform(payload) }.to change(Change, :count).by(1)
     end
 
     context 'with attributes' do
-      subject(:change) { Change.last }
+      subject(:update) { Update.last }
       before { handler.perform(payload) }
 
-      it { expect(change.type).to eq 'commit' }
-      it { expect(change.account_id).to eq user.account_id }
-      it { expect(change.commit_id).to eq commit.id }
-      it { expect(change.message).to eq commit.message }
+      it { expect(update.type).to eq 'commit' }
+      it { expect(update.account_id).to eq user.account_id }
+      it { expect(update.commit_id).to eq commit.id }
+      it { expect(update.message).to eq commit.message }
     end
   end
 end

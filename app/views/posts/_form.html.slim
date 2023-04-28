@@ -18,10 +18,10 @@
     .column.text-right
       = render I::Toggle.with(model: post, attribute: :published)
 
-  - if changes.any?
-    = render I::Picker.new(title: 'Recent changes') do |picker|
-      - changes.each do |change|
-        - if change.commit.present?
-          - commit = change.commit
+  - if updates.any?
+    = render I::Picker.new(title: 'Recent updates') do |picker|
+      - updates.each do |update|
+        - if update.commit.present?
+          - commit = update.commit.decorate
           - picker.choice(id: commit.id, attribute: :commits, opts: commit.checkbox_options(post), form:) do
             = render I::Commit.new(commit:, post:)

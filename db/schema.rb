@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_28_210841) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_28_212620) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -86,20 +86,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_210841) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_changelogs_on_account_id"
-  end
-
-  create_table "changes", id: :string, force: :cascade do |t|
-    t.string "name", null: false
-    t.string "type", null: false
-    t.string "account_id"
-    t.string "commit_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "post_id"
-    t.index ["account_id", "commit_id"], name: "index_changes_on_account_id_and_commit_id", unique: true
-    t.index ["account_id"], name: "index_changes_on_account_id"
-    t.index ["commit_id"], name: "index_changes_on_commit_id"
-    t.index ["post_id"], name: "index_changes_on_post_id"
   end
 
   create_table "commits", id: :string, force: :cascade do |t|
@@ -213,6 +199,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_210841) do
     t.index ["repository_id", "sort_key"], name: "index_repository_transitions_parent_sort", unique: true
   end
 
+  create_table "updates", id: :string, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "type", null: false
+    t.string "account_id"
+    t.string "commit_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "post_id"
+    t.datetime "discarded_at"
+    t.index ["account_id", "commit_id"], name: "index_updates_on_account_id_and_commit_id", unique: true
+    t.index ["account_id"], name: "index_updates_on_account_id"
+    t.index ["commit_id"], name: "index_updates_on_commit_id"
+    t.index ["post_id"], name: "index_updates_on_post_id"
+  end
+
   create_table "users", id: :string, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -248,9 +249,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_210841) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "changelogs", "accounts"
-  add_foreign_key "changes", "accounts"
-  add_foreign_key "changes", "commits"
-  add_foreign_key "changes", "posts"
   add_foreign_key "commits", "accounts"
   add_foreign_key "commits", "changelogs"
   add_foreign_key "commits", "posts"
@@ -262,5 +260,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_210841) do
   add_foreign_key "repositories", "accounts"
   add_foreign_key "repositories", "changelogs"
   add_foreign_key "repository_transitions", "repositories"
+  add_foreign_key "updates", "accounts"
+  add_foreign_key "updates", "commits"
+  add_foreign_key "updates", "posts"
   add_foreign_key "users", "accounts"
 end
