@@ -20,6 +20,7 @@ Bundler.require(*Rails.groups)
 
 module Changepack
   class Application < Rails::Application
+    config.paths.add 'content/lib', eager_load: true
     config.paths.add 'connect/lib', eager_load: true
     config.paths.add 'changepack/lib', eager_load: true
     config.autoload_paths << Rails.root.join("app/views")

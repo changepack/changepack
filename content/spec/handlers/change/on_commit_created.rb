@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-module Changes
+class Change
   describe OnCommitCreated do
     let(:user) { create(:user) }
     let(:commit) { create(:commit) }
