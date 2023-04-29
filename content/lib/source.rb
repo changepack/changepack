@@ -6,7 +6,6 @@ module T
   Sources = T.type_alias { ::Source::RelationType }
 end
 
-
 class Source < ApplicationRecord
   TYPES = %w[repository].freeze
 

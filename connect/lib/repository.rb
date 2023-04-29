@@ -30,4 +30,12 @@ class Repository < ApplicationRecord
   normalize :name
   normalize :branch
   inquirer :status
+
+  after_commit :created!, on: :create
+
+  private
+
+  def created!
+    pub Created.new(id:, account_id:, name:)
+  end
 end

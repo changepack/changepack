@@ -14,5 +14,11 @@ class Repository
       attribute :access_token, String
       attribute :account_id, String
     end
+
+    class Created < Event
+      attribute :id, String
+      attribute :account_id, String
+      attribute :name, String
+    end
   end
 end

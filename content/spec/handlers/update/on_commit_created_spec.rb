@@ -21,7 +21,7 @@ class Update
     subject(:handler) { described_class.new }
 
     it 'creates an update for the commit' do
-      expect { handler.perform(payload) }.to change(Change, :count).by(1)
+      expect { handler.perform(payload) }.to change(Update, :count).by(1)
     end
 
     context 'with attributes' do
@@ -31,7 +31,7 @@ class Update
       it { expect(update.type).to eq 'commit' }
       it { expect(update.account_id).to eq user.account_id }
       it { expect(update.commit_id).to eq commit.id }
-      it { expect(update.message).to eq commit.message }
+      it { expect(update.name).to eq commit.message }
     end
   end
 end

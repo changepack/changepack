@@ -5,16 +5,13 @@ class Update
   class OnCommitCreated < Handler
     on ::Commit::Created
 
-    delegate :account_id, :message, to: :event
-    delegate :id, to: :event, prefix: :commit
-
-    sig { override.returns Change }
+    sig { override.returns Update }
     def run
-      Change.create(
+      Update.create(
         type: :commit,
-        account_id:,
-        commit_id:,
-        message:
+        account_id: event.account_id,
+        commit_id: event.id,
+        name: event.message
       )
     end
   end
