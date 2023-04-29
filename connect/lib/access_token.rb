@@ -18,4 +18,8 @@ class AccessToken < ApplicationRecord
 
   validates :provider, presence: true, inclusion: { in: Provider.to_a }
   validates :token, presence: true, uniqueness: { scope: %i[account_id provider] }
+
+  before_save do
+    self.account ||= user&.account
+  end
 end

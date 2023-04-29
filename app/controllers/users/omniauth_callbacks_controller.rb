@@ -15,12 +15,7 @@ module Users
       if user_signed_out?
         User.from!(provider, auth).tap { |user| sign_in(user) }
       else
-        providers = current_user.providers.deep_merge!(
-          User::Registration.provider(provider, auth)
-        )
-
-        current_user.lock!
-                    .update!(providers:)
+        current_user.provide(provider, auth)
       end
 
       Repository.pull_async(current_user.git)

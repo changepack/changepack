@@ -10,8 +10,8 @@ class User
       devise :database_authenticatable, :rememberable, :validatable, :registerable, :omniauthable,
              omniauth_providers: [:github]
 
-      after_initialize do
-        self.account ||= Account.new if account.nil?
+      before_save do
+        self.account ||= Account.new
       end
     end
 
@@ -20,9 +20,14 @@ class User
 
       sig { params(provider: T::Key, auth: OmniAuth::AuthHash).returns(User) }
       def from!(provider, auth)
-        case provider.to_sym
-        when :github
-          from_github!(auth)
+        transaction do
+          user = case provider.to_sym
+                 when :github
+                   from_github!(auth)
+                 end
+
+          user.access_tokens << AccessToken.new(token: auth.credentials.token, provider:)
+          user
         end
       end
 
@@ -44,5 +49,21 @@ class User
         { github: { id: auth.uid, access_token: auth.credentials.token } }
       end
     end
+  end
+
+  sig { params(provider: T::Key, auth: OmniAuth::AuthHash).returns(User) }
+  def provide(provider, auth)
+    User.transaction do
+      lock!
+      providers.deep_merge! User::Registration.provider(provider, auth)
+      save!
+
+      access_tokens << AccessToken.new(
+        token: auth.credentials.token,
+        provider:
+      )
+    end
+
+    self
   end
 end
