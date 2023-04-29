@@ -12,12 +12,10 @@ FactoryBot.define do
   end
 
   factory :access_token do
-    uid { '1' }
     provider { 'github' }
     token { 'access_token' }
     user
     account { user.account }
-    changelog { build(:changelog, account:) }
   end
 
   factory :changelog do
