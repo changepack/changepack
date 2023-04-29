@@ -108,6 +108,8 @@ group :development do
   gem "rack-livereload"
 
   gem "letter_opener"
+
+  gem "lookbook", ">= 2.0.0"
 end
 
 group :test do

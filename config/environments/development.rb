@@ -82,4 +82,9 @@ Rails.application.configure do
   config.hosts = ENV['APP_HOST']
 
   config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
+
+  config.lookbook.preview_layout = 'preview'
+  config.lookbook.preview_paths = [
+    Rails.root.join('spec/components/previews')
+  ]
 end

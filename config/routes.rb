@@ -27,13 +27,17 @@ Rails.application.routes.draw do
 
   resources :posts, only: [:show]
 
-  unless Rails.env.production?
+  mount Sidekiq::Web => 'sidekiq'
+
+  if Rails.env.test?
     scope path: '__cypress__', controller: 'users/cypress' do
       post 'authenticate', action: 'authenticate'
     end
   end
 
-  mount Sidekiq::Web => 'sidekiq'
+  if Rails.env.development?
+    mount Lookbook::Engine, at: "/lookbook"
+  end
 
   # Both a public and a private URL to your changelog.
   # Has to be at the end so that all other routes are matched first.
