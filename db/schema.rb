@@ -10,22 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_28_231551) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_29_091833) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "access_tokens", id: :string, force: :cascade do |t|
     t.string "provider", null: false
-    t.string "uid", null: false
     t.string "token", null: false
     t.string "user_id", null: false
     t.string "account_id", null: false
-    t.string "changelog_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id", "provider", "token"], name: "index_access_tokens_on_account_id_and_provider_and_token", unique: true
     t.index ["account_id"], name: "index_access_tokens_on_account_id"
-    t.index ["changelog_id"], name: "index_access_tokens_on_changelog_id"
     t.index ["user_id"], name: "index_access_tokens_on_user_id"
   end
 
@@ -177,6 +174,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_231551) do
     t.datetime "pulled_at"
     t.datetime "discarded_at"
     t.jsonb "providers", default: {}, null: false
+    t.string "access_token_id"
+    t.index ["access_token_id"], name: "index_repositories_on_access_token_id"
     t.index ["account_id"], name: "index_repositories_on_account_id"
     t.index ["discarded_at"], name: "index_repositories_on_discarded_at"
   end
@@ -238,7 +237,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_231551) do
   end
 
   add_foreign_key "access_tokens", "accounts"
-  add_foreign_key "access_tokens", "changelogs"
   add_foreign_key "access_tokens", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
@@ -249,6 +247,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_231551) do
   add_foreign_key "posts", "accounts"
   add_foreign_key "posts", "changelogs"
   add_foreign_key "posts", "users"
+  add_foreign_key "repositories", "access_tokens"
   add_foreign_key "repositories", "accounts"
   add_foreign_key "repository_transitions", "repositories"
   add_foreign_key "updates", "accounts"
