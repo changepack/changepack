@@ -11,7 +11,6 @@ class User
     included do
       provider :github
       provider :github, :id
-      provider :github, :access_token
     end
 
     sig { returns T.nilable(Provider) }
@@ -21,9 +20,10 @@ class User
       @git ||= Provider[provider].new(access_token:, account_id:)
     end
 
-    sig { returns String }
+    sig { returns T.nilable(String) }
     def access_token
-      providers.dig(provider, :access_token)
+      @access_token ||= access_tokens.find { |token| token.provider == provider }
+                                     .try(:token)
     end
 
     sig { returns T::Boolean }
