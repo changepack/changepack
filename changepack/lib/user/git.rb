@@ -20,10 +20,9 @@ class User
       @git ||= Provider[provider].new(access_token:, account_id:)
     end
 
-    sig { returns T.nilable(String) }
+    sig { returns T.nilable(AccessToken) }
     def access_token
       @access_token ||= access_tokens.find { |token| token.provider == provider }
-                                     .try(:token)
     end
 
     sig { returns T::Boolean }

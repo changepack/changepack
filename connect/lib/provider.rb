@@ -18,7 +18,7 @@ class Provider
 
   abstract!
 
-  attribute :access_token, :string
+  attribute :access_token, T.instance(AccessToken)
   attribute :account_id, :string
 
   sig { params(provider: T::Key).returns(T.untyped) }

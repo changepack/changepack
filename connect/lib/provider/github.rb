@@ -46,7 +46,10 @@ class Provider
 
     sig { override.returns(Octokit::Client) }
     def client
-      @client ||= Octokit::Client.new(access_token:, per_page: 100)
+      @client ||= Octokit::Client.new(
+        access_token: access_token.to_s,
+        per_page: 100
+      )
     end
 
     class Mapper

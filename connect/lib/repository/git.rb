@@ -10,7 +10,6 @@ class Repository
 
     included do
       provider :github, :id
-      provider :github, :access_token
     end
 
     class_methods do
@@ -31,9 +30,9 @@ class Repository
       def pull_async(git)
         Event.publish(
           Repository::Authorized.new(
-            provider: git.provider,
-            access_token: git.access_token,
-            account_id: git.account_id
+            access_token: git.access_token.to_s,
+            account_id: git.account_id,
+            provider: git.provider
           )
         )
 
@@ -45,7 +44,7 @@ class Repository
     def self.upsert!(repository, git:)
       account_id = git.account_id
       providers = {
-        git.provider => { id: repository.id, access_token: git.access_token }
+        git.provider => { id: repository.id, access_token: git.access_token.to_s }
       }
 
       Repository.find_or_initialize_by(account_id:, providers:) do |repo|
@@ -70,11 +69,6 @@ class Repository
     sig { returns Provider }
     def git
       @git ||= Provider[provider].new(access_token:, account_id:)
-    end
-
-    sig { returns String }
-    def access_token
-      providers.dig(provider, :access_token)
     end
   end
 end

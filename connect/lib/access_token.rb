@@ -22,4 +22,8 @@ class AccessToken < ApplicationRecord
   after_initialize do
     self.account ||= user&.account if user_id.present?
   end
+
+  def to_s
+    token
+  end
 end
