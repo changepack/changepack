@@ -53,7 +53,7 @@ class ApplicationLayout < ApplicationView
         next if helpers.user_signed_out?
 
         nav.link_to 'Home', root_path, active: home?
-        nav.link_to 'Repositories', repositories_path, active: repositories?
+        nav.link_to 'Data sources', sources_path, active: sources?
       end
 
       render navigation
@@ -79,11 +79,11 @@ class ApplicationLayout < ApplicationView
   end
 
   def home?
-    helpers.current_controller.in?(%i[accounts posts])
+    helpers.current_controller.in? %i[accounts posts]
   end
 
-  def repositories?
-    helpers.current_controller.in?(%i[repositories])
+  def sources?
+    helpers.current_controller.in? %i[sources]
   end
 
   def settings

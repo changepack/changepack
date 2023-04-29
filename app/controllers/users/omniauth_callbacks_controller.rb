@@ -5,7 +5,7 @@ module Users
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     def github
       sign_in_from!(:github)
-      redirect_to repositories_path, notice: t('devise.omniauth_callbacks.success', kind: 'GitHub')
+      redirect_to sources_path, notice: t('devise.omniauth_callbacks.success', kind: 'GitHub')
     end
 
     private

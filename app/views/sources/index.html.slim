@@ -1,16 +1,16 @@
 .block.md:flex.md:justify-between.md:items-center
   section
-    = link_to repositories_path do
-      h1.font-semibold.text-4xl Repositories
+    = link_to sources_path do
+      h1.font-semibold.text-4xl Data sources
       h2.mt-4
         | Pull changes from Git and write changelogs based on your commits
 
 section.overflow-x-auto
   .py-10.md:py-24
     .md:-my-8
-      - if repositories.any?
-        - repositories.each do |repository|
-          = render I::Repository.new(repository:)
+      - if sources.any?
+        - sources.each do |source|
+          = render I::Source.new(source:)
 
         - if pagy && pagy.pages > 1
           .py-10.md:py-24
@@ -20,7 +20,7 @@ section.overflow-x-auto
       - elsif current_account.access_tokens.any?
         section data-test-id="blank"
           = render I::Flash.new(type: :info) do
-            ' We haven’t pulled any repositories from your Git account yet.
+            ' We haven’t pulled any sources from your Git account yet.
             ' Please wait.
 
       - elsif allowed_to?(:new?)
@@ -48,4 +48,4 @@ section.overflow-x-auto
       - else
         section data-test-id="blank"
           = render I::Flash.new(type: :info) do
-            ' You don’t have any repositories yet.
+            ' You don’t have any sources yet.

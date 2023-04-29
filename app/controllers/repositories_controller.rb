@@ -2,13 +2,6 @@
 # frozen_string_literal: true
 
 class RepositoriesController < ApplicationController
-  def index
-    authorize!
-    pagy, repositories = pagy(collection)
-
-    render locals: { repositories:, pagy: }
-  end
-
   def confirm_update
     authorize! repository, to: :update? and render item
   end
@@ -17,7 +10,7 @@ class RepositoriesController < ApplicationController
     authorize! repository
 
     repository.transition_to!(:active)
-    redirect_to repositories_url
+    redirect_to sources_path
   end
 
   def confirm_destroy
@@ -28,19 +21,14 @@ class RepositoriesController < ApplicationController
     authorize! repository
 
     repository.transition_to!(:inactive)
-    redirect_to repositories_url
+    redirect_to sources_path
   end
 
   private
 
   sig { returns Repository }
   def repository
-    @repository ||= collection.find(id)
-  end
-
-  sig { returns T::Repositories }
-  def collection
-    authorized(Repository.activity.kept)
+    @repository ||= authorized(Repository.all).find(id)
   end
 
   sig { returns T::Locals }
