@@ -6,6 +6,8 @@ module Changepack
     extend T::Helpers
     extend T::Sig
 
+    attr_reader :event, :payload
+
     abstract!
 
     sig { params(event: T.class_of(Changepack::Event)).void }
@@ -29,9 +31,5 @@ module Changepack
 
     sig { abstract.returns T.untyped }
     def run; end
-
-    private
-
-    attr_reader :event, :payload
   end
 end

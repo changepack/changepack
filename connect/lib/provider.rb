@@ -16,10 +16,10 @@ class Provider
   Result = T.type_alias { T.any(Provider::Repository, Provider::Commit) }
   Results = T.type_alias { T::Array[Result] }
 
-  abstract!
-
   attribute :access_token, T.instance(AccessToken)
   attribute :account_id, :string
+
+  abstract!
 
   sig { params(provider: T::Key).returns(T.untyped) }
   def self.[](provider)
@@ -35,7 +35,7 @@ class Provider
 
   sig { returns T::Array[String] }
   def self.to_a
-    to_h.keys.map(&:to_s)
+    to_h.keys
   end
 
   sig { returns T::Shape }

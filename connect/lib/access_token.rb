@@ -16,13 +16,14 @@ class AccessToken < ApplicationRecord
   belongs_to :account
   has_many :repositories, dependent: :nullify
 
-  validates :provider, presence: true, inclusion: { in: Provider.to_a }
   validates :token, presence: true, uniqueness: { scope: %i[account_id provider] }
+  validates :provider, presence: true
 
   after_initialize do
     self.account ||= user&.account if user_id.present?
   end
 
+  sig { returns String }
   def to_s
     token
   end
