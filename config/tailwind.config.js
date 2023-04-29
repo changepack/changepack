@@ -15,6 +15,13 @@ module.exports = {
       fontFamily: {
         sans: [...defaultTheme.fontFamily.sans],
       },
+      fontSize: {
+        xs: ['0.75rem', '1.38'],
+        sm: ['0.875rem', '1.61'],
+        base: ['1rem', '1.84'],
+        lg: ['1.125rem', '2.07'],
+        xl: ['1.25rem', '2.3'],
+      },
       colors: {
         orange: {
           100: '#FFFFE6',

@@ -60,7 +60,7 @@ module I
     def body
       title
 
-      article class: 'leading-relaxed prose max-w-full' do
+      article class: 'text-base prose max-w-full' do
         plain post.content.to_s
       end
 

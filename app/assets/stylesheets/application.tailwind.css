@@ -124,6 +124,10 @@
   }
 }
 
+.trix-content {
+  line-height: inherit;
+}
+
 trix-editor:empty:not(:focus)::before {
   @apply text-gray-300;
 }
