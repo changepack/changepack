@@ -10,7 +10,6 @@ class User
 
     included do
       provider :github
-      provider :github, :id
     end
 
     sig { returns T.nilable(Provider) }

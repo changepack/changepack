@@ -23,6 +23,7 @@ class Account < ApplicationRecord
   has_many :commits, dependent: :destroy
   has_many :repositories, dependent: :destroy
   has_many :changelogs, dependent: :destroy
+  has_many :access_tokens, dependent: :destroy
 
   has_one_attached :picture
 

@@ -33,7 +33,7 @@ class User
 
       sig { params(auth: OmniAuth::AuthHash).returns(User) }
       def from_github!(auth)
-        where.contains(providers: { github: { id: auth.uid } }).first_or_create! do |user|
+        where.contains(providers: { github: auth.uid }).first_or_create! do |user|
           user.name = auth.info.name
           user.email = auth.info.email
           user.password = Devise.friendly_token[0, 20]

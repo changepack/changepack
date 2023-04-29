@@ -45,7 +45,7 @@ class Commit
     def self.source(repository)
       case repository.provider
       when 'github'
-        repository.github_id
+        repository.github
       end
     end
   end

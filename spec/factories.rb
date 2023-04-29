@@ -37,7 +37,7 @@ FactoryBot.define do
     account { create(:account) }
     name { "#{Faker::App.name.downcase}/#{Faker::App.name.downcase}" }
     branch { 'main' }
-    providers { { 'github' => { 'id' => '1', 'access_token' => 'access_token' } } }
+    providers { { 'github' => 1 } }
   end
 
   factory :repository_transition do

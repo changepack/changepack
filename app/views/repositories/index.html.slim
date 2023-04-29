@@ -17,7 +17,7 @@ section.overflow-x-auto
             .-my-8
               == pagy_nav(pagy)
 
-      - elsif current_user.git?
+      - elsif current_account.access_tokens.any?
         section data-test-id="blank"
           = render I::Flash.new(type: :info) do
             ' We haven’t pulled any repositories from your Git account yet.

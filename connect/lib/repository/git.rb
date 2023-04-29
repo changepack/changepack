@@ -9,7 +9,7 @@ class Repository
     include Provided
 
     included do
-      provider :github, :id
+      provider :github
     end
 
     class_methods do
