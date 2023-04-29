@@ -4,6 +4,13 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :source do
+    name { Faker::Lorem.sentence }
+    type { 'repository' }
+    account { repository.account }
+    repository
+  end
+
   factory :update do
     name { Faker::Lorem.sentence }
     type { 'commit' }

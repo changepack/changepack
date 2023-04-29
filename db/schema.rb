@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_29_130029) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_29_141618) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -192,11 +192,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_29_130029) do
     t.index ["repository_id", "sort_key"], name: "index_repository_transitions_parent_sort", unique: true
   end
 
+  create_table "sources", id: :string, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "type", null: false
+    t.string "account_id", null: false
+    t.string "repository_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_sources_on_account_id"
+    t.index ["repository_id"], name: "index_sources_on_repository_id"
+  end
+
   create_table "updates", id: :string, force: :cascade do |t|
     t.string "name", null: false
     t.string "type", null: false
     t.string "account_id"
-    t.string "commit_id"
+    t.string "commit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "post_id"
@@ -250,6 +261,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_29_130029) do
   add_foreign_key "repositories", "access_tokens"
   add_foreign_key "repositories", "accounts"
   add_foreign_key "repository_transitions", "repositories"
+  add_foreign_key "sources", "accounts"
+  add_foreign_key "sources", "repositories"
   add_foreign_key "updates", "accounts"
   add_foreign_key "updates", "commits"
   add_foreign_key "updates", "posts"

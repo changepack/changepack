@@ -31,7 +31,7 @@ class Update < ApplicationRecord
   attribute :type, :string
 
   belongs_to :account
-  belongs_to :commit
+  belongs_to :commit, optional: true
   belongs_to :post, optional: true
 
   validates :name, presence: true
