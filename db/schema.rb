@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_30_172808) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_30_230014) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -201,7 +201,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_172808) do
     t.datetime "updated_at", null: false
     t.string "status", default: "inactive"
     t.datetime "discarded_at"
+    t.string "changelog_id", null: false
     t.index ["account_id"], name: "index_sources_on_account_id"
+    t.index ["changelog_id"], name: "index_sources_on_changelog_id"
     t.index ["repository_id"], name: "index_sources_on_repository_id"
   end
 
@@ -215,8 +217,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_172808) do
     t.string "post_id"
     t.datetime "discarded_at"
     t.string "source_id"
+    t.string "changelog_id", null: false
     t.index ["account_id", "commit_id"], name: "index_updates_on_account_id_and_commit_id", unique: true
     t.index ["account_id"], name: "index_updates_on_account_id"
+    t.index ["changelog_id"], name: "index_updates_on_changelog_id"
     t.index ["commit_id"], name: "index_updates_on_commit_id"
     t.index ["post_id"], name: "index_updates_on_post_id"
     t.index ["source_id"], name: "index_updates_on_source_id"
@@ -266,8 +270,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_172808) do
   add_foreign_key "repositories", "accounts"
   add_foreign_key "repository_transitions", "repositories"
   add_foreign_key "sources", "accounts"
+  add_foreign_key "sources", "changelogs"
   add_foreign_key "sources", "repositories"
   add_foreign_key "updates", "accounts"
+  add_foreign_key "updates", "changelogs"
   add_foreign_key "updates", "commits"
   add_foreign_key "updates", "posts"
   add_foreign_key "updates", "sources"

@@ -20,6 +20,7 @@ class Source < ApplicationRecord
   attribute :status, :string, default: :inactive
 
   belongs_to :account
+  belongs_to :changelog, optional: true
   belongs_to :repository, optional: true
   has_many :updates, dependent: :destroy
 

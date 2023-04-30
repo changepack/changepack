@@ -12,6 +12,7 @@ class Update
         account_id: event.account_id,
         commit_id: event.id,
         name: event.message,
+        changelog:,
         source:
       )
     end
@@ -19,6 +20,11 @@ class Update
     sig { returns T.nilable(Source) }
     def source
       @source ||= Source.find_by(repository_id: event.repository_id)
+    end
+
+    sig { returns Changelog }
+    def changelog
+      @changelog ||= Account.find(account_id).changelogs.first
     end
   end
 end
