@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_30_230014) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_30_231753) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -201,7 +201,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_230014) do
     t.datetime "updated_at", null: false
     t.string "status", default: "inactive"
     t.datetime "discarded_at"
-    t.string "changelog_id", null: false
+    t.string "changelog_id"
     t.index ["account_id"], name: "index_sources_on_account_id"
     t.index ["changelog_id"], name: "index_sources_on_changelog_id"
     t.index ["repository_id"], name: "index_sources_on_repository_id"
@@ -217,7 +217,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_230014) do
     t.string "post_id"
     t.datetime "discarded_at"
     t.string "source_id"
-    t.string "changelog_id", null: false
+    t.string "changelog_id"
     t.index ["account_id", "commit_id"], name: "index_updates_on_account_id_and_commit_id", unique: true
     t.index ["account_id"], name: "index_updates_on_account_id"
     t.index ["changelog_id"], name: "index_updates_on_changelog_id"

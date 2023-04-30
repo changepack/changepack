@@ -24,7 +24,7 @@ class Update
 
     sig { returns Changelog }
     def changelog
-      @changelog ||= Account.find(account_id).changelogs.first
+      @changelog ||= Account.find(event.account_id).changelogs.first
     end
   end
 end

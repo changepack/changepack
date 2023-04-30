@@ -9,6 +9,7 @@ FactoryBot.define do
     type { 'repository' }
     account { repository.account }
     repository
+    changelog { create(:changelog, account: repository.account) }
   end
 
   factory :update do
@@ -17,6 +18,7 @@ FactoryBot.define do
     type { 'commit' }
     account { commit.account }
     commit
+    changelog { create(:changelog, account: commit.account) }
   end
 
   factory :access_token do
