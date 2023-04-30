@@ -189,3 +189,7 @@ gem "file_validators"
 gem "sorbet-runtime"
 
 gem "sorbet-rails"
+
+gem "sentry-ruby"
+
+gem "sentry-rails"
