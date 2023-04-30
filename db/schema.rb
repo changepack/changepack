@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_29_152325) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_30_172808) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -214,10 +214,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_29_152325) do
     t.datetime "updated_at", null: false
     t.string "post_id"
     t.datetime "discarded_at"
+    t.string "source_id"
     t.index ["account_id", "commit_id"], name: "index_updates_on_account_id_and_commit_id", unique: true
     t.index ["account_id"], name: "index_updates_on_account_id"
     t.index ["commit_id"], name: "index_updates_on_commit_id"
     t.index ["post_id"], name: "index_updates_on_post_id"
+    t.index ["source_id"], name: "index_updates_on_source_id"
   end
 
   create_table "users", id: :string, force: :cascade do |t|
@@ -268,5 +270,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_29_152325) do
   add_foreign_key "updates", "accounts"
   add_foreign_key "updates", "commits"
   add_foreign_key "updates", "posts"
+  add_foreign_key "updates", "sources"
   add_foreign_key "users", "accounts"
 end

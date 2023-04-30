@@ -21,6 +21,7 @@ class Source < ApplicationRecord
 
   belongs_to :account
   belongs_to :repository, optional: true
+  has_many :updates, dependent: :destroy
 
   validates :name, presence: true
   validates :type, presence: true, inclusion: { in: TYPES }

@@ -12,6 +12,7 @@ FactoryBot.define do
   end
 
   factory :update do
+    source { create(:source, repository: commit.repository) }
     name { Faker::Lorem.sentence }
     type { 'commit' }
     account { commit.account }

@@ -31,7 +31,8 @@ class Commit < ApplicationRecord
 
   private
 
+  sig { returns String }
   def created!
-    pub Created.new(id:, account_id:, message:)
+    pub Created.new(id:, account_id:, repository_id:, message:)
   end
 end

@@ -8,6 +8,7 @@ class Commit
     class Created < Event
       attribute :id, String
       attribute :account_id, String
+      attribute :repository_id, String
       attribute :message, String
     end
   end

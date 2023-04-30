@@ -11,8 +11,13 @@ class Update
         type: :commit,
         account_id: event.account_id,
         commit_id: event.id,
-        name: event.message
+        name: event.message,
+        source:
       )
+    end
+
+    def source
+      @source ||= Source.find_by(repository_id: event.repository_id)
     end
   end
 end

@@ -31,6 +31,7 @@ class Update < ApplicationRecord
   attribute :type, :string
 
   belongs_to :account
+  belongs_to :source
   belongs_to :commit, optional: true
   belongs_to :post, optional: true
 

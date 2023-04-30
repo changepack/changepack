@@ -36,6 +36,4 @@ Use `tmuxinator` or `foreman` to run backgrounds processes like `guard`, a `cypr
 
 ## Contributors 🎉
 
-Looking to contribute? Please refer our [CONTRIBUTING.md](./CONTRIBUTING.md) file.
-
-<!-- <a href="https://github.com/changepack/changepack/graphs/contributors"><img src="https://opencollective.com/changepack/contributors.svg?width=890&button=false" /></a> -->
+Looking to contribute? Please refer to our [CONTRIBUTING.md](./CONTRIBUTING.md) file.
