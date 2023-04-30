@@ -8,6 +8,8 @@ end
 
 class Post < ApplicationRecord
   include Publish
+  include Hallucinate
+
   include Status
   include Slug
 
@@ -36,6 +38,10 @@ class Post < ApplicationRecord
         sig: T.proc.params(user: T.nilable(User))
 
   scope :recent, -> { order(created_at: :desc) }
+
+  before_save do
+    self.account ||= changelog.account
+  end
 
   private
 

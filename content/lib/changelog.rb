@@ -18,7 +18,8 @@ class Changelog < ApplicationRecord
   belongs_to :account
   has_many :posts, dependent: :destroy
   has_many :access_tokens, dependent: :destroy
-  has_many :repositories, dependent: :destroy
+  has_many :sources, dependent: :destroy
+  has_many :updates, dependent: :destroy
 
   validates :name, presence: true
 
