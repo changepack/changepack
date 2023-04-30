@@ -18,6 +18,7 @@ class Source
       )
     end
 
+    sig { returns T.nilable(Source) }
     def source
       @source ||= Source.find_by(repository_id: event.id)
     end

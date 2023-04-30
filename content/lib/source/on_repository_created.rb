@@ -10,7 +10,7 @@ class Source
 
     sig { override.returns Source }
     def run
-      Source.create(
+      Source.create!(
         type: :repository,
         repository_id:,
         account_id:,
