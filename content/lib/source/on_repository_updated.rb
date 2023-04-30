@@ -10,7 +10,9 @@ class Source
 
     sig { override.returns T::Boolean }
     def run
-      source&.update!(
+      return false if source.blank?
+
+      source.update!(
         repository_id:,
         account_id:,
         status:,
