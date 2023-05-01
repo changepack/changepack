@@ -338,7 +338,7 @@ GEM
       sorbet-runtime (>= 0.5)
     parser (3.2.1.1)
       ast (~> 2.4.1)
-    pg (1.4.6)
+    pg (1.5.3)
     phlex (1.6.1)
       concurrent-ruby (~> 1.2)
       erb (>= 4)
@@ -639,7 +639,7 @@ DEPENDENCIES
   omniauth-rails_csrf_protection
   pagy
   paper_trail
-  pg (~> 1.4)
+  pg (~> 1.5)
   phlex-rails
   prettyid!
   pry-rails
