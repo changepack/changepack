@@ -3,7 +3,13 @@
 # validations for this file exist in /spec/configs/schedule_spec.rb
 
 # Every hour
-trigger_scheduled_items_job:
+trigger_hourly_job:
   cron: '0 * * * *'
-  class: 'Clock::Tick'
+  class: 'Clock::HourlyTick'
+  queue: scheduled_jobs
+
+# Every day
+trigger_daily_job:
+  cron: '0 0 * * *'
+  daily: 'Clock::DailyTick'
   queue: scheduled_jobs

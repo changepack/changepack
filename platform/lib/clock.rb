@@ -8,7 +8,11 @@ module Clock
     attribute :hour, Integer
   end
 
-  class Tick < ApplicationJob
+  class NewDay < Event
+    attribute :day, Integer
+  end
+
+  class HourlyTick < ApplicationJob
     sig { returns Integer }
     def perform
       Time.current.hour.tap do |hour|
@@ -19,8 +23,24 @@ module Clock
     end
   end
 
-  sig { returns Clock::Tick }
-  def self.tick
-    Tick.perform_later
+  class DailyTick < ApplicationJob
+    sig { returns Integer }
+    def perform
+      Time.current.day.tap do |day|
+        Event.publish(
+          NewDay.new(day:)
+        )
+      end
+    end
+  end
+
+  sig { returns Clock::HourlyTick }
+  def self.hourly_tick
+    HourlyTick.perform_later
+  end
+
+  sig { returns Clock::DailyTick }
+  def self.daily_tick
+    DailyTick.perform_later
   end
 end

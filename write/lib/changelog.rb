@@ -7,6 +7,7 @@ module T
 end
 
 class Changelog < ApplicationRecord
+  include Events
   include Slug
 
   DEFAULT = 'Changelog'
