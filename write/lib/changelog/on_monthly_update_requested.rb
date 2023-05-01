@@ -10,6 +10,7 @@ class Changelog
       Post.hallucinate(changelog)
     end
 
+    sig { returns Changelog }
     def changelog
       Changelog.find(event.changelog_id)
     end

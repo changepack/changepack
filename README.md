@@ -12,7 +12,7 @@ Changepack is an open-source changelog for your product. Share updates about new
 
 * **Pull commits from GitHub**. Changepack allows you to link changelogs with your GitHub activity, making it easy to track progress.
 * **Write release notes 10x faster with AI.** Leverage OpenAI’s [ChatGPT](https://openai.com/blog/chatgpt) to write your content in seconds.
-
+* **Monthly automated summaries.** Each month, Changepack handpicks the most notable updates and creates a release note draft for you to review and publish.
 ## Build and run locally
 
 ```
