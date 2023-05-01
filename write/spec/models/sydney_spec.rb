@@ -9,6 +9,12 @@ RSpec.describe Sydney, :vcr do
   let(:account) { create(:account) }
   let(:updates) { create_list(:update, 2, account:) }
 
+  around do |example|
+    ClimateControl.modify OPENAI_ACCESS_TOKEN: 'test' do
+      example.run
+    end
+  end
+
   describe '#hallucinate' do
     # We need the param to be an ActiveRecord::RelationType
     subject(:hallucinate) { sydney.hallucinate(Update.all) }

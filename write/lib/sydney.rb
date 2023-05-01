@@ -49,7 +49,9 @@ class Sydney
 
   sig { returns OpenAI::Client }
   def client
-    @client ||= OpenAI::Client.new
+    @client ||= OpenAI::Client.new(
+      access_token: ENV.fetch('OPENAI_ACCESS_TOKEN', nil)
+    )
   end
 
   sig { params(updates: T::Array[String], prompt: String).returns(Hash) }

@@ -116,6 +116,8 @@ group :test do
   gem "simplecov", require: false
 
   gem "ruby_event_store-rspec"
+
+  gem "climate_control"
 end
 
 gem "slim-rails"
