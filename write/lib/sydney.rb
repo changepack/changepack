@@ -20,13 +20,19 @@ class Sydney
 
   attribute :account, T.instance(Account)
 
-  Updates = T.type_alias { T::Array[String] }
-
-  sig { params(updates: Updates).returns(String) }
+  sig { params(updates: T::Updates).returns T.nilable(String) }
   def hallucinate(updates)
-    client.chat(parameters: parameters(updates))
-          .dig('choices', 0, 'message', 'content')
-          .strip
+    updates
+      .pluck(:name)
+      .then { |names| request('prompts.write', names) }
+  end
+
+  sig { params(updates: T::Updates).returns T.nilable(String) }
+  def choose(updates)
+    updates
+      .pluck(:id, :name)
+      .map { |id, name| I18n.t('prompts.id', id:, name:) }
+      .then { |names| request('prompts.choose', names) }
   end
 
   private
@@ -34,24 +40,31 @@ class Sydney
   delegate :name, to: :account, prefix: true
   delegate :description, to: :account, prefix: true
 
+  sig { params(prompt: String, updates: T::Array[String]).returns T.nilable(String) }
+  def request(prompt, updates)
+    client.chat(parameters: parameters(updates, prompt:))
+          .dig('choices', 0, 'message', 'content')
+          .try(:strip)
+  end
+
   sig { returns OpenAI::Client }
   def client
     @client ||= OpenAI::Client.new
   end
 
-  sig { params(updates: Updates).returns(Hash) }
-  def parameters(updates)
+  sig { params(updates: T::Array[String], prompt: String).returns(Hash) }
+  def parameters(updates, prompt:)
     {
       model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: prompt(updates) }],
+      messages: [{ role: 'user', content: prompt(updates, prompt:) }],
       temperature: 0.7
     }
   end
 
-  sig { params(updates: Updates).returns(String) }
-  def prompt(updates)
+  sig { params(updates: T::Array[String], prompt: String).returns(String) }
+  def prompt(updates, prompt:)
     I18n.t(
-      'prompt', account_name:, account_description:, updates: updates.join("\n")
+      prompt, account_name:, account_description:, updates: updates.join("\n")
     )
   end
 end

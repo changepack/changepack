@@ -1,0 +1,77 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-3.5-turbo","messages":[{"role":"user","content":"Choose
+        the most important changes that the customers should learn about for an app
+        called Gislason-Carter based on the list below.\n\n\nDon’t explain what the
+        company does.\nList the updates using bullet points.\nKeep the original names.\nExplain
+        why you think they’re important.\nMention the IDs of changes so that they
+        can be extracted from the text easily.\n\nHere are the updates:\n\n"}],"temperature":0.7}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 01 May 2023 11:27:01 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache, must-revalidate
+      Openai-Model:
+      - gpt-3.5-turbo-0301
+      Openai-Organization:
+      - user-us1icqkjutufgswcvfdqqmev
+      Openai-Processing-Ms:
+      - '15930'
+      Openai-Version:
+      - '2020-10-01'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Ratelimit-Limit-Requests:
+      - '3500'
+      X-Ratelimit-Limit-Tokens:
+      - '90000'
+      X-Ratelimit-Remaining-Requests:
+      - '3499'
+      X-Ratelimit-Remaining-Tokens:
+      - '89887'
+      X-Ratelimit-Reset-Requests:
+      - 17ms
+      X-Ratelimit-Reset-Tokens:
+      - 75ms
+      X-Request-Id:
+      - c659a043dcdbf25d6334aad32dbc1836
+      Cf-Cache-Status:
+      - DYNAMIC
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 7c07abdf2823ffd0-WAW
+      Alt-Svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJpZCI6ImNoYXRjbXBsLTdCTHkya0F3RndDNVc4dUNFTkIxTE55c0ZTNlZ1Iiwib2JqZWN0IjoiY2hhdC5jb21wbGV0aW9uIiwiY3JlYXRlZCI6MTY4Mjk0MDQwNiwibW9kZWwiOiJncHQtMy41LXR1cmJvLTAzMDEiLCJ1c2FnZSI6eyJwcm9tcHRfdG9rZW5zIjo4NSwiY29tcGxldGlvbl90b2tlbnMiOjI0OCwidG90YWxfdG9rZW5zIjozMzN9LCJjaG9pY2VzIjpbeyJtZXNzYWdlIjp7InJvbGUiOiJhc3Npc3RhbnQiLCJjb250ZW50IjoiMS4gQWRkZWQgbmV3IGZlYXR1cmUgZm9yIGRvY3VtZW50IHNoYXJpbmcgKElEOiAxKVxuLSBUaGlzIGZlYXR1cmUgYWxsb3dzIHVzZXJzIHRvIGVhc2lseSBzaGFyZSBkb2N1bWVudHMgd2l0aGluIHRoZSBhcHAsIG1ha2luZyBjb2xsYWJvcmF0aW9uIGFuZCBjb21tdW5pY2F0aW9uIG1vcmUgZWZmaWNpZW50LlxuXG4yLiBJbXByb3ZlZCB1c2VyIGludGVyZmFjZSBmb3IgZWFzaWVyIG5hdmlnYXRpb24gKElEOiAyKVxuLSBUaGUgdXBkYXRlZCBpbnRlcmZhY2UgZW5oYW5jZXMgdXNlciBleHBlcmllbmNlLCBtYWtpbmcgaXQgZWFzaWVyIGZvciBjdXN0b21lcnMgdG8gbmF2aWdhdGUgdGhlIGFwcCBhbmQgYWNjZXNzIGl0cyBkaWZmZXJlbnQgZmVhdHVyZXMuXG5cbjMuIEVuaGFuY2VkIHNlY3VyaXR5IG1lYXN1cmVzIChJRDogMylcbi0gV2l0aCB0aGUgaW5jcmVhc2luZyBuZWVkIGZvciBkYXRhIHNlY3VyaXR5LCB0aGlzIHVwZGF0ZSBlbnN1cmVzIHRoYXQgdGhlIGFwcOKAmXMgc2VjdXJpdHkgbWVhc3VyZXMgYXJlIHVwLXRvLWRhdGUgYW5kIHJlbGlhYmxlLCBnaXZpbmcgdXNlcnMgcGVhY2Ugb2YgbWluZCB3aGVuIHVzaW5nIHRoZSBhcHAuXG5cbjQuIEltcHJvdmVkIHNlYXJjaCBmdW5jdGlvbmFsaXR5IChJRDogNClcbi0gVGhlIGltcHJvdmVkIHNlYXJjaCBmdW5jdGlvbiBtYWtlcyBpdCBlYXNpZXIgZm9yIHVzZXJzIHRvIGZpbmQgc3BlY2lmaWMgZG9jdW1lbnRzIG9yIGluZm9ybWF0aW9uIHdpdGhpbiB0aGUgYXBwLlxuXG41LiBBZGRlZCBuZXcgbm90aWZpY2F0aW9uIHN5c3RlbSAoSUQ6IDUpXG4tIFRoZSBhcHAgbm93IGhhcyBhIG5ldyBub3RpZmljYXRpb24gc3lzdGVtIHRoYXQgYWxlcnRzIHVzZXJzIHdoZW4gbmV3IGRvY3VtZW50cyBhcmUgYWRkZWQgb3Igd2hlbiB0aGVyZSBhcmUgdXBkYXRlcyB0byBleGlzdGluZyBkb2N1bWVudHMuIFRoaXMgZW5zdXJlcyB1c2VycyBhcmUgYWx3YXlzIHVwLXRvLWRhdGUgd2l0aCB0aGUgbGF0ZXN0IGluZm9ybWF0aW9uLlxuXG5JIGJlbGlldmUgdGhlc2UgdXBkYXRlcyBhcmUgaW1wb3J0YW50IGJlY2F1c2UgdGhleSBlbmhhbmNlIHRoZSBvdmVyYWxsIHVzZXIgZXhwZXJpZW5jZSBvZiB0aGUgYXBwLCBtYWtpbmcgaXQgbW9yZSBlZmZpY2llbnQsIHNlY3VyZSwgYW5kIHVzZXItZnJpZW5kbHkuIFRoZSBuZXcgZmVhdHVyZXMgYW5kIGltcHJvdmVtZW50cyBhcmUgYWxzbyBlc3NlbnRpYWwgaW4gZW5zdXJpbmcgdGhhdCB0aGUgYXBwIHJlbWFpbnMgY29tcGV0aXRpdmUgYW5kIHJlbGV2YW50IGluIHRoZSBtYXJrZXQuIn0sImZpbmlzaF9yZWFzb24iOiJzdG9wIiwiaW5kZXgiOjB9XX0K
+  recorded_at: Mon, 01 May 2023 11:27:01 GMT
+recorded_with: VCR 6.1.0

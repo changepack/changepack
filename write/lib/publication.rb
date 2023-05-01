@@ -36,13 +36,10 @@ class Publication
     if content.present? || updates.none?
       content
     else
-      Sydney.new(account:).hallucinate(changes)
+      Sydney.new(account:).hallucinate(
+        account.updates.where(id: updates)
+      )
     end
-  end
-
-  sig { returns T::Array[String] }
-  def changes
-    account.updates.where(id: updates).pluck(:name)
   end
 
   sig { returns Changelog }
