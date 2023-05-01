@@ -3,5 +3,5 @@
 
 require 'rails_helper'
 
-path = Rails.root.join('content/spec')
+path = Rails.root.join('write/spec')
 Dir.glob("#{path}/**/*_spec.rb") { |file| require file }
