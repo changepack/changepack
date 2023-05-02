@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_30_231753) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_02_125432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -98,6 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_231753) do
     t.jsonb "providers", default: {}, null: false
     t.index ["account_id"], name: "index_commits_on_account_id"
     t.index ["discarded_at"], name: "index_commits_on_discarded_at"
+    t.index ["providers"], name: "index_commits_on_providers", unique: true
     t.index ["repository_id"], name: "index_commits_on_repository_id"
   end
 
@@ -178,6 +179,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_231753) do
     t.index ["access_token_id"], name: "index_repositories_on_access_token_id"
     t.index ["account_id"], name: "index_repositories_on_account_id"
     t.index ["discarded_at"], name: "index_repositories_on_discarded_at"
+    t.index ["providers"], name: "index_repositories_on_providers", unique: true
   end
 
   create_table "repository_transitions", id: :string, force: :cascade do |t|
@@ -204,7 +206,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_231753) do
     t.string "changelog_id"
     t.index ["account_id"], name: "index_sources_on_account_id"
     t.index ["changelog_id"], name: "index_sources_on_changelog_id"
-    t.index ["repository_id"], name: "index_sources_on_repository_id"
+    t.index ["repository_id"], name: "index_sources_on_repository_id", unique: true
   end
 
   create_table "updates", id: :string, force: :cascade do |t|
@@ -221,7 +223,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_231753) do
     t.index ["account_id", "commit_id"], name: "index_updates_on_account_id_and_commit_id", unique: true
     t.index ["account_id"], name: "index_updates_on_account_id"
     t.index ["changelog_id"], name: "index_updates_on_changelog_id"
-    t.index ["commit_id"], name: "index_updates_on_commit_id"
+    t.index ["commit_id"], name: "index_updates_on_commit_id", unique: true
     t.index ["post_id"], name: "index_updates_on_post_id"
     t.index ["source_id"], name: "index_updates_on_source_id"
   end
@@ -271,10 +273,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_231753) do
   add_foreign_key "repository_transitions", "repositories"
   add_foreign_key "sources", "accounts"
   add_foreign_key "sources", "changelogs"
-  add_foreign_key "sources", "repositories"
   add_foreign_key "updates", "accounts"
   add_foreign_key "updates", "changelogs"
-  add_foreign_key "updates", "commits"
   add_foreign_key "updates", "posts"
   add_foreign_key "updates", "sources"
   add_foreign_key "users", "accounts"

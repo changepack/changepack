@@ -47,7 +47,7 @@ class Repository
         git.provider => { id: repository.id, access_token: git.access_token.to_s }
       }
 
-      Repository.find_or_initialize_by(account_id:, providers:) do |repo|
+      Repository.lock.find_or_initialize_by(account_id:, providers:) do |repo|
         repo.update!(repository.to_h)
       end
     end
