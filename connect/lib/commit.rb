@@ -27,6 +27,10 @@ class Commit < ApplicationRecord
 
   normalize :message
 
+  before_validation do
+    self.account ||= repository&.account
+  end
+
   after_commit :created!, on: :create
 
   private
