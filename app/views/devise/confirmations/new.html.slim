@@ -1,15 +1,15 @@
 h2
   | Resend confirmation instructions
-= form_for(resource, as: resource_name, \
-                     url: confirmation_path(resource_name), \
+= form_for(resource, as: resource_name,
+                     url: confirmation_path(resource_name),
                      html: { method: :post }) do |f|
   = render 'devise/shared/error_messages', resource:
   .field
     = f.label :email
     br
     / slim-lint:disable LineLength
-    = f.email_field :email, autofocus: true, \
-                            autocomplete: 'email', \
+    = f.email_field :email, autofocus: true,
+                            autocomplete: 'email',
                             value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
     / slim-lint:enable LineLength
   .actions

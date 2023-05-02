@@ -44,14 +44,14 @@ section data-test-id="edit_user"
 
           .field
             = f.label :password_confirmation, class: 'label'
-            = f.password_field :password_confirmation, autocomplete: 'new-password', \
+            = f.password_field :password_confirmation, autocomplete: 'new-password',
                                                        class: text_field_class(resource, :password_confirmation)
             - resource.errors.full_messages_for(:password_confirmation).each do |error_message|
               .text-xs.text-red-500.mt-2 = error_message
 
           .field
             = f.label :current_password, class: 'label'
-            = f.password_field :current_password, autocomplete: 'current-password', \
+            = f.password_field :current_password, autocomplete: 'current-password',
                                                   class: text_field_class(resource, :current_password)
             - resource.errors.full_messages_for(:current_password).each do |error_message|
               .text-xs.text-red-500.mt-2 = error_message
@@ -86,7 +86,7 @@ section data-test-id="edit_user"
               - resource.account.errors.full_messages_for(:description).each do |error_message|
                 .text-xs.text-red-500.mt-2 = error_message
               .mt-2
-                = field.text_area :description, rows: 3, \
+                = field.text_area :description, rows: 3,
                                                 class: "prose #{text_field_class(resource.account, :description)}"
               p.help
                 ' This field helps our AI learn what your company does
