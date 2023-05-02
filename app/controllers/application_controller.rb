@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_paper_trail_whodunnit
   before_action :authenticate_user!
+  before_action :set_raven_context
 
   helper_method :current_account
   helper_method :disallowed_to?
@@ -20,6 +21,10 @@ class ApplicationController < ActionController::Base
   layout -> { ApplicationLayout }
 
   private
+
+  def set_raven_context
+    Sentry.set_user(account_id: current_account.id, user_id: current_user.id) if user_signed_in?
+  end
 
   sig { returns T.nilable(Account) }
   def current_account

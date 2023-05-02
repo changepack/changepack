@@ -213,7 +213,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_125432) do
     t.string "name", null: false
     t.string "type", null: false
     t.string "account_id"
-    t.string "commit_id", null: false
+    t.string "commit_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "post_id"

@@ -40,14 +40,14 @@ FactoryBot.define do
     author { { name: Faker::Name.name, email: Faker::Internet.email } }
     repository
     account { repository.account }
-    providers { { 'github' => '547f300205087e675a1badf2b148c8b361b25e15' } }
+    providers { { 'github' => SecureRandom.uuid } }
   end
 
   factory :repository do
     account { create(:account) }
     name { "#{Faker::App.name.downcase}/#{Faker::App.name.downcase}" }
     branch { 'main' }
-    providers { { 'github' => 1 } }
+    providers { { 'github' => SecureRandom.uuid } }
   end
 
   factory :repository_transition do
