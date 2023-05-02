@@ -1,0 +1,101 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-3.5-turbo","messages":[{"role":"user","content":"Write
+        a changelog post for an app called Reynolds-Rath based on the changes below.\n\n\nDon’t
+        explain what the company does.\nDo not mention the type of changes in the
+        headings (like bug fixes or features.)\nDo not suggest a title, it will be
+        added by the user.\nYour response should be informative, visual, logical and
+        actionable.\nYou should avoid being vague, controversial, or off-topic.\nYou
+        should always reference factual statements in your response.\nIf the changes
+        below do not contain sufficient information to complete the article, use only
+        facts you were provided with and do not add any information by yourself.\nYou
+        mustn’t reply with content that violates copyrights.\nUse HTML to format the
+        result.\n\nHere are the updates:\nConsequatur beatae qui dolor.\nEveniet quidem
+        vel quae.\n"}],"temperature":0.7}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 02 May 2023 15:44:15 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache, must-revalidate
+      Openai-Model:
+      - gpt-3.5-turbo-0301
+      Openai-Organization:
+      - user-us1icqkjutufgswcvfdqqmev
+      Openai-Processing-Ms:
+      - '18942'
+      Openai-Version:
+      - '2020-10-01'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Ratelimit-Limit-Requests:
+      - '3500'
+      X-Ratelimit-Limit-Tokens:
+      - '90000'
+      X-Ratelimit-Remaining-Requests:
+      - '3499'
+      X-Ratelimit-Remaining-Tokens:
+      - '89786'
+      X-Ratelimit-Reset-Requests:
+      - 17ms
+      X-Ratelimit-Reset-Tokens:
+      - 142ms
+      X-Request-Id:
+      - 899a527ffb29ce8da383c4406e66d0aa
+      Cf-Cache-Status:
+      - DYNAMIC
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 7c1161fafbd8bfa6-WAW
+      Alt-Svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"chatcmpl-7BmSTTuPL9olFAF33OspqPEsDUzfr","object":"chat.completion","created":1683042237,"model":"gpt-3.5-turbo-0301","usage":{"prompt_tokens":170,"completion_tokens":277,"total_tokens":447},"choices":[{"message":{"role":"assistant","content":"<h2>Changelog
+        for Reynolds-Rath</h2>\n\n<p>We are excited to announce the latest updates
+        to Reynolds-Rath:</p>\n\n<h3>Improved User Experience</h3>\n<p>We have made
+        significant changes to improve the user experience of our app. With the latest
+        update, users can now navigate the app with ease, thanks to the intuitive
+        design and user-friendly interface.</p>\n\n<h3>Enhanced Performance</h3>\n<p>Our
+        developers have worked tirelessly to optimize the performance of the app.
+        With the latest update, the app now loads faster, runs smoother and consumes
+        less battery, ensuring an optimal user experience.</p>\n\n<h3>Bug Fixes</h3>\n<p>We
+        have addressed several bugs that were affecting our users, improving the overall
+        stability of the app. The Reynolds-Rath app is now more reliable than ever,
+        ensuring users can complete their tasks without any interruptions.</p>\n\n<h3>New
+        Features</h3>\n<p>We have added new features to the app to provide a more
+        comprehensive experience for our users. With the latest update, users can
+        now access a variety of new tools and functionalities that make it easier
+        to manage their tasks and stay organized.</p>\n\n<p>Thank you for using Reynolds-Rath.
+        We are committed to providing you with the best possible user experience and
+        will continue to innovate our app to meet your needs.</p>"},"finish_reason":"stop","index":0}]}
+
+        '
+  recorded_at: Tue, 02 May 2023 15:44:15 GMT
+recorded_with: VCR 6.1.0

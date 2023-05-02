@@ -16,7 +16,7 @@ class Publication
   attribute :user, T.instance(User)
 
   sig { returns T::Boolean }
-  def update!
+  def save
     Post.transaction do
       post.update(content: completion, title:, account:, user:, changelog:)
       post.publish(published)
@@ -27,7 +27,8 @@ class Publication
     true
   end
 
-  alias create! update!
+  alias create save
+  alias update save
 
   private
 

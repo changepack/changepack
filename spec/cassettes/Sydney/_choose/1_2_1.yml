@@ -1,0 +1,83 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-3.5-turbo","messages":[{"role":"user","content":"Choose
+        the most important changes that the customers should learn about for an app
+        called O''Hara, Block and Anderson based on the list below.\n\n\nDon’t explain
+        what the company does.\nList the updates using bullet points.\nKeep the original
+        names.\nExplain why you think they’re important.\nMention the IDs of changes
+        so that they can be extracted from the text easily.\n\nHere are the updates:\n[ID:
+        upd_RE0GxYfPRpzn] Culpa veniam est dolorem.\n\n[ID: upd_TSBbB495Vwxg] Perspiciatis
+        est quam architecto.\n\n"}],"temperature":0.7}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 02 May 2023 15:44:33 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache, must-revalidate
+      Openai-Model:
+      - gpt-3.5-turbo-0301
+      Openai-Organization:
+      - user-us1icqkjutufgswcvfdqqmev
+      Openai-Processing-Ms:
+      - '3125'
+      Openai-Version:
+      - '2020-10-01'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Ratelimit-Limit-Requests:
+      - '3500'
+      X-Ratelimit-Limit-Tokens:
+      - '90000'
+      X-Ratelimit-Remaining-Requests:
+      - '3499'
+      X-Ratelimit-Remaining-Tokens:
+      - '89857'
+      X-Ratelimit-Reset-Requests:
+      - 17ms
+      X-Ratelimit-Reset-Tokens:
+      - 94ms
+      X-Request-Id:
+      - 9342486d5a7f21c6ca75e7372e2eee6b
+      Cf-Cache-Status:
+      - DYNAMIC
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 7c1162ce3c06fbce-WAW
+      Alt-Svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"chatcmpl-7BmT0IsgxHCWM0d1CJW0R5KZXa3PL","object":"chat.completion","created":1683042270,"model":"gpt-3.5-turbo-0301","usage":{"prompt_tokens":128,"completion_tokens":34,"total_tokens":162},"choices":[{"message":{"role":"assistant","content":"Sorry,
+        but these updates do not provide any information that can be understood or
+        related to an app called O''Hara, Block and Anderson. Please provide more
+        specific updates."},"finish_reason":"stop","index":0}]}
+
+        '
+  recorded_at: Tue, 02 May 2023 15:44:33 GMT
+recorded_with: VCR 6.1.0

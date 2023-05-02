@@ -7,7 +7,8 @@ RSpec.describe Sydney, :vcr do
   subject(:sydney) { described_class.new(account:) }
 
   let(:account) { create(:account) }
-  let(:updates) { create_list(:update, 2, account:) }
+
+  before { create_list(:update, 2, account:) }
 
   around do |example|
     ClimateControl.modify OPENAI_ACCESS_TOKEN: 'test' do
@@ -16,19 +17,14 @@ RSpec.describe Sydney, :vcr do
   end
 
   describe '#hallucinate' do
-    # We need the param to be an ActiveRecord::RelationType
-    subject(:hallucinate) { sydney.hallucinate(Update.all) }
+    subject(:result) { sydney.hallucinate(Update.all) }
 
-    it 'returns a hallucinated post' do
-      expect(hallucinate).to be_a(String)
-    end
+    specify { expect(result).to be_a(String) }
   end
 
   describe '#choose' do
-    subject(:choose) { sydney.choose(Update.all) }
+    subject(:result) { sydney.choose(Update.all) }
 
-    it 'returns a hallucinated post' do
-      expect(choose).to be_a(String)
-    end
+    specify { expect(result).to be_a(String) }
   end
 end

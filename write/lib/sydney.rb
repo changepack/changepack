@@ -24,15 +24,16 @@ class Sydney
   def hallucinate(updates)
     updates
       .pluck(:name)
-      .then { |names| request('prompts.write', names) }
+      .then { |names| request('prompts.write', names) if names.any? }
   end
 
   sig { params(updates: T::Updates).returns T.nilable(String) }
   def choose(updates)
     updates
       .pluck(:id, :name)
-      .map { |id, name| I18n.t('prompts.id', id:, name:) }
-      .then { |names| request('prompts.choose', names) }
+      .map { |id, name| id && name && I18n.t('prompts.id', id:, name:) }
+      .compact_blank
+      .then { |names| request('prompts.choose', names) if names.any? }
   end
 
   private

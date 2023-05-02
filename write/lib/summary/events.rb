@@ -1,11 +1,11 @@
 # typed: false
 # frozen_string_literal: true
 
-class Changelog
+class Summary
   module Events
     extend ActiveSupport::Concern
 
-    class MonthlyUpdateRequested < Event
+    class Requested < Event
       attribute :changelog_id, String
     end
   end

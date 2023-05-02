@@ -29,7 +29,7 @@ class PostsController < ApplicationController
   def create
     authorize!
 
-    Publication.new(permitted).create!
+    Publication.new(permitted).create
 
     if post.valid?
       redirect_to post
@@ -41,7 +41,7 @@ class PostsController < ApplicationController
   def update
     authorize! post
 
-    Publication.new(permitted).update!
+    Publication.new(permitted).update
 
     if post.valid?
       redirect_to post

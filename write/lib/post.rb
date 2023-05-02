@@ -8,8 +8,6 @@ end
 
 class Post < ApplicationRecord
   include Publish
-  include Hallucinate
-
   include Status
   include Slug
 
