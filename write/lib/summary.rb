@@ -7,6 +7,8 @@ class Summary
   include ActiveModel::Model
   include ActiveModel::Attributes
 
+  include AfterCommitEverywhere
+
   extend T::Sig
 
   PERIOD = 4.weeks
@@ -22,8 +24,11 @@ class Summary
       Publication.new(
         account: changelog.account,
         updates:,
+        title:,
         post:
       ).save
+
+      after_commit { SummaryMailer.with(post:).notify if post.valid? }
     end
   end
 
@@ -44,5 +49,13 @@ class Summary
                              .where(post: nil)
                              .where(created_at: PERIOD.ago..)
                              .limit(ENOUGH)
+  end
+
+  sig { returns String }
+  def title
+    Date.current
+        .last_month
+        .strftime('%B %Y')
+        .then { |month| I18n.t('summary.title', month:) }
   end
 end

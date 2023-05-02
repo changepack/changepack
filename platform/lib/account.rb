@@ -37,6 +37,11 @@ class Account < ApplicationRecord
     changelogs << Changelog.new
   end
 
+  sig { returns T::Array[String] }
+  def emails
+    @emails ||= users.map(&:email)
+  end
+
   private
 
   sig { returns T::Array[Symbol] }
