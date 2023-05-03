@@ -7,6 +7,7 @@ module T
 end
 
 class Issue < ApplicationRecord
+  include Events
   include Provided
 
   key :is
@@ -19,12 +20,14 @@ class Issue < ApplicationRecord
   attribute :done, :boolean
   attribute :branch, :string
   attribute :identifier, :string
+  attribute :issued_at, :datetime
 
   belongs_to :account
   belongs_to :team
 
   validates :title, presence: true
   validates :assignee, presence: true, store_model: true
+  validates :issued_at, presence: true
   normalize :title
   normalize :description
   normalize :branch

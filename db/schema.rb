@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_02_235252) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_03_102837) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -151,6 +151,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_235252) do
     t.string "team_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "issued_at", null: false
     t.index ["account_id"], name: "index_issues_on_account_id"
     t.index ["providers"], name: "index_issues_on_providers", unique: true
     t.index ["team_id"], name: "index_issues_on_team_id"
@@ -224,9 +225,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_235252) do
     t.string "status", default: "inactive"
     t.datetime "discarded_at"
     t.string "changelog_id"
+    t.string "team_id"
     t.index ["account_id"], name: "index_sources_on_account_id"
     t.index ["changelog_id"], name: "index_sources_on_changelog_id"
     t.index ["repository_id"], name: "index_sources_on_repository_id", unique: true
+    t.index ["team_id"], name: "index_sources_on_team_id"
+  end
+
+  create_table "team_transitions", id: :string, force: :cascade do |t|
+    t.string "to_state", null: false
+    t.jsonb "metadata", default: {}
+    t.integer "sort_key", null: false
+    t.string "team_id", null: false
+    t.boolean "most_recent", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id", "most_recent"], name: "index_team_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["team_id", "sort_key"], name: "index_team_transitions_parent_sort", unique: true
   end
 
   create_table "teams", id: :string, force: :cascade do |t|
@@ -254,10 +269,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_235252) do
     t.datetime "discarded_at"
     t.string "source_id"
     t.string "changelog_id"
+    t.string "issue_id"
     t.index ["account_id", "commit_id"], name: "index_updates_on_account_id_and_commit_id", unique: true
     t.index ["account_id"], name: "index_updates_on_account_id"
     t.index ["changelog_id"], name: "index_updates_on_changelog_id"
     t.index ["commit_id"], name: "index_updates_on_commit_id", unique: true
+    t.index ["issue_id"], name: "index_updates_on_issue_id"
     t.index ["post_id"], name: "index_updates_on_post_id"
     t.index ["source_id"], name: "index_updates_on_source_id"
   end
@@ -309,6 +326,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_235252) do
   add_foreign_key "repository_transitions", "repositories"
   add_foreign_key "sources", "accounts"
   add_foreign_key "sources", "changelogs"
+  add_foreign_key "team_transitions", "teams"
   add_foreign_key "teams", "access_tokens"
   add_foreign_key "teams", "accounts"
   add_foreign_key "updates", "accounts"

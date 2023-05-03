@@ -9,6 +9,7 @@ FactoryBot.define do
     assignee { { name: Faker::Name.name } }
     team
     account { team.account }
+    issued_at { Faker::Date.in_date_period }
     providers { { 'linear' => SecureRandom.uuid } }
   end
 

@@ -7,7 +7,7 @@ module T
 end
 
 class Update < ApplicationRecord
-  TYPES = %w[commit].freeze
+  TYPES = %w[commit issue].freeze
   OPTIONS = T.let(
     lambda { |pt|
       Arel.sql(
@@ -23,7 +23,7 @@ class Update < ApplicationRecord
     T.proc.params(pt: Post).returns(String)
   )
 
-  self.inheritance_column = false
+  self.inheritance_column = nil
 
   key :upd
 
@@ -32,13 +32,17 @@ class Update < ApplicationRecord
 
   belongs_to :account
   belongs_to :source
+  belongs_to :post, optional: true
   belongs_to :changelog, optional: true
   belongs_to :commit, optional: true
-  belongs_to :post, optional: true
+  belongs_to :issue, optional: true
 
   validates :name, presence: true
   validates :type, presence: true, inclusion: { in: TYPES }
-  validates :commit_id, uniqueness: { scope: :account_id }
+  validates :commit_id, uniqueness: { scope: :account_id }, if: :commit_id?
+  validates :issue_id, uniqueness: { scope: :account_id }, if: :issue_id?
+
+  inquirer :type
 
   scope :options, ->(pt) { where(post: [pt, nil]).order(OPTIONS.call(pt)) },
         sig: T.proc.params(pt: Post)

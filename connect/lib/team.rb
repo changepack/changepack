@@ -8,6 +8,8 @@ end
 
 class Team < ApplicationRecord
   include Provided
+  include Events
+  include Status
   include Active
 
   key :tm
