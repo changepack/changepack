@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_02_125432) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_02_235252) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -136,6 +136,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_125432) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "issues", id: :string, force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.jsonb "assignee", default: {}, null: false
+    t.jsonb "providers", default: {}, null: false
+    t.string "branch"
+    t.string "identifier"
+    t.string "labels", default: [], null: false, array: true
+    t.decimal "priority"
+    t.boolean "done", default: false, null: false
+    t.datetime "discarded_at"
+    t.string "account_id", null: false
+    t.string "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_issues_on_account_id"
+    t.index ["providers"], name: "index_issues_on_providers", unique: true
+    t.index ["team_id"], name: "index_issues_on_team_id"
+  end
+
   create_table "post_transitions", id: :string, force: :cascade do |t|
     t.string "to_state", null: false
     t.jsonb "metadata", default: {}
@@ -209,11 +229,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_125432) do
     t.index ["repository_id"], name: "index_sources_on_repository_id", unique: true
   end
 
+  create_table "teams", id: :string, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "status", default: "inactive", null: false
+    t.jsonb "providers", default: {}, null: false
+    t.datetime "discarded_at"
+    t.string "account_id", null: false
+    t.string "access_token_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["access_token_id"], name: "index_teams_on_access_token_id"
+    t.index ["account_id"], name: "index_teams_on_account_id"
+    t.index ["providers"], name: "index_teams_on_providers", unique: true
+  end
+
   create_table "updates", id: :string, force: :cascade do |t|
     t.string "name", null: false
     t.string "type", null: false
     t.string "account_id"
-    t.string "commit_id"
+    t.string "commit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "post_id"
@@ -264,6 +298,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_125432) do
   add_foreign_key "changelogs", "accounts"
   add_foreign_key "commits", "accounts"
   add_foreign_key "commits", "repositories"
+  add_foreign_key "issues", "accounts"
+  add_foreign_key "issues", "teams"
   add_foreign_key "post_transitions", "posts"
   add_foreign_key "posts", "accounts"
   add_foreign_key "posts", "changelogs"
@@ -273,6 +309,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_125432) do
   add_foreign_key "repository_transitions", "repositories"
   add_foreign_key "sources", "accounts"
   add_foreign_key "sources", "changelogs"
+  add_foreign_key "teams", "access_tokens"
+  add_foreign_key "teams", "accounts"
   add_foreign_key "updates", "accounts"
   add_foreign_key "updates", "changelogs"
   add_foreign_key "updates", "posts"

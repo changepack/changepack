@@ -20,8 +20,10 @@ class Account < ApplicationRecord
   has_many :users, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :updates, dependent: :destroy
-  has_many :commits, dependent: :destroy
   has_many :repositories, dependent: :destroy
+  has_many :commits, dependent: :destroy
+  has_many :teams, dependent: :destroy
+  has_many :issues, dependent: :destroy
   has_many :changelogs, dependent: :destroy
   has_many :access_tokens, dependent: :destroy
 

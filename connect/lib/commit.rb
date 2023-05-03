@@ -24,7 +24,6 @@ class Commit < ApplicationRecord
   validates :url, presence: true, url: true
   validates :commited_at, presence: true
   validates :author, presence: true, store_model: true
-
   normalize :message
 
   before_validation do

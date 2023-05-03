@@ -3,7 +3,7 @@
 
 class Commit
   class Author
-    include StoreModel::Model
+    include ValueObject
 
     attribute :name, :string
     attribute :email, :string
@@ -12,5 +12,8 @@ class Commit
     # Do not validate with URI::MailTo::EMAIL_REGEXP as it doesn't work with Dependabot
     # Example: 49699333+dependabot[bot]@users.noreply.github.com
     validates :email, presence: true
+
+    normalize :name
+    normalize :email
   end
 end

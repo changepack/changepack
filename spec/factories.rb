@@ -4,6 +4,20 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :issue do
+    title { Faker::Lorem.sentence }
+    assignee { { name: Faker::Name.name } }
+    team
+    account { team.account }
+    providers { { 'linear' => SecureRandom.uuid } }
+  end
+
+  factory :team do
+    account { create(:account) }
+    name { Faker::App.name }
+    providers { { 'linear' => SecureRandom.uuid } }
+  end
+
   factory :source do
     name { Faker::Lorem.sentence }
     type { 'repository' }

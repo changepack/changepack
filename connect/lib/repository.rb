@@ -26,9 +26,9 @@ class Repository < ApplicationRecord
 
   validates :name, presence: true
   validates :branch, presence: true
-
   normalize :name
   normalize :branch
+
   inquirer :status
 
   after_commit :created!, on: :create
