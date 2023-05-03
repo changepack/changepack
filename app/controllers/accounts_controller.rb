@@ -17,7 +17,18 @@ class AccountsController < ApplicationController
 
   sig { returns Account }
   def account
-    @account ||= Account.kept.friendly.find(id)
+    @account ||= custom_domain || friendly_id
+  end
+
+  sig { returns T.nilable(Account) }
+  def custom_domain
+    Changelog.find_by(custom_domain: request.host)
+             .try(:account)
+  end
+
+  sig { returns Account }
+  def friendly_id
+    Account.kept.friendly.find(id)
   end
 
   sig { returns T::Posts }
