@@ -11,10 +11,13 @@ class Changelog < ApplicationRecord
   include Slug
 
   DEFAULT = 'Changelog'
+  AUDIENCE = %w[non_technical technical internal].freeze
 
   key :cl
 
   attribute :name, :string
+  attribute :custom_domain, :string
+  attribute :audience, :string, default: :non_technical
 
   belongs_to :account
   has_many :posts, dependent: :destroy
@@ -23,6 +26,8 @@ class Changelog < ApplicationRecord
   has_many :updates, dependent: :destroy
 
   validates :name, presence: true
+  validates :custom_domain, uniqueness: true, allow_nil: true
+  validates :audience, presence: true, inclusion: { in: AUDIENCE }
 
   after_initialize do
     self.name ||= DEFAULT

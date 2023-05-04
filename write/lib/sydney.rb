@@ -67,7 +67,12 @@ class Sydney
   sig { params(updates: T::Array[String], prompt: String).returns(String) }
   def prompt(updates, prompt:)
     I18n.t(
-      prompt, account_name:, account_description:, updates: updates.join("\n")
+      prompt, account_name:, account_description:, audience:, updates: updates.join("\n")
     )
+  end
+
+  sig { returns String }
+  def audience
+    @audience ||= I18n.t("prompts.audiences.#{account.changelogs.pick(:audience)}")
   end
 end

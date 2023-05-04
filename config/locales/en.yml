@@ -3,6 +3,7 @@ en:
     write: |
       Write a changelog post for an app called %{account_name} based on the changes below.
       %{account_description}
+      Intended audience: %{audience}
 
       Don’t explain what the company does.
       Do not mention the type of changes in the headings (like bug fixes or features.)
@@ -19,6 +20,7 @@ en:
     choose: |
       Choose the most important changes that the customers should learn about for an app called %{account_name} based on the list below.
       %{account_description}
+      Intended audience: %{audience}
 
       Don’t explain what the company does.
       List the updates using bullet points.
@@ -32,3 +34,7 @@ en:
       [ID: %{id}] %{name}
   summary:
     title: "%{month} update"
+  audiences:
+    technical: "technical"
+    non_technical: "non-technical"
+    internal: "employees of the company, internally"
