@@ -46,9 +46,7 @@ class User
   def register!(provider, auth)
     User.transaction do
       lock!
-      providers.deep_merge!({ provider => { id: auth.uid } })
-      save!
-
+      update! providers: providers.deep_merge(provider => auth.uid)
       register_access_token!(provider, auth:)
     end
 

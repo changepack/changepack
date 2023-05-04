@@ -18,7 +18,7 @@ module Users
         current_user.register!(provider, auth)
       end
 
-      Repository.pull_async(current_user.git)
+      true
     end
 
     sig { returns OmniAuth::AuthHash }

@@ -25,19 +25,6 @@ class Repository
 
         true
       end
-
-      sig { params(git: Provider).returns(T::Boolean) }
-      def pull_async(git)
-        Event.publish(
-          Repository::Authorized.new(
-            access_token: git.access_token.to_s,
-            account_id: git.account_id,
-            provider: git.provider
-          )
-        )
-
-        true
-      end
     end
 
     sig { params(repository: Provider::Repository, git: Provider).returns(Repository) }

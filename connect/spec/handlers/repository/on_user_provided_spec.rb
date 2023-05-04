@@ -4,15 +4,14 @@
 require 'rails_helper'
 
 class Repository
-  describe OnAuthorized do
+  describe OnUserProvided do
     let(:user) { create(:user) }
     let(:payload) do
       {
-        event_type: 'Repository::Authorized',
+        event_type: 'User::Provided',
         data: {
-          provider: :github,
-          access_token: 'access_token',
-          account_id: user.account_id
+          id: user.id,
+          providers: user.providers
         }
       }
     end

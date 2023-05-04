@@ -6,11 +6,7 @@ require 'rails_helper'
 module Users
   describe OmniauthCallbacksController do
     let(:user) { create(:user) }
-    let(:result) do
-      {
-        'github' => { 'id' => 'id' }
-      }
-    end
+    let(:result) { { 'github' => 'id' } }
 
     before do
       OmniAuth.config.test_mode = true
@@ -35,7 +31,7 @@ module Users
 
     it 'sends an event to pull repositories' do
       expect { get '/users/auth/github/callback' }.to publish(
-        an_event(Repository::Authorized)
+        an_event(User::Provided)
       ).in(Rails.configuration.event_store)
     end
   end

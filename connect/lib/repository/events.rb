@@ -9,12 +9,6 @@ class Repository
       attribute :repository_id, String
     end
 
-    class Authorized < Event
-      attribute :provider, T::Key
-      attribute :access_token, String
-      attribute :account_id, String
-    end
-
     class Created < Event
       attribute :id, String
       attribute :account_id, String

@@ -4,8 +4,14 @@
 module Provided
   extend ActiveSupport::Concern
 
+  class Provided < Event
+    attribute :id, String
+    attribute :providers, Hash
+  end
+
   included do
     attribute :providers, :jsonb, default: -> { {} }
+    after_commit :provided!, on: :update, if: :providers_previously_changed?
     inquirer :provider
   end
 
@@ -17,11 +23,11 @@ module Provided
     end
   end
 
-  def providers
-    @providers ||= Hashie::Mash.new(super)
+  def provider
+    providers.keys.first
   end
 
-  def provider
-    @provider ||= providers.keys.first
+  def provided!
+    pub Provided.new(id:, providers:)
   end
 end
