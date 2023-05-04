@@ -31,8 +31,7 @@ class Sydney
   def choose(updates)
     updates
       .pluck(:id, :name)
-      .map { |id, name| id && name && I18n.t('prompts.id', id:, name:) }
-      .compact_blank
+      .map { |id, name| I18n.t('prompts.id', id:, name:) }
       .then { |names| request('prompts.choose', names) if names.any? }
   end
 
