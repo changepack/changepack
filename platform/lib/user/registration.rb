@@ -26,7 +26,7 @@ class User
                    from_github!(auth)
                  end
 
-          user.access_tokens << AccessToken.new(token: auth.credentials.token, provider:)
+          AccessToken.from!(provider, auth:, user:)
           user
         end
       end
@@ -37,16 +37,8 @@ class User
           user.name = auth.info.name
           user.email = auth.info.email
           user.password = Devise.friendly_token[0, 20]
-          user.providers = provider(:github, auth)
+          user.providers = { github: { id: auth.uid } }
         end
-      end
-    end
-
-    sig { params(provider: T::Key, auth: OmniAuth::AuthHash).returns(Provider.to_shapes) }
-    def self.provider(provider, auth)
-      case provider.to_sym
-      when :github
-        { github: { id: auth.uid, access_token: auth.credentials.token } }
       end
     end
   end
@@ -55,13 +47,10 @@ class User
   def provide(provider, auth)
     User.transaction do
       lock!
-      providers.deep_merge! User::Registration.provider(provider, auth)
+      providers.deep_merge!({ provider => { id: auth.uid } })
       save!
 
-      access_tokens << AccessToken.new(
-        token: auth.credentials.token,
-        provider:
-      )
+      AccessToken.from!(provider, user: self, auth:)
     end
 
     self
