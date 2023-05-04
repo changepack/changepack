@@ -27,14 +27,4 @@ class AccessToken < ApplicationRecord
   def to_s
     token
   end
-
-  sig { params(provider: T::Key, auth: OmniAuth::AuthHash, user: User).returns(AccessToken) }
-  def self.from!(provider, auth:, user:)
-    AccessToken.find_or_create_by!(
-      token: auth.credentials.token,
-      account: user.account,
-      provider:,
-      user:
-    )
-  end
 end

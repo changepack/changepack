@@ -19,20 +19,19 @@ class User
       extend T::Sig
 
       sig { params(provider: T::Key, auth: OmniAuth::AuthHash).returns(User) }
-      def from!(provider, auth)
+      def register!(provider, auth)
         transaction do
           user = case provider.to_sym
                  when :github
-                   from_github!(auth)
+                   register_github!(auth)
                  end
 
-          AccessToken.from!(provider, auth:, user:)
-          user
+          user.tap { |usr| usr.register_access_token!(provider, auth:) }
         end
       end
 
       sig { params(auth: OmniAuth::AuthHash).returns(User) }
-      def from_github!(auth)
+      def register_github!(auth)
         where.contains(providers: { github: auth.uid }).first_or_create! do |user|
           user.name = auth.info.name
           user.email = auth.info.email
@@ -44,15 +43,25 @@ class User
   end
 
   sig { params(provider: T::Key, auth: OmniAuth::AuthHash).returns(User) }
-  def provide(provider, auth)
+  def register!(provider, auth)
     User.transaction do
       lock!
       providers.deep_merge!({ provider => { id: auth.uid } })
       save!
 
-      AccessToken.from!(provider, user: self, auth:)
+      register_access_token!(provider, auth:)
     end
 
     self
+  end
+
+  sig { params(provider: T::Key, auth: OmniAuth::AuthHash).returns(AccessToken) }
+  def register_access_token!(provider, auth:)
+    AccessToken.find_or_create_by!(
+      token: auth.credentials.token,
+      user: self,
+      provider:,
+      account:
+    )
   end
 end
