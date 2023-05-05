@@ -20,6 +20,7 @@ class Forbidden < ApplicationRecord
   validates :content, presence: true, uniqueness: { scope: %i[type source_id] }
 
   inquirer :type
+  delegate :email?, to: :type
 
   def self.defaults
     [

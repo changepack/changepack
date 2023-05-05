@@ -7,6 +7,7 @@ class Source
     extend T::Sig
 
     included do
+      has_many :forbiddens, dependent: :destroy
       after_create :forbid_defaults!
     end
 

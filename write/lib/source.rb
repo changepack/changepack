@@ -23,7 +23,6 @@ class Source < ApplicationRecord
   belongs_to :repository, optional: true
   belongs_to :team, optional: true
   has_many :updates, dependent: :destroy
-  has_many :forbiddens, dependent: :destroy
 
   validates :name, presence: true
   validates :type, presence: true, inclusion: { in: TYPES }

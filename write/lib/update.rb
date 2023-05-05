@@ -7,6 +7,8 @@ module T
 end
 
 class Update < ApplicationRecord
+  include Forbid
+
   TYPES = %w[commit issue].freeze
   OPTIONS = T.let(
     lambda { |pt|
