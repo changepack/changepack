@@ -22,6 +22,7 @@ class Forbidden < ApplicationRecord
   inquirer :type
   delegate :email?, to: :type
 
+  sig { returns T::Array[Forbidden] }
   def self.defaults
     [
       new(type: 'email', content: 'dependabot')

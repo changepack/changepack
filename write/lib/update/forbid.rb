@@ -10,6 +10,7 @@ class Update
       validate :valid_unforbidden_emails, on: :create
     end
 
+    sig { returns T.nilable(ActiveModel::Error) }
     def valid_unforbidden_emails
       return unless source
 
