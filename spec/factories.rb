@@ -5,7 +5,7 @@ require 'faker'
 
 FactoryBot.define do
   factory :forbidden do
-    changelog
+    source
     content { Faker::Internet.email }
     type { 'email' }
   end

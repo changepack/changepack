@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_05_223750) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_05_230558) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -130,11 +130,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_223750) do
   create_table "forbiddens", id: :string, force: :cascade do |t|
     t.string "type", null: false
     t.string "content", null: false
-    t.bigint "changelog_id", null: false
+    t.string "source_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["changelog_id", "type", "content"], name: "index_forbiddens_on_changelog_id_and_type_and_content", unique: true
-    t.index ["changelog_id"], name: "index_forbiddens_on_changelog_id"
+    t.index ["source_id", "type", "content"], name: "index_forbiddens_on_source_id_and_type_and_content", unique: true
+    t.index ["source_id"], name: "index_forbiddens_on_source_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -328,6 +328,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_223750) do
   add_foreign_key "changelogs", "accounts"
   add_foreign_key "commits", "accounts"
   add_foreign_key "commits", "repositories"
+  add_foreign_key "forbiddens", "sources"
   add_foreign_key "issues", "accounts"
   add_foreign_key "issues", "teams"
   add_foreign_key "post_transitions", "posts"

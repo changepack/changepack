@@ -14,10 +14,16 @@ class Forbidden < ApplicationRecord
   attribute :type, :string
   attribute :content, :string
 
-  belongs_to :changelog
+  belongs_to :source
 
   validates :type, presence: true, inclusion: { in: TYPES }
-  validates :content, presence: true, uniqueness: { scope: %i[type changelog_id] }
+  validates :content, presence: true, uniqueness: { scope: %i[type source_id] }
 
   inquirer :type
+
+  def self.defaults
+    [
+      new(type: 'email', content: 'dependabot')
+    ]
+  end
 end
