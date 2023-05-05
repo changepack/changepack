@@ -4,6 +4,12 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :forbidden do
+    changelog
+    content { Faker::Internet.email }
+    type { 'email' }
+  end
+
   factory :issue do
     title { Faker::Lorem.sentence }
     assignee { { name: Faker::Name.name } }

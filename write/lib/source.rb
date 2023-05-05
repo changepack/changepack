@@ -11,8 +11,6 @@ class Source < ApplicationRecord
 
   TYPES = %w[repository team].freeze
 
-  self.inheritance_column = nil
-
   key :src
 
   attribute :name, :string

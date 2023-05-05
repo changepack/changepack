@@ -23,8 +23,6 @@ class Update < ApplicationRecord
     T.proc.params(pt: Post).returns(String)
   )
 
-  self.inheritance_column = nil
-
   key :upd
 
   attribute :name, :string

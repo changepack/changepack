@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_04_184809) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_05_211328) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -125,6 +125,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_184809) do
     t.index ["created_at"], name: "index_event_store_events_in_streams_on_created_at"
     t.index ["stream", "event_id"], name: "index_event_store_events_in_streams_on_stream_and_event_id", unique: true
     t.index ["stream", "position"], name: "index_event_store_events_in_streams_on_stream_and_position", unique: true
+  end
+
+  create_table "forbiddens", id: :string, force: :cascade do |t|
+    t.string "type", null: false
+    t.string "content", null: false
+    t.bigint "changelog_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["changelog_id", "type", "content"], name: "index_forbiddens_on_changelog_id_and_type_and_content", unique: true
+    t.index ["changelog_id"], name: "index_forbiddens_on_changelog_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
