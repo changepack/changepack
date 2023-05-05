@@ -38,6 +38,7 @@ FactoryBot.define do
     name { Faker::Lorem.sentence }
     type { 'commit' }
     account { commit.account }
+    email { Faker::Internet.email }
     commit
     changelog { create(:changelog, account: commit.account) }
   end

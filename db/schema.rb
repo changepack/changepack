@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_05_211328) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_05_223750) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -282,6 +282,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_211328) do
     t.string "source_id"
     t.string "changelog_id"
     t.string "issue_id"
+    t.string "email", null: false
     t.index ["account_id", "commit_id"], name: "index_updates_on_account_id_and_commit_id", unique: true
     t.index ["account_id"], name: "index_updates_on_account_id"
     t.index ["changelog_id"], name: "index_updates_on_changelog_id"

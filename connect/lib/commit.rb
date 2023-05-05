@@ -36,6 +36,8 @@ class Commit < ApplicationRecord
 
   sig { returns String }
   def created!
-    pub Created.new(id:, account_id:, repository_id:, message:)
+    pub Created.new(
+      **as_json.symbolize_keys.slice(:id, :account_id, :repository_id, :message, :author)
+    )
   end
 end

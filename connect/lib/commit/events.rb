@@ -10,6 +10,7 @@ class Commit
       attribute :account_id, String
       attribute :repository_id, String
       attribute :message, String
+      attribute :author, Hash
     end
   end
 end

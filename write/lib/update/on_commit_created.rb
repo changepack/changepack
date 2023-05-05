@@ -7,11 +7,12 @@ class Update
 
     sig { override.returns Update }
     def run
-      Update.create!(
+      Update.create(
         type: :commit,
         account_id: event.account_id,
         commit_id: event.id,
         name: event.message,
+        email: event.author.fetch(:email),
         changelog:,
         source:
       )

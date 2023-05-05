@@ -12,6 +12,7 @@ class Update
         event_type: 'Commit::Created',
         data: {
           repository_id: commit.repository_id,
+          author: commit.author.as_json,
           account_id: user.account_id,
           message: commit.message,
           id: commit.id

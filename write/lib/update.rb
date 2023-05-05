@@ -27,6 +27,7 @@ class Update < ApplicationRecord
 
   attribute :name, :string
   attribute :type, :string
+  attribute :email, :string
 
   belongs_to :account
   belongs_to :source
@@ -37,6 +38,7 @@ class Update < ApplicationRecord
 
   validates :name, presence: true
   validates :type, presence: true, inclusion: { in: TYPES }
+  validates :email, presence: true
   validates :commit_id, uniqueness: { scope: :account_id }, if: :commit_id?
   validates :issue_id, uniqueness: { scope: :account_id }, if: :issue_id?
 
