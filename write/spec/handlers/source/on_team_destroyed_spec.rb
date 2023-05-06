@@ -4,13 +4,13 @@
 require 'rails_helper'
 
 class Source
-  describe OnRepositoryDestroyed do
-    let(:repository) { create(:repository) }
-    let!(:source) { create(:source, repository:) }
+  describe OnTeamDestroyed do
+    let(:team) { create(:team) }
+    let!(:source) { create(:source, team:) }
     let(:payload) do
       {
-        event_type: 'Repository::Destroyed',
-        data: Repository::Resource.to_event(repository)
+        event_type: 'Team::Destroyed',
+        data: Team::Resource.to_event(team)
       }
     end
 

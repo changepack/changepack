@@ -12,7 +12,7 @@ FactoryBot.define do
 
   factory :issue do
     title { Faker::Lorem.sentence }
-    assignee { { name: Faker::Name.name } }
+    assignee { { name: Faker::Name.name, email: Faker::Internet.email } }
     team
     account { team.account }
     issued_at { Faker::Date.in_date_period }

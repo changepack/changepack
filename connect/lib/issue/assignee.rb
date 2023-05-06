@@ -6,7 +6,12 @@ class Issue
     include ValueObject
 
     attribute :name, :string
+    attribute :email, :string
+
     validates :name, presence: true
+    validates :email, presence: true
+
     normalize :name
+    normalize :email
   end
 end

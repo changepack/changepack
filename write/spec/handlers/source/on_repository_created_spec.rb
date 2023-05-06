@@ -9,12 +9,7 @@ class Source
     let(:payload) do
       {
         event_type: 'Repository::Created',
-        data: {
-          account_id: repository.account_id,
-          status: repository.status,
-          name: repository.name,
-          id: repository.id
-        }
+        data: Repository::Resource.to_event(repository)
       }
     end
 

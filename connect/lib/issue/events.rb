@@ -16,12 +16,13 @@ class Issue
         attribute :account_id, String
         attribute :team_id, String
         attribute :title, String
+        attribute :assignee, Hash
       end
 
       sig { params(issue: Issue).returns Hash }
       def self.to_event(issue)
         issue
-          .as_json(only: %i[id account_id team_id title])
+          .as_json(only: %i[id account_id team_id title assignee])
           .symbolize_keys
       end
     end

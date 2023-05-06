@@ -5,18 +5,11 @@ require 'rails_helper'
 
 class Update
   describe OnCommitCreated do
-    let(:user) { create(:user) }
     let(:commit) { create(:commit) }
     let(:payload) do
       {
         event_type: 'Commit::Created',
-        data: {
-          repository_id: commit.repository_id,
-          author: commit.author.as_json,
-          account_id: user.account_id,
-          message: commit.message,
-          id: commit.id
-        }
+        data: Commit::Resource.to_event(commit)
       }
     end
 
@@ -32,7 +25,7 @@ class Update
       before { handler.perform(payload) }
 
       specify { expect(update.type).to eq 'commit' }
-      specify { expect(update.account_id).to eq user.account_id }
+      specify { expect(update.account_id).to eq commit.account_id }
       specify { expect(update.commit_id).to eq commit.id }
       specify { expect(update.name).to eq commit.message }
     end

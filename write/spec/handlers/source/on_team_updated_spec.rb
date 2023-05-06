@@ -4,15 +4,15 @@
 require 'rails_helper'
 
 class Source
-  describe OnRepositoryUpdated do
-    let(:repository) { create(:repository) }
-    let(:source) { create(:source, repository:) }
+  describe OnTeamUpdated do
+    let(:team) { create(:team) }
+    let(:source) { create(:source, team:) }
     let(:name) { 'New name' }
 
     let(:payload) do
       {
-        event_type: 'Repository::Updated',
-        data: Repository::Resource.to_event(repository).merge(name:)
+        event_type: 'Team::Updated',
+        data: Team::Resource.to_event(team).merge(name:)
       }
     end
 
