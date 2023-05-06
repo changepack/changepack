@@ -15,7 +15,7 @@ class Update
 
     sig { overridable.returns T.nilable(ActiveModel::Error) }
     def valid_unforbidden_emails
-      return unless source
+      return if source.blank?
 
       forbidden = source.forbiddens.select(&:email?).map(&:content)
       return if forbidden.none? { |regexp| email =~ Regexp.new(regexp) }
