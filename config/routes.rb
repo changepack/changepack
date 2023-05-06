@@ -29,6 +29,12 @@ Rails.application.routes.draw do
         get :confirm_update
       end
     end
+    resources :teams, only: [:update, :destroy] do
+      member do
+        get :confirm_destroy
+        get :confirm_update
+      end
+    end
   end
 
   resources :posts, only: [:show]

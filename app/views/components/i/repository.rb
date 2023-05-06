@@ -68,7 +68,7 @@ module I
     end
 
     def track!
-      turbo_frame id: "pull_commits_#{repository.id}" do
+      turbo_frame id: "pull_#{repository.id}" do
         a href: track_path, **track_attrs do
           icon 'plug', class: 'mr-2'
           span(class: 'hidden md:inline') { 'Pull commits' }
