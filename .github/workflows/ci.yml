@@ -41,6 +41,7 @@ jobs:
           sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
           gem install bundler
           bundle install --jobs 4 --retry 3
+          cp config/application.yml.example config/application.yml
       - name: Run RuboCop
         run: bundle exec rubocop
       - name: Run Brakeman

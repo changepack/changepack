@@ -1,6 +1,6 @@
 p
   ' We wanted to let you know that your monthly automated summary is now available for review.
-  ' Our team at Changepack has handpicked the most notable updates from the past month
+  ' Our team at #{ENV.fetch('APP_NAME')} has handpicked the most notable updates from the past month
   ' and created a release note draft just for you.
 
 p You can review the summary and make any necessary changes by clicking the link below:
@@ -16,4 +16,4 @@ p
 p
   ' Best regards,
   br
-  ' Changepack
+  = ENV.fetch('APP_NAME')

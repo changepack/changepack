@@ -27,7 +27,7 @@ class ApplicationLayout < ApplicationView
 
   def head_tag(&)
     head do
-      title { helpers.content_for?(:title) ? yield(:title) : 'Changepack' }
+      title { helpers.content_for?(:title) ? yield(:title) : ENV.fetch('APP_NAME') }
       meta_tags(&)
 
       stylesheet_link_tag 'application', data_turbo_track: 'reload'

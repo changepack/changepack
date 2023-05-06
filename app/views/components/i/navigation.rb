@@ -10,7 +10,7 @@ module I
         attribute :picture, String
 
         def self.default(website)
-          Brand.new(name: 'Changepack', picture: 'logo.png', website:)
+          Brand.new(name: ENV.fetch('APP_NAME'), picture: 'logo.png', website:)
         end
 
         def merge(other)
