@@ -4,9 +4,12 @@
 class Repository
   module Git
     extend ActiveSupport::Concern
+    extend T::Helpers
     extend T::Sig
 
     include Provided
+
+    abstract!
 
     included do
       provider :github
@@ -15,7 +18,7 @@ class Repository
     class_methods do
       extend T::Sig
 
-      sig { params(git: Provider).returns(T::Boolean) }
+      sig { overridable.params(git: Provider).returns(T::Boolean) }
       def pull(git)
         transaction do
           git.repositories.each do |repository|
@@ -39,12 +42,12 @@ class Repository
       end
     end
 
-    sig { returns T::Boolean }
+    sig { overridable.returns T::Boolean }
     def pull
       Commit.pull(self)
     end
 
-    sig { returns T.nilable(Integer) }
+    sig { overridable.returns T.nilable(Integer) }
     def cursor
       @cursor ||= commits.select { |commit| commit.commited_at > 1.month.ago }
                          .sort_by(&:commited_at)
@@ -53,7 +56,7 @@ class Repository
                          .try(:to_i)
     end
 
-    sig { returns Provider }
+    sig { overridable.returns Provider }
     def git
       @git ||= Provider[provider].new(access_token:, account_id:)
     end

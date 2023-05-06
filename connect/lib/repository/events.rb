@@ -4,6 +4,9 @@
 class Repository
   module Events
     extend ActiveSupport::Concern
+    extend T::Helpers
+
+    abstract!
 
     class Outdated < Event
       attribute :repository_id, String

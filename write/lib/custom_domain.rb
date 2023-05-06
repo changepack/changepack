@@ -3,7 +3,10 @@
 
 module CustomDomain
   extend ActiveSupport::Concern
+  extend T::Helpers
   extend T::Sig
+
+  abstract!
 
   sig { params(request: ActionDispatch::Request).returns(T::Boolean) }
   def self.matches?(request)
@@ -24,7 +27,7 @@ module CustomDomain
 
   private
 
-  sig { returns T.nilable(ActiveModel::Error) }
+  sig { overridable.returns T.nilable(ActiveModel::Error) }
   def valid_custom_domain
     return if custom_domain.blank?
 

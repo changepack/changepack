@@ -4,6 +4,9 @@
 class Commit
   module Events
     extend ActiveSupport::Concern
+    extend T::Helpers
+
+    abstract!
 
     class Created < Event
       attribute :id, String

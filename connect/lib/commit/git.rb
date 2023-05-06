@@ -4,9 +4,12 @@
 class Commit
   module Git
     extend ActiveSupport::Concern
+    extend T::Helpers
     extend T::Sig
 
     include Provided
+
+    abstract!
 
     included do
       provider :github
@@ -15,7 +18,7 @@ class Commit
     class_methods do
       extend T::Sig
 
-      sig { params(repository: Repository).returns(T::Boolean) }
+      sig { overridable.params(repository: Repository).returns(T::Boolean) }
       def pull(repository)
         transaction do
           source = Git.source(repository)

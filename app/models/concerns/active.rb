@@ -3,6 +3,9 @@
 
 module Active
   extend ActiveSupport::Concern
+  extend T::Helpers
+
+  abstract!
 
   ACTIVITY = <<-SQL.squish
     CASE WHEN status = 'active' THEN 0 ELSE 1 END, created_at DESC

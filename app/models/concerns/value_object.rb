@@ -3,7 +3,10 @@
 
 module ValueObject
   extend ActiveSupport::Concern
+  extend T::Helpers
   extend T::Sig
+
+  abstract!
 
   included do
     include StoreModel::Model

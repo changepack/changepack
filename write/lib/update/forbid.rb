@@ -4,13 +4,16 @@
 class Update
   module Forbid
     extend ActiveSupport::Concern
+    extend T::Helpers
     extend T::Sig
+
+    abstract!
 
     included do
       validate :valid_unforbidden_emails, on: :create
     end
 
-    sig { returns T.nilable(ActiveModel::Error) }
+    sig { overridable.returns T.nilable(ActiveModel::Error) }
     def valid_unforbidden_emails
       return unless source
 

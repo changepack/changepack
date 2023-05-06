@@ -4,6 +4,9 @@
 class Team
   module Events
     extend ActiveSupport::Concern
+    extend T::Helpers
+
+    abstract!
 
     class Outdated < Event
       attribute :team_id, String

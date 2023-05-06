@@ -3,10 +3,16 @@
 
 module Status
   extend ActiveSupport::Concern
+  extend T::Helpers
+
+  abstract!
 
   module Base
     extend ActiveSupport::Concern
+    extend T::Helpers
     extend T::Sig
+
+    abstract!
 
     included do
       has_many transition_name, class_name: transition_class.to_s, autosave: false, dependent: :delete_all
@@ -21,12 +27,12 @@ module Status
       delegate :initial_state, to: :state_machine
     end
 
-    sig { params(state: T::Key).returns(T::Boolean) }
+    sig { overridable.params(state: T::Key).returns(T::Boolean) }
     def in_state?(state)
       current_state.to_sym == state.to_sym
     end
 
-    sig { params(state: T::Key).returns(T::Boolean) }
+    sig { overridable.params(state: T::Key).returns(T::Boolean) }
     def not_in_state?(state)
       current_state.to_sym != state.to_sym
     end
@@ -39,7 +45,7 @@ module Status
       )
     end
 
-    sig { returns String }
+    sig { overridable.returns String }
     def current_state
       self['status'].presence || state_machine.current_state
     end
@@ -47,6 +53,9 @@ module Status
 
   module Settings
     extend ActiveSupport::Concern
+    extend T::Helpers
+
+    abstract!
 
     module ClassMethods
       attr_accessor :transition_class, :state_machine, :transition_name

@@ -4,7 +4,10 @@
 class User
   module Registration
     extend ActiveSupport::Concern
+    extend T::Helpers
     extend T::Sig
+
+    abstract!
 
     included do
       devise :database_authenticatable, :rememberable, :validatable, :registerable, :omniauthable,
@@ -18,7 +21,7 @@ class User
     class_methods do
       extend T::Sig
 
-      sig { params(provider: T::Key, auth: OmniAuth::AuthHash).returns(User) }
+      sig { overridable.params(provider: T::Key, auth: OmniAuth::AuthHash).returns(User) }
       def register!(provider, auth)
         transaction do
           user = case provider.to_sym
@@ -30,7 +33,7 @@ class User
         end
       end
 
-      sig { params(auth: OmniAuth::AuthHash).returns(User) }
+      sig { overridable.params(auth: OmniAuth::AuthHash).returns(User) }
       def register_github!(auth)
         where.contains(providers: { github: auth.uid }).first_or_create! do |user|
           user.name = auth.info.name
@@ -42,7 +45,7 @@ class User
     end
   end
 
-  sig { params(provider: T::Key, auth: OmniAuth::AuthHash).returns(User) }
+  sig { overridable.params(provider: T::Key, auth: OmniAuth::AuthHash).returns(User) }
   def register!(provider, auth)
     User.transaction do
       lock!
@@ -53,7 +56,7 @@ class User
     self
   end
 
-  sig { params(provider: T::Key, auth: OmniAuth::AuthHash).returns(AccessToken) }
+  sig { overridable.params(provider: T::Key, auth: OmniAuth::AuthHash).returns(AccessToken) }
   def register_access_token!(provider, auth:)
     AccessToken.find_or_create_by!(
       token: auth.credentials.token,

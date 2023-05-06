@@ -3,7 +3,6 @@
 
 module Changepack
   class Event < T::InexactStruct
-    extend ActiveSupport::Concern
     extend T::Helpers
     extend T::Sig
 
