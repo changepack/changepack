@@ -2,39 +2,24 @@
 # frozen_string_literal: true
 
 class RepositoriesController < ApplicationController
-  def confirm_update
-    authorize! repository, to: :update? and render item
-  end
-
-  def update
-    authorize! repository
-
-    repository.transition_to!(:active)
-    redirect_to sources_path
-  end
-
-  def confirm_destroy
-    authorize! repository, to: :destroy? and render item
-  end
-
-  def destroy
-    authorize! repository
-
-    repository.transition_to!(:inactive)
-    redirect_to sources_path
-  end
+  include Pullable
 
   private
 
-  sig { returns Repository }
-  def repository
-    @repository ||= authorized(Repository.all).find(id)
+  sig { override.returns Repository }
+  def resource
+    @resource ||= authorized(Repository.all).find(id)
   end
 
-  sig { returns T::Locals }
+  sig { override.returns T::Locals }
   def item
     {
-      locals: { repository: }
+      locals: { repository: resource }
     }
+  end
+
+  sig { override.params(_resource: Repository).returns String }
+  def after_transition_path_for(_resource)
+    sources_path
   end
 end
