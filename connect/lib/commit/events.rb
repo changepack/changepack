@@ -8,12 +8,27 @@ class Commit
 
     abstract!
 
+    module Resource
+      include ::Resource
+
+      included do
+        attribute :id, String
+        attribute :account_id, String
+        attribute :repository_id, String
+        attribute :message, String
+        attribute :author, Hash
+      end
+
+      sig { params(commit: Commit).returns Hash }
+      def self.to_event(commit)
+        commit
+          .as_json(only: %i[id account_id repository_id message author])
+          .symbolize_keys
+      end
+    end
+
     class Created < Event
-      attribute :id, String
-      attribute :account_id, String
-      attribute :repository_id, String
-      attribute :message, String
-      attribute :author, Hash
+      include Resource
     end
   end
 end

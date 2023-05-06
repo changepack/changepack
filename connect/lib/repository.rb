@@ -10,6 +10,7 @@ class Repository < ApplicationRecord
   include Events
   include Git
 
+  include Resourcable
   include Active
   include Status
 
@@ -30,23 +31,4 @@ class Repository < ApplicationRecord
   normalize :branch
 
   inquirer :status
-
-  after_commit :created!, on: :create
-
-  private
-
-  sig { returns String }
-  def created!
-    pub Created.new(id:, account_id:, name:, status: status.to_s)
-  end
-
-  sig { returns String }
-  def updated!
-    pub Updated.new(id:, account_id:, name:, status: status.to_s)
-  end
-
-  sig { returns String }
-  def destroyed!
-    pub Destroyed.new(id:)
-  end
 end

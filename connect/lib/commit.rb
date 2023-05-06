@@ -10,6 +10,8 @@ class Commit < ApplicationRecord
   include Events
   include Git
 
+  include Resourcable
+
   key :com
 
   attribute :message, :text
@@ -28,16 +30,5 @@ class Commit < ApplicationRecord
 
   before_validation do
     self.account ||= repository&.account
-  end
-
-  after_commit :created!, on: :create
-
-  private
-
-  sig { returns String }
-  def created!
-    pub Created.new(
-      **as_json.symbolize_keys.slice(:id, :account_id, :repository_id, :message, :author)
-    )
   end
 end

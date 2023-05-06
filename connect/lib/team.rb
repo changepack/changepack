@@ -7,8 +7,10 @@ module T
 end
 
 class Team < ApplicationRecord
-  include Provided
   include Events
+
+  include Resourcable
+  include Provided
   include Status
   include Active
 

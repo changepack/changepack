@@ -12,28 +12,35 @@ class Team
       attribute :team_id, String
     end
 
-    class Authorized < Event
-      attribute :provider, T::Key
-      attribute :access_token, String
-      attribute :account_id, String
+    module Resource
+      include ::Resource
+
+      included do
+        attribute :id, String
+        attribute :account_id, String
+        attribute :name, String
+        attribute :status, String
+      end
+
+      sig { params(team: Team).returns Hash }
+      def self.to_event(team)
+        team
+          .as_json(only: %i[id account_id name status])
+          .symbolize_keys
+          .transform_values(&:to_s)
+      end
     end
 
     class Created < Event
-      attribute :id, String
-      attribute :account_id, String
-      attribute :name, String
-      attribute :status, String
+      include Resource
     end
 
     class Updated < Event
-      attribute :id, String
-      attribute :account_id, String
-      attribute :name, String
-      attribute :status, String
+      include Resource
     end
 
     class Destroyed < Event
-      attribute :id, String
+      include Resource
     end
   end
 end

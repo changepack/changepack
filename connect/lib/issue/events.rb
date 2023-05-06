@@ -8,22 +8,34 @@ class Issue
 
     abstract!
 
+    module Resource
+      include ::Resource
+
+      included do
+        attribute :id, String
+        attribute :account_id, String
+        attribute :team_id, String
+        attribute :title, String
+      end
+
+      sig { params(issue: Issue).returns Hash }
+      def self.to_event(issue)
+        issue
+          .as_json(only: %i[id account_id team_id title])
+          .symbolize_keys
+      end
+    end
+
     class Created < Event
-      attribute :id, String
-      attribute :account_id, String
-      attribute :team_id, String
-      attribute :title, String
+      include Resource
     end
 
     class Updated < Event
-      attribute :id, String
-      attribute :account_id, String
-      attribute :team_id, String
-      attribute :title, String
+      include Resource
     end
 
     class Destroyed < Event
-      attribute :id, String
+      include Resource
     end
   end
 end

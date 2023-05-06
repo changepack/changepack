@@ -8,6 +8,8 @@ end
 
 class Issue < ApplicationRecord
   include Events
+
+  include Resourcable
   include Provided
 
   key :is
