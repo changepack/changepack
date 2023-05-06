@@ -53,7 +53,7 @@ class ApplicationLayout < ApplicationView
         next if helpers.user_signed_out?
 
         nav.link_to 'Home', root_path, active: home?
-        nav.link_to 'Data sources', sources_path, active: sources?
+        nav.link_to 'Sources', sources_path, active: sources?
       end
 
       render navigation
