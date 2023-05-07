@@ -30,16 +30,15 @@ class Repository
       end
     end
 
-    sig { params(repository: Provider::Repository, git: Provider).returns(Repository) }
+    sig { params(repository: Repository, git: Provider).returns(Repository) }
     def self.upsert!(repository, git:)
-      account_id = git.account_id
-      providers = {
-        git.provider => { id: repository.id, access_token: git.access_token.to_s }
-      }
+      providers = repository.providers
+      attributes = repository.attributes.compact
+      account_id = git.access_token.account_id
 
-      Repository.lock.find_or_initialize_by(account_id:, providers:) do |repo|
-        repo.update!(repository.to_h)
-      end
+      Repository
+        .lock
+        .find_or_initialize_by(account_id:, providers:) { |rep| rep.update!(attributes) }
     end
 
     sig { overridable.returns T::Boolean }
@@ -58,7 +57,7 @@ class Repository
 
     sig { overridable.returns Provider }
     def git
-      @git ||= Provider[provider].new(access_token:, account_id:)
+      @git ||= Provider[provider].new(access_token:)
     end
   end
 end

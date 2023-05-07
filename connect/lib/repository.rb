@@ -27,6 +27,7 @@ class Repository < ApplicationRecord
 
   validates :name, presence: true
   validates :branch, presence: true
+  validates :providers, presence: true, uniqueness: { scope: :account_id }
   normalize :name
   normalize :branch
 

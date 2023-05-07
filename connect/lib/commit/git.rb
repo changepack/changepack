@@ -22,11 +22,9 @@ class Commit
       def pull(repository)
         transaction do
           source = Git.source(repository)
-          ignore = repository.commits.pluck(:providers).map(&:values).flatten
           repository.git
                     .commits(source, after: repository.cursor)
-                    .reject { |commit| ignore.include?(commit.sha) }
-                    .each { |commit| Git.insert!(commit, repository:) }
+                    .each { |commit| Git.upsert!(commit, repository:) }
 
           repository.update!(pulled_at: Time.current)
         end
@@ -35,13 +33,15 @@ class Commit
       end
     end
 
-    sig { params(commit: Provider::Commit, repository: Repository).returns(Commit) }
-    def self.insert!(commit, repository:)
-      providers = { repository.provider => commit.sha }
+    sig { params(commit: Commit, repository: Repository).returns(Commit) }
+    def self.upsert!(commit, repository:)
+      providers = commit.providers
+      attributes = commit.attributes.compact
+      repository_id = repository.id
 
-      Commit.create!(
-        commit.to_h.merge(repository:, providers:)
-      )
+      Commit
+        .lock
+        .find_or_initialize_by(repository_id:, providers:) { |com| com.update!(attributes) }
     end
 
     sig { params(repository: Repository).returns(T.nilable(T::Integer)) }

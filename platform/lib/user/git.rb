@@ -19,7 +19,7 @@ class User
     def git
       return if providers.blank?
 
-      @git ||= Provider[provider].new(access_token:, account_id:)
+      @git ||= Provider[provider].new(access_token:)
     end
 
     sig { overridable.returns T.nilable(AccessToken) }

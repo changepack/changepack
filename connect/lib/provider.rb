@@ -13,11 +13,10 @@ class Provider
   include ActiveModel::Model
   include ActiveModel::Attributes
 
-  Result = T.type_alias { T.any(Provider::Repository, Provider::Commit) }
+  Result = T.type_alias { T.any(Repository, Commit) }
   Results = T.type_alias { T::Array[Result] }
 
   attribute :access_token, T.instance(AccessToken)
-  attribute :account_id, :string
 
   abstract!
 
@@ -64,48 +63,4 @@ class Provider
 
   sig { abstract.returns T.untyped }
   def client; end
-
-  class Repository < T::Struct
-    attribute :id, Integer
-    attribute :name, String
-    attribute :branch, String
-
-    sig { returns(name: String, branch: String) }
-    def to_h
-      { name:, branch: }
-    end
-  end
-
-  class Commit < T::Struct
-    class Author < T::Struct
-      attribute :name, String
-      attribute :email, String
-
-      sig { returns T::Shape }
-      def self.to_shape
-        { name: String, email: String }
-      end
-    end
-
-    attribute :sha, String
-    attribute :message, String
-    attribute :url, String
-    attribute :commited_at, T::Time
-    attribute :author, Author
-
-    sig { returns T::Shape }
-    def self.to_shape
-      { message: String, url: String, commited_at: T::Time, author: Author.to_shape }
-    end
-
-    sig { returns Commit.to_shape }
-    def to_h
-      {
-        message:,
-        url:,
-        commited_at:,
-        author: { name: author.name, email: author.email }
-      }
-    end
-  end
 end
