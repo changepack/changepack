@@ -37,22 +37,17 @@ class Provider
     to_h.keys
   end
 
-  sig { returns T::Shape }
-  def self.to_shapes
-    # TODO: Uncomment once we add more providers
-    # T.any(
-    #   { github: { id: String, access_token: String } },
-    #   { ... }
-    # )
-
-    { github: { id: String, access_token: String } }
-  end
-
   sig { abstract.returns Results }
   def repositories; end
 
   sig { abstract.params(_repository_id: T.untyped).returns(Results) }
   def commits(_repository_id); end
+
+  sig { abstract.returns Results }
+  def teams; end
+
+  sig { abstract.params(_team_id: T.untyped).returns(Results) }
+  def issues(_team_id); end
 
   sig { returns Symbol }
   def provider
