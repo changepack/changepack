@@ -55,18 +55,18 @@ class Provider
     class Mapper
       extend T::Sig
 
-      sig { params(repository: Sawyer::Resource).returns(Repository) }
+      sig { params(repository: Sawyer::Resource).returns(Hash) }
       def self.repository(repository)
-        Repository.new(
+        {
           name: repository.full_name,
           branch: repository.default_branch,
           providers: { github: repository.id }
-        )
+        }
       end
 
-      sig { params(commit: Sawyer::Resource).returns(Commit) }
+      sig { params(commit: Sawyer::Resource).returns(Hash) }
       def self.commit(commit)
-        Commit.new(
+        {
           message: commit.commit.message,
           url: commit.html_url,
           commited_at: commit.commit.author.date,
@@ -75,7 +75,7 @@ class Provider
             name: commit.commit.author.name,
             email: commit.commit.author.email
           }
-        )
+        }
       end
     end
   end

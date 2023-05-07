@@ -33,15 +33,15 @@ class Commit
       end
     end
 
-    sig { params(commit: Commit, repository: Repository).returns(Commit) }
-    def self.upsert!(commit, repository:)
-      providers = commit.providers
-      attributes = commit.attributes.compact
+    sig { params(attributes: Hash, repository: Repository).returns(Commit) }
+    def self.upsert!(attributes, repository:)
+      providers = attributes.fetch(:providers)
       repository_id = repository.id
 
       Commit
         .lock
-        .find_or_initialize_by(repository_id:, providers:) { |com| com.update!(attributes) }
+        .find_or_initialize_by(repository_id:, providers:)
+        .tap { |com| com.update!(attributes) }
     end
 
     sig { params(repository: Repository).returns(T.nilable(T::Integer)) }

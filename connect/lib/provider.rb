@@ -13,8 +13,7 @@ class Provider
   include ActiveModel::Model
   include ActiveModel::Attributes
 
-  Result = T.type_alias { T.any(Repository, Commit) }
-  Results = T.type_alias { T::Array[Result] }
+  Results = T.type_alias { T::Array[Hash] }
 
   attribute :access_token, T.instance(AccessToken)
 
