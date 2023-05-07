@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/changepack/omniauth-linear.git
+  revision: 1b9eaa470500c92bde55b4c6d9484e7070da8b1a
+  specs:
+    omniauth-linear (1.0.3)
+      graphql-client
+      omniauth (>= 2.0)
+      omniauth-oauth2 (>= 1.8)
+
+GIT
   remote: https://github.com/changepack/pretty_id.git
   revision: f67b3a57892b63e392a2fdd7952c453d52da55e8
   specs:
@@ -203,6 +212,10 @@ GEM
       raabro (~> 1.4)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    graphql (2.0.21)
+    graphql-client (0.18.0)
+      activesupport (>= 3.0)
+      graphql
     guard (2.18.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -626,6 +639,7 @@ DEPENDENCIES
   file_validators
   font-awesome-rails
   friendly_id
+  graphql-client
   guard
   guard-livereload
   hashie
@@ -639,6 +653,7 @@ DEPENDENCIES
   octokit
   omniauth
   omniauth-github
+  omniauth-linear!
   omniauth-rails_csrf_protection
   pagy
   paper_trail

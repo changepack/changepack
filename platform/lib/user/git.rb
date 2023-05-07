@@ -13,6 +13,7 @@ class User
 
     included do
       provider :github
+      provider :linear
     end
 
     sig { overridable.returns T.nilable(Provider) }

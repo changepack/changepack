@@ -11,7 +11,7 @@ class User
 
     included do
       devise :database_authenticatable, :rememberable, :validatable, :registerable, :omniauthable,
-             omniauth_providers: [:github]
+             omniauth_providers: %i[github linear]
 
       before_save do
         self.account ||= Account.new
@@ -24,24 +24,21 @@ class User
       sig { overridable.params(provider: T::Key, auth: OmniAuth::AuthHash).returns(User) }
       def register!(provider, auth)
         transaction do
-          user = case provider.to_sym
-                 when :github
-                   register_github!(auth)
-                 end
-
-          user.tap { |usr| usr.register_access_token!(provider, auth:) }
+          User::Registration
+            .first_or_create!(provider, auth)
+            .tap { |user| user.register_access_token!(provider, auth:) }
         end
       end
+    end
+  end
 
-      sig { overridable.params(auth: OmniAuth::AuthHash).returns(User) }
-      def register_github!(auth)
-        where.contains(providers: { github: auth.uid }).first_or_create! do |user|
-          user.name = auth.info.name
-          user.email = auth.info.email
-          user.password = Devise.friendly_token[0, 20]
-          user.providers = { github: { id: auth.uid } }
-        end
-      end
+  sig { overridable.params(proviser: T::Key, auth: OmniAuth::AuthHash).returns(User) }
+  def self.first_or_create!(provider, auth)
+    User.where.contains(providers: { provider => auth.uid }).first_or_create! do |user|
+      user.name = auth.info.name
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.providers = { provider => auth.uid }
     end
   end
 

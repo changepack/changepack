@@ -27,7 +27,8 @@ class Provider
   sig { returns T::Hash[Symbol, Class] }
   def self.to_h
     {
-      github: GitHub
+      github: GitHub,
+      linear: Linear
     }
   end
 

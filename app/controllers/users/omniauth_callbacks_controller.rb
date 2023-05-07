@@ -8,6 +8,11 @@ module Users
       redirect_to sources_path, notice: t('devise.omniauth_callbacks.success', kind: 'GitHub')
     end
 
+    def linear
+      register_or_sign_in_from!(:linear)
+      redirect_to sources_path, notice: t('devise.omniauth_callbacks.success', kind: 'Linear')
+    end
+
     private
 
     sig { params(provider: Symbol).returns(T::Boolean) }

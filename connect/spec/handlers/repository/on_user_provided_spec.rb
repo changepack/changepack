@@ -11,6 +11,7 @@ class Repository
         event_type: 'User::Provided',
         data: {
           id: user.id,
+          provider: 'github',
           providers: user.providers
         }
       }

@@ -271,7 +271,8 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], scope: 'repo,user'
+  config.omniauth :github, ENV.fetch('GITHUB_KEY'), ENV.fetch('GITHUB_SECRET'), scope: 'repo,user'
+  config.omniauth :linear, ENV.fetch('LINEAR_KEY'), ENV.fetch('LINEAR_SECRET'), scope: 'read'
 
   OmniAuth.config.logger = Rails.logger if Rails.env.development?
 

@@ -10,6 +10,7 @@ module Provided
 
   class Provided < Event
     attribute :id, String
+    attribute :provider, String
     attribute :providers, Hash
   end
 
@@ -39,6 +40,7 @@ module Provided
 
   sig { overridable.returns String }
   def provided!
-    pub Provided.new(id:, providers:)
+    provider = (providers.keys - providers_previously_was.keys).sole
+    pub Provided.new(id:, provider:, providers:)
   end
 end

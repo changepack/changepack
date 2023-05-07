@@ -6,12 +6,12 @@ require 'rails_helper'
 module Users
   describe OmniauthCallbacksController do
     let(:user) { create(:user) }
-    let(:result) { { 'github' => 'id' } }
+    let(:result) { { provider.to_s => 'id' } }
 
     before do
       OmniAuth.config.test_mode = true
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(
-        provider: :github,
+      OmniAuth.config.mock_auth[provider] = OmniAuth::AuthHash.new(
+        provider:,
         uid: 'id',
         credentials: {
           token: 'access_token'
@@ -21,18 +21,40 @@ module Users
       sign_in(user)
     end
 
-    it 'saves credentials to GitHub' do
-      expect { get '/users/auth/github/callback' }.to change(user, :providers).from({}).to(result)
+    context 'when GitHub is used' do
+      let(:provider) { :github }
+
+      it 'saves credentials to GitHub' do
+        expect { get '/users/auth/github/callback' }.to change(user, :providers).from({}).to(result)
+      end
+
+      it 'saves access token' do
+        expect { get '/users/auth/github/callback' }.to change(user.access_tokens, :count).by(1)
+      end
+
+      it 'sends an event to pull repositories' do
+        expect { get '/users/auth/github/callback' }.to publish(
+          an_event(User::Provided)
+        ).in(Rails.configuration.event_store)
+      end
     end
 
-    it 'saves access token' do
-      expect { get '/users/auth/github/callback' }.to change(user.access_tokens, :count).by(1)
-    end
+    context 'when Linear is used' do
+      let(:provider) { :linear }
 
-    it 'sends an event to pull repositories' do
-      expect { get '/users/auth/github/callback' }.to publish(
-        an_event(User::Provided)
-      ).in(Rails.configuration.event_store)
+      it 'saves credentials to GitHub' do
+        expect { get '/users/auth/linear/callback' }.to change(user, :providers).from({}).to(result)
+      end
+
+      it 'saves access token' do
+        expect { get '/users/auth/linear/callback' }.to change(user.access_tokens, :count).by(1)
+      end
+
+      it 'sends an event to pull repositories' do
+        expect { get '/users/auth/linear/callback' }.to publish(
+          an_event(User::Provided)
+        ).in(Rails.configuration.event_store)
+      end
     end
   end
 end

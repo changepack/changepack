@@ -195,3 +195,7 @@ gem "sorbet-rails"
 gem "sentry-ruby"
 
 gem "sentry-rails"
+
+gem "graphql-client"
+
+gem "omniauth-linear", github: "changepack/omniauth-linear"
