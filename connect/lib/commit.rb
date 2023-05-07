@@ -14,10 +14,10 @@ class Commit < ApplicationRecord
 
   key :com
 
-  attribute :message, :text
   attribute :url, :string
+  attribute :message, :text
   attribute :commited_at, :datetime
-  attribute :author, Commit::Author.to_type, default: -> { {} }
+  attribute :author, Author.to_type, default: -> { {} }
 
   belongs_to :account
   belongs_to :repository

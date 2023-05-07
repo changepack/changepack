@@ -9,6 +9,9 @@ class Provider
           nodes {
             id
             name
+            mergeWorkflowState {
+              id
+            }
           }
         }
       }

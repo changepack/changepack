@@ -17,6 +17,7 @@ class Team < ApplicationRecord
   key :tm
 
   attribute :name, :string
+  attribute :schema, Schema.to_type, default: -> { {} }
   attribute :status, :string, default: :inactive
 
   belongs_to :account
@@ -24,6 +25,7 @@ class Team < ApplicationRecord
   has_many :issues, dependent: :destroy
 
   validates :name, presence: true
+  validates :schema, store_model: true
   validates :status, presence: true
   normalize :name
 

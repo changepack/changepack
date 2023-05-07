@@ -1,3 +1,30 @@
+class StringsType < ActiveRecord::Type::Value
+  def type
+    :strings
+  end
+end
+
+class IntegersType < ActiveRecord::Type::Value
+  def type
+    :integers
+  end
+
+  def cast(values)
+    return if values.blank?
+    values.map(&:to_i)
+  end
+end
+
+class HashType < ActiveRecord::Type::Value
+  def type
+    :hash
+  end
+end
+
+ActiveModel::Type.register(:strings, StringsType)
+ActiveModel::Type.register(:integers, IntegersType)
+ActiveModel::Type.register(:hash, HashType)
+
 module T
   String = T.type_alias { ::String }
   Symbol = T.type_alias { ::Symbol }
