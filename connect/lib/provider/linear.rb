@@ -97,7 +97,21 @@ class Provider
     def self.team(team)
       {
         name: team['name'],
-        providers: { linear: team['id'] }
+        providers: { linear: team['id'] },
+        schema: schema(team)
+      }
+    end
+
+    sig { returns Hash }
+    def self.schema(team)
+      {
+        done: {
+          type: 'object',
+          properties: {
+            id: { const: team['mergeWorkflowState']['id'] }
+          },
+          required: ['id']
+        }
       }
     end
 
