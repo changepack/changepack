@@ -1,0 +1,28 @@
+query($teamId: String!) {
+  team(id: $teamId) {
+    id
+    issues {
+      nodes {
+        id
+        title
+        description
+        assignee {
+          id
+          name
+          email
+        }
+        labels {
+          nodes {
+            name
+          }
+        }
+        priority
+        branchName
+        identifier
+        state {
+          id
+        }
+      }
+    }
+  }
+}

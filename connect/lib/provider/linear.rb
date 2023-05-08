@@ -3,66 +3,47 @@
 
 class Provider
   class Linear < Provider
-    TEAMS = <<~GRAPHQL
-      query {
-        teams {
-          nodes {
-            id
-            name
-            mergeWorkflowState {
-              id
-            }
-          }
-        }
-      }
-    GRAPHQL
-
-    ISSUES = <<~GRAPHQL
-      query($teamId: String!) {
-        team(id: $teamId) {
-          id
-          issues {
-            nodes {
-              id
-              title
-              description
-              assignee {
-                id
-                name
-                email
-              }
-              labels {
-                nodes {
-                  name
-                }
-              }
-              priority
-              branchName
-              identifier
-              state {
-                id
-              }
-            }
-          }
-        }
-      }
-    GRAPHQL
-
     sig { override.returns(Results) }
     def teams
-      gql = client.parse(TEAMS)
-      teams = client.query(gql, context:).data.teams.nodes.map(&:to_h)
-      teams.map { |team| Mapper.team(team) }
+      client.query(parse(:teams), context:)
+            .data
+            .teams
+            .nodes
+            .then { |teams| transform(teams) }
+            .map { |team| Mapper.team(team) }
     end
 
     sig { override.params(team_id: String).returns(Results) }
     def issues(team_id)
-      gql = client.parse(ISSUES)
-      issues = client.query(gql, variables: { teamId: team_id }, context:).data.team.issues.nodes.map(&:to_h)
-      issues.map { |issue| Mapper.issue(issue) }
+      client.query(parse(:issues), variables: variables(team_id), context:)
+            .data
+            .team
+            .issues
+            .nodes
+            .then { |issues| transform(issues) }
+            .map { |issue| Mapper.issue(issue) }
     end
 
     private
+
+    sig { params(query: Symbol).returns(GraphQL::Client::OperationDefinition) }
+    def parse(query)
+      client.parse(
+        Rails.root.join('connect', 'lib', 'provider', "#{query}.graphql").read
+      )
+    end
+
+    sig { params(results: Results).returns(Results) }
+    def transform(results)
+      results.map(&:to_h)
+             .map { |result| result.deep_transform_keys { |key| key.to_s.underscore } }
+             .map { |result| Hashie::Mash.new(result) }
+    end
+
+    sig { params(team_id: String).returns(Hash) }
+    def variables(team_id)
+      { teamId: team_id }
+    end
 
     sig { override.returns GraphQL::Client }
     def client
@@ -91,37 +72,39 @@ class Provider
   end
 
   class Mapper
-    extend T::Sig
+    class << self
+      extend T::Sig
 
-    sig { params(team: Hash).returns(name: String, providers: { linear: String }) }
-    def self.team(team)
-      {
-        name: team['name'],
-        providers: { linear: team['id'] },
-        schema: schema(team)
-      }
-    end
-
-    sig { returns Hash }
-    def self.schema(team)
-      {
-        done: {
-          type: 'object',
-          properties: {
-            id: { const: team['mergeWorkflowState']['id'] }
-          },
-          required: ['id']
+      sig { params(team: Hash).returns(name: String, providers: Hash, schema: Hash) }
+      def team(team)
+        {
+          name: team.name,
+          providers: { linear: team.id },
+          schema: schema(team)
         }
-      }
-    end
+      end
 
-    sig { params(issue: Hash).returns(Hash) }
-    def self.issue(issue)
-      {
-        title: issue['title'],
-        description: issue['description'],
-        providers: { linear: issue['id'] }
-      }
+      sig { params(team: Hash).returns(Hash) }
+      def schema(team)
+        {
+          done: {
+            type: :object,
+            required: [:id],
+            properties: {
+              id: { const: team.merge_workflow_state.id }
+            }
+          }
+        }
+      end
+
+      sig { params(issue: Hash).returns(Hash) }
+      def issue(issue)
+        {
+          title: issue.title,
+          description: issue.description,
+          providers: { linear: issue.id }
+        }
+      end
     end
   end
 end

@@ -1,0 +1,11 @@
+query {
+  teams {
+    nodes {
+      id
+      name
+      mergeWorkflowState {
+        id
+      }
+    }
+  }
+}
