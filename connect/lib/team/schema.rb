@@ -2,17 +2,17 @@
 # frozen_string_literal: true
 
 class Team
-  class Schema
-    class Status
-      include ValueObject
-
-      attribute :type, :string
-      attribute :required, :strings, default: []
-      attribute :properties, :hash, default: -> { {} }
-    end
-
+  class State
     include ValueObject
 
-    attribute :done, Status.to_type, default: -> { {} }
+    attribute :type, :string
+    attribute :required, :strings, default: []
+    attribute :properties, :hash, default: -> { {} }
+  end
+
+  class Schema
+    include ValueObject
+
+    attribute :done, State.to_type, default: -> { {} }
   end
 end
