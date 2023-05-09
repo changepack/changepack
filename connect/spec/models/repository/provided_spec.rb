@@ -4,7 +4,7 @@
 require 'rails_helper'
 
 class Repository
-  describe Git, :vcr do
+  describe Provided, :vcr do
     subject(:command) { Repository.pull(provider) }
     let(:provider) { user.provider(:github) }
     let(:user) { create(:user) }

@@ -8,7 +8,7 @@ end
 
 class Commit < ApplicationRecord
   include Events
-  include Git
+  include Provided
 
   include Resourcable
 

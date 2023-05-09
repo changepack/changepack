@@ -2,12 +2,12 @@
 # frozen_string_literal: true
 
 class Commit
-  module Git
+  module Provided
     extend ActiveSupport::Concern
     extend T::Helpers
     extend T::Sig
 
-    include Provided
+    include ::Provided
 
     abstract!
 
@@ -21,10 +21,10 @@ class Commit
       sig { overridable.params(repository: Repository).returns(T::Boolean) }
       def pull(repository)
         transaction do
-          source = Git.source(repository)
+          source = Provided.source(repository)
           repository.git
                     .commits(source, after: repository.cursor)
-                    .each { |commit| Git.upsert!(commit, repository:) }
+                    .each { |commit| Provided.upsert!(commit, repository:) }
 
           repository.update!(pulled_at: Time.current)
         end
