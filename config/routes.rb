@@ -6,8 +6,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  constraints CustomDomain do
-    root to: 'accounts#show', as: :custom_domain
+  constraints Domain do
+    root to: 'accounts#show', as: :domain
     resources :posts, only: [:show]
   end
 

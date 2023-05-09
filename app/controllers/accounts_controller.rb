@@ -17,12 +17,12 @@ class AccountsController < ApplicationController
 
   sig { returns Account }
   def account
-    @account ||= custom_domain || friendly_id
+    @account ||= domain || friendly_id
   end
 
   sig { returns T.nilable(Account) }
-  def custom_domain
-    Changelog.find_by(custom_domain: request.host)
+  def domain
+    Changelog.find_by(domain: request.host)
              .try(:account)
   end
 
