@@ -16,7 +16,7 @@ RSpec.describe UpdateDecorator, type: :decorator do
     }
   end
 
-  let(:update) { build(:update) }
+  let(:update) { build(:update, :commit) }
 
   let(:disabled) do
     [

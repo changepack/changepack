@@ -6,7 +6,7 @@ require 'rails_helper'
 class Source
   describe OnRepositoryDestroyed do
     let(:repository) { create(:repository) }
-    let!(:source) { create(:source, repository:) }
+    let!(:source) { create(:source, :repository, repository:) }
     let(:payload) do
       {
         event_type: 'Repository::Destroyed',

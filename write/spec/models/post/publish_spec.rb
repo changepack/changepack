@@ -6,7 +6,7 @@ require 'rails_helper'
 class Post
   describe Publish do
     let!(:user) { create(:user) }
-    let(:update) { create(:update, account: user.account) }
+    let(:update) { create(:update, :commit, account: user.account) }
     let(:post) { create(:post, user:) }
 
     describe '#publish' do

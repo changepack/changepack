@@ -6,7 +6,7 @@ require 'rails_helper'
 describe SourcePolicy, type: :policy do
   let(:user) { build(:user, account:) }
   let(:account) { build(:account) }
-  let(:record) { build(:source, account:) }
+  let(:record) { build(:source, :repository, account:) }
 
   let(:context) { { user: } }
 
@@ -21,7 +21,7 @@ describe SourcePolicy, type: :policy do
 
     before do
       record.update!(name: 'A')
-      create(:source, name: 'B')
+      create(:source, :repository, name: 'B')
     end
 
     it { is_expected.to eq %w[A] }

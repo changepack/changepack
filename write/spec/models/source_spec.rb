@@ -4,7 +4,7 @@
 require 'rails_helper'
 
 RSpec.describe Source do
-  subject { build(:source) }
+  subject { build(:source, :repository) }
 
   it { is_expected.to belong_to(:account) }
   it { is_expected.to belong_to(:repository).optional }

@@ -6,7 +6,7 @@ require 'rails_helper'
 class Source
   describe OnTeamDestroyed do
     let(:team) { create(:team) }
-    let!(:source) { create(:source, team:) }
+    let!(:source) { create(:source, :team, team:) }
     let(:payload) do
       {
         event_type: 'Team::Destroyed',

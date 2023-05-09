@@ -5,7 +5,7 @@ require 'rails_helper'
 
 class Repository
   describe OnUserProvidersChanged do
-    let(:user) { create(:user, providers: { github: 1 }) }
+    let(:user) { create(:user, :github) }
     let(:payload) do
       {
         event_type: 'User::ProvidersChanged',

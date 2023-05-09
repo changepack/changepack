@@ -10,9 +10,9 @@ class Repository
     let(:user) { create(:user) }
 
     context 'with a GitHub integration' do
-      let(:user) { create(:user, providers: { github: 1 }) }
+      let(:user) { create(:user, :github) }
 
-      before { create(:access_token, user:) }
+      before { create(:access_token, :github, user:) }
 
       it 'upserts repositories' do
         expect { command }.to change(user.account.repositories, :count)

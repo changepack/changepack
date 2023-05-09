@@ -6,7 +6,7 @@ require 'rails_helper'
 class Source
   describe OnRepositoryUpdated do
     let(:repository) { create(:repository) }
-    let(:source) { create(:source, repository:) }
+    let(:source) { create(:source, :repository, repository:) }
     let(:name) { 'New name' }
 
     let(:payload) do

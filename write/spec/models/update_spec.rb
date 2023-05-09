@@ -4,7 +4,7 @@
 require 'rails_helper'
 
 RSpec.describe Update do
-  subject { build(:update) }
+  subject { build(:update, :commit) }
 
   it { is_expected.to belong_to(:account) }
   it { is_expected.to belong_to(:commit).optional }

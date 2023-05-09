@@ -14,7 +14,7 @@ class Update
     end
 
     subject(:handler) { described_class.new }
-    before { create(:source, repository: commit.repository) }
+    before { create(:source, :repository, repository: commit.repository) }
 
     it 'creates an update for the commit' do
       expect { handler.perform(payload) }.to change(Update, :count).by(1)

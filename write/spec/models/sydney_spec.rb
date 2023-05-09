@@ -8,7 +8,7 @@ RSpec.describe Sydney, :vcr do
 
   let(:account) { create(:account) }
 
-  before { create_list(:update, 2, account:) }
+  before { create_list(:update, 2, :commit, account:) }
 
   around do |example|
     ClimateControl.modify OPENAI_ACCESS_TOKEN: 'test' do

@@ -6,7 +6,7 @@ require 'rails_helper'
 class Source
   describe Forbid do
     describe '#forbid_defaults!' do
-      let!(:source) { create(:source) }
+      let!(:source) { create(:source, :repository) }
 
       it 'associates the forbidden keywords with the source' do
         Forbidden.defaults.each do |forbidden|

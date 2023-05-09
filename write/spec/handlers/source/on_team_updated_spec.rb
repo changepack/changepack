@@ -6,7 +6,7 @@ require 'rails_helper'
 class Source
   describe OnTeamUpdated do
     let(:team) { create(:team) }
-    let(:source) { create(:source, team:) }
+    let(:source) { create(:source, :team, team:) }
     let(:name) { 'New name' }
 
     let(:payload) do

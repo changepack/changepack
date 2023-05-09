@@ -14,7 +14,7 @@ class Update
     end
 
     subject(:handler) { described_class.new }
-    before { create(:source, team: issue.team) }
+    before { create(:source, :team, team: issue.team) }
 
     it 'creates an update for the issue' do
       expect { handler.perform(payload) }.to change(Update, :count).by(1)

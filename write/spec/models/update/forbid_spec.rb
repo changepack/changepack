@@ -5,7 +5,8 @@ require 'rails_helper'
 
 class Update
   describe Forbid do
-    let(:update) { build(:update, email: '49699333+dependabot[bot]@users.noreply.github.com') }
+    let(:update) { build(:update, :commit, email:) }
+    let(:email) { '49699333+dependabot[bot]@users.noreply.github.com' }
 
     before { update.save }
 

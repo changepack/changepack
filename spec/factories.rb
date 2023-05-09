@@ -5,7 +5,7 @@ require 'faker'
 
 FactoryBot.define do
   factory :forbidden do
-    source
+    association :source, :repository
     content { Faker::Internet.email }
     type { 'email' }
   end
@@ -27,27 +27,56 @@ FactoryBot.define do
 
   factory :source do
     name { Faker::Lorem.sentence }
-    type { 'repository' }
-    account { repository.account }
-    repository
-    changelog { create(:changelog, account: repository.account) }
+
+    trait :repository do
+      type { 'repository' }
+      account { repository.account }
+      repository
+      changelog { create(:changelog, account: repository.account) }
+    end
+
+    trait :team do
+      type { 'team' }
+      account { team.account }
+      team
+      changelog { create(:changelog, account: team.account) }
+    end
   end
 
   factory :update do
-    source { create(:source, repository: commit.repository) }
     name { Faker::Lorem.sentence }
-    type { 'commit' }
-    account { commit.account }
     email { Faker::Internet.email }
-    commit
-    changelog { create(:changelog, account: commit.account) }
+
+    trait :commit do
+      type { 'commit' }
+      account { commit.account }
+      source { create(:source, :repository, repository: commit.repository) }
+      changelog { create(:changelog, account: commit.account) }
+      commit
+    end
+
+    trait :issue do
+      type { 'issue' }
+      account { issue.account }
+      source { create(:source, :team, team: issue.team) }
+      changelog { create(:changelog, account: issue.account) }
+      issue
+    end
   end
 
   factory :access_token do
-    provider { 'github' }
+    provider { 'provider' }
     token { 'access_token' }
     user
     account { user.account }
+
+    trait :github do
+      provider { 'github' }
+    end
+
+    trait :linear do
+      provider { 'linear' }
+    end
   end
 
   factory :changelog do
@@ -89,6 +118,10 @@ FactoryBot.define do
     email { Faker::Internet.email }
     password { Faker::Internet.password }
     password_confirmation { password }
+
+    trait :github do
+      providers { { github: 1 } }
+    end
   end
 
   factory :post do
