@@ -28,7 +28,7 @@ class Issue < ApplicationRecord
   belongs_to :team
 
   validates :title, presence: true
-  validates :assignee, presence: true, store_model: true
+  validates :assignee, store_model: true
   validates :issued_at, presence: true
   normalize :title
   normalize :description
@@ -36,14 +36,4 @@ class Issue < ApplicationRecord
   normalize :identifier
 
   provider :linear
-
-  sig { returns T::Hash[Symbol, T.any(String, Hash)] }
-  def self.to_shape
-    {
-      title: String,
-      description: String,
-      done: T::Boolean,
-      providers: { linear: String }
-    }
-  end
 end

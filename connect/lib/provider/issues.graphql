@@ -22,6 +22,7 @@ query($teamId: String!) {
         state {
           id
         }
+        createdAt
       }
     }
   }

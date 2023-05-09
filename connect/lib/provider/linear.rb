@@ -45,7 +45,7 @@ class Provider
       { teamId: team.linear }
     end
 
-    sig { override.returns GraphQL::Client }
+    sig { override.returns(GraphQL::Client) }
     def client
       @client ||= GraphQL::Client.new(
         schema: GraphQL::Client.load_schema(http),
@@ -53,7 +53,7 @@ class Provider
       ).tap { |client| client.allow_dynamic_queries = true }
     end
 
-    sig { returns GraphQL::Client::HTTP }
+    sig { returns(GraphQL::Client::HTTP) }
     def http
       @http ||= GraphQL::Client::HTTP.new('https://api.linear.app/graphql') do
         def headers(context) # rubocop:disable Lint/NestedMethodDefinition
@@ -75,7 +75,7 @@ class Provider
     class << self
       extend T::Sig
 
-      sig { params(team: Hash).returns Team.to_shape }
+      sig { params(team: Hash).returns(Hash) }
       def team(team)
         {
           name: team.name,
@@ -84,7 +84,7 @@ class Provider
         }
       end
 
-      sig { params(team: Hash).returns Team::Schema.to_shape }
+      sig { params(team: Hash).returns(Hash) }
       def schema(team)
         {
           done: {
@@ -97,13 +97,44 @@ class Provider
         }
       end
 
-      sig { params(issue: Hash, team: Team).returns Issue.to_shape }
+      sig { params(issue: Hash, team: Team).returns(Hash) }
       def issue(issue, team:)
         {
           title: issue.title,
           description: issue.description,
-          done: JSON::Validator.validate(team.schema.done.as_json, issue.state),
           providers: { linear: issue.id }
+        }.merge(
+          **completion(issue, team:), **meta(issue)
+        )
+      end
+
+      sig { params(issue: Hash, team: Team).returns(Hash) }
+      def completion(issue, team:)
+        {
+          assignee: assignee(issue),
+          branch: issue.branch_name,
+          done: team.schema.done.validate(issue.state)
+        }
+      end
+
+      sig { params(issue: Hash).returns(Hash) }
+      def meta(issue)
+        {
+          priority: issue.priority,
+          issued_at: issue.created_at,
+          identifier: issue.identifier,
+          labels: issue.labels.nodes.map(&:name)
+        }
+      end
+
+      sig { params(issue: Hash).returns(T.nilable(Hash)) }
+      def assignee(issue)
+        return if issue.assignee.blank?
+
+        {
+          name: issue.assignee.name,
+          email: issue.assignee.email,
+          providers: { linear: issue.assignee.id }
         }
       end
     end
