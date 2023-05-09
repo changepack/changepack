@@ -8,7 +8,7 @@ end
 
 class User < ApplicationRecord
   include Registration
-  include Git
+  include Provided
 
   key :user
 

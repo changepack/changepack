@@ -4,11 +4,11 @@
 require 'rails_helper'
 
 class Repository
-  describe OnUserProvided do
-    let(:user) { create(:user) }
+  describe OnUserProvidersChanged do
+    let(:user) { create(:user, providers: { github: 1 }) }
     let(:payload) do
       {
-        event_type: 'User::Provided',
+        event_type: 'User::ProvidersChanged',
         data: {
           id: user.id,
           provider: 'github',

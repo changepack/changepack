@@ -2,14 +2,19 @@
 # frozen_string_literal: true
 
 class Repository
-  class OnUserProvided < Handler
-    on ::User::Provided
+  class OnUserProvidersChanged < Handler
+    on ::User::ProvidersChanged
 
     sig { override.returns T::Boolean }
     def run
       return false if bad_provider?
 
-      Repository.pull(user.git)
+      Repository.pull(provider)
+    end
+
+    sig { returns Provider }
+    def provider
+      @provider ||= user.provider(event.provider)
     end
 
     sig { returns User }

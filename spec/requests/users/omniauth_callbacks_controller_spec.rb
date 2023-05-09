@@ -34,7 +34,7 @@ module Users
 
       it 'sends an event to pull repositories' do
         expect { get '/users/auth/github/callback' }.to publish(
-          an_event(User::Provided)
+          an_event(User::ProvidersChanged)
         ).in(Rails.configuration.event_store)
       end
     end
@@ -52,7 +52,7 @@ module Users
 
       it 'sends an event to pull repositories' do
         expect { get '/users/auth/linear/callback' }.to publish(
-          an_event(User::Provided)
+          an_event(User::ProvidersChanged)
         ).in(Rails.configuration.event_store)
       end
     end

@@ -5,7 +5,8 @@ require 'rails_helper'
 
 class Repository
   describe Git, :vcr do
-    subject(:command) { Repository.pull(user.git) }
+    subject(:command) { Repository.pull(provider) }
+    let(:provider) { user.provider(:github) }
     let(:user) { create(:user) }
 
     context 'with a GitHub integration' do

@@ -8,7 +8,7 @@ module Provided
 
   abstract!
 
-  class Provided < Event
+  class ProvidersChanged < Event
     attribute :id, String
     attribute :provider, String
     attribute :providers, Hash
@@ -17,7 +17,6 @@ module Provided
   included do
     attribute :providers, :jsonb, default: -> { {} }
     after_commit :provided!, on: :update, if: :providers_previously_changed?
-    inquirer :provider
   end
 
   class_methods do
@@ -38,9 +37,14 @@ module Provided
     providers.keys.first
   end
 
+  sig { overridable.returns T::Boolean }
+  def provided?
+    providers.present?
+  end
+
   sig { overridable.returns String }
   def provided!
     provider = (providers.keys - providers_previously_was.keys).sole
-    pub Provided.new(id:, provider:, providers:)
+    pub ProvidersChanged.new(id:, provider:, providers:)
   end
 end
