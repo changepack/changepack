@@ -8,7 +8,7 @@ end
 
 class User < ApplicationRecord
   include Registration
-  include Provided
+  include Tokenable
 
   key :user
 

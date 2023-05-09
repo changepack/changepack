@@ -65,17 +65,16 @@ FactoryBot.define do
   end
 
   factory :access_token do
-    provider { 'provider' }
     token { 'access_token' }
-    user
     account { user.account }
+    user
 
     trait :github do
-      provider { 'github' }
+      type { 'github' }
     end
 
     trait :linear do
-      provider { 'linear' }
+      type { 'linear' }
     end
   end
 
@@ -121,6 +120,10 @@ FactoryBot.define do
 
     trait :github do
       providers { { github: 1 } }
+
+      after(:create) do |user|
+        create(:access_token, :github, account: user.account, user:)
+      end
     end
   end
 

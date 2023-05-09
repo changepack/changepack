@@ -9,7 +9,7 @@ end
 class AccessToken < ApplicationRecord
   key :tok
 
-  attribute :provider, :string
+  attribute :type, :string
   attribute :token, :string
 
   belongs_to :user
@@ -17,15 +17,20 @@ class AccessToken < ApplicationRecord
   has_many :repositories, dependent: :nullify
   has_many :teams, dependent: :nullify
 
-  validates :token, presence: true, uniqueness: { scope: %i[account_id provider] }
-  validates :provider, presence: true
+  validates :token, presence: true, uniqueness: { scope: %i[account_id type] }
+  validates :type, presence: true
 
   after_initialize do
-    self.account ||= user&.account if user_id.present?
+    self.account ||= user.try(:account) if user_id.present?
   end
 
   sig { returns String }
   def to_s
     token
+  end
+
+  sig { returns Provider }
+  def provider
+    @provider ||= Provider[type].new(access_token: self)
   end
 end

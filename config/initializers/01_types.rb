@@ -21,9 +21,9 @@ class HashType < ActiveRecord::Type::Value
   end
 end
 
+ActiveModel::Type.register(:hash, HashType)
 ActiveModel::Type.register(:strings, StringsType)
 ActiveModel::Type.register(:integers, IntegersType)
-ActiveModel::Type.register(:hash, HashType)
 
 module T
   String = T.type_alias { ::String }

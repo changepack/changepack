@@ -57,8 +57,8 @@ class User
   def register_access_token!(provider, auth:)
     AccessToken.find_or_create_by!(
       token: auth.credentials.token,
+      type: provider,
       user: self,
-      provider:,
       account:
     )
   end

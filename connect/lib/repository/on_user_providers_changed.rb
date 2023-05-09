@@ -14,7 +14,7 @@ class Repository
 
     sig { returns Provider }
     def provider
-      @provider ||= user.provider(event.provider)
+      @provider ||= user.access_token(:github).provider
     end
 
     sig { returns User }

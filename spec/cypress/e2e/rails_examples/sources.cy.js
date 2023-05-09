@@ -34,7 +34,7 @@ describe('Sources', function() {
     cy.appFactories([['create', 'user']]).then(users => {
       const user = users[0]
 
-      cy.appFactories([['create', 'access_token', { account_id: user.account_id }]])
+      cy.appFactories([['create', 'access_token', 'github', { account_id: user.account_id }]])
       cy.login({ email: user.email })
       cy.visit('/sources')
       cy.get('[data-test-id="blank"]').should('be.visible')

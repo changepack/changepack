@@ -9,7 +9,7 @@ module Cypress
       user = create(:user, email: 'john.doe@example.com')
       repository = create(:repository, account: user.account)
 
-      create(:access_token, account: user.account)
+      create(:access_token, :github, account: user.account)
       create(:source, :repository, account: user.account, repository:)
     end
   end
