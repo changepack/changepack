@@ -15,6 +15,7 @@ class AccessToken < ApplicationRecord
   belongs_to :user
   belongs_to :account
   has_many :repositories, dependent: :nullify
+  has_many :teams, dependent: :nullify
 
   validates :token, presence: true, uniqueness: { scope: %i[account_id provider] }
   validates :provider, presence: true

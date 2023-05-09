@@ -199,3 +199,5 @@ gem "sentry-rails"
 gem "graphql-client"
 
 gem "omniauth-linear", github: "changepack/omniauth-linear"
+
+gem "json-schema"

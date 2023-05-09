@@ -13,15 +13,15 @@ class Provider
             .map { |team| Mapper.team(team) }
     end
 
-    sig { override.params(team_id: String).returns(Results) }
-    def issues(team_id)
-      client.query(parse(:issues), variables: variables(team_id), context:)
+    sig { override.params(team: Team).returns(Results) }
+    def issues(team)
+      client.query(parse(:issues), variables: variables(team), context:)
             .data
             .team
             .issues
             .nodes
             .then { |issues| transform(issues) }
-            .map { |issue| Mapper.issue(issue) }
+            .map { |issue| Mapper.issue(issue, team:) }
     end
 
     private
@@ -40,9 +40,9 @@ class Provider
              .map { |result| Hashie::Mash.new(result) }
     end
 
-    sig { params(team_id: String).returns(Hash) }
-    def variables(team_id)
-      { teamId: team_id }
+    sig { params(team: Team).returns(Hash) }
+    def variables(team)
+      { teamId: team.linear }
     end
 
     sig { override.returns GraphQL::Client }
@@ -97,11 +97,12 @@ class Provider
         }
       end
 
-      sig { params(issue: Hash).returns Issue.to_shape }
-      def issue(issue)
+      sig { params(issue: Hash, team: Team).returns Issue.to_shape }
+      def issue(issue, team:)
         {
           title: issue.title,
           description: issue.description,
+          done: JSON::Validator.validate(team.schema.done.as_json, issue.state),
           providers: { linear: issue.id }
         }
       end

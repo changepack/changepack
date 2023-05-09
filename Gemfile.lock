@@ -253,6 +253,8 @@ GEM
       activesupport (>= 5.0.0)
     jmespath (1.6.2)
     json (2.6.3)
+    json-schema (4.0.0)
+      addressable (>= 2.8)
     jwt (2.7.0)
     launchy (2.5.2)
       addressable (~> 2.8)
@@ -646,6 +648,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
+  json-schema
   letter_opener
   lookbook (>= 2.0.0)
   mock_redis

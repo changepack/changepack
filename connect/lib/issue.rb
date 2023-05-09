@@ -42,6 +42,7 @@ class Issue < ApplicationRecord
     {
       title: String,
       description: String,
+      done: T::Boolean,
       providers: { linear: String }
     }
   end
