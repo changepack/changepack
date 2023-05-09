@@ -12,5 +12,10 @@ module ValueObject
     include StoreModel::Model
     include ActiveModel::Validations::Callbacks
     include NormalizeAttributes::Callbacks
+
+    class_eval do
+      extend T::Helpers
+      extend T::Sig
+    end
   end
 end

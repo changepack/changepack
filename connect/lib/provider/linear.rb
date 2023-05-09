@@ -75,7 +75,7 @@ class Provider
     class << self
       extend T::Sig
 
-      sig { params(team: Hash).returns(name: String, providers: Hash, schema: Hash) }
+      sig { params(team: Hash).returns Team.to_shape }
       def team(team)
         {
           name: team.name,
@@ -84,7 +84,7 @@ class Provider
         }
       end
 
-      sig { params(team: Hash).returns(Hash) }
+      sig { params(team: Hash).returns Team::Schema.to_shape }
       def schema(team)
         {
           done: {
@@ -97,7 +97,7 @@ class Provider
         }
       end
 
-      sig { params(issue: Hash).returns(Hash) }
+      sig { params(issue: Hash).returns Issue.to_shape }
       def issue(issue)
         {
           title: issue.title,

@@ -30,4 +30,13 @@ class Team < ApplicationRecord
   normalize :name
 
   provider :linear
+
+  sig { returns T::Hash[Symbol, T.any(String, Hash)] }
+  def self.to_shape
+    {
+      name: String,
+      providers: { linear: String },
+      schema: Schema.to_shape
+    }
+  end
 end

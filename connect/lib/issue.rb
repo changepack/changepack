@@ -36,4 +36,13 @@ class Issue < ApplicationRecord
   normalize :identifier
 
   provider :linear
+
+  sig { returns T::Hash[Symbol, T.any(String, Hash)] }
+  def self.to_shape
+    {
+      title: String,
+      description: String,
+      providers: { linear: String }
+    }
+  end
 end
