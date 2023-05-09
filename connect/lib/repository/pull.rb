@@ -2,12 +2,12 @@
 # frozen_string_literal: true
 
 class Repository
-  module Provided
+  module Pull
     extend ActiveSupport::Concern
     extend T::Helpers
     extend T::Sig
 
-    include ::Provided
+    include Provided
 
     abstract!
 
@@ -22,7 +22,7 @@ class Repository
       def pull(git)
         transaction do
           git.repositories.each do |repository|
-            Provided.upsert!(repository, git:)
+            Pull.upsert!(repository, git:)
           end
         end
 

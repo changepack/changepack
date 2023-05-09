@@ -8,7 +8,7 @@ end
 
 class Repository < ApplicationRecord
   include Events
-  include Provided
+  include Pull
 
   include Resourcable
   include Active

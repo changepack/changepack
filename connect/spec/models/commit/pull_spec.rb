@@ -4,7 +4,7 @@
 require 'rails_helper'
 
 class Commit
-  describe Provided, :vcr do
+  describe Pull, :vcr do
     subject(:command) { Commit.pull(repository) }
     let(:repository) { create(:repository, providers:, access_token:) }
 
