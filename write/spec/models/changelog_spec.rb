@@ -11,7 +11,6 @@ RSpec.describe Changelog do
   it { is_expected.to have_many(:sources).dependent(:destroy) }
   it { is_expected.to have_many(:updates).dependent(:destroy) }
 
-  it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_inclusion_of(:audience).in_array(described_class::AUDIENCES) }
   it { is_expected.to validate_presence_of(:audience) }
   it { is_expected.to validate_uniqueness_of(:custom_domain) }

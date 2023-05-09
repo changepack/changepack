@@ -20,7 +20,7 @@ class AccessToken < ApplicationRecord
   validates :token, presence: true, uniqueness: { scope: %i[account_id type] }
   validates :type, presence: true
 
-  after_initialize do
+  before_save do
     self.account ||= user.try(:account) if user_id.present?
   end
 

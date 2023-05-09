@@ -28,7 +28,7 @@ class Changelog < ApplicationRecord
   validates :custom_domain, uniqueness: true, allow_nil: true
   validates :audience, presence: true, inclusion: { in: AUDIENCES }
 
-  after_initialize do
+  before_validation do
     self.name ||= DEFAULT
   end
 
