@@ -11,13 +11,13 @@ class Changelog < ApplicationRecord
   include Slug
 
   DEFAULT = 'Changelog'
-  AUDIENCES = %w[non_technical technical internal].freeze
+  AUDIENCES = %w[technical general in_house].freeze
 
   key :cl
 
   attribute :name, :string
   attribute :domain, :string
-  attribute :audience, :string, default: :non_technical
+  attribute :audience, :string, default: :general
 
   belongs_to :account
   has_many :posts, dependent: :destroy
