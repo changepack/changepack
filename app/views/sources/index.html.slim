@@ -5,7 +5,7 @@
       h2.mt-4
         | Pull changes from GitHub or Linear and write changelogs based on the most recent changes
 
-    - unless current_user.github? || current_user.linear?
+    - unless current_user.github? && current_user.linear?
       .mt-4.flex
         - unless current_user.github?
           = button_to 'Connect GitHub', \
