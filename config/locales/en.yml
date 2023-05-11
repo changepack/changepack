@@ -35,6 +35,6 @@ en:
   summary:
     title: "%{month} update"
   audiences:
-    technical: "technical"
-    non_technical: "non-technical"
-    internal: "employees of the company, internally"
+    tech: "Software specialists"
+    mainstream: "Everyday users"
+    in_house: "Company personnel"
