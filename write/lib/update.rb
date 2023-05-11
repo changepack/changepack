@@ -19,6 +19,7 @@ class Update < ApplicationRecord
   # commits and issues together, for instance.
   attribute :name, :string
   attribute :type, :string
+  # We use tags for search or filtering
   attribute :tags, :string, array: true, default: []
 
   belongs_to :account

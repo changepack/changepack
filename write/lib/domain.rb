@@ -29,11 +29,7 @@ module Domain
 
   sig { overridable.returns T.nilable(ActiveModel::Error) }
   def valid_domain
-    return if domain.blank?
-
-    domain_regex = /\A[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}\z/ix
-
-    return if domain.match?(domain_regex)
+    return if domain.blank? || domain.match?(/\A[a-z0-9]+([-.]{1}[a-z0-9]+)*\.[a-z]{2,5}\z/ix)
 
     errors.add(:domain, 'is not a valid domain format')
   end

@@ -19,6 +19,7 @@ class Source < ApplicationRecord
   # repositories and teams together, for instance.
   attribute :name, :string
   attribute :type, :string
+  # Status is derived from the repository or team
   attribute :status, :string, default: :inactive
 
   belongs_to :account
