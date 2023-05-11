@@ -26,7 +26,7 @@ By not using STI, we are able to keep the data models for `Team`, `Repository`, 
 
 ## Inbound Communication
 
-The `connect` context receives events from other contexts and handles them through a set of event handlers. These event handlers are responsible for updating the `connect` context's state and triggering actions based on the events.
+The `connect` context receives events from other contexts and handles them through a set of event handlers. These event handlers are responsible for updating the `connect` context's state and triggering actions based on the events. The context collaborates with the `platform` context for inbound communication. This collaboration is particularly relevant when new access tokens need to be created as users sign in or register using OAuth 2 provided by GitHub, Linear, and others.
 
 The following event handlers handle inbound communication:
 
@@ -35,7 +35,7 @@ The following event handlers handle inbound communication:
 
 ## Outbound Communication
 
-The `connect` context sends out events as a result of changes in its state or as a response to certain actions. Other contexts can listen to these events and react accordingly.
+The `connect` context sends out events as a result of changes in its state or as a response to certain actions. Other contexts can listen to these events and react accordingly. The connect context primarily collaborates with the `write` context as a source of updates that can be attached to posts and changelogs.
 
 For all Create, Update, and Destroy (CRUD) actions, except Read, the `connect` context sends out corresponding events. These events include:
 
