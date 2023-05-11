@@ -4,7 +4,7 @@
 class TeamTransition < ApplicationRecord
   key :tmt
 
-  belongs_to :team, inverse_of: :team_transitions
+  belongs_to :team, inverse_of: :transitions
 
   after_destroy :update_most_recent, if: :most_recent?
 

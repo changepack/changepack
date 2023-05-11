@@ -41,10 +41,10 @@ class Commit
       Commit
         .lock
         .find_or_initialize_by(repository_id:, providers:)
-        .tap { |com| com.update!(attributes) }
+        .tap { |commit| commit.update!(attributes) }
     end
 
-    sig { params(repository: Repository).returns(T.nilable(T::Integer)) }
+    sig { params(repository: Repository).returns T.nilable(T::Integer) }
     def self.source(repository)
       case repository.provider
       when 'github'

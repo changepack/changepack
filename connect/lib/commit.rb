@@ -30,6 +30,6 @@ class Commit < ApplicationRecord
   normalize :message
 
   before_validation do
-    self.account ||= repository&.account
+    self.account ||= repository.try(:account)
   end
 end

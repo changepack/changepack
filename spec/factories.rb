@@ -125,6 +125,14 @@ FactoryBot.define do
         create(:access_token, :github, account: user.account, user:)
       end
     end
+
+    trait :linear do
+      providers { { github: 1 } }
+
+      after(:create) do |user|
+        create(:access_token, :linear, account: user.account, user:)
+      end
+    end
   end
 
   factory :post do

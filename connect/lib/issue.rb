@@ -8,15 +8,15 @@ end
 
 class Issue < ApplicationRecord
   include Events
+  include Pull
 
   include Resourcable
-  include Provided
 
   key :is
 
   attribute :title, :string
   attribute :description, :string
-  attribute :assignee, Issue::Assignee.to_type, default: -> { {} }
+  attribute :assignee, Issue::Assignee.to_type
   attribute :labels, :string, array: true, default: []
   attribute :priority, :decimal
   attribute :done, :boolean
@@ -28,12 +28,14 @@ class Issue < ApplicationRecord
   belongs_to :team
 
   validates :title, presence: true
-  validates :assignee, store_model: true
+  validates :assignee, store_model: true, allow_blank: true
   validates :issued_at, presence: true
   normalize :title
   normalize :description
   normalize :branch
   normalize :identifier
 
-  provider :linear
+  before_validation do
+    self.account ||= team.try(:account)
+  end
 end

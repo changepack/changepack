@@ -8,9 +8,9 @@ end
 
 class Team < ApplicationRecord
   include Events
+  include Pull
 
   include Resourcable
-  include Provided
   include Status
   include Active
 
@@ -28,8 +28,6 @@ class Team < ApplicationRecord
   validates :schema, store_model: true
   validates :status, presence: true
   normalize :name
-
-  provider :linear
 
   sig { returns T::Hash[Symbol, T.any(String, Hash)] }
   def self.to_shape

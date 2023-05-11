@@ -12,7 +12,7 @@ class Commit
       let(:providers) { { github: 1 } }
       let(:access_token) { create(:access_token, :github) }
 
-      it 'upserts repositories' do
+      it 'upserts commits' do
         expect { command }.to change(repository.commits, :count)
       end
     end
