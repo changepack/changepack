@@ -10,17 +10,16 @@ class Update
     abstract!
 
     included do
-      validate :valid_unforbidden_emails, on: :create
+      validate :valid_tags, on: :create
     end
 
     sig { overridable.returns T.nilable(ActiveModel::Error) }
-    def valid_unforbidden_emails
-      return if source.blank?
+    def valid_tags
+      forbidden = source.try(:forbiddens).try(:map, &:content) || []
 
-      forbidden = source.forbiddens.select(&:email?).map(&:content)
-      return if forbidden.none? { |regexp| email =~ Regexp.new(regexp) }
+      return if forbidden.none? { |regexp| tags.any? { |tag| tag =~ Regexp.new(regexp) } }
 
-      errors.add(:email, 'matches a forbidden keyword')
+      errors.add(:tags, 'match a forbidden keyword')
     end
   end
 end

@@ -45,7 +45,7 @@ FactoryBot.define do
 
   factory :update do
     name { Faker::Lorem.sentence }
-    email { Faker::Internet.email }
+    tags { [Faker::Internet.email] }
 
     trait :commit do
       type { 'commit' }

@@ -12,9 +12,9 @@ class Update
         account_id: event.account_id,
         commit_id: event.id,
         name: event.message,
-        email: event.author.fetch(:email),
         changelog:,
-        source:
+        source:,
+        tags:
       )
     end
 
@@ -26,6 +26,13 @@ class Update
     sig { returns Changelog }
     def changelog
       @changelog ||= Account.find(event.account_id).changelogs.first
+    end
+
+    sig { returns T::Array[String] }
+    def tags
+      [
+        event.author.fetch(:email)
+      ]
     end
   end
 end

@@ -13,7 +13,6 @@ RSpec.describe Update do
 
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:type) }
-  it { is_expected.to validate_presence_of(:email) }
   it { is_expected.to validate_uniqueness_of(:issue_id).scoped_to(:account_id) }
   it { is_expected.to validate_uniqueness_of(:commit_id).scoped_to(:account_id) }
   it { is_expected.to validate_inclusion_of(:type).in_array(described_class::TYPES) }

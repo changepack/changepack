@@ -11,13 +11,13 @@ class Update
     sig { override.returns Update }
     def run
       Update.create(
-        email: assignee.fetch(:email),
         type: :issue,
         name: title,
         account_id:,
         changelog:,
         issue_id:,
-        source:
+        source:,
+        tags:
       )
     end
 
@@ -29,6 +29,13 @@ class Update
     sig { returns Changelog }
     def changelog
       @changelog ||= Account.find(account_id).changelogs.first
+    end
+
+    sig { returns T::Array[String] }
+    def tags
+      [
+        assignee.fetch(:email)
+      ]
     end
   end
 end
