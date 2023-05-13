@@ -32,12 +32,13 @@ class Repository
 
     sig { params(attributes: Hash, git: Provider).returns(Repository) }
     def self.upsert!(attributes, git:)
+      access_token = git.access_token
+      account_id = access_token.account_id
       providers = attributes.fetch(:providers)
-      account_id = git.access_token.account_id
 
       Repository
         .lock
-        .find_or_initialize_by(account_id:, providers:)
+        .find_or_initialize_by(account_id:, access_token:, providers:)
         .tap { |rep| rep.update!(attributes) }
     end
 

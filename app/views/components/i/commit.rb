@@ -33,14 +33,26 @@ module I
       render Message.new(commit:, url:)
 
       div class: 'flex items-center mt-1 pl-4' do
+        provider
         repository
         author
         commited_at
       end
     end
 
+    def provider
+      tag do
+        case commit.provider
+        when 'github'
+          'GitHub'
+        end
+      end
+    end
+
     def repository
-      tag { "#{commit.repository.name}@#{commit.repository.branch}" }
+      tag class: 'ml-2' do
+        "#{commit.repository.name}@#{commit.repository.branch}"
+      end
     end
 
     def author

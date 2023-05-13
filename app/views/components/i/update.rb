@@ -6,12 +6,14 @@ module I
     attribute :update, T::Update
     attribute :post, T.nilable(::Post)
 
-    delegate :commit, to: :update
+    delegate :commit, :issue, to: :update
 
     def template
       case update.type
       when 'commit'
         render I::Commit.new(commit:, url:)
+      when 'issue'
+        render I::Issue.new(issue:, url:)
       end
     end
 

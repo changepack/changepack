@@ -1,5 +1,5 @@
 = turbo_frame_tag "stop_tracking_#{team.id}" do
-  = button_to repository, \
+  = button_to team, \
                 class: 'button-delete inline-block', \
                 data: { test_id: 'confirm_stop', turbo_frame: '_top' }, \
                 method: :delete do

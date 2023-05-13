@@ -68,7 +68,7 @@ class PostsController < ApplicationController
   def updates
     @updates ||= current_account.updates
                                 .options(post)
-                                .includes(:post, commit: %i[repository])
+                                .includes(:post, commit: :repository, issue: :team)
                                 .limit(100)
                                 .kept
   end

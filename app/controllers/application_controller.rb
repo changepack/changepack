@@ -22,15 +22,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  sig { returns T.untyped }
-  def skip_bullet
-    previous_value = Bullet.enable?
-    Bullet.enable = false
-    yield
-  ensure
-    Bullet.enable = previous_value
-  end
-
   sig { returns T.nilable(account_id: String, user_id: String) }
   def set_raven_context
     Sentry.set_user(account_id: current_account.id, user_id: current_user.id) if user_signed_in?

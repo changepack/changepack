@@ -13,6 +13,6 @@ class SourcesController < ApplicationController
 
   sig { returns T::Sources }
   def collection
-    skip_bullet { authorized(Source.includes(:repository, :team).activity.kept) }
+    authorized(Source.includes(:repository, :team).activity.kept)
   end
 end

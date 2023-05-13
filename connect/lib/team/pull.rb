@@ -32,12 +32,13 @@ class Team
 
     sig { params(attributes: Hash, app: Provider).returns(Team) }
     def self.upsert!(attributes, app:)
+      access_token = app.access_token
+      account_id = access_token.account_id
       providers = attributes.fetch(:providers)
-      account_id = app.access_token.account_id
 
       Team
         .lock
-        .find_or_initialize_by(account_id:, providers:)
+        .find_or_initialize_by(account_id:, access_token:, providers:)
         .tap { |rep| rep.update!(attributes) }
     end
 
