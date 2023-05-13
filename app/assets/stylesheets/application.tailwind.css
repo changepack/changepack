@@ -51,11 +51,11 @@
     @apply label bg-[#FCEDB9] text-[#A82C2B];
   }
 
-  .repository {
+  .source {
     @apply border-2 border-gray-100 rounded-lg;
   }
 
-  .repository + .repository {
+  .source + .source {
     @apply mt-4;
   }
 

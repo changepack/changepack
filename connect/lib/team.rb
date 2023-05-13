@@ -29,6 +29,8 @@ class Team < ApplicationRecord
   validates :status, presence: true
   normalize :name
 
+  inquirer :status
+
   sig { returns T::Hash[Symbol, T.any(String, Hash)] }
   def self.to_shape
     {

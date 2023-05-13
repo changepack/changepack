@@ -2,8 +2,8 @@
 # frozen_string_literal: true
 
 module I
-  class Repository < ApplicationComponent
-    attribute :repository, T::Repository
+  class Team < ApplicationComponent
+    attribute :team, T::Team
 
     def template
       wrapper do
@@ -14,7 +14,7 @@ module I
     end
 
     def wrapper(&)
-      div class: 'source', data: { test_id: 'repository' } do
+      div class: 'source', data: { test_id: 'team' } do
         table class: 'w-full' do
           tbody do
             tr class: 'focus:outline-none h-16', &
@@ -28,18 +28,17 @@ module I
         icon :circle, class: status_class
 
         div class: 'text-base font-medium leading-none ml-4 mr-2' do
-          plain repository.name
+          plain team.name
         end
 
         div class: 'ml-2 dimmed hidden md:block' do
           provider
-          branch
         end
       end
     end
 
     def pulled
-      return if repository.pulled_at.blank?
+      return if team.pulled_at.blank?
 
       div class: 'flex items-center justify-end hidden md:block' do
         span class: 'tag' do
@@ -50,7 +49,7 @@ module I
 
     def actions
       div class: 'flex items-center justify-end pr-5' do
-        if repository.status.active?
+        if team.status.active?
           stop!
         else
           track!
@@ -59,7 +58,7 @@ module I
     end
 
     def stop!
-      turbo_frame id: "stop_tracking_#{repository.id}" do
+      turbo_frame id: "stop_tracking_#{team.id}" do
         a href: stop_path, **stop_attrs do
           icon 'trash', class: 'mr-2'
           span(class: 'hidden md:inline') { 'Stop tracking' }
@@ -69,17 +68,17 @@ module I
     end
 
     def track!
-      turbo_frame id: "pull_#{repository.id}" do
+      turbo_frame id: "pull_#{team.id}" do
         a href: track_path, **track_attrs do
           icon 'plug', class: 'mr-2'
-          span(class: 'hidden md:inline') { 'Pull commits' }
+          span(class: 'hidden md:inline') { 'Pull issues' }
           span(class: 'inline md:hidden') { 'Pull' }
         end
       end
     end
 
     def stop_path
-      helpers.confirm_destroy_repository_path(repository)
+      helpers.confirm_destroy_team_path(team)
     end
 
     def stop_attrs
@@ -87,7 +86,7 @@ module I
     end
 
     def track_path
-      helpers.confirm_update_repository_path(repository)
+      helpers.confirm_update_team_path(team)
     end
 
     def track_attrs
@@ -95,30 +94,24 @@ module I
     end
 
     def status_class
-      repository.status.active? ? 'text-green-500' : 'dimmed'
-    end
-
-    def branch
-      span class: 'text-sm mr-2' do
-        provider
-      end
-
-      icon :tag
-
-      div class: 'text-sm leading-none ml-2 dimmed inline-block' do
-        plain repository.branch
+      if team.status.active?
+        'text-green-500'
+      else
+        'dimmed'
       end
     end
 
     def provider
-      case repository.provider
-      when 'github'
-        'GitHub'
+      span class: 'text-sm mr-2' do
+        case team.provider
+        when 'linear'
+          'Linear'
+        end
       end
     end
 
     def pulled_at
-      helpers.l(repository.pulled_at, format: :long)
+      helpers.l(team.pulled_at, format: :long)
     end
   end
 end
