@@ -29,7 +29,7 @@ class ChangelogsController < ApplicationController
 
   sig { returns Changelog }
   def friendly_id
-    Account.kept.friendly.find(id)
+    Account.kept.friendly.find params.fetch(:account_id)
   end
 
   sig { returns T::Posts }
