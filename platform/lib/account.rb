@@ -7,6 +7,7 @@ module T
 end
 
 class Account < ApplicationRecord
+  include Domain
   include Slug
 
   PICTURES = %w[image/jpeg image/png image/gif].freeze

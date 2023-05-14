@@ -10,12 +10,12 @@ module Domain
 
   sig { params(request: ActionDispatch::Request).returns(T::Boolean) }
   def self.matches?(request)
-    request.subdomain.present? && matching_changelog?(request)
+    request.subdomain.present? && matching_account?(request)
   end
 
   sig { params(request: ActionDispatch::Request).returns(T::Boolean) }
-  def self.matching_changelog?(request)
-    Changelog.where(domain: request.host).any?
+  def self.matching_account?(request)
+    Account.where(domain: request.host).any?
   end
 
   included do

@@ -14,6 +14,8 @@ describe Account do
   it { is_expected.to have_many(:changelogs).dependent(:destroy) }
   it { is_expected.to have_many(:access_tokens).dependent(:destroy) }
 
+  it { is_expected.to validate_uniqueness_of(:domain) }
+
   it 'is created when a user signs up' do
     expect { create(:user) }.to change(described_class, :count).by(1)
   end

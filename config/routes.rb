@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   constraints Domain do
     root to: 'accounts#show', as: :domain
+    get ':id', to: 'changelogs#show', as: :domain_changelog
     resources :posts, only: [:show]
   end
 

@@ -22,8 +22,7 @@ class AccountsController < ApplicationController
 
   sig { returns T.nilable(Account) }
   def domain
-    Changelog.find_by(domain: request.host)
-             .try(:account)
+    Account.find_by(domain: request.host)
   end
 
   sig { returns Account }

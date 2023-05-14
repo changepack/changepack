@@ -14,22 +14,22 @@ class ChangelogsController < ApplicationController
 
   sig { returns Changelog }
   def changelog
-    @changelog ||= domain || friendly_id
-  end
-
-  sig { returns T.nilable(Changelog) }
-  def domain
-    Changelog.find_by(domain: request.host)
-  end
-
-  sig { returns Changelog }
-  def friendly_id
-    account.changelogs.kept.friendly.find(id)
+    @changelog ||= account.changelogs.kept.friendly.find(id)
   end
 
   sig { returns Account }
   def account
-    Account.kept.friendly.find params.fetch(:account_id)
+    domain || friendly_id
+  end
+
+  sig { returns T.nilable(Changelog) }
+  def domain
+    Account.find_by(domain: request.host)
+  end
+
+  sig { returns Changelog }
+  def friendly_id
+    Account.kept.friendly.find(id)
   end
 
   sig { returns T::Posts }

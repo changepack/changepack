@@ -7,7 +7,6 @@ module T
 end
 
 class Changelog < ApplicationRecord
-  include Domain
   include Slug
 
   DEFAULT = 'Changelog'
@@ -17,7 +16,6 @@ class Changelog < ApplicationRecord
   key :cl
 
   attribute :name, :string
-  attribute :domain, :string
   attribute :privacy, :string, default: :public
   attribute :audience, :string, default: :mainstream
 
@@ -27,7 +25,6 @@ class Changelog < ApplicationRecord
   has_many :updates, dependent: :destroy
 
   validates :name, presence: true
-  validates :domain, uniqueness: true, allow_nil: true
   validates :audience, presence: true, inclusion: { in: AUDIENCES }
   validates :privacy, presence: true, inclusion: { in: PRIVACY }
 
