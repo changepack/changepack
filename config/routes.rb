@@ -54,4 +54,5 @@ Rails.application.routes.draw do
   # Both a public and a private URL to your changelog.
   # Has to be at the end so that all other routes are matched first.
   get ':id', to: 'accounts#show', as: :account
+  get ':account_id/:id', to: 'changelogs#show', as: :changelog
 end
