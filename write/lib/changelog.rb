@@ -11,12 +11,14 @@ class Changelog < ApplicationRecord
   include Slug
 
   DEFAULT = 'Changelog'
-  AUDIENCES = %w[tech mainstream in_house].freeze
+  PRIVACY = %w[public unlisted].freeze
+  AUDIENCES = %w[mainstream tech in_house].freeze
 
   key :cl
 
   attribute :name, :string
   attribute :domain, :string
+  attribute :privacy, :string, default: :public
   attribute :audience, :string, default: :mainstream
 
   belongs_to :account
@@ -27,8 +29,10 @@ class Changelog < ApplicationRecord
   validates :name, presence: true
   validates :domain, uniqueness: true, allow_nil: true
   validates :audience, presence: true, inclusion: { in: AUDIENCES }
+  validates :privacy, presence: true, inclusion: { in: PRIVACY }
 
   inquirer :audience
+  inquirer :privacy
 
   before_validation do
     self.name ||= DEFAULT
