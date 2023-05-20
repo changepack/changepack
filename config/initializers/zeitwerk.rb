@@ -1,5 +1,6 @@
 Rails.autoloaders.each do |autoloader|
   autoloader.inflector.inflect(
-    'github' => 'GitHub'
+    'github' => 'GitHub',
+    'api' => 'API'
   )
  end

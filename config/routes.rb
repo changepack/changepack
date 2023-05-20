@@ -12,6 +12,12 @@ Rails.application.routes.draw do
     resources :posts, only: [:show]
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :posts, only: [:index]
+    end
+  end
+
   authenticate do
     root 'accounts#index'
 
