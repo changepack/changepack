@@ -1,4 +1,7 @@
 - brand(post.account)
 
+- content_for :title, post.title, flush: true if post.title.present?
+- content_for :description, post.description, flush: true
+
 section data-test-id="post_page"
   = render I::Blog.new(post:)

@@ -27,7 +27,7 @@ class ApplicationLayout < ApplicationView
 
   def head_tag(&)
     head do
-      title { helpers.content_for?(:title) ? yield(:title) : ENV.fetch('APP_NAME') }
+      title { title_or_app_name }
       meta_tags(&)
 
       stylesheet_link_tag 'application', data_turbo_track: 'reload'
@@ -41,7 +41,12 @@ class ApplicationLayout < ApplicationView
     meta name: 'viewport', content: 'width=device-width,initial-scale=1'
     meta name: 'turbo-cache-control', content: 'no-cache'
 
-    yield(:description) if helpers.content_for?(:description)
+    if helpers.content_for?(:description)
+      meta name: 'description', content: helpers.content_for(:description)
+      meta property: 'og:description', content: helpers.content_for(:description)
+    end
+
+    meta property: 'og:title', content: title_or_app_name
 
     csp_meta_tag
     csrf_meta_tags
@@ -88,5 +93,9 @@ class ApplicationLayout < ApplicationView
 
   def settings
     helpers.user_signed_in?
+  end
+
+  def title_or_app_name
+    helpers.content_for?(:title) ? helpers.content_for(:title) : ENV.fetch('APP_NAME')
   end
 end

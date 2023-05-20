@@ -41,6 +41,10 @@ class Post < ApplicationRecord
     self.account ||= changelog.account
   end
 
+  def description
+    content.to_plain_text.truncate(140)
+  end
+
   private
 
   sig { returns T::Array[Symbol] }
