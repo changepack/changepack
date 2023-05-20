@@ -7,29 +7,32 @@ Rails.application.routes.draw do
   }
 
   constraints Domain do
-    root to: 'accounts#show', as: :domain
-    get ':id', to: 'changelogs#show', as: :domain_changelog
-    resources :posts, only: [:show]
+    scope as: :domain do
+      root to: 'accounts#show'
+
+      resources :posts, only: :show
+      resources :changelogs, only: :show, path: ''
+    end
   end
 
   namespace :api do
     namespace :v1 do
-      resources :posts, only: [:create]
+      resources :posts, only: :create
     end
   end
 
   authenticate do
     root 'accounts#index'
 
-    resources :accounts, only: [:index]
+    resources :accounts, only: :index
 
-    resources :posts, except: [:show] do
+    resources :posts, except: :show do
       member do
         get :confirm_destroy
       end
     end
 
-    resources :sources, only: [:index]
+    resources :sources, only: :index
     resources :repositories, only: [:update, :destroy] do
       member do
         get :confirm_destroy
@@ -44,7 +47,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :posts, only: [:show]
+  get 'posts/:id', to: 'posts#show', as: :deprecated_post
 
   mount Sidekiq::Web => 'sidekiq'
 
@@ -60,6 +63,10 @@ Rails.application.routes.draw do
 
   # Both a public and a private URL to your changelog.
   # Has to be at the end so that all other routes are matched first.
-  get ':id', to: 'accounts#show', as: :account
-  get ':account_id/:id', to: 'changelogs#show', as: :changelog
+  scope path: ':account_id', as: :account do
+    root 'accounts#show', as: ''
+
+    resources :posts, only: :show
+    resources :changelogs, only: :show, path: ''
+  end
 end

@@ -18,7 +18,7 @@ module I
     end
 
     def url
-      helpers.post_path(update.post) if update.disabled?(post)
+      helpers.scoped_post_path(update.post) if update.disabled?(post)
     end
   end
 end

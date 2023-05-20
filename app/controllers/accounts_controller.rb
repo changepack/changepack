@@ -39,4 +39,9 @@ class AccountsController < ApplicationController
                       .with_rich_text_content_and_embeds
                       .includes(:user)
   end
+
+  sig { returns String }
+  def id
+    params.fetch(:account_id)
+  end
 end

@@ -25,4 +25,20 @@ module ApplicationHelper
   def brand(account)
     render 'accounts/brand', account:
   end
+
+  def scoped_post_path(post)
+    if request.subdomain.present?
+      domain_post_path(post)
+    else
+      account_post_path(post.account, post)
+    end
+  end
+
+  def scoped_post_url(post)
+    if request.subdomain.present?
+      domain_post_url(post)
+    else
+      account_post_url(post.account, post)
+    end
+  end
 end

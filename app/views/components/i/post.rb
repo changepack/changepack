@@ -16,7 +16,7 @@ module I
 
       def wrapper(**attributes, &)
         if post.persisted?
-          a href: helpers.post_path(post), **attributes, &
+          a href: helpers.scoped_post_path(post), **attributes, &
         else
           div(**attributes, &)
         end
@@ -75,7 +75,7 @@ module I
       return if post.title.blank?
 
       h2 class: title_class, data: { test_id: 'post' } do
-        a href: post_path(post), data: { turbo_frame: '_top' } do
+        a href: helpers.scoped_post_path(post), data: { turbo_frame: '_top' } do
           span data: { test_id: 'post_button' } do
             plain post.title
           end
