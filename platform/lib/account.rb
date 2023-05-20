@@ -19,7 +19,7 @@ class Account < ApplicationRecord
   attribute :website, :string
 
   has_many :users, dependent: :destroy
-  has_many :api_keys, dependent: :destroy, class_name: 'API::Key'
+  has_many :api_keys, as: :bearer, class_name: 'API::Key', dependent: :destroy
 
   has_many :posts, dependent: :destroy
   has_many :updates, dependent: :destroy
@@ -45,8 +45,8 @@ class Account < ApplicationRecord
   end
 
   sig { returns T::Array[String] }
-  def emails
-    @emails ||= users.map(&:email)
+  def notifications
+    @notifications ||= users.map(&:email)
   end
 
   private

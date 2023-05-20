@@ -5,7 +5,7 @@ require 'faker'
 
 FactoryBot.define do
   factory :api_key, class: 'API::Key' do
-    account
+    association :bearer, factory: :account
   end
 
   factory :forbidden do

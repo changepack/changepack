@@ -14,8 +14,15 @@ describe Account do
   it { is_expected.to have_many(:issues).dependent(:destroy) }
   it { is_expected.to have_many(:changelogs).dependent(:destroy) }
   it { is_expected.to have_many(:access_tokens).dependent(:destroy) }
+  it { is_expected.to have_one_attached(:picture) }
 
-  it { is_expected.to validate_uniqueness_of(:domain) }
+  it { is_expected.to allow_value('example.com').for(:domain) }
+
+  context 'when the domain is valid' do
+    subject { build(:account, domain: 'example.com') }
+
+    it { is_expected.to validate_uniqueness_of(:domain) }
+  end
 
   it 'is created when a user signs up' do
     expect { create(:user) }.to change(described_class, :count).by(1)

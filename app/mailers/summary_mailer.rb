@@ -5,6 +5,6 @@ class SummaryMailer < ApplicationMailer
   def notify
     @post = params[:post]
 
-    mail(to: @post.account.emails, subject: @post.title)
+    mail(to: @post.account.notifications, subject: @post.title)
   end
 end

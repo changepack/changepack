@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_20_011850) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_20_133010) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -78,12 +78,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_20_011850) do
   end
 
   create_table "api_keys", id: :string, force: :cascade do |t|
-    t.string "account_id", null: false
     t.string "token", null: false
     t.datetime "last_used_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_api_keys_on_account_id"
+    t.string "bearer_type"
+    t.string "bearer_id"
+    t.index ["bearer_type", "bearer_id"], name: "index_api_keys_on_bearer"
     t.index ["token"], name: "index_api_keys_on_token", unique: true
   end
 
@@ -338,7 +339,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_20_011850) do
   add_foreign_key "access_tokens", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "api_keys", "accounts"
   add_foreign_key "changelogs", "accounts"
   add_foreign_key "commits", "accounts"
   add_foreign_key "commits", "repositories"
