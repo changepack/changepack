@@ -1,4 +1,6 @@
 ![CI](https://github.com/changepack/changepack/actions/workflows/ci.yml/badge.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/6fcca30f3ba6843848db/maintainability)](https://codeclimate.com/github/changepack/changepack/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/6fcca30f3ba6843848db/test_coverage)](https://codeclimate.com/github/changepack/changepack/test_coverage)
 
 Changepack is an open-source changelog for your product. Share updates about new features with your customers and keep people in the loop!
 

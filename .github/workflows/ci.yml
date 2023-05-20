@@ -1,4 +1,4 @@
-name: Continuous integration
+name: build
 on: push
 env:
   DATABASE_URL: postgresql://rails_github_actions:postgres@localhost:5432/changepack_test
@@ -6,6 +6,7 @@ env:
   CI: true
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+  CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 jobs:
   verify:
     name: Build
@@ -39,7 +40,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
+          sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev lsof
           gem install bundler
           bundle install --jobs 4 --retry 3
           cp config/application.yml.example config/application.yml
@@ -50,9 +51,11 @@ jobs:
       - name: Run slim-lint
         run: bundle exec slim-lint app/views
       - name: Setup test database
-        run: rails db:create db:migrate
+        run: rails db:schema:load
       - name: Run RSpec
         run: bundle exec rspec
+      - name: Compile assets
+        run: rails assets:precompile
       - name: Run Cypress
         uses: cypress-io/github-action@v5
         env:
@@ -61,6 +64,14 @@ jobs:
           start: bundle exec rails server -e test -p 5017
           wait-on: 'http://localhost:5017'
           browser: chrome
-          headless: true
           project: ./spec
           config-file: cypress.config.js
+      - name: Kill Puma to generate Cypress coverage
+        run: pkill -f puma
+      - name: Publish code coverage
+        uses: paambaati/codeclimate-action@v4.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: bundle exec rails coverage:report
+          coverageLocations: ${{ github.workspace }}/coverage/coverage.json:simplecov

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-rm -rf coverage/.resultset.json
+rm -rf coverage
 bundle exec rspec
 bin/cypress
 bundle exec rails coverage:report

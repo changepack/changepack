@@ -8,20 +8,10 @@ if defined?(CypressOnRails)
     c.logger = Rails.logger
   end
 
-  # # if you compile your asssets on CI
-  # if ENV['CYPRESS'].present? && ENV['CI'].present?
-  #  Rails.application.configure do
-  #    config.assets.compile = false
-  #    config.assets.unknown_asset_fallback = false
-  #  end
-  # end
-end
-
-if ENV['CYPRESS'].present?
-  require 'simplecov'
-
-  SimpleCov.start 'rails' do
-    coverage_dir 'coverage/cypress'.to_s
-    formatter SimpleCov::Formatter::SimpleFormatter
+  if ENV['CYPRESS'].present? && ENV['CI'].present?
+   Rails.application.configure do
+     config.assets.compile = false
+     config.assets.unknown_asset_fallback = false
+   end
   end
 end

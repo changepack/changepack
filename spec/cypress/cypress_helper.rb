@@ -3,6 +3,12 @@
 
 # This is loaded once before the first command is executed
 
+require 'simplecov'
+SimpleCov.start 'rails' do
+  coverage_dir 'coverage/cypress'
+  formatter SimpleCov::Formatter::SimpleFormatter
+end
+
 begin
   require 'database_cleaner-active_record'
 rescue LoadError => e

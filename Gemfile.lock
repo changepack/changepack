@@ -718,6 +718,7 @@ DEPENDENCIES
   sidekiq
   sidekiq-cron
   simplecov
+  simplecov_json_formatter
   slim-rails
   slim_lint
   sorbet-rails

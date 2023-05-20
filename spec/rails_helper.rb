@@ -3,7 +3,7 @@
 
 require 'simplecov'
 SimpleCov.start 'rails' do
-  coverage_dir 'coverage/rspec'.to_s
+  coverage_dir 'coverage/rspec'
   formatter SimpleCov::Formatter::SimpleFormatter
 end
 

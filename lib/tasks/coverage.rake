@@ -6,7 +6,8 @@ namespace :coverage do
       formatter SimpleCov::Formatter::MultiFormatter.new(
         [
           SimpleCov::Formatter::SimpleFormatter,
-          SimpleCov::Formatter::HTMLFormatter
+          SimpleCov::Formatter::HTMLFormatter,
+          SimpleCov::Formatter::JSONFormatter
         ]
       )
     end

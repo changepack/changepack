@@ -87,6 +87,10 @@ group :development, :test do
   gem "shoulda-matchers"
 
   gem "mock_redis"
+
+  gem "simplecov", require: false
+
+  gem "simplecov_json_formatter"
 end
 
 group :development do
@@ -113,8 +117,6 @@ group :development do
 end
 
 group :test do
-  gem "simplecov", require: false
-
   gem "ruby_event_store-rspec"
 
   gem "climate_control"
