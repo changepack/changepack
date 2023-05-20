@@ -15,8 +15,7 @@ module API
     attribute :token, :string
     attribute :last_used_at, :datetime
 
-    belongs_to :bearer, polymorphic: true, optional: true
-    belongs_to :account
+    belongs_to :bearer, polymorphic: true
 
     validates :token, presence: true, uniqueness: true
     encrypts :token, deterministic: true

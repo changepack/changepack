@@ -102,6 +102,19 @@ section data-test-id="edit_user"
                     .text-xs.text-red-500.mt-2 = error_message
 
     = render I::Content.new do |content|
+      - content.sidebar do
+        .hidden.md:block
+          h3.text-base.font-semibold.leading-6 API
+          p.mt-1.text-sm.dimmed
+            ' Interact with Changepack programmatically
+
+      - content.article do
+        .fields.md:ml-12
+          .field
+            = label_tag :api_key, 'Your API key', class: 'label'
+            = text_field_tag :api_key, current_account.api_keys.pick(:token), disabled: true, class: 'input'
+
+    = render I::Content.new do |content|
       - content.article do
         .fields.md:ml-12
           .field
