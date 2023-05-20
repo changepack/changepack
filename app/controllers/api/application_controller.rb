@@ -57,7 +57,7 @@ module API
     def ensure_schema!
       return if self.class.schema.blank?
 
-      @validation_result = self.class.schema.new.call(params.permit!)
+      @validation_result = self.class.schema.new.call(params.permit!.to_h)
       return if @validation_result.success?
 
       render json: @validation_result.errors.to_json, status: :unprocessable_entity
