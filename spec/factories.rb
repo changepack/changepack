@@ -4,6 +4,10 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :api_key, class: 'API::Key' do
+    account
+  end
+
   factory :forbidden do
     association :source, :repository
     content { Faker::Internet.email }

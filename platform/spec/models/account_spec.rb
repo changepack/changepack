@@ -5,6 +5,7 @@ require 'rails_helper'
 
 describe Account do
   it { is_expected.to have_many(:users).dependent(:destroy) }
+  it { is_expected.to have_many(:api_keys).dependent(:destroy) }
   it { is_expected.to have_many(:posts).dependent(:destroy) }
   it { is_expected.to have_many(:commits).dependent(:destroy) }
   it { is_expected.to have_many(:repositories).dependent(:destroy) }

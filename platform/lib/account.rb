@@ -19,14 +19,17 @@ class Account < ApplicationRecord
   attribute :website, :string
 
   has_many :users, dependent: :destroy
+  has_many :api_keys, dependent: :destroy, class_name: 'API::Key'
+
   has_many :posts, dependent: :destroy
   has_many :updates, dependent: :destroy
+  has_many :changelogs, dependent: :destroy
+
+  has_many :access_tokens, dependent: :destroy
   has_many :repositories, dependent: :destroy
   has_many :commits, dependent: :destroy
   has_many :teams, dependent: :destroy
   has_many :issues, dependent: :destroy
-  has_many :changelogs, dependent: :destroy
-  has_many :access_tokens, dependent: :destroy
 
   has_one_attached :picture
 
@@ -38,6 +41,7 @@ class Account < ApplicationRecord
 
   after_create do
     changelogs << Changelog.new
+    api_keys << API::Key.new
   end
 
   sig { returns T::Array[String] }

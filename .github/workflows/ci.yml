@@ -5,6 +5,7 @@ env:
   RAILS_ENV: test
   CI: true
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+  RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 jobs:
   verify:
     name: Build
