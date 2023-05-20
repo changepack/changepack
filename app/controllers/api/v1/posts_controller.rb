@@ -4,11 +4,20 @@
 module API
   module V1
     class PostsController < API::ApplicationController
+      self.schema = Class.new(Dry::Validation::Contract) do
+        params do
+          required(:content).filled(:string)
+
+          optional(:title).filled(:string)
+          optional(:published).filled(:bool)
+        end
+      end
+
       def create
         publication = Publication.new(
-          account: current_bearer,
           post: Post.new,
-          **params.permit(:title, :content, :published)
+          account: current_bearer,
+          **validation_result.to_h
         ).tap(&:create)
 
         render json: publication.post, status: :created

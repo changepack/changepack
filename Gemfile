@@ -134,6 +134,8 @@ gem "statesman"
 
 gem "dry-initializer-rails"
 
+gem "dry-validation"
+
 gem "hashie"
 
 gem "after_commit_everywhere"
