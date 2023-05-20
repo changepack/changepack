@@ -37,7 +37,7 @@ module T
   Locals = T.type_alias { { locals: ::Hash } }
 
   def self.instance(__typed)
-    ar_type_value = Class.new(ActiveRecord::Type::Value) do
+    ar_type_value = ::Class.new(ActiveRecord::Type::Value) do
       attr_reader :__typed
 
       def initialize(__typed:, **opts)

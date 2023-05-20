@@ -5,11 +5,11 @@ require 'faker'
 
 FactoryBot.define do
   factory :api_key, class: 'API::Key' do
-    association :bearer, factory: :account
+    bearer factory: %i[account]
   end
 
   factory :forbidden do
-    association :source, :repository
+    source factory: %i[source repository]
     content { Faker::Internet.email }
     type { 'email' }
   end
@@ -24,7 +24,7 @@ FactoryBot.define do
   end
 
   factory :team do
-    account { create(:account) }
+    account
     name { Faker::App.name }
     providers { { 'linear' => SecureRandom.uuid } }
   end
@@ -36,14 +36,14 @@ FactoryBot.define do
       type { 'repository' }
       account { repository.account }
       repository
-      changelog { create(:changelog, account: repository.account) }
+      changelog { association :changelog, account: repository.account }
     end
 
     trait :team do
       type { 'team' }
       account { team.account }
       team
-      changelog { create(:changelog, account: team.account) }
+      changelog { association :changelog, account: team.account }
     end
   end
 
@@ -54,16 +54,16 @@ FactoryBot.define do
     trait :commit do
       type { 'commit' }
       account { commit.account }
-      source { create(:source, :repository, repository: commit.repository) }
-      changelog { create(:changelog, account: commit.account) }
+      source { association :source, :repository, repository: commit.repository }
+      changelog { association :changelog, account: commit.account }
       commit
     end
 
     trait :issue do
       type { 'issue' }
       account { issue.account }
-      source { create(:source, :team, team: issue.team) }
-      changelog { create(:changelog, account: issue.account) }
+      source { association :source, :team, team: issue.team }
+      changelog { association :changelog, account: issue.account }
       issue
     end
   end
@@ -98,7 +98,7 @@ FactoryBot.define do
   end
 
   factory :repository do
-    account { create(:account) }
+    account
     name { "#{Faker::App.name.downcase}/#{Faker::App.name.downcase}" }
     branch { 'main' }
     providers { { 'github' => SecureRandom.uuid } }
@@ -142,7 +142,7 @@ FactoryBot.define do
   factory :post do
     user
     account { user.account }
-    changelog { build(:changelog, account:) }
+    changelog { association :changelog, account: }
     title { Faker::Lorem.sentence }
     content { Faker::Lorem.paragraph }
   end
