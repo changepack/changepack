@@ -44,7 +44,11 @@ module I
       end
 
       def user
-        @user ||= post.user || helpers.current_user
+        @user ||= if post.new_record?
+                    helpers.current_user
+                  else
+                    post.user
+                  end
       end
     end
 

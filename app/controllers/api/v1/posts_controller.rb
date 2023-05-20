@@ -4,9 +4,14 @@
 module API
   module V1
     class PostsController < API::ApplicationController
-      def index
-        @pagy, @posts = pagy_array(Post.none)
-        render json: @posts
+      def create
+        publication = Publication.new(
+          account: current_bearer,
+          post: Post.new,
+          **params.permit(:title, :content, :published)
+        ).tap(&:create)
+
+        render json: publication.post, status: :created
       end
     end
   end
