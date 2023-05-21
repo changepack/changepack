@@ -23,7 +23,7 @@ module I
       def template
         a class: 'flex-shrink-0 flex items-center', href: changepack.website do
           img src: helpers.image_path(changepack.picture), class: 'inline h-7 w-7 rounded-full mr-2'
-          span class: 'hover:text-gray-800 text-m font-semibold' do
+          span class: 'hover:text-gray-800 text-lg font-semibold' do
             plain changepack.name
           end
         end
@@ -73,7 +73,9 @@ module I
         def md
           a href: helpers.edit_user_registration_path, class: 'ml-auto hidden md:inline', title: 'Settings' do
             div class: 'flex items-center' do
-              icon 'cog', **classes('text-gray-400 mr-2 p-2', account?: 'bg-orange-900 text-white rounded-full')
+              icon 'cog',
+                   **classes('text-gray-400 mr-2 p-2 rounded-full hover:bg-gray-200',
+                             account?: 'bg-orange-900 hover:bg-orange-900 text-white')
               render I::AccountPicture.new(account: helpers.current_account)
             end
           end

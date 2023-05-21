@@ -49,21 +49,15 @@ module I
           plain 'Changelog'
         end
 
-        h2 class: 'mt-8' do
-          title_text
+        h2 class: 'mt-8 dimmed' do
+          description
         end
-
-        account.description? && description
       end
     end
 
     def description
-      div class: 'mt-2 text-sm dimmed' do
-        plain account.description
-      end
-    end
+      return account.description if account.description?
 
-    def title_text
       plain 'New updates and improvements'
 
       return if account.name.blank?

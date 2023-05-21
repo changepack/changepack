@@ -33,7 +33,7 @@ module I
       def status
         case post.status
         when 'draft'
-          div class: 'mt-4' do
+          div class: 'mt-3' do
             tag { 'Draft' }
           end
         end
