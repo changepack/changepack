@@ -21,6 +21,7 @@ class ApplicationLayout < ApplicationView
       body do
         navigation
         content(&)
+        footer
       end
     end
   end
@@ -58,6 +59,7 @@ class ApplicationLayout < ApplicationView
         next if helpers.user_signed_out?
 
         nav.link_to 'Home', root_path, active: home?
+        nav.link_to 'Compose', new_post_path, active: compose?
         nav.link_to 'Connections', sources_path, active: sources?
       end
 
@@ -75,6 +77,10 @@ class ApplicationLayout < ApplicationView
     end
   end
 
+  def footer
+    render I::Footer.new
+  end
+
   def white_label
     @brand = Brand.new(
       name: helpers.content_for(:account_name),
@@ -84,11 +90,15 @@ class ApplicationLayout < ApplicationView
   end
 
   def home?
-    helpers.current_controller.in? %i[accounts posts]
+    helpers.current_controller.in? %i[accounts]
   end
 
   def sources?
     helpers.current_controller.in? %i[sources]
+  end
+
+  def compose?
+    helpers.current_controller.in? %i[posts]
   end
 
   def settings

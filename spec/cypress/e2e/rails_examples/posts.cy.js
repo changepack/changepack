@@ -9,7 +9,7 @@ describe('Posts', function() {
     cy.visit('/')
     cy.get('[data-test-id="post"]').should('not.exist')
 
-    cy.get('[data-test-id="new_post_button"]').click()
+    cy.get('[data-test-id="compose"]').click()
     cy.get('[data-test-id="new_post_page"]').should('have.length.gt', 0)
     cy.get('[data-test-id="title"]').type('Testing Changepack')
     cy.get('[data-test-id="content"]').type('We added Cypress to Changepack.')

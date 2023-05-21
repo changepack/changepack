@@ -1,6 +1,7 @@
 APP_NAME: 'Changepack'
 APP_HOST: 'localhost'
 APP_PORT: '3000'
+APP_SOURCE_CODE: 'https://github.com/changepack/changepack'
 GITHUB_KEY: ''
 GITHUB_SECRET: ''
 LINEAR_KEY: ''

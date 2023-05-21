@@ -3,17 +3,6 @@
 
 module I
   class Blog < ApplicationComponent
-    class Compose < ApplicationComponent
-      def template
-        div class: 'mt-4 md:mt-0' do
-          a href: new_post_path, class: 'button-1', data: { test_id: 'new_post_button' } do
-            icon 'plus', class: 'mr-2'
-            plain 'Compose'
-          end
-        end
-      end
-    end
-
     # You can pass a post or a collection of posts
     attribute :posts, T.nilable(T::Posts)
     attribute :post, T.nilable(::Post)
@@ -32,11 +21,9 @@ module I
 
     def template
       div class: 'block md:flex md:justify-between md:items-center' do
-        section class: 'md:w-1/2' do
+        section do
           title
         end
-
-        render Compose.new if helpers.allowed_to?(:create?, with: PostPolicy)
       end
 
       content
@@ -49,7 +36,7 @@ module I
           plain 'Changelog'
         end
 
-        h2 class: 'mt-8 dimmed' do
+        h2 class: 'mt-8 dimmed text-lg' do
           description
         end
       end
