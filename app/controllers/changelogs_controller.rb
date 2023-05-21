@@ -32,7 +32,7 @@ class ChangelogsController < ApplicationController
     Account.kept.friendly.find params.fetch(:account_id)
   end
 
-  sig { returns T::Posts }
+  sig { returns Post::RelationType }
   def posts
     @posts ||= changelog.posts
                         .for(current_user)

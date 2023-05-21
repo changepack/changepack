@@ -11,7 +11,7 @@ class SourcesController < ApplicationController
 
   private
 
-  sig { returns T::Sources }
+  sig { returns Source::RelationType }
   def collection
     authorized(Source.includes(:repository, :team).activity.kept)
   end

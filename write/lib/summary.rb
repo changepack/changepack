@@ -43,7 +43,7 @@ class Summary
                            .then { |id| Update.where(id:).pluck(:id) }
   end
 
-  sig { returns T::Updates }
+  sig { returns Update::RelationType }
   def collection
     @collection ||= changelog.updates
                              .where(post: nil)

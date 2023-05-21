@@ -30,7 +30,7 @@ class AccountsController < ApplicationController
     Account.kept.friendly.find(id)
   end
 
-  sig { returns T::Posts }
+  sig { returns Post::RelationType }
   def posts
     @posts ||= account.posts
                       .for(current_user)

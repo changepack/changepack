@@ -64,7 +64,7 @@ class PostsController < ApplicationController
     @post ||= Post.kept.friendly.find(id)
   end
 
-  sig { returns T::Updates }
+  sig { returns Update::RelationType }
   def updates
     @updates ||= current_account.updates
                                 .options(post)

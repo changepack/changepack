@@ -4,7 +4,7 @@
 module I
   class Blog < ApplicationComponent
     # You can pass a post or a collection of posts
-    attribute :posts, T.nilable(T::Posts)
+    attribute :posts, T.nilable(::Post::RelationType)
     attribute :post, T.nilable(::Post)
     # If not present, account will be inferred from the post
     attribute :account, T.nilable(Account)

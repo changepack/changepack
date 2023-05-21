@@ -20,14 +20,14 @@ class Sydney
 
   attribute :account, T.instance(Account)
 
-  sig { params(updates: T::Updates).returns T.nilable(String) }
+  sig { params(updates: Update::RelationType).returns T.nilable(String) }
   def hallucinate(updates)
     updates
       .pluck(:name)
       .then { |names| request('prompts.write', names) if names.any? }
   end
 
-  sig { params(updates: T::Updates).returns T.nilable(String) }
+  sig { params(updates: Update::RelationType).returns T.nilable(String) }
   def choose(updates)
     updates
       .pluck(:id, :name)
