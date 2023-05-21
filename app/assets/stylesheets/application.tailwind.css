@@ -108,7 +108,7 @@
   }
 
   .form .label {
-    @apply block mb-2 text-sm text-gray-600 cursor-pointer;
+    @apply block mb-2 text-sm text-gray-600 cursor-pointer font-medium;
   }
 
   .form .input {
