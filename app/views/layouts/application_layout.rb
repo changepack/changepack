@@ -19,9 +19,7 @@ class ApplicationLayout < ApplicationView
     html do
       head_tag(&)
       body do
-        navigation
-        content(&)
-        footer
+        page_container(&)
       end
     end
   end
@@ -51,6 +49,18 @@ class ApplicationLayout < ApplicationView
 
     csp_meta_tag
     csrf_meta_tags
+  end
+
+  def page_container(&)
+    div class: 'flex flex-col min-h-screen' do
+      div class: 'flex-grow' do
+        navigation
+        content(&)
+      end
+      div class: 'flex-none' do
+        footer
+      end
+    end
   end
 
   def navigation
