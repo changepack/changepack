@@ -36,7 +36,7 @@ module I
           plain 'Changelog'
         end
 
-        h2 class: 'mt-8 dimmed text-lg' do
+        h2 class: 'mt-8 dimmed text-md md:text-lg' do
           description
         end
       end
