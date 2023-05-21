@@ -6,8 +6,8 @@ class Team
     include ValueObject
 
     attribute :type, :string
-    attribute :required, :strings, default: []
-    attribute :properties, :hash, default: -> { {} }
+    attribute :required, :array_to_s, default: []
+    attribute :properties, :object, default: -> { {} }
 
     sig { params(value: T.any(Hash, String)).returns(T::Boolean) }
     def validate(value)

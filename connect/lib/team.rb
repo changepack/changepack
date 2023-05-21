@@ -1,10 +1,6 @@
 # typed: false
 # frozen_string_literal: true
 
-module T
-  Teams = T.type_alias { ::Team::RelationType }
-end
-
 class Team < ApplicationRecord
   include Events
   include Pull

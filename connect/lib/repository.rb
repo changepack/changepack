@@ -1,10 +1,6 @@
 # typed: false
 # frozen_string_literal: true
 
-module T
-  Repositories = T.type_alias { ::Repository::RelationType }
-end
-
 class Repository < ApplicationRecord
   include Events
   include Pull

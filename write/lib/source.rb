@@ -1,10 +1,6 @@
 # typed: false
 # frozen_string_literal: true
 
-module T
-  Sources = T.type_alias { ::Source::RelationType }
-end
-
 class Source < ApplicationRecord
   include Forbid
   include Active

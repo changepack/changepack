@@ -1,10 +1,6 @@
 # typed: false
 # frozen_string_literal: true
 
-module T
-  Commits = T.type_alias { ::Commit::RelationType }
-end
-
 class Commit < ApplicationRecord
   include Events
   include Pull

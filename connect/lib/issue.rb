@@ -1,10 +1,6 @@
 # typed: false
 # frozen_string_literal: true
 
-module T
-  Issues = T.type_alias { ::Issue::RelationType }
-end
-
 class Issue < ApplicationRecord
   include Events
   include Pull

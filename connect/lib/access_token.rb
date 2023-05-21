@@ -1,10 +1,6 @@
 # typed: false
 # frozen_string_literal: true
 
-module T
-  AccessTokens = T.type_alias { ::AccessToken::RelationType }
-end
-
 class AccessToken < ApplicationRecord
   key :tok
 

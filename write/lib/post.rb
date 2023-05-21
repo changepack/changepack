@@ -1,10 +1,6 @@
 # typed: false
 # frozen_string_literal: true
 
-module T
-  Posts = T.type_alias { ::Post::RelationType }
-end
-
 class Post < ApplicationRecord
   include Publish
   include Status

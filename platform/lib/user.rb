@@ -1,10 +1,6 @@
 # typed: false
 # frozen_string_literal: true
 
-module T
-  Users = T.type_alias { ::User::RelationType }
-end
-
 class User < ApplicationRecord
   include Registration
   include Tokenable

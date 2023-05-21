@@ -1,10 +1,6 @@
 # typed: false
 # frozen_string_literal: true
 
-module T
-  Changelogs = T.type_alias { ::Changelog::RelationType }
-end
-
 class Changelog < ApplicationRecord
   include Slug
 

@@ -1,10 +1,6 @@
 # typed: false
 # frozen_string_literal: true
 
-module T
-  Providers = T.type_alias { Array[::Provider] }
-end
-
 class Provider
   extend T::Helpers
   extend T::Sig

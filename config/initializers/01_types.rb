@@ -1,12 +1,12 @@
 class StringsType < ActiveRecord::Type::Value
   def type
-    :strings
+    :array_to_s
   end
 end
 
 class IntegersType < ActiveRecord::Type::Value
   def type
-    :integers
+    :array_to_i
   end
 
   def cast(values)
@@ -15,15 +15,15 @@ class IntegersType < ActiveRecord::Type::Value
   end
 end
 
-class HashType < ActiveRecord::Type::Value
+class ObjectType < ActiveRecord::Type::Value
   def type
-    :hash
+    :object
   end
 end
 
-ActiveModel::Type.register(:hash, HashType)
-ActiveModel::Type.register(:strings, StringsType)
-ActiveModel::Type.register(:integers, IntegersType)
+ActiveModel::Type.register(:object, ObjectType)
+ActiveModel::Type.register(:array_to_s, StringsType)
+ActiveModel::Type.register(:array_to_i, IntegersType)
 
 module T
   String = T.type_alias { ::String }
@@ -58,21 +58,6 @@ module T
     end
 
     ar_type_value.new(__typed:)
-  end
-
-  def self.const_missing(name)
-    model_name = name.to_s.singularize
-    type_name = "T::#{name}"
-
-    if const_defined?(model_name)
-      # This is a bit hacky, but we use standard Rails autoload to load
-      # the model and then `ActiveModel::T` automatically defines the
-      # associated type for it.
-      const_get(model_name)
-      return const_get(type_name) if const_defined?(type_name)
-    end
-
-    super(name)
   end
 
   class Struct

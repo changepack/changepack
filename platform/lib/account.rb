@@ -1,10 +1,6 @@
 # typed: false
 # frozen_string_literal: true
 
-module T
-  Accounts = T.type_alias { ::Account::RelationType }
-end
-
 class Account < ApplicationRecord
   include Domain
   include Slug

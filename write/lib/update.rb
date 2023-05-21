@@ -1,10 +1,6 @@
 # typed: false
 # frozen_string_literal: true
 
-module T
-  Updates = T.type_alias { ::Update::RelationType }
-end
-
 class Update < ApplicationRecord
   include Options
   include Forbid

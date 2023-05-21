@@ -1,12 +1,6 @@
 # typed: false
 # frozen_string_literal: true
 
-module T
-  module API
-    Keys = T.type_alias { ::API::Key::RelationType }
-  end
-end
-
 module API
   class Key < ApplicationRecord
     key :api

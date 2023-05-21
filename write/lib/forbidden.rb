@@ -1,10 +1,6 @@
 # typed: false
 # frozen_string_literal: true
 
-module T
-  Forbiddens = T.type_alias { ::Forbidden::RelationType }
-end
-
 class Forbidden < ApplicationRecord
   TYPES = %w[email].freeze
 

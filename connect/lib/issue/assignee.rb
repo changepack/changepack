@@ -7,7 +7,7 @@ class Issue
 
     attribute :name, :string
     attribute :email, :string
-    attribute :providers, :hash, default: -> { {} }
+    attribute :providers, :object, default: -> { {} }
 
     validates :name, presence: true
     validates :email, presence: true
