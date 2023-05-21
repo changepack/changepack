@@ -41,6 +41,7 @@ class Post < ApplicationRecord
     self.account ||= changelog.account
   end
 
+  sig { returns String }
   def description
     content.to_plain_text.truncate(140)
   end

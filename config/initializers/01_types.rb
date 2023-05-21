@@ -35,6 +35,8 @@ module T
   Payload = T.type_alias { T::Hash[T::Key, T.untyped] }
   Params = T.type_alias { T.any(::Hash, ActionController::Parameters) }
   Locals = T.type_alias { { locals: ::Hash } }
+  Bearer = T.type_alias { ::Account }
+  Bearers = T.type_alias { ::Account::RelationType }
 
   def self.instance(__typed)
     ar_type_value = ::Class.new(ActiveRecord::Type::Value) do

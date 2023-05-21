@@ -40,11 +40,13 @@ module API
 
     # Use this to raise an error and automatically respond with a 401 HTTP status
     # code when API key authentication fails
+    sig { returns T.nilable(T::Bearer) }
     def authenticate_bearer!
       @current_bearer = authenticate_or_request_with_http_token { |token, options| authenticator(token, options) }
     end
 
     # Use this for optional API key authentication
+    sig { returns T.nilable(T::Bearer) }
     def authenticate_bearer
       @current_bearer = authenticate_with_http_token { |token, options| authenticator(token, options) }
     end
@@ -63,6 +65,7 @@ module API
       render json: @validation_result.errors.to_json, status: :unprocessable_entity
     end
 
+    sig { params(http_token: String, _options: T::Hash[T::Key, T.untyped]).returns(T.nilable(T::Bearer)) }
     def authenticator(http_token, _options)
       @current_api_key = API::Key.find_by(token: http_token)
 
