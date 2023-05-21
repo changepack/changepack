@@ -4,7 +4,7 @@
 module I
   class Commit < ApplicationComponent
     class Message < ApplicationComponent
-      attribute :commit, T::Commit
+      attribute :commit, ::Commit
       attribute :url, T.nilable(String)
 
       def template
@@ -26,7 +26,7 @@ module I
       end
     end
 
-    attribute :commit, T::Commit
+    attribute :commit, ::Commit
     attribute :url, T.nilable(String)
 
     def template

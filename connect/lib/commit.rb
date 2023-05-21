@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 module T
-  Commit = T.type_alias { ::Commit }
   Commits = T.type_alias { ::Commit::RelationType }
 end
 

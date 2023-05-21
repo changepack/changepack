@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 module T
-  User = T.type_alias { ::User }
   Users = T.type_alias { ::User::RelationType }
 end
 

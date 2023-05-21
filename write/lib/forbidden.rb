@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 module T
-  Forbidden = T.type_alias { ::Forbidden }
   Forbiddens = T.type_alias { ::Forbidden::RelationType }
 end
 

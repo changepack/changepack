@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 module T
-  Source = T.type_alias { ::Source }
   Sources = T.type_alias { ::Source::RelationType }
 end
 

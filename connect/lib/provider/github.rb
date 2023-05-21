@@ -3,7 +3,7 @@
 
 class Provider
   class GitHub < Provider
-    Cursor = T.type_alias { T.nilable(T::Integer) }
+    Cursor = T.type_alias { T.nilable(Integer) }
 
     sig { override.params(after: Cursor).returns(Results) }
     def repositories(after: nil)

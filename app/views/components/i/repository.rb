@@ -3,7 +3,7 @@
 
 module I
   class Repository < ApplicationComponent
-    attribute :repository, T::Repository
+    attribute :repository, ::Repository
 
     def template
       wrapper do

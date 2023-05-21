@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 module T
-  Post = T.type_alias { ::Post }
   Posts = T.type_alias { ::Post::RelationType }
 end
 

@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 module T
-  Update = T.type_alias { ::Update }
   Updates = T.type_alias { ::Update::RelationType }
 end
 

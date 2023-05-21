@@ -3,7 +3,7 @@
 
 module I
   class Team < ApplicationComponent
-    attribute :team, T::Team
+    attribute :team, ::Team
 
     def template
       wrapper do

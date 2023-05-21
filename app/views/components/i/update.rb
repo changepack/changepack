@@ -3,7 +3,7 @@
 
 module I
   class Update < ApplicationComponent
-    attribute :update, T::Update
+    attribute :update, ::Update
     attribute :post, T.nilable(::Post)
 
     delegate :commit, :issue, to: :update

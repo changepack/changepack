@@ -6,7 +6,7 @@ module I
     attribute :name, T.nilable(String)
     attribute :label_value, T.nilable(String)
     attribute :checked, T.nilable(T::Boolean)
-    attribute :id, T::String, default: -> { 'toggle' }
+    attribute :id, String, default: -> { 'toggle' }
 
     sig { params(model: ApplicationRecord, attribute: T::Key).returns(T.self_type) }
     def self.with(model:, attribute:)

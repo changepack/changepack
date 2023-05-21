@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 module T
-  Changelog = T.type_alias { ::Changelog }
   Changelogs = T.type_alias { ::Changelog::RelationType }
 end
 

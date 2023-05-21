@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 module T
-  AccessToken = T.type_alias { ::AccessToken }
   AccessTokens = T.type_alias { ::AccessToken::RelationType }
 end
 

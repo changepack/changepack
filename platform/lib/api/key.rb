@@ -3,7 +3,6 @@
 
 module T
   module API
-    Key = T.type_alias { ::API::Key }
     Keys = T.type_alias { ::API::Key::RelationType }
   end
 end

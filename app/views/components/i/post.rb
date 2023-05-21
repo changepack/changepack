@@ -4,7 +4,7 @@
 module I
   class Post < ApplicationComponent
     class Metadata < ApplicationComponent
-      attribute :post, T::Post
+      attribute :post, ::Post
 
       def template
         wrapper class: 'dimmed text-sm', data: { turbo_frame: '_top' } do
@@ -52,7 +52,7 @@ module I
       end
     end
 
-    attribute :post, T::Post
+    attribute :post, ::Post
 
     def template
       render I::Content.new do |content|

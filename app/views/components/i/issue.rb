@@ -4,7 +4,7 @@
 module I
   class Issue < ApplicationComponent
     class Title < ApplicationComponent
-      attribute :issue, T::Issue
+      attribute :issue, ::Issue
       attribute :url, T.nilable(String)
 
       def template
@@ -26,7 +26,7 @@ module I
       end
     end
 
-    attribute :issue, T::Issue
+    attribute :issue, ::Issue
     attribute :url, T.nilable(String)
 
     def template

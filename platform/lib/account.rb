@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 module T
-  Account = T.type_alias { ::Account }
   Accounts = T.type_alias { ::Account::RelationType }
 end
 

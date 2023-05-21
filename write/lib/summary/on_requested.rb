@@ -5,7 +5,7 @@ class Summary
   class OnRequested < Handler
     on ::Summary::Requested
 
-    sig { override.returns T.nilable(T::Post) }
+    sig { override.returns T.nilable(Post) }
     def run
       Summary.new(changelog:).create if changelog.present?
     end

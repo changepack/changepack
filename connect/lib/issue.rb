@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 module T
-  Issue = T.type_alias { ::Issue }
   Issues = T.type_alias { ::Issue::RelationType }
 end
 

@@ -3,7 +3,7 @@
 
 module I
   class Source < ApplicationComponent
-    attribute :source, T::Source
+    attribute :source, ::Source
 
     delegate :repository, :team, to: :source
 

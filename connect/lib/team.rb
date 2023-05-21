@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 module T
-  Team = T.type_alias { ::Team }
   Teams = T.type_alias { ::Team::RelationType }
 end
 

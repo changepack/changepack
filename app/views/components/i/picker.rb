@@ -4,7 +4,7 @@
 module I
   class Picker < ApplicationComponent
     class Choice < ApplicationComponent
-      attribute :id, T::String
+      attribute :id, String
       attribute :opts, T::Array[T.any(T::Boolean, Hash)]
       attribute :attribute, T.any(Symbol, String)
       attribute :form, T.untyped
@@ -22,7 +22,7 @@ module I
 
     attr_reader :checkboxes
 
-    attribute :title, T::String
+    attribute :title, String
 
     def initialize(...)
       @checkboxes = []
