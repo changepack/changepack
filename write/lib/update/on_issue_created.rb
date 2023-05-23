@@ -5,12 +5,13 @@ class Update
   class OnIssueCreated < Handler
     on ::Issue::Created
 
-    delegate :account_id, :title, :assignee, :team_id, to: :event
+    delegate :account_id, :title, :assignee, :team_id, :issued_at, to: :event
     delegate :id, to: :event, prefix: :issue
 
     sig { override.returns Update }
     def run
       Update.create(
+        sourced_at: issued_at,
         type: :issue,
         name: title,
         account_id:,

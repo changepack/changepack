@@ -17,6 +17,7 @@ class Commit
         attribute :repository_id, String
         attribute :message, String
         attribute :author, Hash
+        attribute :commited_at, T::Time
       end
 
       sig { params(commit: Commit).returns Hash }
@@ -24,6 +25,7 @@ class Commit
         commit
           .as_json(only: %i[id account_id repository_id message author])
           .symbolize_keys
+          .merge(commited_at: commit.created_at)
       end
     end
 

@@ -15,7 +15,7 @@ class Update
               WHEN updates.post_id = '#{pt.id}' THEN 0
               ELSE 1
             END,
-            updates.created_at DESC
+            updates.sourced_at DESC
           SQL
         )
       },

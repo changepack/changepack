@@ -56,6 +56,7 @@ FactoryBot.define do
       account { commit.account }
       source { association :source, :repository, repository: commit.repository }
       changelog { association :changelog, account: commit.account }
+      sourced_at { commit.commited_at }
       commit
     end
 
@@ -64,6 +65,7 @@ FactoryBot.define do
       account { issue.account }
       source { association :source, :team, team: issue.team }
       changelog { association :changelog, account: issue.account }
+      sourced_at { issue.issued_at }
       issue
     end
   end

@@ -16,6 +16,7 @@ class Update < ApplicationRecord
   attribute :type, :string
   # We use tags for search or filtering
   attribute :tags, :string, array: true, default: []
+  attribute :sourced_at, :datetime
 
   belongs_to :account
   belongs_to :source
@@ -30,8 +31,11 @@ class Update < ApplicationRecord
 
   validates :name, presence: true
   validates :type, presence: true, inclusion: { in: TYPES }
+  validates :sourced_at, presence: true
   validates :commit_id, uniqueness: { scope: :account_id }, if: :commit_id?
   validates :issue_id, uniqueness: { scope: :account_id }, if: :issue_id?
+
+  scope :sorted, -> { order(sourced_at: :desc) }
 
   inquirer :type
 end
