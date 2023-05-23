@@ -42,6 +42,8 @@ module Changepack
     config.generators.orm :active_record, primary_key_type: :string
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.active_support.remove_deprecated_time_with_zone_name = true
   end
 
   def self.redis_ssl_verify_mode

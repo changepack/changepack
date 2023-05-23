@@ -7,7 +7,7 @@ class Summary
 
     sig { override.returns T.nilable(Post) }
     def run
-      Summary.new(changelog:).create if changelog.present?
+      Summary.new(changelog:).save if changelog.present?
     end
 
     sig { returns T.nilable(Changelog) }

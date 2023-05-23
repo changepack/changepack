@@ -29,7 +29,7 @@ module T
   String = T.type_alias { ::String }
   Symbol = T.type_alias { ::Symbol }
   Integer = T.type_alias { ::Integer }
-  Time = T.type_alias { T.any(::Time, DateTime, ActiveSupport::TimeWithZone) }
+  Time = T.type_alias { T.any(::Time, DateTime) }
   Key = T.type_alias { T.any(::String, ::Symbol) }
   Shape = T.type_alias { T::Hash[Key, Class] }
   Payload = T.type_alias { T::Hash[T::Key, T.untyped] }

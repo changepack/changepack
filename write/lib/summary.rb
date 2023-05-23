@@ -16,25 +16,34 @@ class Summary
 
   attribute :changelog, T.instance(Changelog)
 
-  sig { returns Post }
-  def create
-    new(changelog:).tap do |post|
-      next if updates.blank?
+  sig { returns T::Boolean }
+  def save
+    return false if updates.blank?
 
-      Publication.new(
-        account: changelog.account,
-        updates:,
-        title:,
-        post:
-      ).save
+    publication.save
+    after_commit { notify if post.valid? }
 
-      after_commit { SummaryMailer.with(post:).notify if post.valid? }
-    end
+    true
+  end
+
+  def notify
+    SummaryMailer.with(post:).notify
   end
 
   private
 
   delegate :account, to: :changelog
+  delegate :post, to: :publication
+
+  sig { returns Publication }
+  def publication
+    @publication ||= Publication.new(
+      account: changelog.account,
+      updates:,
+      title:,
+      post:
+    )
+  end
 
   sig { returns T::Array[T::String] }
   def updates
