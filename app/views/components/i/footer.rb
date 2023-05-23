@@ -18,9 +18,7 @@ module I
     end
 
     def wrapper(&)
-      footer(class: 'bg-gray-100') do
-        div(class: 'lg:container mx-auto p-4 py-6 lg:py-16', &)
-      end
+      footer(class: 'bg-gray-100') { div(class: 'lg:container mx-auto p-4 py-6 lg:py-16', &) }
     end
 
     def top
@@ -42,13 +40,11 @@ module I
     end
 
     def logotype
-      div(class: 'mb-6 md:mb-0') do
-        render I::Logotype.new(brand:)
-      end
+      div(class: 'mb-6 md:mb-0') { render I::Logotype.new(brand:) }
     end
 
     def menu # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-      div(class: classes('grid gap-8 sm:gap-24 ', company?: 'grid-cols-2 sm:grid-cols-2')) do
+      menu_wrapper do
         if company?
           div(class: 'text-sm') do
             h2(class: 'mb-3 font-medium') { 'Company' }
@@ -67,6 +63,16 @@ module I
             li(class: 'mb-3') { a(href: ENV.fetch('APP_SOURCE_CODE')) { 'GitHub' } }
           end
         end
+      end
+    end
+
+    # Can't use `classes` in `#menu` because Tailwind doesn't detect
+    # the conditional classes
+    def menu_wrapper(&)
+      if company?
+        div(class: 'grid gap-8 sm:gap-24 grid-cols-2 sm:grid-cols-2', &)
+      else
+        div(&)
       end
     end
 
