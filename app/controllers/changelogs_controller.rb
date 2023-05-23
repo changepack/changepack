@@ -6,7 +6,7 @@ class ChangelogsController < ApplicationController
   skip_verify_authorized only: :show
 
   delegate :account, to: :changelog
-  viewed_as :account
+  visited :account
 
   def show
     render locals: { account:, posts: }

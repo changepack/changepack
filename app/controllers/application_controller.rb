@@ -14,17 +14,17 @@ class ApplicationController < ActionController::Base
 
   helper_method :user_signed_out?
   helper_method :current_account
-  helper_method :viewed_account?
-  helper_method :viewed_account
+  helper_method :visited_account?
+  helper_method :visited_account
   helper_method :disallowed_to?
   helper_method :pagy_array
   helper_method :pagy
 
   layout -> { ApplicationLayout }
 
-  sig { params(viewer: T::Key).returns(T::Key) }
-  def self.viewed_as(viewer)
-    @_viewer = viewer
+  sig { params(visited: T::Key).returns(T::Key) }
+  def self.visited(visited)
+    @_visited = visited
   end
 
   private
@@ -40,15 +40,15 @@ class ApplicationController < ActionController::Base
   end
 
   sig { returns T.nilable(Account) }
-  def viewed_account
-    @viewed_account ||= self.class
-                            .instance_variable_get(:@_viewer)
-                            .then { |viewer| send(viewer) if viewer.present? }
+  def visited_account
+    @visited_account ||= self.class
+                             .instance_variable_get(:@_visited)
+                             .then { |visited| send(visited) if visited.present? }
   end
 
   sig { returns T::Boolean }
-  def viewed_account?
-    viewed_account.present? && viewed_account != current_account
+  def visited_account?
+    visited_account.present? && visited_account != current_account
   end
 
   sig { returns T.nilable(String) }

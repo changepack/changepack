@@ -100,7 +100,7 @@ class ApplicationLayout < ApplicationView
   end
 
   def skip_navigation?
-    helpers.user_signed_out? || helpers.viewed_account?
+    helpers.user_signed_out? || helpers.visited_account?
   end
 
   def home?

@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   skip_verify_authorized only: :show
 
   delegate :account, to: :post
-  viewed_as :account
+  visited :account
 
   def index
     authorize! and redirect_to current_account
