@@ -1,7 +1,7 @@
 - if current_account != account
   - content_for :account_name, account.name
   - content_for :account_website, account.website
-  - content_for :account_picture, url_for(account.decorate.thumb)
+  - content_for :account_picture, account.decorate.picture_url
 
   - content_for :title, account.name
   - content_for :description, account.description

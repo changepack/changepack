@@ -17,7 +17,7 @@ module I
 
     def picture
       if account.picture.present?
-        helpers.image_tag(account.decorate.thumb)
+        helpers.image_tag(account.decorate.picture)
       else
         svg class: 'h-full w-full text-gray-300', fill: 'currentColor', viewBox: '0 0 24 24' do
           path d: DEFAULT

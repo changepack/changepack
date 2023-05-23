@@ -4,7 +4,9 @@
 class ChangelogsController < ApplicationController
   skip_before_action :authenticate_user!, only: :show
   skip_verify_authorized only: :show
+
   delegate :account, to: :changelog
+  viewed_as :account
 
   def show
     render locals: { account:, posts: }

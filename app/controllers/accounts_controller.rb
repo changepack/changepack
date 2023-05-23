@@ -5,6 +5,8 @@ class AccountsController < ApplicationController
   skip_before_action :authenticate_user!, only: :show
   skip_verify_authorized only: :show
 
+  viewed_as :account
+
   def index
     authorize! and redirect_to current_account
   end

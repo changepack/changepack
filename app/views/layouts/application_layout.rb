@@ -66,7 +66,7 @@ class ApplicationLayout < ApplicationView
   def navigation
     header class: 'lg:container mx-auto' do
       navigation = I::Navigation.new(brand:) do |nav|
-        next if helpers.user_signed_out?
+        next if skip_navigation?
 
         nav.link_to 'Home', root_path, active: home?
         nav.link_to 'Compose', new_post_path, active: compose?
@@ -97,6 +97,10 @@ class ApplicationLayout < ApplicationView
       website: helpers.content_for(:account_website),
       picture: helpers.content_for(:account_picture)
     )
+  end
+
+  def skip_navigation?
+    helpers.user_signed_out? || helpers.viewed_account?
   end
 
   def home?

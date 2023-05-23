@@ -2,9 +2,13 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
-  skip_verify_authorized only: :show
   skip_before_action :authenticate_user!, only: :show
   before_action :set_new_post, only: %i[new create]
+
+  skip_verify_authorized only: :show
+
+  delegate :account, to: :post
+  viewed_as :account
 
   def index
     authorize! and redirect_to current_account
