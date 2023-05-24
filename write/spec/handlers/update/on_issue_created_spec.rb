@@ -28,6 +28,13 @@ class Update
       specify { expect(update.account_id).to eq issue.account_id }
       specify { expect(update.issue_id).to eq issue.id }
       specify { expect(update.name).to eq issue.title }
+      specify { expect(update.discarded?).to be true }
+
+      context 'when the issue is done' do
+        let(:issue) { create(:issue, done: true) }
+
+        specify { expect(update.discarded?).to be false }
+      end
     end
   end
 end

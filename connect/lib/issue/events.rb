@@ -18,12 +18,13 @@ class Issue
         attribute :title, String
         attribute :assignee, Hash
         attribute :issued_at, T::Time
+        attribute :done, T::Boolean
       end
 
       sig { params(issue: Issue).returns Hash }
       def self.to_event(issue)
         issue
-          .as_json(only: %i[id account_id team_id title assignee])
+          .as_json(only: %i[id account_id team_id title assignee done])
           .symbolize_keys
           .merge(issued_at: issue.created_at)
       end

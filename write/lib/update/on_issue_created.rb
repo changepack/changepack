@@ -5,12 +5,21 @@ class Update
   class OnIssueCreated < Handler
     on ::Issue::Created
 
-    delegate :account_id, :title, :assignee, :team_id, :issued_at, to: :event
+    delegate :account_id, :title, :assignee, :team_id, :issued_at, :done, to: :event
     delegate :id, to: :event, prefix: :issue
 
     sig { override.returns Update }
     def run
-      Update.create(
+      update = Update.create(attributes)
+      update.discard if in_progress?(update)
+      update
+    end
+
+    private
+
+    sig { returns T::Hash[T::Key, T.untyped] }
+    def attributes
+      {
         sourced_at: issued_at,
         type: :issue,
         name: title,
@@ -19,7 +28,12 @@ class Update
         issue_id:,
         source:,
         tags:
-      )
+      }
+    end
+
+    sig { params(update: Update).returns(T::Boolean) }
+    def in_progress?(update)
+      update.valid? && done.blank?
     end
 
     sig { returns T.nilable(Source) }

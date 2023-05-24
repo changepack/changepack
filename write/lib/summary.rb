@@ -58,6 +58,7 @@ class Summary
                              .where(post: nil)
                              .where(created_at: PERIOD.ago..)
                              .limit(ENOUGH)
+                             .kept
   end
 
   sig { returns String }
