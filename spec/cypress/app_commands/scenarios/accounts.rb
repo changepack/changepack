@@ -8,8 +8,8 @@ module Cypress
     def self.seed
       account = create(:account, slug: 'acc_test')
       user = create(:user, account:)
-      create(:post, account:, user:, status: :published, title: 'Published', slug: 'log_published')
-      create(:post, account:, user:, status: :draft, title: 'Draft')
+      create(:post, :published, account:, user:, title: 'Published', slug: 'log_published')
+      create(:post, account:, user:, title: 'Draft')
     end
   end
 end
