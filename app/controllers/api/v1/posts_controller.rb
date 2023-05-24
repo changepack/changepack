@@ -10,6 +10,7 @@ module API
 
           optional(:title).filled(:string)
           optional(:published).filled(:bool)
+          optional(:published_at).filled(:time)
         end
       end
 
@@ -17,10 +18,18 @@ module API
         publication = Publication.new(
           post: Post.new,
           account: current_bearer,
-          **validation_result.to_h
+          **validation_result.to_h.except(:published_at)
         ).tap(&:create)
 
+        publication.post.update!(published_at:) if published_at.present?
+
         render json: publication.post, status: :created
+      end
+
+      private
+
+      def published_at
+        validation_result[:published_at]
       end
     end
   end

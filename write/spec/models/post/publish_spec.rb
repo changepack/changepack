@@ -19,7 +19,7 @@ class Post
 
       context 'when reverting' do
         let(:publishable) { false }
-        let(:post) { create(:post, user:).tap { |c| c.transition_to!(:published) } }
+        let(:post) { create(:post, :published, user:) }
 
         it 'sets status back to draft' do
           expect { command }.to change(post, :status).from('published').to('draft')

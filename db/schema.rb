@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_23_203641) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_24_175002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -204,6 +204,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_203641) do
     t.string "slug"
     t.datetime "discarded_at"
     t.string "changelog_id", null: false
+    t.datetime "published_at"
     t.index ["account_id"], name: "index_posts_on_account_id"
     t.index ["changelog_id"], name: "index_posts_on_changelog_id"
     t.index ["discarded_at"], name: "index_posts_on_discarded_at"

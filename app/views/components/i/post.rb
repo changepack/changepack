@@ -40,7 +40,7 @@ module I
       end
 
       def created_at
-        post.created_at || Time.current
+        post.published_at || post.created_at || Time.current
       end
 
       def user

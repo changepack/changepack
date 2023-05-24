@@ -147,6 +147,12 @@ FactoryBot.define do
     changelog { association :changelog, account: }
     title { Faker::Lorem.sentence }
     content { Faker::Lorem.paragraph }
+
+    trait :published do
+      after(:create) do |post|
+        post.transition_to!(:published)
+      end
+    end
   end
 
   factory :post_transition do

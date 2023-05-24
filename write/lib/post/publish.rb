@@ -12,6 +12,9 @@ class Post
     abstract!
 
     included do
+      attribute :published_at, :datetime
+      validates :published_at, presence: true, if: :published?
+
       after_commit :detach, on: :update, if: :discarded_at_previously_changed?
     end
 
@@ -28,15 +31,19 @@ class Post
 
     sig { overridable.params(updates: Updates).void }
     def attach(updates)
-      account.updates
-             .where(id: updates)
-             .find_each { |update| update.update!(post: self) }
+      Update.transaction do
+        account.updates
+               .where(id: updates)
+               .find_each { |update| update.update!(post: self) }
+      end
     end
 
     sig { overridable.params(except: Updates).void }
     def detach(except: [])
-      updates.where.not(id: except)
-             .find_each { |update| update.update!(post_id: nil) }
+      Update.transaction do
+        updates.where.not(id: except)
+               .find_each { |update| update.update!(post_id: nil) }
+      end
     end
   end
 end
