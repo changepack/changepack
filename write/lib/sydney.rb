@@ -19,6 +19,8 @@ class Sydney
 
   extend T::Sig
 
+  Updates = T.type_alias { T::Array[String] }
+
   attribute :account, T.instance(Account)
   validates :account, presence: true
 
@@ -42,11 +44,11 @@ class Sydney
   delegate :name, to: :account, prefix: true
   delegate :description, to: :account, prefix: true
 
-  sig { params(prompt: String, updates: T::Array[String]).returns T.nilable(String) }
+  sig { params(prompt: String, updates: Updates).returns T.nilable(String) }
   def request(prompt, updates)
     client.chat(parameters: parameters(updates, prompt:))
           .dig('choices', 0, 'message', 'content')
-          .try(:strip)
+          .try(:squish)
   end
 
   sig { returns OpenAI::Client }
@@ -56,7 +58,7 @@ class Sydney
     )
   end
 
-  sig { params(updates: T::Array[String], prompt: String).returns(Hash) }
+  sig { params(updates: Updates, prompt: String).returns(Hash) }
   def parameters(updates, prompt:)
     {
       model: 'gpt-3.5-turbo',
@@ -65,15 +67,20 @@ class Sydney
     }
   end
 
-  sig { params(updates: T::Array[String], prompt: String).returns(String) }
+  sig { params(updates: Updates, prompt: String).returns(String) }
   def prompt(updates, prompt:)
     I18n.t(
-      prompt, account_name:, account_description:, audience:, updates: updates.join("\n")
+      prompt, account_name:, account_description:, audience:, updates: humanize(updates)
     )
+  end
+
+  sig { params(updates: Updates).returns(String) }
+  def humanize(updates)
+    updates.map { |update| "- #{update}" }.join("\n")
   end
 
   sig { returns String }
   def audience
-    @audience ||= I18n.t("audiences.#{account.changelogs.pick(:audience)}")
+    @audience ||= I18n.t("audiences.#{account.changelogs.pick(:audience)}").downcase
   end
 end

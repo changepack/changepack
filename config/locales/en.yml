@@ -1,31 +1,33 @@
 en:
   prompts:
     write: |
-      Write a changelog post for an app called %{account_name} based on the changes below.
-      %{account_description}
-      Intended audience: %{audience}
+      Please generate an HTML-formatted changelog for an application identified as %{account_name}. The necessary changes to report are mentioned below:
 
-      Don’t explain what the company does.
-      Do not mention the type of changes in the headings (like bug fixes or features.)
-      Do not suggest a title, it will be added by the user.
-      Your response should be informative, visual, logical and actionable.
-      You should avoid being vague, controversial, or off-topic.
-      You should always reference factual statements in your response.
-      If the changes below do not contain sufficient information to complete the article, use only facts you were provided with and do not add any information by yourself.
-      You mustn’t reply with content that violates copyrights.
-      Use HTML to format the result.
-
-      Here are the updates:
       %{updates}
+
+      Each update represents a distinct change and should be described in detail. Provide information based solely on these updates, without adding any extraneous details or speculating on missing information. While the changelog is intended for %{audience}, this information should not be explicitly mentioned or suggested in the changelog.
+
+      While generating the changelog:
+
+      - Start the introduction with varied phrasings instead of frequently using "Recent changes:". The introduction should identify a common theme if the changes are related, or highlight that it's a list of recent changes if they are not. If there's only one update, the introduction should focus on that change. Ensure the introduction is at least two sentences long and provides substantial context. End with a conclusion that is also at least two sentences long, both enclosed within HTML paragraph tags (<p>).
+      - Structure the changelog using HTML paragraph tags (<p>) for each update. Use lists (<ul>, <ol>) primarily if there are 7 or more updates. If there are less than 7 updates or a single update, use <h3> headings for each update, with the single update getting an in-depth exploration under multiple subheadings. Choose the appropriate formatting tool to enhance readability. Headings should never begin with a hyphen.
+      - Describe each update in the %{updates} list as a distinct change, elaborating in detail.
+      - Stay focused on the updates and ensure your text is informative, clear, and actionable.
+      - You may mention the company behind the app if it is directly relevant to the updates, but do not elaborate on what the company does unless it is necessary to understand the changes.
+      - Refrain from sharing personal opinions, discussing abstract concepts like life, existence, or sentience, and engaging in debates.
+      - Avoid classifying updates under specific headings such as bug fixes or features.
+      - Do not propose a title for the changelog, as this will be provided by the user.
+      - Ensure your content does not infringe on any copyrights.
+
+      Note: "%{account_description}" is a brief description of the account related to the app, but should not be used in the changelog itself.
     choose: |
-      Choose the most important changes that the customers should learn about for an app called %{account_name} based on the list below.
+      Choose the most important changes that %{account_name}’s customers should learn about based on the list you will be provided with.
       %{account_description}
       Intended audience: %{audience}
 
-      Don’t explain what the company does.
       List the updates using bullet points.
-      Keep the original names.
-      Explain why you think they’re important.
+      Keep the original names and IDs.
+      Think step-by-step and explain why you think they’re important.
       Mention the IDs of changes so that they can be extracted from the text easily.
 
       Here are the updates:

@@ -34,6 +34,7 @@ class Post
       Update.transaction do
         account.updates
                .where(id: updates)
+               .includes(:source)
                .find_each { |update| update.update!(post: self) }
       end
     end
@@ -42,6 +43,7 @@ class Post
     def detach(except: [])
       Update.transaction do
         updates.where.not(id: except)
+               .includes(:source)
                .find_each { |update| update.update!(post_id: nil) }
       end
     end
