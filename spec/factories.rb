@@ -68,6 +68,10 @@ FactoryBot.define do
       sourced_at { issue.issued_at }
       issue
     end
+
+    trait :production do
+      name { 'Use GPT-3 to write release notes faster and more easily' }
+    end
   end
 
   factory :access_token do
@@ -115,6 +119,13 @@ FactoryBot.define do
 
   factory :account do
     name { Faker::Company.name }
+
+    trait :production do
+      name { 'Changepack' }
+      description do
+        'Changepack is an open-source changelog for your product. Share updates about new features with your customers and keep people in the loop!' # rubocop:disable Layout/LineLength
+      end
+    end
   end
 
   factory :user do

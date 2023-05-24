@@ -15,10 +15,12 @@
 class Sydney
   include ActiveModel::Model
   include ActiveModel::Attributes
+  include ActiveModel::Validations
 
   extend T::Sig
 
   attribute :account, T.instance(Account)
+  validates :account, presence: true
 
   sig { params(updates: Update::RelationType).returns T.nilable(String) }
   def hallucinate(updates)
@@ -72,6 +74,6 @@ class Sydney
 
   sig { returns String }
   def audience
-    @audience ||= I18n.t("prompts.audiences.#{account.changelogs.pick(:audience)}")
+    @audience ||= I18n.t("audiences.#{account.changelogs.pick(:audience)}")
   end
 end

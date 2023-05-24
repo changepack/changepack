@@ -6,6 +6,7 @@ class Summary
 
   include ActiveModel::Model
   include ActiveModel::Attributes
+  include ActiveModel::Validations
 
   include AfterCommitEverywhere
 
@@ -16,9 +17,15 @@ class Summary
 
   attribute :changelog, T.instance(Changelog)
 
+  validates :changelog, presence: true
+  validates :updates, presence: true
+
+  delegate :account, to: :changelog
+  delegate :post, to: :publication
+
   sig { returns T::Boolean }
   def save
-    return false if updates.blank?
+    return false if invalid?
 
     publication.save
     after_commit { notify if post.valid? }
@@ -27,26 +34,25 @@ class Summary
   end
 
   def notify
-    SummaryMailer.with(post:).notify
+    SummaryMailer.with(post:).notify.deliver_later
   end
 
   private
-
-  delegate :account, to: :changelog
-  delegate :post, to: :publication
 
   sig { returns Publication }
   def publication
     @publication ||= Publication.new(
       account: changelog.account,
+      post: Post.new,
       updates:,
-      title:,
-      post:
+      title:
     )
   end
 
   sig { returns T::Array[T::String] }
   def updates
+    return [] if collection.blank?
+
     @updates ||= collection.then { |base| Sydney.new(account:).choose(base) }
                            .then { |choices| choices.scan(/upd_\w+/) }
                            .then { |id| Update.where(id:).pluck(:id) }
@@ -54,6 +60,8 @@ class Summary
 
   sig { returns Update::RelationType }
   def collection
+    return Update.none if changelog.blank?
+
     @collection ||= changelog.updates
                              .where(post: nil)
                              .where(created_at: PERIOD.ago..)

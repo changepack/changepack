@@ -4,6 +4,7 @@
 class Publication
   include ActiveModel::Model
   include ActiveModel::Attributes
+  include ActiveModel::Validations
 
   extend T::Sig
 
@@ -11,9 +12,11 @@ class Publication
   attribute :content, :string
   attribute :published, :boolean, default: false
   attribute :updates, array: true, default: -> { [] }
-  attribute :post, T.instance(Post)
+  attribute :post, T.instance(Post), default: -> { Post.new }
   attribute :account, T.instance(Account)
   attribute :user, T.instance(User)
+
+  validates :account, presence: true
 
   sig { returns T::Boolean }
   def save
@@ -34,13 +37,13 @@ class Publication
 
   sig { returns T.nilable(String) }
   def completion
-    if content.present? || updates.none?
-      content
-    else
-      Sydney.new(account:).hallucinate(
-        account.updates.where(id: updates)
-      )
-    end
+    @completion ||= if content.present? || updates.none?
+                      content
+                    else
+                      Sydney.new(account:).hallucinate(
+                        account.updates.where(id: updates)
+                      )
+                    end
   end
 
   sig { returns Changelog }

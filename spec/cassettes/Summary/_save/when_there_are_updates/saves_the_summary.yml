@@ -1,0 +1,190 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-3.5-turbo","messages":[{"role":"user","content":"Choose
+        the most important changes that the customers should learn about for an app
+        called Changepack based on the list below.\nChangepack is an open-source changelog
+        for your product. Share updates about new features with your customers and
+        keep people in the loop!\nIntended audience: Everyday users\n\nDon’t explain
+        what the company does.\nList the updates using bullet points.\nKeep the original
+        names.\nExplain why you think they’re important.\nMention the IDs of changes
+        so that they can be extracted from the text easily.\n\nHere are the updates:\n[ID:
+        upd_mj9Esq4bdtpY] Use GPT-3 to write release notes faster and more easily\n\n"}],"temperature":0.7}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 24 May 2023 20:24:43 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache, must-revalidate
+      Openai-Model:
+      - gpt-3.5-turbo-0301
+      Openai-Organization:
+      - user-us1icqkjutufgswcvfdqqmev
+      Openai-Processing-Ms:
+      - '6543'
+      Openai-Version:
+      - '2020-10-01'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Ratelimit-Limit-Requests:
+      - '3500'
+      X-Ratelimit-Limit-Tokens:
+      - '90000'
+      X-Ratelimit-Remaining-Requests:
+      - '3499'
+      X-Ratelimit-Remaining-Tokens:
+      - '89826'
+      X-Ratelimit-Reset-Requests:
+      - 17ms
+      X-Ratelimit-Reset-Tokens:
+      - 116ms
+      X-Request-Id:
+      - ec862b97937b5efe5c2a1308c832ecee
+      Cf-Cache-Status:
+      - DYNAMIC
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 7cc8435f3d3a3542-WAW
+      Alt-Svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"chatcmpl-7JpK91iuFQwdwxSwpNHW6FCmGwtfH","object":"chat.completion","created":1684959877,"model":"gpt-3.5-turbo-0301","usage":{"prompt_tokens":145,"completion_tokens":67,"total_tokens":212},"choices":[{"message":{"role":"assistant","content":"-
+        Update: Changepack now uses GPT-3 to write release notes\n- Importance: This
+        update will allow for faster and easier writing of release notes, which will
+        ultimately benefit both the company and the customers by keeping everyone
+        informed about new features and updates. [ID: upd_mj9Esq4bdtpY]"},"finish_reason":"stop","index":0}]}
+
+        '
+  recorded_at: Wed, 24 May 2023 20:24:43 GMT
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-3.5-turbo","messages":[{"role":"user","content":"Write
+        a changelog post for an app called Changepack based on the changes below.\nChangepack
+        is an open-source changelog for your product. Share updates about new features
+        with your customers and keep people in the loop!\nIntended audience: Everyday
+        users\n\nDon’t explain what the company does.\nDo not mention the type of
+        changes in the headings (like bug fixes or features.)\nDo not suggest a title,
+        it will be added by the user.\nYour response should be informative, visual,
+        logical and actionable.\nYou should avoid being vague, controversial, or off-topic.\nYou
+        should always reference factual statements in your response.\nIf the changes
+        below do not contain sufficient information to complete the article, use only
+        facts you were provided with and do not add any information by yourself.\nYou
+        mustn’t reply with content that violates copyrights.\nUse HTML to format the
+        result.\n\nHere are the updates:\nUse GPT-3 to write release notes faster
+        and more easily\n"}],"temperature":0.7}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 24 May 2023 20:25:15 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache, must-revalidate
+      Openai-Model:
+      - gpt-3.5-turbo-0301
+      Openai-Organization:
+      - user-us1icqkjutufgswcvfdqqmev
+      Openai-Processing-Ms:
+      - '31470'
+      Openai-Version:
+      - '2020-10-01'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Ratelimit-Limit-Requests:
+      - '3500'
+      X-Ratelimit-Limit-Tokens:
+      - '90000'
+      X-Ratelimit-Remaining-Requests:
+      - '3499'
+      X-Ratelimit-Remaining-Tokens:
+      - '89743'
+      X-Ratelimit-Reset-Requests:
+      - 17ms
+      X-Ratelimit-Reset-Tokens:
+      - 170ms
+      X-Request-Id:
+      - 91483b97ee95257c1354734127085a4e
+      Cf-Cache-Status:
+      - DYNAMIC
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 7cc8438a4b41352e-WAW
+      Alt-Svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"chatcmpl-7JpKGVjjltIuXve1Ko9r4scXAljsL","object":"chat.completion","created":1684959884,"model":"gpt-3.5-turbo-0301","usage":{"prompt_tokens":201,"completion_tokens":337,"total_tokens":538},"choices":[{"message":{"role":"assistant","content":"Changepack
+        is excited to announce that we have integrated GPT-3 technology into our app!
+        This means that writing release notes for your product is now faster and easier
+        than ever before. GPT-3 is a powerful language model that is capable of generating
+        human-like text. With this integration, you can now input your release notes
+        into Changepack and have them automatically generated for you. This will save
+        you time and effort, and ensure that your release notes are clear and concise.\n\nImproved
+        search functionality\nWe have also made some improvements to the search functionality
+        in Changepack. You can now search for specific keywords or phrases within
+        your changelogs. This will make it easier for you to find the information
+        you need quickly and efficiently. Additionally, we have added filters to the
+        search results, so you can refine your search even further.\n\nEnhanced user
+        interface\nWe have made some changes to the user interface in Changepack to
+        make it more user-friendly. We have added more visual cues, such as icons
+        and color-coding, to help you navigate the app more easily. We have also made
+        some changes to the layout of the app, to make it more intuitive and easy
+        to use.\n\nBug fixes\nAs always, we have fixed some bugs and made some performance
+        improvements to the app. This will ensure that Changepack runs smoothly and
+        efficiently, and that you can rely on it to keep track of your product updates.\n\nWe
+        hope you enjoy these updates to Changepack, and that they help you to keep
+        your customers in the loop about your product updates. If you have any feedback
+        or suggestions for future updates, please don''t hesitate to reach out to
+        us!"},"finish_reason":"stop","index":0}]}
+
+        '
+  recorded_at: Wed, 24 May 2023 20:25:15 GMT
+recorded_with: VCR 6.1.0
