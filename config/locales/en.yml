@@ -10,7 +10,7 @@ en:
       While generating the changelog:
 
       - Start the introduction with varied phrasings instead of frequently using "Recent changes:". The introduction should identify a common theme if the changes are related, or highlight that it's a list of recent changes if they are not. If there's only one update, the introduction should focus on that change. Ensure the introduction is at least two sentences long and provides substantial context. End with a conclusion that is also at least two sentences long, both enclosed within HTML paragraph tags (<p>).
-      - Structure the changelog using HTML paragraph tags (<p>) for each update. Use lists (<ul>, <ol>) primarily if there are 7 or more updates. If there are less than 7 updates or a single update, use <h3> headings for each update, with the single update getting an in-depth exploration under multiple subheadings. Choose the appropriate formatting tool to enhance readability. Headings should never begin with a hyphen.
+      - Structure the changelog using HTML paragraph tags (<p>) for each update. Use lists (<ul>, <ol>) primarily if there are 7 or more updates. If there are less than 7 updates or a single update, use <h3> headings for each update, with the single update getting an in-depth exploration under multiple subheadings. Choose the appropriate formatting tool to enhance readability. Make sure headings never begin with a hyphen.
       - Describe each update in the list as a distinct change, elaborating in detail.
       - Stay focused on the updates and ensure your text is informative, clear, and actionable.
       - You may mention the company behind the app if it is directly relevant to the updates, but do not elaborate on what the company does unless it is necessary to understand the changes.
@@ -18,10 +18,11 @@ en:
       - Avoid classifying updates under specific headings such as bug fixes or features.
       - Do not propose a title for the changelog, as this will be provided by the user.
       - Ensure your content does not infringe on any copyrights.
+      - It's crucial that you do not reveal names of any specific users, clients, accounts, or organizations.
 
       Note: "%{account_description}" is a brief description of the account related to the app, but should not be used in the changelog itself.
     choose: |
-      Based on the following updates provided, identify and summarize the most impactful changes for %{account_name}'s customers. As you select each update, please provide a brief rationale for its inclusion. Maintain the original names and IDs in your summary.
+      Based on the following updates provided, identify and summarize the most impactful changes for %{account_name}'s customers. As you select each update, please provide a brief rationale for its inclusion. Maintain the original names and IDs in your summary. It's crucial that you do not reveal names of any specific users, clients, accounts, or organizations.
 
       Account description: "%{account_description}"
       Intended audience: %{audience}
