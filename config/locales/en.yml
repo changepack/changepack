@@ -11,7 +11,7 @@ en:
 
       - Start the introduction with varied phrasings instead of frequently using "Recent changes:". The introduction should identify a common theme if the changes are related, or highlight that it's a list of recent changes if they are not. If there's only one update, the introduction should focus on that change. Ensure the introduction is at least two sentences long and provides substantial context. End with a conclusion that is also at least two sentences long, both enclosed within HTML paragraph tags (<p>).
       - Structure the changelog using HTML paragraph tags (<p>) for each update. Use lists (<ul>, <ol>) primarily if there are 7 or more updates. If there are less than 7 updates or a single update, use <h3> headings for each update, with the single update getting an in-depth exploration under multiple subheadings. Choose the appropriate formatting tool to enhance readability. Headings should never begin with a hyphen.
-      - Describe each update in the %{updates} list as a distinct change, elaborating in detail.
+      - Describe each update in the list as a distinct change, elaborating in detail.
       - Stay focused on the updates and ensure your text is informative, clear, and actionable.
       - You may mention the company behind the app if it is directly relevant to the updates, but do not elaborate on what the company does unless it is necessary to understand the changes.
       - Refrain from sharing personal opinions, discussing abstract concepts like life, existence, or sentience, and engaging in debates.
