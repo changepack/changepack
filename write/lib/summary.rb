@@ -54,7 +54,7 @@ class Summary
     return [] if collection.blank?
 
     @updates ||= collection.then { |base| Sydney.new(account:).choose(base) }
-                           .then { |choices| choices.scan(/upd_\w+/) }
+                           .then { |choices| choices.scan(/(upd_\w+)/).flatten }
                            .then { |id| Update.where(id:).pluck(:id) }
   end
 

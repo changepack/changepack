@@ -21,16 +21,14 @@ en:
 
       Note: "%{account_description}" is a brief description of the account related to the app, but should not be used in the changelog itself.
     choose: |
-      Choose the most important changes that %{account_name}’s customers should learn about based on the list you will be provided with.
-      %{account_description}
+      Based on the following updates provided, identify and summarize the most impactful changes for %{account_name}'s customers. As you select each update, please provide a brief rationale for its inclusion. Maintain the original names and IDs in your summary.
+
+      Account description: "%{account_description}"
       Intended audience: %{audience}
 
-      List the updates using bullet points.
-      Keep the original names and IDs.
-      Think step-by-step and explain why you think they’re important.
-      Mention the IDs of changes so that they can be extracted from the text easily.
+      Please list the updates in the following format: "ID: Update. Rationale: Reason for selection." Give priority to updates that have wide-reaching impacts, introduce new features, or significantly change the user experience.
 
-      Here are the updates:
+      Updates:
       %{updates}
     id: |
       [ID: %{id}] %{name}
