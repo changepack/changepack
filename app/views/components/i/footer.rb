@@ -18,7 +18,7 @@ module I
     end
 
     def wrapper(&)
-      footer(class: 'bg-gray-100') { div(class: 'lg:container mx-auto p-4 py-6 lg:py-16', &) }
+      footer(class: 'bg-gray-100') { div(class: 'lg:container mx-auto p-5 py-6 lg:py-16', &) }
     end
 
     def top
