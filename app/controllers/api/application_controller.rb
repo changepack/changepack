@@ -9,8 +9,7 @@ module API
 
     extend T::Sig
 
-    attr_reader :current_api_key
-    attr_reader :current_bearer
+    attr_reader :current_api_key, :current_bearer
     # Accessor for validation results hash
     attr_reader :validation_result
 
