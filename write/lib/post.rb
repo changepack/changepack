@@ -30,7 +30,11 @@ class Post < ApplicationRecord
   scope :for, ->(user) { where(user.blank? && { status: :published }) },
         sig: T.proc.params(user: T.nilable(User))
 
-  scope :recent, -> { order(created_at: :desc) }
+  scope :recent, lambda {
+    order(
+      Arel.sql('COALESCE(published_at, created_at) DESC')
+    )
+  }
 
   before_save do
     self.account ||= changelog.account
