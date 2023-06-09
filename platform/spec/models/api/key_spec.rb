@@ -4,7 +4,7 @@
 require 'rails_helper'
 
 RSpec.describe API::Key do
-  # it { is_expected.to belong_to(:bearer) }
+  it { is_expected.to belong_to(:bearer) }
 
   context 'when the API Key is created' do
     subject { build(:api_key) }
