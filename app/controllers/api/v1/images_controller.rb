@@ -5,7 +5,8 @@ module API
   module V1
     class ImagesController < API::ApplicationController
       def create
-        image = API::Image.new
+        image = API::Image.create
+
         if image.file.attach params[:file]
           render json: { url: url_for(image.file) }, status: :created
         else
