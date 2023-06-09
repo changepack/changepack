@@ -80,7 +80,7 @@ class ApplicationLayout < ApplicationView
   def content
     main class: 'lg:container mx-auto my-8 md:my-32 px-5' do
       helpers.flash.each do |type, message|
-        render I::Flash.new(type:) { plain message }
+        render I::Flash.new(type:, message:)
       end
 
       yield

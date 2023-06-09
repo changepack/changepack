@@ -4,10 +4,13 @@
 module I
   class Flash < ApplicationComponent
     attribute :type, T.nilable(T::Key)
+    attribute :message, String
 
-    def template(&)
+    def template
       div do
-        div class: "py-2 px-3 mb-10 font-medium rounded-lg inline-block #{color}", &
+        div class: "py-2 px-3 mb-10 font-medium rounded-lg inline-block #{color}" do
+          plain message
+        end
       end
     end
 
