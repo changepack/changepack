@@ -3,7 +3,7 @@
 
 require 'rails_helper'
 
-RSpec.describe API::Image, :vcr do
+RSpec.describe API::Image do
   let(:image) { build(:api_image) }
 
   it 'has a valid factory' do

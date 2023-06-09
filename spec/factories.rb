@@ -5,16 +5,9 @@ require 'faker'
 
 FactoryBot.define do
   factory :api_image, class: 'API::Image' do
-    after(:build) do |image|
-      file = Tempfile.new(['faker_placeholdit', '.png'])
-      file.binmode
-      file << Net::HTTP.get(URI(Faker::Placeholdit.image(size: '300x300', format: 'png')))
-      file.rewind
-
-      image.file.attach(
-        io: file,
-        filename: 'placeholder.png',
-        content_type: 'image/png'
+    file do
+      Rack::Test::UploadedFile.new(
+        Rails.root.join('spec/files/placeholder.png')
       )
     end
   end
