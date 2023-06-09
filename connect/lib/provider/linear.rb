@@ -80,7 +80,7 @@ class Provider
         {
           name: team.name,
           providers: { linear: team.id },
-          schema: schema(team)
+          schema: schema(team).deep_stringify_keys
         }
       end
 

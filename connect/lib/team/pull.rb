@@ -39,7 +39,7 @@ class Team
       Team
         .lock
         .find_or_initialize_by(account_id:, access_token:, providers:)
-        .tap { |rep| rep.update!(attributes) }
+        .tap { |team| team.update!(attributes) }
     end
 
     sig { overridable.returns T::Boolean }

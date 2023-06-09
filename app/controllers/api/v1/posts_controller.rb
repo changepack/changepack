@@ -22,6 +22,7 @@ module API
 
       private
 
+      sig { returns Publication }
       def publication
         @publication ||= Publication.new(
           post: Post.new,
@@ -30,12 +31,14 @@ module API
         )
       end
 
+      sig { returns T::Hash[Symbol, T.untyped] }
       def attributes
         validation_result.to_h
                          .except(:published_at)
                          .merge(published: published_at.present?)
       end
 
+      sig { returns T.nilable(T.any(T::Time, String)) }
       def published_at
         validation_result[:published_at]
       end
