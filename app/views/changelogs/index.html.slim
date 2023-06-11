@@ -13,14 +13,14 @@ section.overflow-x-auto
           col.w-96
         tr
           th.text-sm
-          th.text-sm.text-right Privacy
-          th.text-sm.text-right.pr-5 Audience
+          th.text-sm.text-right.hidden.md:table-cell Privacy
+          th.text-sm.text-right.hidden.md:table-cell.pr-5 Audience
 
       - changelogs.each do |changelog|
-        = render I::Box.new(cols: [96, 96, 96]) do
+        = render I::Box.new(cols: [96, 96, 96], data: { test_id: 'changelog' }) do
           td.text-base.font-medium.leading-none.pl-5.pr-2
             = changelog.name
-          td.text-sm.dimmed.text-right
+          td.text-sm.dimmed.text-right.hidden.md:table-cell
             = changelog.privacy.humanize
-          td.text-sm.dimmed.text-right.pr-5
+          td.text-sm.dimmed.text-right.hidden.md:table-cell.pr-5
             = t("audiences.#{changelog.audience}")
