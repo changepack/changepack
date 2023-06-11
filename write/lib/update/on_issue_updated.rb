@@ -8,7 +8,7 @@ class Update
     delegate :id, to: :event, prefix: :issue
     delegate :done, to: :event
 
-    sig { override.returns Update }
+    sig { override.returns T.nilable(Update) }
     def run
       update = Update.find_by(issue_id:)
       update.undiscard if done?(update)
@@ -17,7 +17,7 @@ class Update
 
     private
 
-    sig { params(update: Update).returns(T::Boolean) }
+    sig { params(update: T.nilable(Update)).returns(T::Boolean) }
     def done?(update)
       update&.discarded? && done.present?
     end
