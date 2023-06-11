@@ -33,12 +33,12 @@ class ChangelogsController < ApplicationController
     domain || friendly_id
   end
 
-  sig { returns T.nilable(Changelog) }
+  sig { returns T.nilable(Account) }
   def domain
     Account.find_by(domain: request.host)
   end
 
-  sig { returns Changelog }
+  sig { returns Account }
   def friendly_id
     Account.kept.friendly.find params.fetch(:account_id)
   end

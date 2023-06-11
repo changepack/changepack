@@ -19,7 +19,7 @@ section.overflow-x-auto
       - changelogs.each do |changelog|
         = render I::Box.new(cols: [96, 96, 96], data: { test_id: 'changelog' }) do
           td.text-base.font-medium.leading-none.pl-5.pr-2
-            = changelog.name
+            = link_to changelog.name, scoped_changelog_path(changelog)
           td.text-sm.dimmed.text-right.hidden.md:table-cell
             = changelog.privacy.humanize
           td.text-sm.dimmed.text-right.hidden.md:table-cell.pr-5
