@@ -51,11 +51,11 @@
     @apply label bg-[#FCEDB9] text-[#A82C2B];
   }
 
-  .source {
+  .box {
     @apply border-2 border-gray-100 rounded-lg;
   }
 
-  .source + .source {
+  .box + .box {
     @apply mt-4;
   }
 

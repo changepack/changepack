@@ -6,13 +6,22 @@ class ChangelogsController < ApplicationController
   skip_verify_authorized only: :show
 
   delegate :account, to: :changelog
-  visited :account
+  visited :account, only: :show
+
+  def index
+    authorize! and render locals: { changelogs: }
+  end
 
   def show
     render locals: { account:, posts: }
   end
 
   private
+
+  sig { returns Changelog::RelationType }
+  def changelogs
+    @changelogs ||= current_account.changelogs.kept
+  end
 
   sig { returns Changelog }
   def changelog

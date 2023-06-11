@@ -23,9 +23,9 @@ class ApplicationController < ActionController::Base
 
   layout -> { ApplicationLayout }
 
-  sig { params(visited: T::Key).returns(T::Key) }
-  def self.visited(visited)
-    @_visited = visited
+  sig { params(visited: T::Key, only: T.nilable(T::Key)).returns T::Array[T.nilable(T::Key)] }
+  def self.visited(visited, only: nil)
+    @_visited = [visited, only]
   end
 
   private
@@ -44,7 +44,12 @@ class ApplicationController < ActionController::Base
   def visited_account
     @visited_account ||= self.class
                              .instance_variable_get(:@_visited)
-                             .then { |visited| send(visited) if visited.present? }
+                             .then { |visited, only| send(visited) if visited.present? && only?(only) }
+  end
+
+  sig { params(only: T.nilable(T::Key)).returns(T::Boolean) }
+  def only?(only)
+    only.blank? || action_name.to_sym == only.to_sym
   end
 
   sig { returns T::Boolean }

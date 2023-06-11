@@ -6,20 +6,10 @@ module I
     attribute :team, ::Team
 
     def template
-      wrapper do
+      render I::Box do
         td { name }
         td { pulled }
         td { actions }
-      end
-    end
-
-    def wrapper(&)
-      div class: 'source', data: { test_id: 'team' } do
-        table class: 'w-full' do
-          tbody do
-            tr class: 'focus:outline-none h-16', &
-          end
-        end
       end
     end
 

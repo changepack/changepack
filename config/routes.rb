@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
     resources :accounts, only: :index
 
+    resources :changelogs, only: [:index, :show]
+
     resources :posts, except: :show do
       member do
         get :confirm_destroy
