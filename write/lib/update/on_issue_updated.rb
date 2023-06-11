@@ -19,7 +19,7 @@ class Update
 
     sig { params(update: T.nilable(Update)).returns(T::Boolean) }
     def done?(update)
-      update&.discarded? && done.present?
+      !!(update&.discarded? && done.present?)
     end
   end
 end
