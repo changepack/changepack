@@ -4,7 +4,7 @@
 module I
   class Flash < ApplicationComponent
     attribute :type, T.nilable(T::Key)
-    attribute :message, String
+    attribute :message, T.nilable(String)
 
     def template
       div do
