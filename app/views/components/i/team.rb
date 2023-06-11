@@ -6,7 +6,7 @@ module I
     attribute :team, ::Team
 
     def template
-      render I::Box do
+      render I::Box.new(data: { test_id: 'team' }) do
         td { name }
         td { pulled }
         td { actions }

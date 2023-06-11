@@ -6,7 +6,7 @@ module I
     attribute :repository, ::Repository
 
     def template
-      render I::Box do
+      render I::Box.new(data: { test_id: 'repository' }) do
         td { name }
         td { pulled }
         td { actions }

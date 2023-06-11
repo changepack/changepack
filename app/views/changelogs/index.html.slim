@@ -4,9 +4,23 @@
       h1.font-semibold.text-4xl Changelogs
 
 section.overflow-x-auto
-  .py-10.md:py-24
+  .py-10.md:py-18
     .md:-my-8
+      table.w-full.mb-2
+        colgroup
+          col.w-96
+          col.w-96
+          col.w-96
+        tr
+          th.text-sm
+          th.text-sm.text-right Privacy
+          th.text-sm.text-right.pr-5 Audience
+
       - changelogs.each do |changelog|
-        = render I::Box do
-          td
-            .text-base.font-medium.leading-none.ml-5.mr-2 = changelog.name
+        = render I::Box.new(cols: [96, 96, 96]) do
+          td.text-base.font-medium.leading-none.pl-5.pr-2
+            = changelog.name
+          td.text-sm.dimmed.text-right
+            = changelog.privacy.humanize
+          td.text-sm.dimmed.text-right.pr-5
+            = t("audiences.#{changelog.audience}")

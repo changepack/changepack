@@ -63,7 +63,7 @@ class ApplicationLayout < ApplicationView
     end
   end
 
-  def navigation
+  def navigation # rubocop:disable Metrics/AbcSize
     header class: 'lg:container mx-auto' do
       navigation = I::Navigation.new(brand:) do |nav|
         next if skip_navigation?
