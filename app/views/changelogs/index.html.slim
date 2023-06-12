@@ -17,7 +17,7 @@ section.overflow-x-auto
           th.text-sm.text-right.hidden.md:table-cell.pr-5 Audience
 
       - changelogs.each do |changelog|
-        = render I::Box.new(cols: [96, 72, 72], data: { test_id: 'changelog' }) do
+        = render I::Box.new(cols: %w[w-96 w-72' w-72], data: { test_id: 'changelog' }) do
           td.text-base.font-medium.leading-none.pl-5.pr-2
             = link_to changelog.name, scoped_changelog_path(changelog)
           td.text-sm.dimmed.text-right.hidden.md:table-cell

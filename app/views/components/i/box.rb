@@ -4,7 +4,7 @@
 module I
   class Box < ApplicationComponent
     attribute :data, T.nilable(Hash), default: -> { {} }
-    attribute :cols, T::Array[Integer], default: -> { [] }
+    attribute :cols, T::Array[T.any(Integer, String)], default: -> { [] }
 
     def template(&)
       div class: 'box', data: do
@@ -21,8 +21,8 @@ module I
       return if cols.blank?
 
       colgroup do
-        cols.each do |width|
-          col class: "w-#{width}"
+        cols.each do |klass|
+          col class: klass
         end
       end
     end

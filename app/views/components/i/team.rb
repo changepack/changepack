@@ -6,9 +6,9 @@ module I
     attribute :team, ::Team
 
     def template
-      render I::Box.new(data: { test_id: 'team' }) do
+      render I::Box.new(cols: %w[w-1/2 w-2/5 w-1/5], data: { test_id: 'team' }) do
         td { name }
-        td { pulled }
+        td(class: 'text-right pr-4') { pulled }
         td { actions }
       end
     end
