@@ -4,6 +4,12 @@
     - post.errors.full_messages_for(:title).each do |error_message|
       .text-xs.text-red-500.mt-2 = error_message
 
+  - if changelogs.count > 1
+    .my-5
+      = form.collection_select :changelog_id, changelogs, \
+        :id, :name, { include_blank: 'Select a changelog' }, \
+        class: 'input', required: true, data: { test_id: 'changelog' }
+
   .my-5
     = form.rich_text_area :content, class: post.content_field_class, data: { test_id: 'content' }, autofocus: true
     - post.errors.full_messages_for(:content).each do |error_message|

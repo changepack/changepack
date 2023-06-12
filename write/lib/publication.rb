@@ -12,6 +12,7 @@ class Publication
   attribute :content, :string
   attribute :published, :boolean, default: false
   attribute :updates, array: true, default: -> { [] }
+  attribute :changelog_id, :string
   attribute :post, T.instance(Post), default: -> { Post.new }
   attribute :account, T.instance(Account)
   attribute :user, T.instance(User)
@@ -48,6 +49,6 @@ class Publication
 
   sig { returns Changelog }
   def changelog
-    @changelog ||= account.changelogs.first!
+    @changelog ||= account.changelogs.find_by(id: changelog_id) || account.changelogs.first!
   end
 end

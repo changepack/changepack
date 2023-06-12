@@ -92,7 +92,11 @@ class PostsController < ApplicationController
   sig { returns T::Locals }
   def form
     {
-      locals: { post: post.decorate, updates: updates.decorate }
+      locals: {
+        post: post.decorate,
+        updates: updates.decorate,
+        changelogs: current_account.changelogs
+      }
     }
   end
 
