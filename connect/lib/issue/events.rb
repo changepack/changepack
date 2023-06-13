@@ -26,7 +26,7 @@ class Issue
         issue
           .as_json(only: %i[id account_id team_id title assignee done])
           .symbolize_keys
-          .merge(issued_at: issue.created_at)
+          .merge(issued_at: issue.issued_at) # Needed for type safety
       end
     end
 

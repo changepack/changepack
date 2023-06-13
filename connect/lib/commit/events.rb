@@ -25,7 +25,7 @@ class Commit
         commit
           .as_json(only: %i[id account_id repository_id message author])
           .symbolize_keys
-          .merge(commited_at: commit.created_at)
+          .merge(commited_at: commit.commited_at) # Needed for type safety
       end
     end
 
