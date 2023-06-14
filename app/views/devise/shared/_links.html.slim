@@ -18,17 +18,10 @@
 - if devise_mapping.omniauthable?
   p.text-center
     - resource_class.omniauth_providers.each_with_index do |provider, index|
-      - if index == 0
-        = button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", \
-                  omniauth_authorize_path(resource_name, provider),
-                  method: :post,
-                  data: { turbo: false },
-                  class: 'text-sm dimmed'
-      - else
-        = button_to "#{OmniAuth::Utils.camelize(provider)}", \
-                  omniauth_authorize_path(resource_name, provider),
-                  method: :post,
-                  data: { turbo: false },
-                  class: 'text-sm dimmed'
+      = button_to "#{index == 0 ? 'Sign in with ' : ''}#{OmniAuth::Utils.camelize(provider)}", \
+                omniauth_authorize_path(resource_name, provider),
+                method: :post,
+                data: { turbo: false },
+                class: 'text-sm dimmed'
       - unless index == resource_class.omniauth_providers.size - 1
         ' •
