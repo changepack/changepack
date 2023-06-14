@@ -22,6 +22,8 @@ class Post
     def publish(publishable)
       if publishable.present? && can_transition_to?(:published)
         transition_to!(:published)
+        # Trigger Post::Published event
+        Post::Published.new(post_id: self.id).trigger
       elsif publishable.blank? && can_transition_to?(:draft)
         transition_to!(:draft)
       end
@@ -49,3 +51,4 @@ class Post
     end
   end
 end
+```
