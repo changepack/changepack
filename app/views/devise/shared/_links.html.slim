@@ -16,12 +16,13 @@
   p.text-sm.text-center.dimmed
     = link_to 'Didn’t receive unlock instructions?', new_unlock_path(resource_name)
 - if devise_mapping.omniauthable?
-  p.text-center
+  .text-center
     - resource_class.omniauth_providers.each_with_index do |provider, index|
       = button_to "#{index.zero? ? 'Sign in with ' : ''}#{OmniAuth::Utils.camelize(provider)}", \
                 omniauth_authorize_path(resource_name, provider),
                 method: :post,
                 data: { turbo: false },
-                class: 'text-sm dimmed'
+                class: 'text-sm dimmed',
+                form_class: 'inline-block'
       - unless index == resource_class.omniauth_providers.size - 1
-        ' •
+        span.dimmed<> ·
