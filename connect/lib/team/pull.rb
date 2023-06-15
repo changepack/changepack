@@ -47,13 +47,13 @@ class Team
       Issue.pull(self)
     end
 
-    sig { overridable.returns T.nilable(Integer) }
+    sig { overridable.returns T.nilable(String) }
     def cursor
-      @cursor ||= issues.select { |issue| issue.issued_at > 1.month.ago }
-                        .sort_by(&:issued_at)
+      @cursor ||= issues.sort_by(&:issued_at)
                         .reverse
-                        .pick(:issued_at)
-                        .try(:to_i)
+                        .last(100)
+                        .last
+                        .try(:linear)
     end
 
     sig { overridable.returns Provider }

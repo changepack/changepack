@@ -1,7 +1,12 @@
-query($teamId: String!) {
+query($teamId: String!, $after: String) {
   team(id: $teamId) {
     id
-    issues {
+    issues(after: $after, first: 100) {
+      pageInfo {
+        startCursor
+        hasNextPage
+        endCursor
+      }
       nodes {
         id
         title

@@ -9,6 +9,7 @@ class Provider
   include ActiveModel::Attributes
 
   Results = T.type_alias { T::Array[Hash] }
+  Cursor = T.type_alias { T.nilable T.any(Integer, String) }
 
   attribute :access_token, T.instance(AccessToken)
 

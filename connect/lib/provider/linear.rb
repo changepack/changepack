@@ -3,28 +3,48 @@
 
 class Provider
   class Linear < Provider
+    Object = T.type_alias { GraphQL::Client::Schema::ObjectClass }
+    Objects = T.type_alias { T::Array[Object] }
+
     sig { override.returns(Results) }
     def teams
       client.query(parse(:teams), context:)
             .data
             .teams
             .nodes
-            .then { |teams| transform(teams) }
             .map { |team| Mapper.team(team) }
     end
 
-    sig { override.params(team: Team).returns(Results) }
-    def issues(team)
-      client.query(parse(:issues), variables: variables(team), context:)
-            .data
-            .team
-            .issues
-            .nodes
-            .then { |issues| transform(issues) }
-            .map { |issue| Mapper.issue(issue, team:) }
+    sig { override.params(team: Team, after: Cursor).returns(Results) }
+    def issues(team, after: nil)
+      issues = paginate do
+        client.query(parse(:issues), variables: variables(team, after), context:)
+      end
+
+      issues.map { |issue| Mapper.issue(issue, team:) }
     end
 
     private
+
+    sig { params(items: Objects).returns(Objects) }
+    def paginate(items: [])
+      query = yield
+      paginated_items = items.concat(query.data.team.issues.nodes)
+
+      if exhausted?(query)
+        paginated_items
+      else
+        paginate(items: paginated_items) do
+          variables = paginated_variables(query)
+          client.query(parse(:issues), variables:, context:)
+        end
+      end
+    end
+
+    sig { params(query: GraphQL::Client::Response).returns(T::Boolean) }
+    def exhausted?(query)
+      query.data.team.issues.page_info.has_next_page.blank?
+    end
 
     sig { params(query: Symbol).returns(GraphQL::Client::OperationDefinition) }
     def parse(query)
@@ -33,16 +53,17 @@ class Provider
       )
     end
 
-    sig { params(results: Results).returns(Results) }
-    def transform(results)
-      results.map(&:to_h)
-             .map { |result| result.deep_transform_keys { |key| key.to_s.underscore } }
-             .map { |result| Hashie::Mash.new(result) }
+    sig { params(team: Team, after: Cursor).returns(Hash) }
+    def variables(team, after = nil)
+      { teamId: team.linear, after: }.compact
     end
 
-    sig { params(team: Team).returns(Hash) }
-    def variables(team)
-      { teamId: team.linear }
+    sig { params(query: GraphQL::Client::Response).returns(Hash) }
+    def paginated_variables(query)
+      {
+        teamId: query.data.team.id,
+        after: query.data.team.issues.page_info.end_cursor
+      }
     end
 
     sig { override.returns(GraphQL::Client) }
@@ -75,7 +96,7 @@ class Provider
     class << self
       extend T::Sig
 
-      sig { params(team: Hash).returns(Hash) }
+      sig { params(team: Object).returns(Hash) }
       def team(team)
         {
           name: team.name,
@@ -84,7 +105,7 @@ class Provider
         }
       end
 
-      sig { params(team: Hash).returns(Hash) }
+      sig { params(team: Object).returns(Hash) }
       def schema(team)
         {
           done: {
@@ -97,7 +118,7 @@ class Provider
         }
       end
 
-      sig { params(issue: Hash, team: Team).returns(Hash) }
+      sig { params(issue: Object, team: Team).returns(Hash) }
       def issue(issue, team:)
         {
           title: issue.title,
@@ -108,16 +129,16 @@ class Provider
         )
       end
 
-      sig { params(issue: Hash, team: Team).returns(Hash) }
+      sig { params(issue: Object, team: Team).returns(Hash) }
       def completion(issue, team:)
         {
           assignee: assignee(issue),
           branch: issue.branch_name,
-          done: team.schema.done.validate(issue.state)
+          done: team.schema.done.validate(issue.state.to_h)
         }
       end
 
-      sig { params(issue: Hash).returns(Hash) }
+      sig { params(issue: Object).returns(Hash) }
       def meta(issue)
         {
           priority: issue.priority,
@@ -127,7 +148,7 @@ class Provider
         }
       end
 
-      sig { params(issue: Hash).returns(T.nilable(Hash)) }
+      sig { params(issue: Object).returns T.nilable(Hash) }
       def assignee(issue)
         return if issue.assignee.blank?
 

@@ -3,8 +3,6 @@
 
 class Provider
   class GitHub < Provider
-    Cursor = T.type_alias { T.nilable(Integer) }
-
     sig { override.params(after: Cursor).returns(Results) }
     def repositories(after: nil)
       repositories = paginate(after:) { client.repos }

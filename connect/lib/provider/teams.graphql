@@ -1,5 +1,5 @@
 query {
-  teams {
+  teams(first: 100) {
     nodes {
       id
       name
