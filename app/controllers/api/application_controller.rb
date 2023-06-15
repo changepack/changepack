@@ -22,6 +22,7 @@ module API
     # Make sure that request data meets schema requirements
     before_action :ensure_schema!
 
+    rescue_from ActionController::ParameterMissing, with: :render_unprocessable_entity_response
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
@@ -30,7 +31,8 @@ module API
     attr_writer :current_api_key, :current_bearer
 
     def render_unprocessable_entity_response(exception)
-      render json: exception.record.errors, status: :unprocessable_entity
+      json = exception.try(:record) ? exception.record.errors : exception.message
+      render json:, status: :unprocessable_entity
     end
 
     def render_not_found_response(exception)

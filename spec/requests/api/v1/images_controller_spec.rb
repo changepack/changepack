@@ -17,8 +17,8 @@ module API
       end
 
       it 'returns unprocessable entity status when no image is attached' do
-post api_v1_images_path, params: {}, headers
-        post api_v1_images_path, params: {}, headers: headers
+        post(api_v1_images_path, params: {}, headers:)
+
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
