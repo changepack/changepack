@@ -27,9 +27,7 @@ class Sydney
 
   sig { params(updates: Update::RelationType).returns T.nilable(String) }
   def hallucinate(updates)
-    updates
-      .pluck(:name)
-      .then { |names| request('prompts.write', names) if names.any? }
+    request 'prompts.write', updates.map(&:prompt)
   end
 
   sig { params(updates: Update::RelationType).returns T.nilable(String) }

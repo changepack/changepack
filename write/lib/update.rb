@@ -13,6 +13,9 @@ class Update < ApplicationRecord
   # filters, reports, or SQL queries, such as those used to scope paginated
   # commits and issues together, for instance.
   attribute :name, :string
+  # Context provides additional information about the update, such as the
+  # a long-form summary of changes introduced in the commit or issue
+  attribute :context, :string
   attribute :type, :string
   # We use tags for search or filtering
   attribute :tags, :string, array: true, default: []
@@ -38,4 +41,6 @@ class Update < ApplicationRecord
   scope :sorted, -> { order(sourced_at: :desc) }
 
   inquirer :type
+
+  def prompt = context || name
 end

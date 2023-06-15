@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_09_114653) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_15_195423) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -305,6 +305,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_09_114653) do
     t.string "issue_id"
     t.string "tags", default: [], null: false, array: true
     t.datetime "sourced_at", null: false
+    t.text "context"
     t.index ["account_id", "commit_id"], name: "index_updates_on_account_id_and_commit_id", unique: true
     t.index ["account_id"], name: "index_updates_on_account_id"
     t.index ["changelog_id"], name: "index_updates_on_changelog_id"
