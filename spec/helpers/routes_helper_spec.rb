@@ -1,6 +1,9 @@
+# typed: false
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe RoutesHelper, type: :helper do
+RSpec.describe RoutesHelper do
   let(:post) { create(:post) }
   let(:changelog) { create(:changelog) }
 
@@ -15,7 +18,8 @@ RSpec.describe RoutesHelper, type: :helper do
       expect(scoped_post_path(post)).to eq(account_post_path(post.account, post))
     end
   end
-describe '#scoped_post_url' do
+
+  describe '#scoped_post_url' do
     it 'returns domain post url when subdomain is present' do
       allow(request).to receive(:subdomain).and_return('subdomain')
       expect(scoped_post_url(post)).to eq(domain_post_url(post))
@@ -51,5 +55,3 @@ describe '#scoped_post_url' do
     end
   end
 end
-end
-```
