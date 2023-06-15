@@ -20,6 +20,13 @@ it 'tests another method' do
   expect(result).to eq('expected result')
 end
 # Repeat for the other methods
+it 'tests wrapper method' do
+  footer = described_class.new
+  result = footer.wrapper
+  expect(result).to eq('expected result')
+end
+# Repeat for the other methods
+end
 end
 end
 ```
