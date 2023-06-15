@@ -24,20 +24,31 @@ RSpec.describe DummyController, type: :controller do
   end
 
   describe '#confirm_update' do
+it 'authorizes the resource and renders the item' do
+  # Write your test here
+end
     # Write test for confirm_update
   end
 
   describe '#update' do
+it 'authorizes the resource, transitions it to active, and redirects to the correct path' do
+  # Write your test here
+end
     # Write test for update
   end
 
   describe '#confirm_destroy' do
+it 'authorizes the resource and renders the item' do
+  # Write your test here
+end
     # Write test for confirm_destroy
   end
 
   describe '#destroy' do
+it 'authorizes the resource, transitions it to inactive, and redirects to the correct path' do
+  # Write your test here
+end
     # Write test for destroy
   end
 end
 ```
-
