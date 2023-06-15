@@ -2,7 +2,8 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-
+RSpec.describe SourcesController do
+  include Devise::Test::ControllerHelpers
 RSpec.describe SourcesController do
   describe 'GET #index' do
     it 'authorizes the user' do
