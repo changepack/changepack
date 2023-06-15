@@ -22,7 +22,7 @@ class Issue
       def pull(team)
         transaction do
           team.app
-              .issues(team)
+              .issues(team, after: team.cursor)
               .each { |issue| Pull.upsert!(issue, team:) }
 
           team.update!(pulled_at: Time.current)
