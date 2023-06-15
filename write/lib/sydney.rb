@@ -21,6 +21,7 @@ class Sydney
 
   Updates = T.type_alias { T::Array[String] }
 
+  attribute :model, :string
   attribute :account, T.instance(Account)
   validates :account, presence: true
 
@@ -61,7 +62,7 @@ class Sydney
   sig { params(updates: Updates, prompt: String).returns(Hash) }
   def parameters(updates, prompt:)
     {
-      model: 'gpt-3.5-turbo',
+      model: model || ENV.fetch('OPENAI_MODEL', 'gpt-3.5-turbo'),
       messages: [{ role: 'user', content: prompt(updates, prompt:) }],
       temperature: 0.7
     }
