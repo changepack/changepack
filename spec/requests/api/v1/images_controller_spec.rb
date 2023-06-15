@@ -15,6 +15,11 @@ module API
 
         expect { post api_v1_images_path, params:, headers: }.to change(API::Image, :count).by(1)
       end
+
+      it 'returns unprocessable entity status when no image is attached' do
+        post api_v1_images_path, params: {}, headers: headers
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
     end
   end
 end
