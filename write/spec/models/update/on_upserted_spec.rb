@@ -32,21 +32,36 @@ RSpec.describe Update::OnUpserted do
 
   describe '#silence?' do
     context 'when update is blank' do
+it 'returns true' do
+  allow(update).to receive(:blank?).and_return(true)
+  expect(handler.silence?).to be true
+end
       # Test here
     end
 
     context 'when update is discarded' do
+it 'returns true' do
+  allow(update).to receive(:discarded?).and_return(true)
+  expect(handler.silence?).to be true
+end
       # Test here
     end
 
     context 'when update has a present context' do
+it 'returns true' do
+  allow(update).to receive_messages(context: double('Context', present?: true))
+  expect(handler.silence?).to be true
+end
       # Test here
     end
 
     context 'when update has a blank issue' do
+it 'returns true' do
+  allow(update).to receive_messages(issue: double('Issue', blank?: true))
+  expect(handler.silence?).to be true
+end
       # Test here
     end
   end
 end
 ```
-
