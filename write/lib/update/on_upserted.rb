@@ -18,7 +18,7 @@ class Update
 
     sig { params(update: T.nilable(Update)).returns(T::Boolean) }
     def silence?(update)
-      update.blank? || update.discarded? || update.context.present?
+      update.blank? || update.discarded? || update.context.present? || update.issue.blank?
     end
   end
 end
