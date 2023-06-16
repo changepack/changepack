@@ -5,10 +5,10 @@ class Update
   class OnUpserted < Handler
     on Update::Upserted
 
-    sig { override.returns Update }
+    sig { override.returns T::Boolean }
     def run
       update = Update.find_by(id: event.id)
-      return if silence?(update)
+      return false if silence?(update)
 
       context = Sydney.new(account: update.account).context(update)
       update.update!(context:)
