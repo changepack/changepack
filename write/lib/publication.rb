@@ -53,7 +53,7 @@ class Publication
 
     Sydney.new(
       update: account.updates.where(id: updates)
-    ).hallucinate
+    ).write
   end
 
   sig { returns T::Boolean }

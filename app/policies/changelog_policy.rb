@@ -3,8 +3,11 @@
 
 class ChangelogPolicy < ApplicationPolicy
   alias_rule :edit?, :destroy?, to: :update?
-  alias_rule :index?, to: :show?
   alias_rule :new?, to: :create?
+
+  def index?
+    user.present?
+  end
 
   def show?
     true

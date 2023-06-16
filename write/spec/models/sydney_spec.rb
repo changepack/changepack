@@ -17,8 +17,8 @@ RSpec.describe Sydney, :vcr do
 
     before { create_list(:update, 2, :commit, account:) }
 
-    describe '#hallucinate' do
-      subject(:result) { sydney.hallucinate }
+    describe '#write' do
+      subject(:result) { sydney.write }
 
       specify { expect(result).to be_a(String) }
     end

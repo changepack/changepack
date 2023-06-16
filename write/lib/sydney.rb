@@ -28,11 +28,11 @@ class Sydney
   validates :update, presence: true
 
   sig { returns Output }
-  def hallucinate
+  def write
     return if invalid?
 
     input = humanize updates.map(&:prompt)
-    content = prompt(:hallucinate, input)
+    content = prompt(:write, input)
     request(content)
   end
 
@@ -91,7 +91,7 @@ class Sydney
   sig { params(prompt: T::Key, input: String).returns(String) }
   def prompt(prompt, input)
     I18n.t(
-      prompt, account_name:, account_description:, audience:, updates: input
+      "prompts.#{prompt}", account_name:, account_description:, audience:, updates: input
     )
   end
 
