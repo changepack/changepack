@@ -44,7 +44,7 @@ class Sydney
     return if response.blank?
 
     matches = response.match(/<<START_SUMMARY>>(.*?)<<END_SUMMARY>>/m)
-    matches.to_a.second.strip
+    matches.to_a.second&.strip
   end
 
   private

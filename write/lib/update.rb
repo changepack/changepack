@@ -4,6 +4,7 @@
 class Update < ApplicationRecord
   include Options
   include Forbid
+  include Events
 
   TYPES = %w[commit issue].freeze
 
@@ -42,5 +43,20 @@ class Update < ApplicationRecord
 
   inquirer :type
 
+  after_commit :created!, on: :create
+  after_commit :updated!, on: :update
+
   def prompt = context || name
+
+  private
+
+  sig { returns String }
+  def created!
+    pub Upserted.new(id:)
+  end
+
+  sig { returns String }
+  def updated!
+    pub Upserted.new(id:)
+  end
 end
