@@ -68,10 +68,12 @@ jobs:
           config-file: cypress.config.js
       - name: Kill Puma to generate Cypress coverage
         run: pkill -f puma
-      - name: Publish code coverage
-        uses: paambaati/codeclimate-action@v4.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageCommand: bundle exec rails coverage:report
+- name: Publish code coverage
+  if: github.ref == 'refs/heads/main'
+  uses: paambaati/codeclimate-action@v4.0.0
+  env:
+    CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+  with:
+    coverageCommand: bundle exec rails coverage:report
+    coverageLocations: ${{ github.workspace }}/coverage/coverage.json:simplecov
           coverageLocations: ${{ github.workspace }}/coverage/coverage.json:simplecov
