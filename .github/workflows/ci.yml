@@ -59,7 +59,7 @@ jobs:
       - name: Run Cypress
         uses: cypress-io/github-action@v5
         env:
-          CYPRESS: true
+          CYPRESS: 1
         with:
           start: bundle exec rails server -e test -p 5017
           wait-on: 'http://localhost:5017'
@@ -67,7 +67,7 @@ jobs:
           project: ./spec
           config-file: cypress.config.js
       - name: Kill Puma to generate Cypress coverage
-        run: pkill -f puma
+        run: kill -2 `cat tmp/pids/server.pid`
       - name: Publish code coverage
         if: github.ref == 'refs/heads/main'
         uses: paambaati/codeclimate-action@v4.0.0
