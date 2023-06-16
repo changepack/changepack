@@ -19,28 +19,38 @@ class Sydney
 
   extend T::Sig
 
-  Updates = T.type_alias { T::Array[String] }
+  Input = T.type_alias { T::Array[String] }
+  Output = T.type_alias { T.nilable(String) }
 
   attribute :model, :string
-  attribute :account, T.instance(Account)
-  validates :account, presence: true
+  attribute :update, T.instance(T.type_alias { T.any(Update, Update::RelationType) })
 
-  sig { params(updates: Update::RelationType).returns T.nilable(String) }
-  def hallucinate(updates)
-    request 'prompts.write', updates.map(&:prompt)
+  validates :update, presence: true
+
+  sig { returns Output }
+  def hallucinate
+    return if invalid?
+
+    input = humanize updates.map(&:prompt)
+    content = prompt(:hallucinate, input)
+    request(content)
   end
 
-  sig { params(updates: Update::RelationType).returns T.nilable(String) }
-  def choose(updates)
-    updates
-      .pluck(:id, :name)
-      .map { |id, name| I18n.t('prompts.id', id:, name:) }
-      .then { |names| request('prompts.choose', names) if names.any? }
+  sig { returns Output }
+  def choose
+    return if invalid?
+
+    input = humanize updates.map(&:prompt)
+    content = prompt(:choose, input)
+    request(content)
   end
 
-  sig { params(update: Update).returns T.nilable(String) }
-  def context(update)
-    response = request 'prompts.context', [update.issue.description]
+  sig { returns Output }
+  def context
+    return if invalid?
+
+    content = prompt(:context, update.issue.description)
+    response = request(content)
     return if response.blank?
 
     matches = response.match(/<<START_SUMMARY>>(.*?)<<END_SUMMARY>>/m)
@@ -49,12 +59,15 @@ class Sydney
 
   private
 
+  delegate :account, to: :changelog
   delegate :name, to: :account, prefix: true
   delegate :description, to: :account, prefix: true
 
-  sig { params(prompt: String, updates: Updates).returns T.nilable(String) }
-  def request(prompt, updates)
-    client.chat(parameters: parameters(updates, prompt:))
+  alias updates update
+
+  sig { params(content: String).returns Output }
+  def request(content)
+    client.chat(parameters: parameters(content))
           .dig('choices', 0, 'message', 'content')
           .try(:squish)
   end
@@ -66,29 +79,34 @@ class Sydney
     )
   end
 
-  sig { params(updates: Updates, prompt: String).returns(Hash) }
-  def parameters(updates, prompt:)
+  sig { params(content: String).returns(Hash) }
+  def parameters(content)
     {
       model: model || ENV.fetch('OPENAI_MODEL', 'gpt-3.5-turbo'),
-      messages: [{ role: 'user', content: prompt(updates, prompt:) }],
+      messages: [{ role: 'user', content: }],
       temperature: 0.7
     }
   end
 
-  sig { params(updates: Updates, prompt: String).returns(String) }
-  def prompt(updates, prompt:)
+  sig { params(prompt: T::Key, input: String).returns(String) }
+  def prompt(prompt, input)
     I18n.t(
-      prompt, account_name:, account_description:, audience:, updates: humanize(updates)
+      prompt, account_name:, account_description:, audience:, updates: input
     )
   end
 
-  sig { params(updates: Updates).returns(String) }
+  sig { params(updates: Input).returns(String) }
   def humanize(updates)
     updates.map { |update| "- #{update}" }.join("\n")
   end
 
   sig { returns String }
   def audience
-    @audience ||= I18n.t("audiences.#{account.changelogs.pick(:audience)}").downcase
+    @audience ||= I18n.t("audiences.#{changelog.audience}").downcase
+  end
+
+  sig { returns Changelog }
+  def changelog
+    @changelog ||= update.is_a?(Update) ? update.changelog : updates.first.changelog
   end
 end

@@ -46,7 +46,14 @@ module T
       end
 
       def cast(value)
-        return value if value.is_a?(__typed)
+        if __typed.is_a?(T::Types::Base)
+          return value if eval?(value)
+        else
+          return value if value.is_a?(__typed)
+        end
+
+        raise ArgumentError, "Value must be an instance of #{__typed}"
+      rescue TypeError
         raise ArgumentError, "Value must be an instance of #{__typed}"
       end
 
@@ -55,6 +62,15 @@ module T
       # storing instances in the database.
       def serialize(value); end
       def deserialize(value); end
+
+      private
+
+      def eval?(value)
+        T.let(value, __typed)
+        true
+      rescue TypeError
+        false
+      end
     end
 
     ar_type_value.new(__typed:)

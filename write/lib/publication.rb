@@ -22,7 +22,7 @@ class Publication
   sig { returns T::Boolean }
   def save
     Post.transaction do
-      post.update(content: completion, title:, account:, user:, changelog:)
+      post.update(**to_post)
       post.publish(published)
       post.detach(except: updates)
       post.attach(updates)
@@ -36,15 +36,29 @@ class Publication
 
   private
 
+  sig { returns Hash }
+  def to_post
+    {
+      content: completion || content,
+      changelog:,
+      account:,
+      title:,
+      user:
+    }
+  end
+
   sig { returns T.nilable(String) }
   def completion
-    @completion ||= if content.present? || updates.none?
-                      content
-                    else
-                      Sydney.new(account:).hallucinate(
-                        account.updates.where(id: updates)
-                      )
-                    end
+    return if content?
+
+    Sydney.new(
+      update: account.updates.where(id: updates)
+    ).hallucinate
+  end
+
+  sig { returns T::Boolean }
+  def content?
+    content.present? || updates.blank?
   end
 
   sig { returns Changelog }

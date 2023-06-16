@@ -10,7 +10,7 @@ class Update
       update = Update.find_by(id: event.id)
       return false if silence?(update)
 
-      context = Sydney.new(account: update.account).context(update)
+      context = Sydney.new(update:).context
       update.update!(context:)
     end
 
