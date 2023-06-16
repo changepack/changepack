@@ -1,0 +1,12 @@
+= form_with(model: changelog, class: 'form contents') do |form|
+  .mb-5
+    = form.text_field :name, class: 'input', placeholder: 'Title', data: { test_id: 'title' }
+    - changelog.errors.full_messages_for(:title).each do |error_message|
+      .text-xs.text-red-500.mt-2 = error_message
+
+  .columns-2
+    .column
+      = form.button class: 'button-1', type: 'submit', data: { test_id: 'submit' } do
+        = icon 'save', class: 'mr-2'
+        | Save changelog
+      = link_to 'Cancel', changelogs_path, class: 'ml-2 button-3 hidden md:inline-block'

@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
     resources :accounts, only: :index
 
-    resources :changelogs, only: [:index, :show]
+    resources :changelogs, only: [:index, :show, :edit]
 
     resources :posts, except: :show do
       member do

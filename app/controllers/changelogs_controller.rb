@@ -16,6 +16,10 @@ class ChangelogsController < ApplicationController
     render locals: { account:, posts: }
   end
 
+  def edit
+    authorize! changelog and render form
+  end
+
   private
 
   sig { returns Changelog::RelationType }
@@ -25,7 +29,12 @@ class ChangelogsController < ApplicationController
 
   sig { returns Changelog }
   def changelog
-    @changelog ||= account.changelogs.kept.friendly.find(id)
+    @changelog ||= changelogs.friendly.find(id)
+  end
+
+  sig { returns Changelog }
+  def scoped
+    @scoped ||= account.changelogs.kept.friendly.find(id)
   end
 
   sig { returns Account }
@@ -45,11 +54,18 @@ class ChangelogsController < ApplicationController
 
   sig { returns Post::RelationType }
   def posts
-    @posts ||= changelog.posts
-                        .for(current_user)
-                        .kept
-                        .recent
-                        .with_rich_text_content_and_embeds
-                        .includes(:user)
+    @posts ||= scoped.posts
+                     .for(current_user)
+                     .kept
+                     .recent
+                     .with_rich_text_content_and_embeds
+                     .includes(:user)
+  end
+
+  sig { returns T::Locals }
+  def form
+    {
+      locals: { changelog: }
+    }
   end
 end

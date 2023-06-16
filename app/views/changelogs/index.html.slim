@@ -9,18 +9,22 @@ section.overflow-x-auto
       table.w-full.mb-2
         colgroup
           col.w-96
-          col.w-72
-          col.w-72
+          col.w-64
+          col.w-52
+          col.w-28
         tr
           th.text-sm
           th.text-sm.text-right.hidden.md:table-cell Privacy
-          th.text-sm.text-right.hidden.md:table-cell.pr-5 Audience
+          th.text-sm.text-right.hidden.md:table-cell Audience
+          th.pr-5
 
       - changelogs.each do |changelog|
-        = render I::Box.new(cols: %w[w-96 w-72' w-72], data: { test_id: 'changelog' }) do
+        = render I::Box.new(cols: %w[w-96 w-64 w-52 w-28], data: { test_id: 'changelog' }) do
           td.text-base.font-medium.leading-none.pl-5.pr-2
             = link_to changelog.name, scoped_changelog_path(changelog)
           td.text-sm.dimmed.text-right.hidden.md:table-cell
             = changelog.privacy.humanize
-          td.text-sm.dimmed.text-right.hidden.md:table-cell.pr-5
+          td.text-sm.dimmed.text-right.hidden.md:table-cell
             = t("audiences.#{changelog.audience}")
+          td.text-right.pr-5
+            = link_to 'Edit', edit_changelog_path(changelog), class: 'button-2'
