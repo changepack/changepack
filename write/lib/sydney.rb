@@ -38,6 +38,15 @@ class Sydney
       .then { |names| request('prompts.choose', names) if names.any? }
   end
 
+  sig { params(update: Update).returns T.nilable(String) }
+  def context(update)
+    response = request 'prompts.context', [update.issue.description]
+    return if response.blank?
+
+    matches = response.match(/<<START_SUMMARY>>(.*?)<<END_SUMMARY>>/m)
+    matches.to_a.second.strip
+  end
+
   private
 
   delegate :name, to: :account, prefix: true

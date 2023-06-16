@@ -31,6 +31,22 @@ en:
 
       Updates:
       %{updates}
+    context: |
+      As an AI language model, your assignment is to evaluate an outstanding task related to an application named %{account_name}. %{account_description}
+
+      The task's explanation is technical jargon and is geared toward the organization's in-house departments. It contains mentions of specific staff members and tools including feature management platforms like LaunchDarkly, customer messaging platforms like Intercom, user behavior analytics tools like FullStory, project management software like Jira, and others.
+
+      %{audience}
+
+      Your task has two aspects:
+
+      1. Assess the task, underlining parts that could be unclear to the target audience. Propose changes to enhance readability and improve understanding, while maintaining a professional yet accessible tone. Identify any mentions of specific staff members or proprietary tools including but not limited to feature management platforms like LaunchDarkly, customer messaging tools like Intercom, user behavior analytics platforms like FullStory, project management software like Jira, and others.
+
+      2. Craft a clear and succinct summary of this task. Enclose the summary within the `<<START_SUMMARY>>` and `<<END_SUMMARY>>` markers. This summary should not exceed 600 characters and should not include any reference to specific staff members or proprietary tools such as LaunchDarkly, Intercom, FullStory, Jira, and the likes. The objective is to convey the essential alterations and updates to the product. Remove all URLs, regardless of whether they are in HTML or Markdown format.
+
+      Now, please evaluate and summarize the following task:
+
+      %{updates}
     id: |
       [ID: %{id}] %{name}
   summary:

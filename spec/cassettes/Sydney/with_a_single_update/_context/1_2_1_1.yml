@@ -1,0 +1,122 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-3.5-turbo","messages":[{"role":"user","content":"As an
+        AI language model, your assignment is to evaluate an outstanding task related
+        to an application named Schneider Inc. \n\nThe task''s explanation is technical
+        jargon and is geared toward the organization''s in-house departments. It contains
+        mentions of specific staff members and tools including feature management
+        platforms like LaunchDarkly, customer messaging platforms like Intercom, user
+        behavior analytics tools like FullStory, project management software like
+        Jira, and others.\n\neveryday users\n\nYour task has two aspects:\n\n1. Assess
+        the task, underlining parts that could be unclear to the target audience.
+        Propose changes to enhance readability and improve understanding, while maintaining
+        a professional yet accessible tone. Identify any mentions of specific staff
+        members or proprietary tools including but not limited to feature management
+        platforms like LaunchDarkly, customer messaging tools like Intercom, user
+        behavior analytics platforms like FullStory, project management software like
+        Jira, and others.\n\n2. Craft a clear and succinct summary of this task. Enclose
+        the summary within the `\u003c\u003cSTART_SUMMARY\u003e\u003e` and `\u003c\u003cEND_SUMMARY\u003e\u003e`
+        markers. This summary should not exceed 600 characters and should not include
+        any reference to specific staff members or proprietary tools such as LaunchDarkly,
+        Intercom, FullStory, Jira, and the likes. The objective is to convey the essential
+        alterations and updates to the product. Remove all URLs, regardless of whether
+        they are in HTML or Markdown format.\n\nNow, please evaluate and summarize
+        the following task:\n\n- Go to [settings](https://linear.app/settings) to
+        enable features such as Roadmap, explore features and add integrations. Use
+        `G` then `S` to get there. ![image.png](https://uploads.linear.app/fe63b3e2-bf87-46c0-8784-cd7d639287c8/558fcd30-245d-4ddf-b15b-d9f18b1f4626/image.png)
+        Visit individual [team settings](https://linear.app/settings/teams/) to customize
+        features on a team level. * Configure automated issue workflows for issues
+        linked to PRs * Add or edit *workflow statuses*, and *labels* * Add team Slack
+        notifications * Create reusable *templates*. Use the keyboard shortcut `Alt`
+        `C` to quickly create new issues from templates * Set your *estimate* scale
+        and enable *cycles* * Configure time-saving features such as *Auto-close*
+        and *Auto-archive* ![image.png](https://uploads.linear.app/fe63b3e2-bf87-46c0-8784-cd7d639287c8/9fc1632b-893e-422c-939f-0cdc9d009b37/image.png)\n"}],"temperature":0.7}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 16 Jun 2023 13:12:02 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache, must-revalidate
+      Openai-Model:
+      - gpt-3.5-turbo-0301
+      Openai-Organization:
+      - user-us1icqkjutufgswcvfdqqmev
+      Openai-Processing-Ms:
+      - '5475'
+      Openai-Version:
+      - '2020-10-01'
+      Strict-Transport-Security:
+      - max-age=15724800; includeSubDomains
+      X-Ratelimit-Limit-Requests:
+      - '3500'
+      X-Ratelimit-Limit-Tokens:
+      - '90000'
+      X-Ratelimit-Remaining-Requests:
+      - '3499'
+      X-Ratelimit-Remaining-Tokens:
+      - '89370'
+      X-Ratelimit-Reset-Requests:
+      - 17ms
+      X-Ratelimit-Reset-Tokens:
+      - 420ms
+      X-Request-Id:
+      - c79ee6f8a8bb353f3a8dbbc1d9fdd1ba
+      Cf-Cache-Status:
+      - DYNAMIC
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 7d834d309fd4347f-WAW
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "id": "chatcmpl-7S3X2BMB6X9GKaOhFIaoDWkDSkac8",
+          "object": "chat.completion",
+          "created": 1686921116,
+          "model": "gpt-3.5-turbo-0301",
+          "usage": {
+            "prompt_tokens": 561,
+            "completion_tokens": 144,
+            "total_tokens": 705
+          },
+          "choices": [
+            {
+              "message": {
+                "role": "assistant",
+                "content": "<<START_SUMMARY>> \nVisit settings to enable features, explore integrations and customize settings on a team level. Configure automated issue workflows, add/edit workflow statuses and labels, set estimate scale and enable time-saving features such as auto-close and auto-archive. Use keyboard shortcuts to quickly create new issues from templates. <<END_SUMMARY>>\n\nThe task instructs users to visit settings to enable features and add integrations, customize settings on a team level, configure automated issue workflows, and set estimate scale. It also mentions time-saving features such as auto-close and auto-archive and using keyboard shortcuts to create new issues from templates. The summary simplifies the information, highlighting key actions and features without mentioning specific tools or staff members."
+              },
+              "finish_reason": "stop",
+              "index": 0
+            }
+          ]
+        }
+  recorded_at: Fri, 16 Jun 2023 13:12:01 GMT
+recorded_with: VCR 6.1.0
