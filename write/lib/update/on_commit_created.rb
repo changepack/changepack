@@ -17,23 +17,30 @@ class Update
         source:,
         tags:
       )
-    end
+after_save :trigger_done_event, if: :done?
 
-    sig { returns T.nilable(Source) }
-    def source
-      @source ||= Source.find_by(repository_id: event.repository_id)
-    end
+private
 
-    sig { returns Changelog }
-    def changelog
-      @changelog ||= Account.find(event.account_id).changelogs.first
-    end
+def trigger_done_event
+# Trigger the Update::Done event
+end
 
-    sig { returns T::Array[String] }
-    def tags
-      [
-        event.author.fetch(:email)
-      ]
+sig { returns T.nilable(Source) }
+def source
+@source ||= Source.find_by(repository_id: event.repository_id)
+end
+
+sig { returns Changelog }
+def changelog
+@changelog ||= Account.find(event.account_id).changelogs.first
+end
+
+sig { returns T::Array[String] }
+def tags
+[
+event.author.fetch(:email)
+]
+end
     end
   end
 end
