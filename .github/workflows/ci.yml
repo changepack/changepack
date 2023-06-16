@@ -69,6 +69,7 @@ jobs:
       - name: Kill Puma to generate Cypress coverage
         run: pkill -f puma
       - name: Publish code coverage
+        if: github.ref == 'refs/heads/main'
         uses: paambaati/codeclimate-action@v4.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
