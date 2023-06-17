@@ -62,10 +62,11 @@ class ChangelogsController < ApplicationController
                      .includes(:user)
   end
 
-  sig { returns T::Locals }
+  sig { returns Hash }
   def form
     {
-      locals: { changelog: }
+      locals: { changelog: },
+      layout: ->(_, _) { FormLayout }
     }
   end
 end
