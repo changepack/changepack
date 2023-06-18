@@ -112,7 +112,7 @@ section data-test-id="edit_user"
         .fields.md:ml-12
           .field
             = label_tag :api_key, 'Your API key', class: 'label'
-            = text_field_tag :api_key, current_account.api_keys.pick(:token), disabled: true, class: 'input'
+            = text_field_tag :api_key, current_account.api_keys.pick(:token), disabled: true, class: 'input string'
 
     = render I::Content.new do |content|
       - content.article do

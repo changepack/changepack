@@ -8,11 +8,11 @@
       .mb-6
         = f.label :email, class: 'label' do
           | Email address
-        = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'w-full input'
+        = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'w-full input string'
 
       .mb-6
         = f.label :password, class: 'label'
-        = f.password_field :password, autocomplete: 'current-password', class: 'w-full input'
+        = f.password_field :password, autocomplete: 'current-password', class: 'w-full input string'
 
       .mb-6
         = f.submit 'Continue', class: 'w-full button-1 px-2 py-3'

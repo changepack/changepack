@@ -18,7 +18,7 @@ module ApplicationHelper
 
   sig { params(model: ApplicationRecord, field: T::Key).returns(String) }
   def text_field_class(model, field)
-    "input #{'input-invalid' if model.errors.include?(field.to_sym)}"
+    "input string #{'input-invalid' if model.errors.include?(field.to_sym)}"
   end
 
   sig { params(account: Account).returns(T.untyped) }
