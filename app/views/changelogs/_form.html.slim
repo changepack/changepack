@@ -2,6 +2,7 @@
   = render I::Form.new(form:) do |wrapper|
     - wrapper.form do
         = form.input :name
+        = form.input :privacy, as: :radio_buttons, collection: changelog.privacies
 
     - wrapper.actions do
       = form.button :submit, 'Save changelog'

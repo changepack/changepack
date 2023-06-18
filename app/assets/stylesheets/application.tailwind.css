@@ -103,8 +103,24 @@
     @apply block mb-2 text-sm text-gray-600 cursor-pointer font-medium;
   }
 
-  .form .input {
+  .form .input.string {
     @apply block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full max-w-full placeholder:text-gray-300;
+  }
+
+  .form .input.radio_buttons:not(:checked) {
+    @apply w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2;
+  }
+
+  .form .input.radio_buttons:checked {
+    @apply w-4 h-4 text-blue-600 ring-offset-blue-800 focus:ring-2 bg-blue-700 border-blue-600;
+  }
+
+  .form .field.radio {
+    @apply flex items-center;
+  }
+
+  .form .field.radio label {
+    @apply ml-2 text-sm;
   }
 
   .form .input.invalid {

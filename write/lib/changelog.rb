@@ -32,6 +32,10 @@ class Changelog < ApplicationRecord
     self.name ||= DEFAULT
   end
 
+  def self.privacy
+    PRIVACY
+  end
+
   private
 
   sig { returns T::Array[Symbol] }

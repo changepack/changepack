@@ -62,7 +62,7 @@ class ChangelogsController < ApplicationController
   sig { returns Hash }
   def form
     {
-      locals: { changelog: },
+      locals: { changelog: changelog.decorate },
       layout: ->(_, _) { FormLayout }
     }
   end
