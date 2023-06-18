@@ -39,7 +39,7 @@ class Update < ApplicationRecord
   validates :commit_id, uniqueness: { scope: :account_id }, if: :commit_id?
   validates :issue_id, uniqueness: { scope: :account_id }, if: :issue_id?
 
-  scope :sorted, -> { order(sourced_at: :desc) }
+  scope :desc, -> { order(sourced_at: :desc) }
 
   inquirer :type
 

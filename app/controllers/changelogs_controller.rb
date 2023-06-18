@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 class ChangelogsController < ApplicationController
+  before_action :set_new_changelog, only: %i[new create]
   skip_before_action :authenticate_user!, only: :show
   skip_verify_authorized only: :show
 
@@ -16,8 +17,23 @@ class ChangelogsController < ApplicationController
     render locals: { account:, posts: }
   end
 
+  def new
+    authorize! and render form
+  end
+
   def edit
     authorize! changelog and render form
+  end
+
+  def create
+    authorize!
+    changelog.update(permitted)
+
+    if changelog.valid?
+      redirect_to changelogs_path
+    else
+      render :new, form
+    end
   end
 
   def update
@@ -56,6 +72,11 @@ class ChangelogsController < ApplicationController
     authorized params.require(:changelog)
   end
 
+  sig { returns Changelog }
+  def set_new_changelog
+    @changelog = current_account.changelogs.new
+  end
+
   sig { returns Account }
   def account
     @account ||= domain || friendly_id
@@ -63,7 +84,7 @@ class ChangelogsController < ApplicationController
 
   sig { returns Changelog::RelationType }
   def changelogs
-    @changelogs ||= current_account.changelogs.kept
+    @changelogs ||= current_account.changelogs.kept.desc
   end
 
   sig { returns Changelog }

@@ -26,9 +26,7 @@ Rails.application.routes.draw do
     root 'accounts#index'
 
     resources :accounts, only: :index
-
-    resources :changelogs, only: [:index, :show, :edit, :update]
-
+    resources :changelogs
     resources :posts, except: :show do
       member do
         get :confirm_destroy

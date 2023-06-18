@@ -26,6 +26,8 @@ class Changelog < ApplicationRecord
   inquirer :audience
   inquirer :privacy
 
+  scope :desc, -> { order(created_at: :desc) }
+
   before_validation do
     self.name ||= DEFAULT
   end
