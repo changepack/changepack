@@ -34,7 +34,7 @@ module I
     end
 
     def page
-      div class: 'container mx-auto my-16 px-80 fields', &@form
+      div class: 'container mx-auto p-6 md:my-16 md:px-80 fields', &@form
     end
 
     def top_container(&)
@@ -48,7 +48,8 @@ module I
     def previous_page
       return if helpers.content_for?(:previous_page).blank?
 
-      a class: 'font-bold inline-block mr-6 text-xl leading-none', href: helpers.content_for(:previous_page) do
+      a class: 'font-bold block md:inline-block mb-3 md:mb-0 mr-6 text-xl leading-none',
+        href: helpers.content_for(:previous_page) do
         '×'
       end
     end

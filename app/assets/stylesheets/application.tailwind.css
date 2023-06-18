@@ -108,11 +108,11 @@
   }
 
   .form .input.radio_buttons:not(:checked) {
-    @apply w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2;
+    @apply w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 cursor-pointer;
   }
 
   .form .input.radio_buttons:checked {
-    @apply w-4 h-4 text-blue-600 ring-offset-blue-800 focus:ring-2 bg-blue-700 border-blue-600;
+    @apply w-4 h-4 text-blue-600 ring-offset-blue-800 focus:ring-2 bg-blue-700 border-blue-600 cursor-pointer;
   }
 
   .form .field.radio {
@@ -120,7 +120,7 @@
   }
 
   .form .field.radio label {
-    @apply ml-2 text-sm;
+    @apply ml-2 text-sm cursor-pointer;
   }
 
   .form .input.invalid {
