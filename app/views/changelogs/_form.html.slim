@@ -4,6 +4,7 @@
         = form.input :name
         = form.input :privacy, as: :radio_buttons, collection: changelog.privacies
         = form.input :audience, as: :radio_buttons, collection: changelog.audiences
+        = form.input :about_audience, as: :text, required: false, input_html: { rows: 3 }, hint: t('audiences.about')
 
     - wrapper.actions do
       = form.button :submit, 'Save changelog'

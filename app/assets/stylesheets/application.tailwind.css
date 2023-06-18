@@ -103,7 +103,7 @@
     @apply block mb-2 text-sm text-gray-600 cursor-pointer font-medium;
   }
 
-  .form .input.string {
+  .form .input.string, .form .input.text {
     @apply block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full max-w-full placeholder:text-gray-300;
   }
 

@@ -102,7 +102,7 @@ class Sydney
 
   sig { returns String }
   def audience
-    @audience ||= I18n.t("audiences.#{changelog.audience}").downcase
+    @audience ||= changelog.about_audience || I18n.t("audiences.#{changelog.audience}").downcase
   end
 
   sig { returns Changelog }
