@@ -3,6 +3,7 @@
     - wrapper.form do
         = form.input :name
         = form.input :privacy, as: :radio_buttons, collection: changelog.privacies
+        = form.input :audience, as: :radio_buttons, collection: changelog.audiences
 
     - wrapper.actions do
       = form.button :submit, 'Save changelog'

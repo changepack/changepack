@@ -6,7 +6,7 @@ class ChangelogPolicy < ApplicationPolicy
   alias_rule :new?, to: :create?
 
   params_filter do |params|
-    params.permit(:name, :privacy)
+    params.permit(:name, :privacy, :audience)
   end
 
   def index?
