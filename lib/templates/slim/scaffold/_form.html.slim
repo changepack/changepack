@@ -1,0 +1,9 @@
+= simple_form_for(@<%= singular_table_name %>) do |f|
+  = render I::Form.new(form:) do |wrapper|
+    - wrapper.form do
+        <%- attributes.each do |attribute| -%>
+          = form.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %>
+        <%- end -%>
+
+    - wrapper.actions do
+      = form.button :submit

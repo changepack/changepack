@@ -1,16 +1,10 @@
 - content_for :page_name, 'Edit changelog'
 - content_for :previous_page, changelogs_path
 
-= form_with(model: changelog, class: 'form contents') do |form|
+= simple_form_for changelog do |form|
   = render I::Form.new(form:) do |wrapper|
     - wrapper.form do
-      .mb-5
-        = form.label :name, class: 'label'
-        = form.text_field :name, class: 'input', placeholder: 'Name', data: { test_id: 'name' }
-        - changelog.errors.full_messages_for(:title).each do |error_message|
-          .text-xs.text-red-500.mt-2 = error_message
+        = form.input :name
 
     - wrapper.actions do
-      = form.button class: 'button-1', type: 'submit', data: { test_id: 'submit' } do
-        = icon 'save', class: 'mr-2'
-        | Save changelog
+      = form.button :submit, 'Update changelog'

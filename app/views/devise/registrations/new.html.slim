@@ -15,7 +15,7 @@
         = f.label :password, class: 'label'
         = f.password_field :password, autocomplete: 'password', class: 'w-full input'
         - if @minimum_password_length
-            p.help
+            p.hint
               = @minimum_password_length
               |  characters minimum
 

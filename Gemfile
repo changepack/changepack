@@ -205,3 +205,5 @@ gem "graphql-client"
 gem "omniauth-linear", github: "changepack/omniauth-linear"
 
 gem "json-schema"
+
+gem "simple_form"

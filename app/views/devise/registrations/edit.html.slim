@@ -20,25 +20,25 @@ section data-test-id="edit_user"
               | Email address
             = f.email_field :email, autocomplete: 'email', class: text_field_class(resource, :email)
             - resource.errors.full_messages_for(:email).each do |error_message|
-              .text-xs.text-red-500.mt-2 = error_message
+              .error = error_message
 
           .field
             = f.label :name, class: 'label'
             = f.text_field :name, class: text_field_class(resource, :name)
             - resource.errors.full_messages_for(:name).each do |error_message|
-              .text-xs.text-red-500.mt-2 = error_message
+              .error = error_message
 
           .field
             = f.label :password, class: 'label'
             = f.password_field :password, autocomplete: 'new-password', class: text_field_class(resource, :password)
             - resource.errors.full_messages_for(:password).each do |error_message|
-              .text-xs.text-red-500.mt-2 = error_message
+              .error = error_message
 
-            p.help
+            p.hint
               ' Leave blank if you don't want to change it
 
             - if @minimum_password_length
-              p.help
+              p.hint
                 = @minimum_password_length
                 |  characters minimum
 
@@ -47,15 +47,15 @@ section data-test-id="edit_user"
             = f.password_field :password_confirmation, autocomplete: 'new-password',
                                                        class: text_field_class(resource, :password_confirmation)
             - resource.errors.full_messages_for(:password_confirmation).each do |error_message|
-              .text-xs.text-red-500.mt-2 = error_message
+              .error = error_message
 
           .field
             = f.label :current_password, class: 'label'
             = f.password_field :current_password, autocomplete: 'current-password',
                                                   class: text_field_class(resource, :current_password)
             - resource.errors.full_messages_for(:current_password).each do |error_message|
-              .text-xs.text-red-500.mt-2 = error_message
-            p.help
+              .error = error_message
+            p.hint
               ' We need your current password to confirm your changes
 
     = render I::Content.new do |content|
@@ -73,22 +73,22 @@ section data-test-id="edit_user"
               = field.label :name, 'Company name', class: 'label'
               = field.text_field :name, class: text_field_class(resource.account, :name)
               - resource.account.errors.full_messages_for(:name).each do |error_message|
-                .text-xs.text-red-500.mt-2 = error_message
+                .error = error_message
 
             .field
               = field.label :website, 'Website', class: 'label'
               = field.text_field :website, class: text_field_class(resource.account, :website)
               - resource.account.errors.full_messages_for(:website).each do |error_message|
-                .text-xs.text-red-500.mt-2 = error_message
+                .error = error_message
 
             .field
               = field.label :description, 'Company description', class: 'label'
               - resource.account.errors.full_messages_for(:description).each do |error_message|
-                .text-xs.text-red-500.mt-2 = error_message
+                .error = error_message
               .mt-2
                 = field.text_area :description, rows: 3,
                                                 class: "prose #{text_field_class(resource.account, :description)}"
-              p.help
+              p.hint
                 ' This field helps our AI learn what your company does
 
             .field
@@ -99,7 +99,7 @@ section data-test-id="edit_user"
                   = field.file_field :picture, class: 'hidden'
                   = field.label :picture, 'Change', class: 'button-2'
                   - resource.account.errors.full_messages_for(:picture).each do |error_message|
-                    .text-xs.text-red-500.mt-2 = error_message
+                    .error = error_message
 
     = render I::Content.new do |content|
       - content.sidebar do

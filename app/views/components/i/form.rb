@@ -34,7 +34,7 @@ module I
     end
 
     def page
-      div class: 'container mx-auto my-16 px-80', &@form
+      div class: 'container mx-auto my-16 px-80 fields', &@form
     end
 
     def top_container(&)

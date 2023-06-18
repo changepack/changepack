@@ -2,7 +2,7 @@
   .mb-5
     = form.text_field :title, class: post.title_field_class, placeholder: 'Title', data: { test_id: 'title' }
     - post.errors.full_messages_for(:title).each do |error_message|
-      .text-xs.text-red-500.mt-2 = error_message
+      .error = error_message
 
   - if changelogs.count > 1
     .my-5
@@ -13,7 +13,7 @@
   .my-5
     = form.rich_text_area :content, class: post.content_field_class, data: { test_id: 'content' }, autofocus: true
     - post.errors.full_messages_for(:content).each do |error_message|
-      .text-xs.text-red-500.mt-2 = error_message
+      .error = error_message
 
   .columns-2
     .column
