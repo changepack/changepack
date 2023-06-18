@@ -89,6 +89,8 @@ class ApplicationLayout < ApplicationView
   end
 
   def footer
+    return if skip_footer?
+
     render I::Footer.new
   end
 
@@ -102,6 +104,10 @@ class ApplicationLayout < ApplicationView
 
   def skip_navigation?
     helpers.user_signed_out? || helpers.visited_account?
+  end
+
+  def skip_footer?
+    !skip_navigation?
   end
 
   def home?
