@@ -5,6 +5,10 @@ class ChangelogPolicy < ApplicationPolicy
   alias_rule :edit?, :destroy?, to: :update?
   alias_rule :new?, to: :create?
 
+  params_filter do |params|
+    params.permit(:name)
+  end
+
   def index?
     user.present?
   end

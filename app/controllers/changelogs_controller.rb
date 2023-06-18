@@ -20,7 +20,46 @@ class ChangelogsController < ApplicationController
     authorize! changelog and render form
   end
 
+  def update
+    authorize! changelog
+    changelog.update(permitted)
+
+    if changelog.valid?
+      redirect_to changelogs_path
+    else
+      render :edit, form
+    end
+  end
+
   private
+
+  sig { returns T.nilable(Account) }
+  def domain
+    Account.find_by(domain: request.host)
+  end
+
+  sig { returns Account }
+  def friendly_id
+    Account.kept.friendly.find params.fetch(:account_id)
+  end
+
+  sig { returns Hash }
+  def form
+    {
+      locals: { changelog: },
+      layout: ->(_, _) { FormLayout }
+    }
+  end
+
+  sig { returns T::Params }
+  def permitted
+    authorized params.require(:changelog)
+  end
+
+  sig { returns Account }
+  def account
+    @account ||= domain || friendly_id
+  end
 
   sig { returns Changelog::RelationType }
   def changelogs
@@ -37,21 +76,6 @@ class ChangelogsController < ApplicationController
     @scoped ||= account.changelogs.kept.friendly.find(id)
   end
 
-  sig { returns Account }
-  def account
-    domain || friendly_id
-  end
-
-  sig { returns T.nilable(Account) }
-  def domain
-    Account.find_by(domain: request.host)
-  end
-
-  sig { returns Account }
-  def friendly_id
-    Account.kept.friendly.find params.fetch(:account_id)
-  end
-
   sig { returns Post::RelationType }
   def posts
     @posts ||= scoped.posts
@@ -60,13 +84,5 @@ class ChangelogsController < ApplicationController
                      .recent
                      .with_rich_text_content_and_embeds
                      .includes(:user)
-  end
-
-  sig { returns Hash }
-  def form
-    {
-      locals: { changelog: },
-      layout: ->(_, _) { FormLayout }
-    }
   end
 end
