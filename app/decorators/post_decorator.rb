@@ -9,6 +9,6 @@ class PostDecorator < ApplicationDecorator
 
   sig { returns String }
   def content_field_class
-    "prose #{h.text_field_class(self, :content)}"
+    "prose text #{h.text_field_class(self, :content)}"
   end
 end

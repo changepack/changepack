@@ -104,7 +104,15 @@
   }
 
   .form .input.string, .form .input.text, .form .input.password {
-    @apply block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full max-w-full placeholder:text-gray-300;
+    @apply block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 max-w-full placeholder:text-gray-300;
+  }
+
+  .form .input.string, .form .input.password {
+    @apply w-96;
+  }
+
+  .form .input.text {
+    @apply w-full;
   }
 
   .form .input.radio_buttons:not(:checked) {

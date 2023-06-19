@@ -38,7 +38,7 @@ module I
 
       def article(aside, &)
         aside.article do
-          div class: 'fields md:ml-12', &@inputs
+          div class: 'fields md:ml-24', &@inputs
         end
       end
     end
@@ -84,7 +84,7 @@ module I
     end
 
     def page
-      div class: "container mx-auto p-6 md:my-16 #{px} fields".squish, &@form
+      div class: "container mx-auto p-6 md:my-16 fields #{px}".squish, &@form
     end
 
     def top_container(&)
@@ -117,7 +117,7 @@ module I
       when Variant::Narrow
         'md:px-80'
       when Variant::Wide
-        nil
+        'md:px-16'
       end
     end
 

@@ -5,20 +5,6 @@
   = render I::Form.new(form: f, variant: I::Form::Variant::Wide) do |wrapper|
     - wrapper.form do
       = wrapper.fields do |fields|
-        - fields.title 'Profile'
-        - fields.subtitle 'Change your email or password to keep your account information up-to-date'
-
-        - fields.inputs do
-          = f.input :email, required: true, label: 'Email address'
-          = f.input :name, required: true
-
-          = f.input :password, \
-            hint: "Leave blank if you don't want to change it. #{@minimum_password_length} characters minimum", \
-            autocomplete: 'new-password'
-          = f.input :password_confirmation, autocomplete: 'new-password'
-          = f.input :current_password, required: true, hint: 'We need your current password to confirm your changes'
-
-      = wrapper.fields do |fields|
         - fields.title 'Company'
         - fields.subtitle 'This information will be displayed publicly so be careful what you share'
 
@@ -44,13 +30,27 @@
                     .error = error_message
 
       = wrapper.fields do |fields|
+        - fields.title 'Profile'
+        - fields.subtitle 'Change your email or password to keep your account information up-to-date'
+
+        - fields.inputs do
+          = f.input :email, required: true, label: 'Email address'
+          = f.input :name, required: true
+
+          = f.input :password, \
+            hint: "Leave blank if you don't want to change it. #{@minimum_password_length} characters minimum", \
+            autocomplete: 'new-password'
+          = f.input :password_confirmation, autocomplete: 'new-password'
+          = f.input :current_password, required: true, hint: 'We need your current password to confirm your changes'
+
+      = wrapper.fields do |fields|
         - fields.title 'API'
         - fields.subtitle 'Interact with Changepack programmatically'
 
         - fields.inputs do
           .field
             = label_tag :api_key, 'Your API key', class: 'label'
-            = text_field_tag :api_key, current_account.api_keys.pick(:token), disabled: true, class: 'input string'
+            = text_field_tag :api_key, current_account.api_keys.pick(:token), disabled: true, class: 'input text'
 
     - wrapper.actions do
       = f.button :submit, 'Update account'
