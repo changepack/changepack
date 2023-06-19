@@ -3,7 +3,14 @@
 
 module Users
   class RegistrationsController < Devise::RegistrationsController
+    layout -> { determine_layout }
+
     private
+
+    sig { returns T.class_of(ApplicationView) }
+    def determine_layout
+      action_name.in?(%w[edit update]) ? FormLayout : ApplicationLayout
+    end
 
     sig { returns T::Params }
     def sign_up_params

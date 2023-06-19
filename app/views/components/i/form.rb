@@ -5,7 +5,15 @@ module I
   class Form < ApplicationComponent
     include Phlex::DeferredRender
 
+    class Variant < T::Enum
+      enums do
+        Narrow = new
+        Wide = new
+      end
+    end
+
     attribute :form, T.untyped
+    attribute :variant, Variant, default: -> { Variant::Narrow }
 
     def actions(&block)
       @actions = block
@@ -34,7 +42,7 @@ module I
     end
 
     def page
-      div class: 'container mx-auto p-6 md:my-16 md:px-80 fields', &@form
+      div class: "container mx-auto p-6 md:my-16 #{px} fields".squish, &@form
     end
 
     def top_container(&)
@@ -59,6 +67,15 @@ module I
 
       span class: 'dimmed' do
         helpers.content_for(:page_name)
+      end
+    end
+
+    def px
+      case variant
+      when Variant::Narrow
+        'md:px-80'
+      when Variant::Wide
+        nil
       end
     end
 
