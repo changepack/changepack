@@ -3,11 +3,9 @@ en:
     "yes": 'Yes'
     "no": 'No'
     required:
-      text: 'required'
-      mark: '*'
-      # You can uncomment the line below if you need to overwrite the whole required html.
-      # When using html, text and mark won't be used.
-      html: '<span class="tag-required">Required</span>'
+      html: ''
+    optional:
+      html: '<span class="tag-required">Optional</span>'
     error_notification:
       default_message: "Please review the problems below:"
     # Examples
