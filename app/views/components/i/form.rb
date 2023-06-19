@@ -5,6 +5,44 @@ module I
   class Form < ApplicationComponent
     include Phlex::DeferredRender
 
+    class Fields < ApplicationComponent
+      include Phlex::DeferredRender
+
+      def template(&)
+        render I::Aside.new do |aside|
+          sidebar(aside)
+          article(aside)
+        end
+      end
+
+      def title(title)
+        @title = title
+      end
+
+      def subtitle(subtitle)
+        @subtitle = subtitle
+      end
+
+      def inputs(&block)
+        @inputs = block
+      end
+
+      def sidebar(aside)
+        aside.sidebar do
+          div class: 'hidden md:block' do
+            h3(class: 'text-base font-semibold leading-6') { @title }
+            div(class: 'mt-1 text-sm dimmed') { @subtitle }
+          end
+        end
+      end
+
+      def article(aside, &)
+        aside.article do
+          div class: 'fields md:ml-12', &@inputs
+        end
+      end
+    end
+
     class Variant < T::Enum
       enums do
         Narrow = new
@@ -26,6 +64,10 @@ module I
     def template
       top
       page
+    end
+
+    def fields(&block)
+      render Fields.new, &block
     end
 
     def top
