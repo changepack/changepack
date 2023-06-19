@@ -14,48 +14,14 @@
 
         - content.article do
           .fields.md:ml-12
-            .field
-              = f.label :email, class: 'label' do
-                | Email address
-              = f.email_field :email, autocomplete: 'email', class: text_field_class(resource, :email)
-              - resource.errors.full_messages_for(:email).each do |error_message|
-                .error = error_message
+            = f.input :email, required: true, label: 'Email address'
+            = f.input :name, required: true
 
-            .field
-              = f.label :name, class: 'label'
-              = f.text_field :name, class: text_field_class(resource, :name)
-              - resource.errors.full_messages_for(:name).each do |error_message|
-                .error = error_message
-
-            .field
-              = f.label :password, class: 'label'
-              = f.password_field :password, autocomplete: 'new-password', class: text_field_class(resource, :password)
-              - resource.errors.full_messages_for(:password).each do |error_message|
-                .error = error_message
-
-              p.hint
-                ' Leave blank if you don't want to change it
-
-              - if @minimum_password_length
-                p.hint
-                  = @minimum_password_length
-                  |  characters minimum
-
-            .field
-              = f.label :password_confirmation, class: 'label'
-              = f.password_field :password_confirmation, autocomplete: 'new-password',
-                                                          class: text_field_class(resource, :password_confirmation)
-              - resource.errors.full_messages_for(:password_confirmation).each do |error_message|
-                .error = error_message
-
-            .field
-              = f.label :current_password, class: 'label'
-              = f.password_field :current_password, autocomplete: 'current-password',
-                                                    class: text_field_class(resource, :current_password)
-              - resource.errors.full_messages_for(:current_password).each do |error_message|
-                .error = error_message
-              p.hint
-                ' We need your current password to confirm your changes
+            = f.input :password, \
+              hint: "Leave blank if you don't want to change it. #{@minimum_password_length} characters minimum", \
+              autocomplete: 'new-password'
+            = f.input :password_confirmation, autocomplete: 'new-password'
+            = f.input :current_password, required: true, hint: 'We need your current password to confirm your changes'
 
       = render I::Content.new do |content|
         - content.sidebar do
@@ -68,27 +34,14 @@
         - content.article do
           .fields.md:ml-12
             = f.fields_for :account do |field|
-              .field
-                = field.label :name, 'Company name', class: 'label'
-                = field.text_field :name, class: text_field_class(resource.account, :name)
-                - resource.account.errors.full_messages_for(:name).each do |error_message|
-                  .error = error_message
-
-              .field
-                = field.label :website, 'Website', class: 'label'
-                = field.text_field :website, class: text_field_class(resource.account, :website)
-                - resource.account.errors.full_messages_for(:website).each do |error_message|
-                  .error = error_message
-
-              .field
-                = field.label :description, 'Company description', class: 'label'
-                - resource.account.errors.full_messages_for(:description).each do |error_message|
-                  .error = error_message
-                .mt-2
-                  = field.text_area :description, rows: 3,
-                                                  class: "prose #{text_field_class(resource.account, :description)}"
-                p.hint
-                  ' This field helps our AI learn what your company does
+              = field.input :name, label: 'Company name', required: true
+              = field.input :website, label: 'Website', required: true
+              = field.input :description, \
+                label: 'Company description', \
+                as: :text, \
+                required: true, \
+                input_html: { rows: 3 }, \
+                hint: 'This field helps our AI learn what your company does'
 
               .field
                 = field.label :picture, 'Company logo', class: 'label'
