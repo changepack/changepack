@@ -55,9 +55,9 @@ module I
     attribute :post, ::Post
 
     def template
-      render I::Content.new do |content|
-        content.article { body }
-        content.sidebar { render Metadata.new(post:) }
+      render I::Aside.new do |aside|
+        aside.article { body }
+        aside.sidebar { render Metadata.new(post:) }
       end
     end
 

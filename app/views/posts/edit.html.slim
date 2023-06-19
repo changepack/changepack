@@ -1,9 +1,9 @@
 .-my-8
   = turbo_frame_tag dom_id(post) do
     section data-test-id="edit_post_page"
-      = render I::Content.new do |content|
-        - content.article do
+      = render I::Aside.new do |aside|
+        - aside.article do
           = render 'form', post:, updates:, changelogs:
 
-        - content.sidebar do
+        - aside.sidebar do
           = render I::Post::Metadata.new(post:)

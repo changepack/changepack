@@ -1,8 +1,8 @@
 section data-test-id="new_post_page"
-  = render I::Content.new do |content|
-    - content.article do
+  = render I::Aside.new do |aside|
+    - aside.article do
       = render 'form', post:, updates:, changelogs:
 
-    - content.sidebar do
+    - aside.sidebar do
       .hidden.md:block
         = render I::Post::Metadata.new(post:)

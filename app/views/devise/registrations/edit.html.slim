@@ -4,15 +4,15 @@
 = simple_form_for(resource, url: user_registration_path, data: { turbo: false }) do |f|
   = render I::Form.new(form: f, variant: I::Form::Variant::Wide) do |wrapper|
     - wrapper.form do
-      = render I::Content.new do |content|
-        - content.sidebar do
+      = render I::Aside.new do |aside|
+        - aside.sidebar do
           .hidden.md:block
             h3.text-base.font-semibold.leading-6 Profile
             p.mt-1.text-sm.dimmed
               ' Change your email or password to keep
               ' your account information up-to-date
 
-        - content.article do
+        - aside.article do
           .fields.md:ml-12
             = f.input :email, required: true, label: 'Email address'
             = f.input :name, required: true
@@ -23,15 +23,15 @@
             = f.input :password_confirmation, autocomplete: 'new-password'
             = f.input :current_password, required: true, hint: 'We need your current password to confirm your changes'
 
-      = render I::Content.new do |content|
-        - content.sidebar do
+      = render I::Aside.new do |aside|
+        - aside.sidebar do
           .hidden.md:block
             h3.text-base.font-semibold.leading-6 Company
             p.mt-1.text-sm.dimmed
               ' This information will be displayed publicly
               ' so be careful what you share
 
-        - content.article do
+        - aside.article do
           .fields.md:ml-12
             = f.fields_for :account do |field|
               = field.input :name, label: 'Company name', required: true
@@ -53,14 +53,14 @@
                     - resource.account.errors.full_messages_for(:picture).each do |error_message|
                       .error = error_message
 
-      = render I::Content.new do |content|
-        - content.sidebar do
+      = render I::Aside.new do |aside|
+        - aside.sidebar do
           .hidden.md:block
             h3.text-base.font-semibold.leading-6 API
             p.mt-1.text-sm.dimmed
               ' Interact with Changepack programmatically
 
-        - content.article do
+        - aside.article do
           .fields.md:ml-12
             .field
               = label_tag :api_key, 'Your API key', class: 'label'

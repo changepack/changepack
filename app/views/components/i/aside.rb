@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module I
-  class Content < ApplicationComponent
+  class Aside < ApplicationComponent
     include Phlex::DeferredRender
 
     def template
