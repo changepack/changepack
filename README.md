@@ -2,7 +2,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/6fcca30f3ba6843848db/maintainability)](https://codeclimate.com/github/changepack/changepack/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/6fcca30f3ba6843848db/test_coverage)](https://codeclimate.com/github/changepack/changepack/test_coverage)
 
-Changepack sends the whole company a brief update on update on what your team shipped last week, every week, powered by ChatGPT. Share news about changes and features with your teammates and keep people in the loop!
+Changepack sends you or your company a brief update on what your team shipped last week, every week, powered by ChatGPT. Share news about changes and features with your teammates and keep people in the loop!
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 <a href="https://render.com/deploy?repo=https://github.com/changepack/changepack">
@@ -15,7 +15,8 @@ Changepack sends the whole company a brief update on update on what your team sh
 * **Write release notes 10x faster with AI.** Leverage OpenAI’s [ChatGPT](https://openai.com/blog/chatgpt) to publish your content in seconds.
 * **Pull commits from GitHub.** Changepack allows you to link changelogs with your GitHub activity, making it easy to track progress. (GitLab coming soon!)
 * **Retrieve issues from Linear.** We connect changelogs to project management tools of your choice, allowing ChatGPT to stay informed about your current tasks. (Other tools coming soon.)
-* **Monthly automated summaries.** Each month, Changepack handpicks the most notable updates and creates a release note draft for you to review and publish.
+* **Weekly summaries.** Each week, Changepack handpicks the most notable updates and emails you a release note.
+
 ## Build and run locally
 
 ```
