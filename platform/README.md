@@ -28,6 +28,9 @@ The `platform` bounded context includes the following key features:
 
 * `Provided` adds support for tracking and managing external providers associated with a model. It allows models to define provider attributes and automatically trigger events when providers are added or removed.
 
+These concerns are horizontal; they are not a core part of any specific model, unlike concerns from other contexts. Therefore, they are located under `platform/concerns`, separate from the domain models.
+
+
 ## Communication with other contexts
 
 The `platform` bounded context is designed to be seamlessly integrated with other bounded contexts within the application. Its models, concerns, and utilities can be directly accessed and utilized by other contexts without the need for event-driven communication.

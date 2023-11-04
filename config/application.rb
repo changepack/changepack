@@ -20,6 +20,7 @@ Bundler.require(*Rails.groups)
 
 module Changepack
   class Application < Rails::Application
+    config.paths.add 'platform/concerns', eager_load: true
     config.paths.add 'platform/lib', eager_load: true
     config.paths.add 'connect/lib', eager_load: true
     config.paths.add 'write/lib', eager_load: true
