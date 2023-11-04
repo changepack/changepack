@@ -2,7 +2,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/6fcca30f3ba6843848db/maintainability)](https://codeclimate.com/github/changepack/changepack/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/6fcca30f3ba6843848db/test_coverage)](https://codeclimate.com/github/changepack/changepack/test_coverage)
 
-Changepack sends the whole company a brief update on update on what your team shipped last week, every week, powered by ChatGPT. Share updates about new features with your teammates and keep people in the loop!
+Changepack sends the whole company a brief update on update on what your team shipped last week, every week, powered by ChatGPT. Share news about changes and features with your teammates and keep people in the loop!
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 <a href="https://render.com/deploy?repo=https://github.com/changepack/changepack">
