@@ -15,12 +15,12 @@ class Summary
   PERIOD = 4.weeks
   ENOUGH = 100
 
-  attribute :changelog, T.instance(Changelog)
+  attribute :newsletter, T.instance(Newsletter)
 
-  validates :changelog, presence: true
+  validates :newsletter, presence: true
   validates :updates, presence: true
 
-  delegate :account, to: :changelog
+  delegate :account, to: :newsletter
   delegate :post, to: :publication
 
   sig { returns T::Boolean }
@@ -42,7 +42,7 @@ class Summary
   sig { returns Publication }
   def publication
     @publication ||= Publication.new(
-      account: changelog.account,
+      account: newsletter.account,
       post: Post.new,
       updates:,
       title:
@@ -60,13 +60,13 @@ class Summary
 
   sig { returns Update::RelationType }
   def collection
-    return Update.none if changelog.blank?
+    return Update.none if newsletter.blank?
 
-    @collection ||= changelog.updates
-                             .where(post: nil)
-                             .where(created_at: PERIOD.ago..)
-                             .limit(ENOUGH)
-                             .kept
+    @collection ||= newsletter.updates
+                              .where(post: nil)
+                              .where(created_at: PERIOD.ago..)
+                              .limit(ENOUGH)
+                              .kept
   end
 
   sig { returns String }

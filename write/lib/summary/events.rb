@@ -9,7 +9,7 @@ class Summary
     abstract!
 
     class Requested < Event
-      attribute :changelog_id, String
+      attribute :newsletter_id, String
     end
   end
 end

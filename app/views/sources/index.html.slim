@@ -3,7 +3,7 @@
     = link_to sources_path do
       h1.font-semibold.text-4xl Connections
       h2.mt-4
-        | Pull changes from GitHub or Linear and write changelogs based on the most recent changes
+        | Pull changes from GitHub or Linear and write newsletters based on the most recent changes
 
     - unless current_user.github? && current_user.linear?
       .mt-4.flex
@@ -55,7 +55,7 @@ section.overflow-x-auto
             section
               ' Connecting to a data sources will allow you
               ' to pull changes in the background to make sure
-              ' your changelog is always up to date.
+              ' your newsletter is always up to date.
 
         .py-10.md:py-24
           .flex.md:-my-8

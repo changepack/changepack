@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_18_212816) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_05_205438) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -91,19 +91,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_212816) do
     t.string "bearer_id"
     t.index ["bearer_type", "bearer_id"], name: "index_api_keys_on_bearer"
     t.index ["token"], name: "index_api_keys_on_token", unique: true
-  end
-
-  create_table "changelogs", id: :string, force: :cascade do |t|
-    t.string "name"
-    t.string "slug", null: false
-    t.string "account_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "audience", default: "non_technical", null: false
-    t.string "privacy", default: "public", null: false
-    t.datetime "discarded_at"
-    t.text "about_audience"
-    t.index ["account_id"], name: "index_changelogs_on_account_id"
   end
 
   create_table "commits", id: :string, force: :cascade do |t|
@@ -188,6 +175,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_212816) do
     t.index ["team_id"], name: "index_issues_on_team_id"
   end
 
+  create_table "newsletters", id: :string, force: :cascade do |t|
+    t.string "name"
+    t.string "slug", null: false
+    t.string "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.boolean "private", default: true
+    t.string "audience"
+    t.index ["account_id"], name: "index_newsletters_on_account_id"
+  end
+
   create_table "post_transitions", id: :string, force: :cascade do |t|
     t.string "to_state", null: false
     t.jsonb "metadata", default: {}
@@ -209,11 +208,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_212816) do
     t.string "account_id", null: false
     t.string "slug"
     t.datetime "discarded_at"
-    t.string "changelog_id", null: false
+    t.string "newsletter_id", null: false
     t.datetime "published_at"
     t.index ["account_id"], name: "index_posts_on_account_id"
-    t.index ["changelog_id"], name: "index_posts_on_changelog_id"
     t.index ["discarded_at"], name: "index_posts_on_discarded_at"
+    t.index ["newsletter_id"], name: "index_posts_on_newsletter_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -256,10 +255,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_212816) do
     t.datetime "updated_at", null: false
     t.string "status", default: "inactive"
     t.datetime "discarded_at"
-    t.string "changelog_id"
+    t.string "newsletter_id"
     t.string "team_id"
     t.index ["account_id"], name: "index_sources_on_account_id"
-    t.index ["changelog_id"], name: "index_sources_on_changelog_id"
+    t.index ["newsletter_id"], name: "index_sources_on_newsletter_id"
     t.index ["repository_id"], name: "index_sources_on_repository_id", unique: true
     t.index ["team_id"], name: "index_sources_on_team_id"
   end
@@ -302,16 +301,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_212816) do
     t.string "post_id"
     t.datetime "discarded_at"
     t.string "source_id"
-    t.string "changelog_id"
+    t.string "newsletter_id"
     t.string "issue_id"
     t.string "tags", default: [], null: false, array: true
     t.datetime "sourced_at", null: false
     t.text "context"
     t.index ["account_id", "commit_id"], name: "index_updates_on_account_id_and_commit_id", unique: true
     t.index ["account_id"], name: "index_updates_on_account_id"
-    t.index ["changelog_id"], name: "index_updates_on_changelog_id"
     t.index ["commit_id"], name: "index_updates_on_commit_id", unique: true
     t.index ["issue_id"], name: "index_updates_on_issue_id"
+    t.index ["newsletter_id"], name: "index_updates_on_newsletter_id"
     t.index ["post_id"], name: "index_updates_on_post_id"
     t.index ["source_id"], name: "index_updates_on_source_id"
   end
@@ -349,26 +348,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_18_212816) do
   add_foreign_key "access_tokens", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "changelogs", "accounts"
   add_foreign_key "commits", "accounts"
   add_foreign_key "commits", "repositories"
   add_foreign_key "forbiddens", "sources"
   add_foreign_key "issues", "accounts"
   add_foreign_key "issues", "teams"
+  add_foreign_key "newsletters", "accounts"
   add_foreign_key "post_transitions", "posts"
   add_foreign_key "posts", "accounts"
-  add_foreign_key "posts", "changelogs"
+  add_foreign_key "posts", "newsletters"
   add_foreign_key "posts", "users"
   add_foreign_key "repositories", "access_tokens"
   add_foreign_key "repositories", "accounts"
   add_foreign_key "repository_transitions", "repositories"
   add_foreign_key "sources", "accounts"
-  add_foreign_key "sources", "changelogs"
+  add_foreign_key "sources", "newsletters"
   add_foreign_key "team_transitions", "teams"
   add_foreign_key "teams", "access_tokens"
   add_foreign_key "teams", "accounts"
   add_foreign_key "updates", "accounts"
-  add_foreign_key "updates", "changelogs"
+  add_foreign_key "updates", "newsletters"
   add_foreign_key "updates", "posts"
   add_foreign_key "updates", "sources"
   add_foreign_key "users", "accounts"

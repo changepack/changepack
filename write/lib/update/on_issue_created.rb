@@ -24,7 +24,7 @@ class Update
         type: :issue,
         name: title,
         account_id:,
-        changelog:,
+        newsletter:,
         issue_id:,
         source:,
         tags:
@@ -41,9 +41,9 @@ class Update
       @source ||= Source.find_by(team_id:)
     end
 
-    sig { returns Changelog }
-    def changelog
-      @changelog ||= Account.find(account_id).changelogs.first
+    sig { returns Newsletter }
+    def newsletter
+      @newsletter ||= Account.find(account_id).newsletters.first
     end
 
     sig { returns T::Array[String] }

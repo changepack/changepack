@@ -6,7 +6,7 @@ The `write` bounded context is responsible for managing and handling the creatio
 
 The `write` bounded context includes the following models:
 
-1. `Changelog`: Represents a changelog, which is a collection of posts documenting changes and updates.
+1. `Newsletter`: Represents a changelog, sent in a form of a newsletter, which is a collection of posts documenting changes and updates.
 2. `Post`: Represents a post within a changelog, containing content and metadata.
 3. `Publication`: A model that facilitates the creation and updating of posts, incorporating associated updates and managing their publication status.
 4. `Source`: Represents a source of updates, such as a repository or team, providing essential information for filtering and reporting purposes.

@@ -59,7 +59,7 @@ class Sydney
 
   private
 
-  delegate :account, to: :changelog
+  delegate :account, to: :newsletter
   delegate :name, to: :account, prefix: true
   delegate :description, to: :account, prefix: true
 
@@ -100,13 +100,13 @@ class Sydney
     updates.map { |update| "- #{update}" }.join("\n")
   end
 
-  sig { returns String }
+  sig { returns T.nilable(String) }
   def audience
-    @audience ||= changelog.about_audience || I18n.t("audiences.#{changelog.audience}").downcase
+    @audience ||= newsletter.audience
   end
 
-  sig { returns Changelog }
-  def changelog
-    @changelog ||= update.is_a?(Update) ? update.changelog : updates.first.changelog
+  sig { returns Newsletter }
+  def newsletter
+    @newsletter ||= update.is_a?(Update) ? update.newsletter : updates.first.newsletter
   end
 end

@@ -35,7 +35,7 @@ The following event handlers handle inbound communication:
 
 ## Outbound Communication
 
-The `connect` context sends out events as a result of changes in its state or as a response to certain actions. Other contexts can listen to these events and react accordingly. The connect context primarily collaborates with the `write` context as a source of updates that can be attached to posts and changelogs.
+The `connect` context sends out events as a result of changes in its state or as a response to certain actions. Other contexts can listen to these events and react accordingly. The connect context primarily collaborates with the `write` context as a source of updates that can be attached to posts and newsletters.
 
 For all Create, Update, and Destroy (CRUD) actions, except Read, the `connect` context sends out corresponding events. These events include:
 

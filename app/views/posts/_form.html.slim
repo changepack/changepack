@@ -4,11 +4,11 @@
     - post.errors.full_messages_for(:title).each do |error_message|
       .error = error_message
 
-  - if changelogs.count > 1
+  - if newsletters.count > 1
     .my-5
-      = form.collection_select :changelog_id, changelogs, \
-        :id, :name, { include_blank: 'Select a changelog' }, \
-        class: 'input string', required: true, data: { test_id: 'changelog' }
+      = form.collection_select :newsletter_id, newsletters, \
+        :id, :name, { include_blank: 'Select a newsletter' }, \
+        class: 'input string', required: true, data: { test_id: 'newsletter' }
 
   .my-5
     = form.rich_text_area :content, class: post.content_field_class, data: { test_id: 'content' }, autofocus: true

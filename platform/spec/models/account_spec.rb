@@ -12,7 +12,7 @@ describe Account do
   it { is_expected.to have_many(:updates).dependent(:destroy) }
   it { is_expected.to have_many(:teams).dependent(:destroy) }
   it { is_expected.to have_many(:issues).dependent(:destroy) }
-  it { is_expected.to have_many(:changelogs).dependent(:destroy) }
+  it { is_expected.to have_many(:newsletters).dependent(:destroy) }
   it { is_expected.to have_many(:access_tokens).dependent(:destroy) }
   it { is_expected.to have_one_attached(:picture) }
 

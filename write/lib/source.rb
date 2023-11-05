@@ -18,7 +18,7 @@ class Source < ApplicationRecord
   attribute :status, :string, default: :inactive
 
   belongs_to :account
-  belongs_to :changelog, optional: true
+  belongs_to :newsletter, optional: true
   # We are violating the guideline of avoiding cross-domain model references here,
   # as sources, repositories, and teams typically change in tandem. Our goal is to
   # prevent the added complexity of caching other attributes from repositories

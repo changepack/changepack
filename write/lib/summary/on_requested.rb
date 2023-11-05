@@ -7,12 +7,12 @@ class Summary
 
     sig { override.returns T.nilable(Post) }
     def run
-      Summary.new(changelog:).save if changelog.present?
+      Summary.new(newsletter:).save if newsletter.present?
     end
 
-    sig { returns T.nilable(Changelog) }
-    def changelog
-      Changelog.find_by(id: event.changelog_id)
+    sig { returns T.nilable(Newsletter) }
+    def newsletter
+      Newsletter.find_by(id: event.newsletter_id)
     end
   end
 end

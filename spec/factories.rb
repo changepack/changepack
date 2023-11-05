@@ -44,14 +44,14 @@ FactoryBot.define do
       type { 'repository' }
       account { repository.account }
       repository
-      changelog { association :changelog, account: repository.account }
+      newsletter { association :newsletter, account: repository.account }
     end
 
     trait :team do
       type { 'team' }
       account { team.account }
       team
-      changelog { association :changelog, account: team.account }
+      newsletter { association :newsletter, account: team.account }
     end
   end
 
@@ -63,7 +63,7 @@ FactoryBot.define do
       type { 'commit' }
       account { commit.account }
       source { association :source, :repository, repository: commit.repository }
-      changelog { association :changelog, account: commit.account }
+      newsletter { association :newsletter, account: commit.account }
       sourced_at { commit.commited_at }
       commit
     end
@@ -72,7 +72,7 @@ FactoryBot.define do
       type { 'issue' }
       account { issue.account }
       source { association :source, :team, team: issue.team }
-      changelog { association :changelog, account: issue.account }
+      newsletter { association :newsletter, account: issue.account }
       sourced_at { issue.issued_at }
       issue
     end
@@ -96,7 +96,7 @@ FactoryBot.define do
     end
   end
 
-  factory :changelog do
+  factory :newsletter do
     name { account.name }
     account
   end
@@ -131,7 +131,7 @@ FactoryBot.define do
     trait :production do
       name { 'Changepack' }
       description do
-        'Changepack is an open-source changelog for your product. Share updates about new features with your customers and keep people in the loop!' # rubocop:disable Layout/LineLength
+        'Changepack sends you or your company a brief update on what your team shipped last week, every week, powered by ChatGPT. Share news about changes and features with your teammates and keep people in the loop!' # rubocop:disable Layout/LineLength
       end
     end
   end
@@ -163,7 +163,7 @@ FactoryBot.define do
   factory :post do
     user
     account { user.account }
-    changelog { association :changelog, account: }
+    newsletter { association :newsletter, account: }
     title { Faker::Lorem.sentence }
     content { Faker::Lorem.paragraph }
 

@@ -22,21 +22,21 @@ module RoutesHelper
     end
   end
 
-  sig { params(changelog: Changelog).returns(String) }
-  def scoped_changelog_path(changelog)
+  sig { params(newsletter: Newsletter).returns(String) }
+  def scoped_newsletter_path(newsletter)
     if request.subdomain.present?
-      domain_changelog_path(changelog)
+      domain_newsletter_path(newsletter)
     else
-      account_changelog_path(changelog.account, changelog)
+      account_newsletter_path(newsletter.account, newsletter)
     end
   end
 
-  sig { params(changelog: Changelog).returns(String) }
-  def scoped_changelog_url(changelog)
+  sig { params(newsletter: Newsletter).returns(String) }
+  def scoped_newsletter_url(newsletter)
     if request.subdomain.present?
-      domain_changelog_url(changelog)
+      domain_newsletter_url(newsletter)
     else
-      account_changelog_url(changelog.account, changelog)
+      account_newsletter_url(newsletter.account, newsletter)
     end
   end
 end

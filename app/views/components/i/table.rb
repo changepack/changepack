@@ -84,7 +84,7 @@ module I
     def search
       div class: 'w-full md:w-1/2' do
         span class: 'font-normal text-gray-500' do
-          'Add, edit, or remove your changelogs'
+          'Add, edit, or remove your newsletters'
         end
         # Replace with search later
       end
@@ -93,7 +93,7 @@ module I
     def actions
       div class: actions_classes do
         button class: 'button-1' do
-          'Add changelog'
+          'Add newsletter'
         end
         # Add other actions here
       end

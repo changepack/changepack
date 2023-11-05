@@ -13,7 +13,7 @@ class Update
         commit_id: event.id,
         name: event.message,
         type: :commit,
-        changelog:,
+        newsletter:,
         source:,
         tags:
       )
@@ -24,9 +24,9 @@ class Update
       @source ||= Source.find_by(repository_id: event.repository_id)
     end
 
-    sig { returns Changelog }
-    def changelog
-      @changelog ||= Account.find(event.account_id).changelogs.first
+    sig { returns Newsletter }
+    def newsletter
+      @newsletter ||= Account.find(event.account_id).newsletters.first
     end
 
     sig { returns T::Array[String] }

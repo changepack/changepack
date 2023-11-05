@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       root to: 'accounts#show'
 
       resources :posts, only: :show
-      resources :changelogs, only: :show, path: ''
+      resources :newsletters, only: :show, path: ''
     end
   end
 
@@ -26,7 +26,6 @@ Rails.application.routes.draw do
     root 'accounts#index'
 
     resources :accounts, only: :index
-    resources :changelogs
     resources :posts, except: :show do
       member do
         get :confirm_destroy
@@ -62,12 +61,12 @@ Rails.application.routes.draw do
     mount Lookbook::Engine, at: "/lookbook"
   end
 
-  # Both a public and a private URL to your changelog.
+  # Both a public and a private URL to your newsletter.
   # Has to be at the end so that all other routes are matched first.
   scope path: ':account_id', as: :account do
     root 'accounts#show', as: ''
 
     resources :posts, only: :show
-    resources :changelogs, only: :show, path: ''
+    resources :newsletters, only: :show, path: ''
   end
 end

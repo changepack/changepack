@@ -12,7 +12,7 @@ class Publication
   attribute :content, :string
   attribute :published, :boolean, default: false
   attribute :updates, array: true, default: -> { [] }
-  attribute :changelog_id, :string
+  attribute :newsletter_id, :string
   attribute :post, T.instance(Post), default: -> { Post.new }
   attribute :account, T.instance(Account)
   attribute :user, T.instance(User)
@@ -40,7 +40,7 @@ class Publication
   def to_post
     {
       content: completion || content,
-      changelog:,
+      newsletter:,
       account:,
       title:,
       user:
@@ -61,8 +61,8 @@ class Publication
     content.present? || updates.blank?
   end
 
-  sig { returns Changelog }
-  def changelog
-    @changelog ||= account.changelogs.find_by(id: changelog_id) || account.changelogs.first!
+  sig { returns Newsletter }
+  def newsletter
+    @newsletter ||= account.newsletters.find_by(id: newsletter_id) || account.newsletters.first!
   end
 end

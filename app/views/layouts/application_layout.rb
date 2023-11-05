@@ -63,14 +63,13 @@ class ApplicationLayout < ApplicationView
     end
   end
 
-  def navigation # rubocop:disable Metrics/AbcSize
+  def navigation
     header class: 'lg:container mx-auto' do
       navigation = I::Navigation.new(brand:) do |nav|
         next if skip_navigation?
 
         nav.link_to 'Home', root_path, active: home?
         nav.link_to 'Compose', new_post_path, active: compose?
-        nav.link_to 'Changelogs', changelogs_path, active: changelogs?
         nav.link_to 'Connections', sources_path, active: sources?
       end
 
@@ -120,10 +119,6 @@ class ApplicationLayout < ApplicationView
 
   def compose?
     helpers.current_controller.in? %i[posts]
-  end
-
-  def changelogs?
-    helpers.current_controller.in? %i[changelogs]
   end
 
   def settings

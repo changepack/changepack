@@ -14,15 +14,15 @@ class Source
         type: :repository,
         repository_id:,
         account_id:,
-        changelog:,
+        newsletter:,
         status:,
         name:
       )
     end
 
-    sig { returns Changelog }
-    def changelog
-      @changelog ||= Account.find(account_id).changelogs.first
+    sig { returns Newsletter }
+    def newsletter
+      @newsletter ||= Account.find(account_id).newsletters.first
     end
   end
 end

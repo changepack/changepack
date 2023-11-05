@@ -5,7 +5,7 @@ require 'rails_helper'
 
 RSpec.describe RoutesHelper do
   let(:post) { create(:post) }
-  let(:changelog) { create(:changelog) }
+  let(:newsletter) { create(:newsletter) }
 
   describe '#scoped_post_path' do
     it 'returns domain post path when subdomain is present' do
@@ -31,27 +31,27 @@ RSpec.describe RoutesHelper do
     end
   end
 
-  describe '#scoped_changelog_path' do
-    it 'returns domain changelog path when subdomain is present' do
+  describe '#scoped_newsletter_path' do
+    it 'returns domain newsletter path when subdomain is present' do
       allow(request).to receive(:subdomain).and_return('subdomain')
-      expect(scoped_changelog_path(changelog)).to eq(domain_changelog_path(changelog))
+      expect(scoped_newsletter_path(newsletter)).to eq(domain_newsletter_path(newsletter))
     end
 
-    it 'returns account changelog path when subdomain is not present' do
+    it 'returns account newsletter path when subdomain is not present' do
       allow(request).to receive(:subdomain).and_return('')
-      expect(scoped_changelog_path(changelog)).to eq(account_changelog_path(changelog.account, changelog))
+      expect(scoped_newsletter_path(newsletter)).to eq(account_newsletter_path(newsletter.account, newsletter))
     end
   end
 
-  describe '#scoped_changelog_url' do
-    it 'returns domain changelog url when subdomain is present' do
+  describe '#scoped_newsletter_url' do
+    it 'returns domain newsletter url when subdomain is present' do
       allow(request).to receive(:subdomain).and_return('subdomain')
-      expect(scoped_changelog_url(changelog)).to eq(domain_changelog_url(changelog))
+      expect(scoped_newsletter_url(newsletter)).to eq(domain_newsletter_url(newsletter))
     end
 
-    it 'returns account changelog url when subdomain is not present' do
+    it 'returns account newsletter url when subdomain is not present' do
       allow(request).to receive(:subdomain).and_return('')
-      expect(scoped_changelog_url(changelog)).to eq(account_changelog_url(changelog.account, changelog))
+      expect(scoped_newsletter_url(newsletter)).to eq(account_newsletter_url(newsletter.account, newsletter))
     end
   end
 end

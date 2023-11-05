@@ -95,7 +95,7 @@ class PostsController < ApplicationController
       locals: {
         post: post.decorate,
         updates: updates.decorate,
-        changelogs: current_account.changelogs
+        newsletters: current_account.newsletters
       }
     }
   end

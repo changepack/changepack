@@ -33,7 +33,7 @@ module I
     def title
       a href: account_path(account) do
         h1 class: 'font-semibold text-5xl' do
-          plain 'Changelog'
+          plain 'Newsletter'
         end
 
         h2 class: 'mt-8 dimmed text-md md:text-lg' do

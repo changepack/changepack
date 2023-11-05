@@ -12,7 +12,7 @@ class Post < ApplicationRecord
   attribute :status, :string, default: :draft
 
   belongs_to :user, optional: true
-  belongs_to :changelog
+  belongs_to :newsletter
   belongs_to :account
 
   has_many :updates, dependent: :nullify
@@ -37,7 +37,7 @@ class Post < ApplicationRecord
   }
 
   before_save do
-    self.account ||= changelog.account
+    self.account ||= newsletter.account
   end
 
   sig { returns String }

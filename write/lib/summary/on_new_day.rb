@@ -7,10 +7,10 @@ class Summary
 
     sig { override.returns T::Array[Event] }
     def run
-      Changelog.pluck(:id)
-               .select { event.day > 1 }
-               .map { |changelog_id| Summary::Requested.new(changelog_id:) }
-               .each { |event| Event.publish(event) }
+      Newsletter.pluck(:id)
+                .select { event.day > 1 }
+                .map { |newsletter_id| Summary::Requested.new(newsletter_id:) }
+                .each { |event| Event.publish(event) }
     end
   end
 end

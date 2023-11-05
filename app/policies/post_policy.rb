@@ -7,7 +7,7 @@ class PostPolicy < ApplicationPolicy
   alias_rule :new?, to: :create?
 
   params_filter do |params|
-    params.permit(:title, :content, :changelog_id, :published, updates: [])
+    params.permit(:title, :content, :newsletter_id, :published, updates: [])
   end
 
   def show?

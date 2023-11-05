@@ -5,9 +5,9 @@ require 'rails_helper'
 
 describe Summary, :vcr do
   describe '#save' do
-    subject(:summary) { described_class.new(changelog:) }
+    subject(:summary) { described_class.new(newsletter:) }
 
-    let(:changelog) { create(:changelog, account:) }
+    let(:newsletter) { create(:newsletter, account:) }
     let(:account) { create(:account, :production) }
 
     context 'when there are no updates' do
@@ -20,7 +20,7 @@ describe Summary, :vcr do
       # Deterministic ID required for the API call
       let(:id) { 'upd_mj9Esq4bdtpY' }
 
-      before { create(:update, :commit, :production, account:, changelog:, id:) }
+      before { create(:update, :commit, :production, account:, newsletter:, id:) }
 
       it 'saves the summary' do
         expect(summary.save).to be_truthy

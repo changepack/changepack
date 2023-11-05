@@ -13,16 +13,16 @@ class Source
       Source.create(
         type: :team,
         account_id:,
-        changelog:,
+        newsletter:,
         team_id:,
         status:,
         name:
       )
     end
 
-    sig { returns Changelog }
-    def changelog
-      @changelog ||= Account.find(account_id).changelogs.first
+    sig { returns Newsletter }
+    def newsletter
+      @newsletter ||= Account.find(account_id).newsletters.first
     end
   end
 end

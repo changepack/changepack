@@ -18,7 +18,7 @@ class Account < ApplicationRecord
 
   has_many :posts, dependent: :destroy
   has_many :updates, dependent: :destroy
-  has_many :changelogs, dependent: :destroy
+  has_many :newsletters, dependent: :destroy
 
   has_many :access_tokens, dependent: :destroy
   has_many :repositories, dependent: :destroy
@@ -35,7 +35,7 @@ class Account < ApplicationRecord
   normalize :name
 
   after_create do
-    changelogs << Changelog.new
+    newsletters << Newsletter.new
     api_keys << API::Key.new
   end
 
