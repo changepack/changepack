@@ -5,8 +5,6 @@ class Account < ApplicationRecord
   include Domain
   include Slug
 
-  PICTURES = %w[image/jpeg image/png image/gif].freeze
-
   key :acc
 
   attribute :name, :string
@@ -27,6 +25,8 @@ class Account < ApplicationRecord
   has_many :issues, dependent: :destroy
 
   has_one_attached :picture
+
+  PICTURES = %w[image/jpeg image/png image/gif].freeze
 
   validates :website, url: true, allow_blank: true
   validates :picture, file_size: { less_than_or_equal_to: 1.megabyte },

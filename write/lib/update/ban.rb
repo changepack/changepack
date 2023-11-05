@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 class Update
-  module Forbid
+  module Ban
     extend ActiveSupport::Concern
     extend T::Helpers
     extend T::Sig
@@ -15,11 +15,11 @@ class Update
 
     sig { overridable.returns T.nilable(ActiveModel::Error) }
     def valid_tags
-      forbidden = source.try(:forbiddens).try(:map, &:content) || []
+      banned = source.try(:banneds).try(:map, &:content) || []
 
-      return if forbidden.none? { |regexp| tags.any? { |tag| tag =~ Regexp.new(regexp) } }
+      return if banned.none? { |regexp| tags.any? { |tag| tag =~ Regexp.new(regexp) } }
 
-      errors.add(:tags, 'match a forbidden keyword')
+      errors.add(:tags, 'match a banned keyword')
     end
   end
 end

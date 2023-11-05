@@ -3,8 +3,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Forbidden do
-  subject { build(:forbidden) }
+RSpec.describe Banned do
+  subject { build(:banned) }
 
   it { is_expected.to validate_presence_of(:type) }
   it { is_expected.to validate_presence_of(:content) }

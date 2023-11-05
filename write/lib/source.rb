@@ -2,10 +2,8 @@
 # frozen_string_literal: true
 
 class Source < ApplicationRecord
-  include Forbid
   include Active
-
-  TYPES = %w[repository team].freeze
+  include Ban
 
   key :src
 
@@ -27,6 +25,8 @@ class Source < ApplicationRecord
   belongs_to :team, optional: true
 
   has_many :updates, dependent: :destroy
+
+  TYPES = %w[repository team].freeze
 
   validates :name, presence: true
   validates :type, presence: true, inclusion: { in: TYPES }

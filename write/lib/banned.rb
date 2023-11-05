@@ -1,8 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-class Forbidden < ApplicationRecord
-  TYPES = %w[email].freeze
+class Banned < ApplicationRecord
+  self.table_name = 'banned_items'
 
   key :fbd
 
@@ -11,13 +11,15 @@ class Forbidden < ApplicationRecord
 
   belongs_to :source
 
+  TYPES = %w[email].freeze
+
   validates :type, presence: true, inclusion: { in: TYPES }
   validates :content, presence: true, uniqueness: { scope: %i[type source_id] }
 
   inquirer :type
   delegate :email?, to: :type
 
-  sig { returns T::Array[Forbidden] }
+  sig { returns T::Array[Banned] }
   def self.defaults
     [
       new(type: 'email', content: 'dependabot')

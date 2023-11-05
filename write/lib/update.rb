@@ -3,10 +3,8 @@
 
 class Update < ApplicationRecord
   include Options
-  include Forbid
   include Events
-
-  TYPES = %w[commit issue].freeze
+  include Ban
 
   key :upd
 
@@ -32,6 +30,8 @@ class Update < ApplicationRecord
   # issues, which you can reference directly.
   belongs_to :commit, optional: true
   belongs_to :issue, optional: true
+
+  TYPES = %w[commit issue].freeze
 
   validates :name, presence: true
   validates :type, presence: true, inclusion: { in: TYPES }
