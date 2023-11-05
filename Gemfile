@@ -60,7 +60,7 @@ group :development, :test do
 
   gem "rubocop", require: false
 
-  gem "cypress-on-rails"
+  gem "cypress-on-rails", '~> 1.14.0'
 
   gem "factory_bot_rails"
 
@@ -201,6 +201,8 @@ gem "sentry-ruby"
 gem "sentry-rails"
 
 gem "graphql-client"
+
+gem "graphql", ">= 2.0.27", "< 2.1"
 
 gem "omniauth-linear", github: "changepack/omniauth-linear"
 

@@ -243,7 +243,7 @@ GEM
       raabro (~> 1.4)
     globalid (1.1.0)
       activesupport (>= 5.0)
-    graphql (2.0.22)
+    graphql (2.0.27)
     graphql-client (0.18.0)
       activesupport (>= 3.0)
       graphql
@@ -665,7 +665,7 @@ DEPENDENCIES
   brakeman
   bullet
   climate_control
-  cypress-on-rails
+  cypress-on-rails (~> 1.14.0)
   database_cleaner-active_record
   debug
   devise
@@ -680,6 +680,7 @@ DEPENDENCIES
   file_validators
   font-awesome-rails
   friendly_id
+  graphql (>= 2.0.27, < 2.1)
   graphql-client
   guard
   guard-livereload
