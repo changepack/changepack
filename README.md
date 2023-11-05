@@ -12,10 +12,9 @@ Changepack sends you or your company a brief update on what your team shipped la
 
 ## Features
 
-* **Write release notes 10x faster with AI.** Leverage OpenAI’s [ChatGPT](https://openai.com/blog/chatgpt) to publish your content in seconds.
+* **Weekly summaries.** Each week, Changepack handpicks the most notable updates and emails you a release note. We leverage OpenAI’s [ChatGPT](https://openai.com/blog/chatgpt) to publish your content in seconds.
 * **Pull commits from GitHub.** Changepack allows you to link changelogs with your GitHub activity, making it easy to track progress. (GitLab coming soon!)
 * **Retrieve issues from Linear.** We connect changelogs to project management tools of your choice, allowing ChatGPT to stay informed about your current tasks. (Other tools coming soon.)
-* **Weekly summaries.** Each week, Changepack handpicks the most notable updates and emails you a release note.
 
 ## Build and run locally
 
