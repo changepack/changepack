@@ -17,7 +17,7 @@ module Users
       params.require(:user).permit(
         :email,
         :password,
-        :password_confirmations
+        :password_confirmation
       )
     end
 

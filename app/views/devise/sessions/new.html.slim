@@ -4,7 +4,8 @@
     p.text-gray-500 Sign in to your account
 
   .m-7
-    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form' }) do |f|
+    / slim-lint:disable LineLength
+    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form' }, data: { turbo: false }) do |f|
       .mb-6
         = f.label :email, class: 'label' do
           | Email address
@@ -16,5 +17,6 @@
 
       .mb-6
         = f.submit 'Continue', class: 'w-full button-1 px-2 py-3'
+    / slim-lint:enable LineLength
 
     = render 'devise/shared/links'

@@ -10,7 +10,7 @@ class User < ApplicationRecord
   attribute :name, :string
   attribute :email, :string
 
-  belongs_to :account
+  belongs_to :account, optional: true
   has_many :posts, dependent: :nullify
   has_many :access_tokens, dependent: :destroy
 

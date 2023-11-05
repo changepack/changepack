@@ -3,7 +3,8 @@
     h1.my-3.text-3xl.font-semibold.text-gray-700 Create your account
 
   .m-7
-    = form_for(resource, as: resource_name, url: user_registration_path, html: { class: 'form' }) do |f|
+    / slim-lint:disable LineLength
+    = form_for(resource, as: resource_name, url: user_registration_path, html: { class: 'form' }, data: { turbo: false }) do |f|
       = render 'devise/shared/error_messages', resource:
 
       .mb-6
@@ -25,5 +26,5 @@
 
       .mb-6
         = f.submit 'Continue', class: 'w-full button-1 px-2 py-3'
-
+    / slim-lint:enable LineLength
     = render 'devise/shared/links'
