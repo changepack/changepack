@@ -4,7 +4,7 @@
 class Banned < ApplicationRecord
   self.table_name = 'banned_items'
 
-  key :fbd
+  key :ban
 
   attribute :type, :string
   attribute :content, :string
