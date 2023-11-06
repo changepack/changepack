@@ -1,7 +1,6 @@
 # typed: false
 # frozen_string_literal: true
 
-# Rename to `Newsletter`
 class Newsletter < ApplicationRecord
   include Slug
 
