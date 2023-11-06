@@ -2,7 +2,9 @@
 # frozen_string_literal: true
 
 class AccountPolicy < ApplicationPolicy
-  def index?
+  alias_rule :index?, to: :show?
+
+  def show?
     user.present?
   end
 end

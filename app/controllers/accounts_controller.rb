@@ -2,34 +2,19 @@
 # frozen_string_literal: true
 
 class AccountsController < ApplicationController
-  skip_before_action :authenticate_user!, only: :show
-  skip_verify_authorized only: :show
-
-  visited :account
-
   def index
     authorize! and redirect_to current_account
   end
 
   def show
-    render locals: { account:, posts: }
+    authorize! account and render locals: { account:, posts: }
   end
 
   private
 
   sig { returns Account }
   def account
-    @account ||= domain || friendly_id
-  end
-
-  sig { returns T.nilable(Account) }
-  def domain
-    Account.find_by(domain: request.host)
-  end
-
-  sig { returns Account }
-  def friendly_id
-    Account.kept.friendly.find(id)
+    @account ||= Account.kept.friendly.find(id)
   end
 
   sig { returns Post::RelationType }

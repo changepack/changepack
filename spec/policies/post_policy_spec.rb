@@ -24,7 +24,7 @@ describe PostPolicy, type: :policy do
 
   describe_rule :show? do
     succeed 'with a user'
-    succeed 'without a user' do
+    failed 'without a user' do
       let(:user) { nil }
     end
   end

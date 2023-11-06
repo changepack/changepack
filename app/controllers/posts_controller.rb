@@ -2,20 +2,14 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
-  skip_before_action :authenticate_user!, only: :show
   before_action :set_new_post, only: %i[new create]
-
-  skip_verify_authorized only: :show
-
-  delegate :account, to: :post
-  visited :account
 
   def index
     authorize! and redirect_to current_account
   end
 
   def show
-    render item
+    authorize! post and render item
   end
 
   def new
@@ -65,7 +59,7 @@ class PostsController < ApplicationController
 
   sig { returns Post }
   def post
-    @post ||= Post.kept.friendly.find(id)
+    @post ||= authorized(Post.all).kept.friendly.find(id)
   end
 
   sig { returns Update::RelationType }

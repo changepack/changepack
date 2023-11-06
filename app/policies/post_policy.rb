@@ -6,12 +6,16 @@ class PostPolicy < ApplicationPolicy
   alias_rule :index?, to: :show?
   alias_rule :new?, to: :create?
 
+  relation_scope do |relation|
+    relation.where(account_id: user.account_id)
+  end
+
   params_filter do |params|
     params.permit(:title, :content, :newsletter_id, :published, updates: [])
   end
 
   def show?
-    true
+    user.present?
   end
 
   def create?

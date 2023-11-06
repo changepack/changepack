@@ -15,18 +15,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :user_signed_out?
   helper_method :current_account
-  helper_method :visited_account?
-  helper_method :visited_account
   helper_method :disallowed_to?
   helper_method :pagy_array
   helper_method :pagy
 
   layout -> { ApplicationLayout }
-
-  sig { params(visited: T::Key, only: T.nilable(T::Key)).returns T::Array[T.nilable(T::Key)] }
-  def self.visited(visited, only: nil)
-    @_visited = [visited, only]
-  end
 
   private
 
@@ -38,23 +31,6 @@ class ApplicationController < ActionController::Base
   sig { returns T.nilable(Account) }
   def current_account
     @current_account ||= current_user.account if user_signed_in?
-  end
-
-  sig { returns T.nilable(Account) }
-  def visited_account
-    @visited_account ||= self.class
-                             .instance_variable_get(:@_visited)
-                             .then { |visited, only| send(visited) if visited.present? && only?(only) }
-  end
-
-  sig { params(only: T.nilable(T::Key)).returns(T::Boolean) }
-  def only?(only)
-    only.blank? || action_name.to_sym == only.to_sym
-  end
-
-  sig { returns T::Boolean }
-  def visited_account?
-    visited_account.present? && visited_account != current_account
   end
 
   sig { returns T.nilable(String) }

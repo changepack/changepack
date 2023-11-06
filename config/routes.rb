@@ -6,15 +6,6 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  constraints Domain do
-    scope as: :domain do
-      root to: 'accounts#show'
-
-      resources :posts, only: :show
-      resources :newsletters, only: :show, path: ''
-    end
-  end
-
   namespace :api do
     namespace :v1 do
       resources :posts, only: :create
@@ -26,7 +17,7 @@ Rails.application.routes.draw do
     root 'accounts#index'
 
     resources :accounts, only: :index
-    resources :posts, except: :show do
+    resources :posts do
       member do
         get :confirm_destroy
       end
@@ -47,7 +38,9 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'posts/:id', to: 'posts#show', as: :deprecated_post
+  scope path: ':account_id', as: :account do
+    root 'accounts#show', as: ''
+  end
 
   mount Sidekiq::Web => 'sidekiq'
 
@@ -59,14 +52,5 @@ Rails.application.routes.draw do
 
   if Rails.env.development?
     mount Lookbook::Engine, at: "/lookbook"
-  end
-
-  # Both a public and a private URL to your newsletter.
-  # Has to be at the end so that all other routes are matched first.
-  scope path: ':account_id', as: :account do
-    root 'accounts#show', as: ''
-
-    resources :posts, only: :show
-    resources :newsletters, only: :show, path: ''
   end
 end

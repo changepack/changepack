@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 class Account < ApplicationRecord
-  include Domain
   include Slug
 
   key :acc
