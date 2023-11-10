@@ -27,9 +27,6 @@ class Post < ApplicationRecord
   inquirer :status
   delegate :draft?, :published?, to: :status
 
-  scope :for, ->(user) { where(user.blank? && { status: :published }) },
-        sig: T.proc.params(user: T.nilable(User))
-
   scope :recent, lambda {
     order(
       Arel.sql('COALESCE(published_at, created_at) DESC')

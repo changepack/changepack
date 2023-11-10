@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
 
   authenticate do
-    root 'accounts#index'
+    root 'posts#index'
 
     resources :accounts, only: :index
     resources :posts do
@@ -36,10 +36,6 @@ Rails.application.routes.draw do
         get :confirm_update
       end
     end
-  end
-
-  scope path: ':account_id', as: :account do
-    root 'accounts#show', as: ''
   end
 
   mount Sidekiq::Web => 'sidekiq'

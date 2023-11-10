@@ -4,6 +4,20 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :notification do
+    type { :welcome }
+    channels { %w[email web] }
+    account
+  end
+
+  factory :delivery, class: 'Notification::Delivery' do
+    notification
+    user { association :user, account: notification.account }
+    queued_at { nil }
+    sent_at { nil }
+    channel { 'email' }
+  end
+
   factory :api_image, class: 'API::Image' do
     file do
       Rack::Test::UploadedFile.new(

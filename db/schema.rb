@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_06_211440) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_09_223451) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -181,6 +181,27 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_06_211440) do
     t.index ["account_id"], name: "index_newsletters_on_account_id"
   end
 
+  create_table "notification_deliveries", id: :string, force: :cascade do |t|
+    t.string "notification_id", null: false
+    t.string "user_id", null: false
+    t.datetime "queued_at"
+    t.datetime "sent_at"
+    t.string "channel", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notification_id"], name: "index_notification_deliveries_on_notification_id"
+    t.index ["user_id"], name: "index_notification_deliveries_on_user_id"
+  end
+
+  create_table "notifications", id: :string, force: :cascade do |t|
+    t.string "type", null: false
+    t.string "channels", default: ["email", "web"], null: false, array: true
+    t.string "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_notifications_on_account_id"
+  end
+
   create_table "post_transitions", id: :string, force: :cascade do |t|
     t.string "to_state", null: false
     t.jsonb "metadata", default: {}
@@ -348,6 +369,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_06_211440) do
   add_foreign_key "issues", "accounts"
   add_foreign_key "issues", "teams"
   add_foreign_key "newsletters", "accounts"
+  add_foreign_key "notification_deliveries", "notifications"
+  add_foreign_key "notification_deliveries", "users"
+  add_foreign_key "notifications", "accounts"
   add_foreign_key "post_transitions", "posts"
   add_foreign_key "posts", "accounts"
   add_foreign_key "posts", "newsletters"

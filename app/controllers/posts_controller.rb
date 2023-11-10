@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   before_action :set_new_post, only: %i[new create]
 
   def index
-    authorize! and redirect_to current_account
+    authorize! and render locals: { posts: }
   end
 
   def show
@@ -56,6 +56,15 @@ class PostsController < ApplicationController
   end
 
   private
+
+  sig { returns Post::RelationType }
+  def posts
+    @posts ||= authorized(Post.all)
+               .kept
+               .recent
+               .with_rich_text_content_and_embeds
+               .includes(:user)
+  end
 
   sig { returns Post }
   def post
