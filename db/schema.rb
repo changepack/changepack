@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_09_223451) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_10_210028) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -199,7 +199,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_09_223451) do
     t.string "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "category", null: false
+    t.string "title", null: false
+    t.string "body", null: false
+    t.string "summary", null: false
+    t.jsonb "data", default: {}, null: false
+    t.string "url"
+    t.string "subject_type"
+    t.bigint "subject_id"
     t.index ["account_id"], name: "index_notifications_on_account_id"
+    t.index ["subject_type", "subject_id"], name: "index_notifications_on_subject"
   end
 
   create_table "post_transitions", id: :string, force: :cascade do |t|

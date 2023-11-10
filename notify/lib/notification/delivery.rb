@@ -3,7 +3,7 @@
 
 class Notification
   class Delivery < ApplicationRecord
-    key :ntd
+    key :ntfd
 
     belongs_to :notification
     belongs_to :user
