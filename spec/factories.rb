@@ -28,7 +28,7 @@ FactoryBot.define do
   end
 
   factory :delivery, class: 'Notification::Delivery' do
-    notification
+    notification { association :notification, :custom }
     user { association :user, account: notification.account }
     queued_at { nil }
     sent_at { nil }

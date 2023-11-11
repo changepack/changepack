@@ -1,0 +1,13 @@
+p Hey there,
+
+p
+  strong = @notification.title
+  br
+  = @notification.summary
+
+p = @notification.body
+
+p
+  ' Best regards,
+  br
+  = ENV.fetch('APP_NAME')
