@@ -12,7 +12,7 @@ class Summary
 
   extend T::Sig
 
-  PERIOD = 4.weeks
+  PERIOD = 1.week
   ENOUGH = 100
 
   attribute :newsletter, T.instance(Newsletter)
@@ -28,13 +28,18 @@ class Summary
     return false if invalid?
 
     publication.save
-    after_commit { notify if post.valid? }
+    notify if post.valid?
 
-    true
+    post.valid?
   end
 
   def notify
-    SummaryMailer.with(post:).notify.deliver_later
+    Notification.create!(
+      body: post.content.to_s,
+      recipient: account,
+      category: 'write',
+      type: 'summary'
+    )
   end
 
   private

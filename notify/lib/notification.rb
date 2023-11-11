@@ -37,10 +37,22 @@ class Notification < ApplicationRecord
   inquirer :category
   inquirer :type
 
-  before_create :assign_attributes_from_template
+  before_validation on: :create do
+    assign_template
+    assign_account_from_recipient
+    assign_attributes_from_template
+  end
+
   after_create :create_deliveries_from_recipient
 
   private
+
+  sig { returns T.nilable(Notification::Template) }
+  def assign_template
+    return if category.blank? || type.blank?
+
+    self.template ||= Notification::Template.find_by(category:, type:)
+  end
 
   sig { returns Notification }
   def assign_attributes_from_template # rubocop:disable Metrics/AbcSize
@@ -54,6 +66,11 @@ class Notification < ApplicationRecord
     self.summary ||= template.summary
 
     self
+  end
+
+  def assign_account_from_recipient
+    self.account ||= recipient.account if recipient.is_a?(User)
+    self.account ||= recipient if recipient.is_a?(Account)
   end
 
   sig { returns T::Array[User] }

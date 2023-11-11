@@ -20,14 +20,17 @@ describe Summary, :vcr do
       # Deterministic ID required for the API call
       let(:id) { 'upd_mj9Esq4bdtpY' }
 
-      before { create(:update, :commit, :production, account:, newsletter:, id:) }
+      before do
+        create(:template, category: :write, type: :summary)
+        create(:update, :commit, :production, account:, newsletter:, id:)
+      end
 
       it 'saves the summary' do
         expect(summary.save).to be_truthy
       end
 
       it 'sends an email' do
-        expect { summary.save }.to have_enqueued_email(SummaryMailer, :notify)
+        expect { summary.save }.to change(Notification, :count).by(1)
       end
     end
   end
