@@ -16,6 +16,6 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :account
 
-  normalize :name
-  normalize :email, with: %i[squish downcase]
+  normalizes :name, with: ->(name) { name.squish }
+  normalizes :email, with: ->(email) { email.squish.downcase }
 end

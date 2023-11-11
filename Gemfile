@@ -148,8 +148,6 @@ gem "devise"
 
 gem "paper_trail"
 
-gem "normalize_attributes"
-
 gem "action_policy"
 
 gem "rails_event_store"

@@ -22,7 +22,8 @@ class Team < ApplicationRecord
   validates :name, presence: true
   validates :schema, store_model: true
   validates :status, presence: true
-  normalize :name
+
+  normalizes :name, with: ->(name) { name.squish }
 
   inquirer :status
 

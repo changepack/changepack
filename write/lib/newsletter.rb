@@ -23,7 +23,7 @@ class Newsletter < ApplicationRecord
   end
 
   validates :name, presence: true
-  normalize :name
+  normalizes :name, with: ->(name) { name.squish }
 
   scope :desc, -> { order(created_at: :desc) }
 

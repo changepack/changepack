@@ -25,10 +25,11 @@ class Issue < ApplicationRecord
   validates :title, presence: true
   validates :assignee, store_model: true, allow_blank: true
   validates :issued_at, presence: true
-  normalize :title
-  normalize :description
-  normalize :branch
-  normalize :identifier
+
+  normalizes :title, with: ->(title) { title.squish }
+  normalizes :description, with: ->(description) { description.squish }
+  normalizes :branch, with: ->(branch) { branch.squish }
+  normalizes :identifier, with: ->(identifier) { identifier.squish }
 
   before_validation do
     self.account ||= team.try(:account)

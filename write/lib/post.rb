@@ -22,7 +22,7 @@ class Post < ApplicationRecord
   validates :title, length: { maximum: 140 }
   validates :content, presence: true
 
-  normalize :title
+  normalizes :title, with: ->(title) { title.squish }
 
   inquirer :status
   delegate :draft?, :published?, to: :status

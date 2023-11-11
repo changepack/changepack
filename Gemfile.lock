@@ -362,8 +362,6 @@ GEM
       racc (~> 1.4)
     nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
-    normalize_attributes (0.4.0)
-      activerecord
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -726,7 +724,6 @@ DEPENDENCIES
   letter_opener
   lookbook (>= 2.0.0)
   mock_redis
-  normalize_attributes
   octokit
   omniauth
   omniauth-github

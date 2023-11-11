@@ -4,7 +4,7 @@
 class Notification < ApplicationRecord
   key :ntf
 
-  CHANNELS = %w[email web].freeze
+  CHANNELS = %w[email].freeze
 
   # Categories are used to group notifications together, like `user`
   attribute :category, :string
@@ -16,7 +16,7 @@ class Notification < ApplicationRecord
   attribute :body, :string
   # Summaries are used to generate a preview of the notification
   attribute :summary, :string
-  attribute :channels, :string, array: true, default: CHANNELS
+  attribute :channel, :string, array: true, default: CHANNELS
   attribute :data, :jsonb, default: {}
   attribute :url, :string
 
@@ -29,8 +29,10 @@ class Notification < ApplicationRecord
   has_many :deliveries, dependent: :destroy
   has_many :users, -> { distinct }, through: :deliveries
 
-  validates :category, :type, :title, :body, :summary, :channels, presence: true
-  validates :channels, inclusion: { in: CHANNELS }
+  validates :category, :type, :title, :body, :summary, :channel, presence: true
+  validates :channel, inclusion: { in: CHANNELS }
+
+  normalizes :channel, with: ->(channel) { Array(channel).map(&:downcase) }
 
   inquirer :category
   inquirer :type
@@ -57,7 +59,7 @@ class Notification < ApplicationRecord
   sig { returns T::Array[User] }
   def create_deliveries_from_recipient
     recipients.each do |recipient|
-      channels.each do |channel|
+      channel.each do |channel|
         deliveries.create!(channel:, user: recipient)
       end
     end

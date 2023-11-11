@@ -31,7 +31,7 @@ class Account < ApplicationRecord
   validates :picture, file_size: { less_than_or_equal_to: 1.megabyte },
                       file_content_type: { allow: PICTURES }
 
-  normalize :name
+  normalizes :name, with: ->(name) { name.squish }
 
   after_create do
     newsletters << Newsletter.new

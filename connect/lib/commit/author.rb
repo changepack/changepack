@@ -13,7 +13,7 @@ class Commit
     # Example: 49699333+dependabot[bot]@users.noreply.github.com
     validates :email, presence: true
 
-    normalize :name
-    normalize :email
+    normalizes :name, with: ->(name) { name.squish }
+    normalizes :email, with: ->(email) { email.squish.downcase }
   end
 end

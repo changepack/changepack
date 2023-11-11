@@ -12,8 +12,8 @@ class Issue
     validates :name, presence: true
     validates :email, presence: true
 
-    normalize :name
-    normalize :email
+    normalizes :name, with: ->(name) { name.squish }
+    normalizes :email, with: ->(email) { email.squish.downcase }
 
     sig { returns T.nilable(String) }
     def linear

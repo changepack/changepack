@@ -13,7 +13,7 @@ FactoryBot.define do
   end
 
   factory :notification do
-    channels { %w[email web] }
+    channel { :email }
     account
     template
 
@@ -32,7 +32,7 @@ FactoryBot.define do
     user { association :user, account: notification.account }
     queued_at { nil }
     sent_at { nil }
-    channel { 'email' }
+    channel { :email }
   end
 
   factory :api_image, class: 'API::Image' do

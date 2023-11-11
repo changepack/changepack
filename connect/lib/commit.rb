@@ -22,7 +22,8 @@ class Commit < ApplicationRecord
   validates :commited_at, presence: true
   validates :author, presence: true, store_model: true
   validates :providers, presence: true, uniqueness: { scope: :repository_id }
-  normalize :message
+
+  normalizes :message, with: ->(message) { message.squish }
 
   before_validation do
     self.account ||= repository.try(:account)

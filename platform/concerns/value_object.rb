@@ -11,7 +11,8 @@ module ValueObject
   included do
     include StoreModel::Model
     include ActiveModel::Validations::Callbacks
-    include NormalizeAttributes::Callbacks
+    include ActiveRecord::Normalization
+    include ActiveRecord::AttributeMethods::Dirty
 
     class_eval do
       extend T::Helpers
