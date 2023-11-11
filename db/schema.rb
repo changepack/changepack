@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_10_210028) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_11_002825) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -193,6 +193,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_10_210028) do
     t.index ["user_id"], name: "index_notification_deliveries_on_user_id"
   end
 
+  create_table "notification_templates", id: :string, force: :cascade do |t|
+    t.string "category", null: false
+    t.string "type", null: false
+    t.string "title", null: false
+    t.text "body", null: false
+    t.string "summary", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type", "category"], name: "index_notification_templates_on_type_and_category", unique: true
+  end
+
   create_table "notifications", id: :string, force: :cascade do |t|
     t.string "type", null: false
     t.string "channels", default: ["email", "web"], null: false, array: true
@@ -207,8 +218,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_10_210028) do
     t.string "url"
     t.string "subject_type"
     t.bigint "subject_id"
+    t.string "template_id"
     t.index ["account_id"], name: "index_notifications_on_account_id"
     t.index ["subject_type", "subject_id"], name: "index_notifications_on_subject"
+    t.index ["template_id"], name: "index_notifications_on_template_id"
   end
 
   create_table "post_transitions", id: :string, force: :cascade do |t|
@@ -381,6 +394,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_10_210028) do
   add_foreign_key "notification_deliveries", "notifications"
   add_foreign_key "notification_deliveries", "users"
   add_foreign_key "notifications", "accounts"
+  add_foreign_key "notifications", "notification_templates", column: "template_id"
   add_foreign_key "post_transitions", "posts"
   add_foreign_key "posts", "accounts"
   add_foreign_key "posts", "newsletters"

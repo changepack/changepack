@@ -4,10 +4,27 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :template, class: 'Notification::Template' do
+    category { Faker::Lorem.word }
+    type { Faker::Lorem.word }
+    title { Faker::Lorem.sentence }
+    body { Faker::Lorem.paragraph }
+    summary { Faker::Lorem.sentence }
+  end
+
   factory :notification do
-    type { :welcome }
     channels { %w[email web] }
     account
+    template
+
+    trait :custom do
+      template { nil }
+      category { Faker::Lorem.word }
+      type { Faker::Lorem.word }
+      title { Faker::Lorem.sentence }
+      body { Faker::Lorem.paragraph }
+      summary { Faker::Lorem.sentence }
+    end
   end
 
   factory :delivery, class: 'Notification::Delivery' do

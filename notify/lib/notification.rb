@@ -22,6 +22,7 @@ class Notification < ApplicationRecord
 
   belongs_to :account
   belongs_to :subject, polymorphic: true, optional: true
+  belongs_to :template, class_name: 'Notification::Template', optional: true
 
   has_many :deliveries, dependent: :destroy
   has_many :users, -> { distinct }, through: :deliveries
@@ -31,4 +32,20 @@ class Notification < ApplicationRecord
 
   inquirer :category
   inquirer :type
+
+  before_create :assign_attributes_from_template
+
+  sig { returns Notification }
+  def assign_attributes_from_template # rubocop:disable Metrics/AbcSize
+    return self unless template
+
+    self.category ||= template.category
+    self.type ||= template.type
+
+    self.body ||= template.body
+    self.title ||= template.title
+    self.summary ||= template.summary
+
+    self
+  end
 end

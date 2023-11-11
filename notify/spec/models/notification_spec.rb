@@ -12,7 +12,7 @@ RSpec.describe Notification do
   describe '#channels' do
     subject { notification.valid? }
 
-    let(:notification) { build(:notification, channels: [channel].flatten) }
+    let(:notification) { build(:notification, :custom, channels: [channel].flatten) }
 
     context 'when channel is email' do
       let(:channel) { 'email' }
