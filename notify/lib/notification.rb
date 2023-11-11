@@ -20,6 +20,8 @@ class Notification < ApplicationRecord
   attribute :data, :jsonb, default: {}
   attribute :url, :string
 
+  attr_accessor :recipient
+
   belongs_to :account
   belongs_to :subject, polymorphic: true, optional: true
   belongs_to :template, class_name: 'Notification::Template', optional: true
@@ -34,6 +36,9 @@ class Notification < ApplicationRecord
   inquirer :type
 
   before_create :assign_attributes_from_template
+  after_create :create_deliveries_from_recipient
+
+  private
 
   sig { returns Notification }
   def assign_attributes_from_template # rubocop:disable Metrics/AbcSize
@@ -47,5 +52,26 @@ class Notification < ApplicationRecord
     self.summary ||= template.summary
 
     self
+  end
+
+  sig { returns T::Array[User] }
+  def create_deliveries_from_recipient
+    recipients.each do |recipient|
+      channels.each do |channel|
+        deliveries.create!(channel:, user: recipient)
+      end
+    end
+  end
+
+  sig { returns T::Array[User] }
+  def recipients
+    case recipient
+    when User
+      [recipient]
+    when Account
+      recipient.users.to_a
+    else
+      []
+    end
   end
 end
