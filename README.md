@@ -2,7 +2,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/6fcca30f3ba6843848db/maintainability)](https://codeclimate.com/github/changepack/changepack/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/6fcca30f3ba6843848db/test_coverage)](https://codeclimate.com/github/changepack/changepack/test_coverage)
 
-Changepack sends you or your company a brief update on what your team shipped last week, every week, powered by ChatGPT. Share news about changes and features with your teammates and keep people in the loop!
+Every week, Changepack delivers a brief update to you or your company, highlighting the progress and developments your team achieved in the past week, all powered by ChatGPT. It’s a great way to keep folks informed about new changes and features, ensuring everyone stays connected and up-to-date!
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 <a href="https://render.com/deploy?repo=https://github.com/changepack/changepack">
@@ -13,8 +13,8 @@ Changepack sends you or your company a brief update on what your team shipped la
 ## Features
 
 * **Weekly summaries.** Each week, Changepack handpicks the most notable updates and emails you a release note. We leverage OpenAI’s [ChatGPT](https://openai.com/blog/chatgpt) to publish your content in seconds.
-* **Pull commits from GitHub.** Changepack allows you to link changelogs with your GitHub activity, making it easy to track progress. (GitLab coming soon!)
-* **Retrieve issues from Linear.** We connect changelogs to project management tools of your choice, allowing ChatGPT to stay informed about your current tasks. (Other tools coming soon.)
+* **Pull commits from GitHub.** You can link Changepack with your GitHub activity, making it easy to track progress. (GitLab coming soon!)
+* **Retrieve issues from Linear.** We connect to project management tools of your choice, allowing ChatGPT to stay informed about your current tasks. (Other tools coming soon.)
 
 ## Build and run locally
 
