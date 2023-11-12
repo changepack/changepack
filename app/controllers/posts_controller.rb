@@ -73,11 +73,12 @@ class PostsController < ApplicationController
 
   sig { returns Update::RelationType }
   def updates
-    @updates ||= current_account.updates
-                                .options(post)
-                                .includes(:post, commit: :repository, issue: :team)
-                                .limit(100)
-                                .kept
+    @updates ||= Current.account
+                        .updates
+                        .options(post)
+                        .includes(:post, commit: :repository, issue: :team)
+                        .limit(100)
+                        .kept
   end
 
   sig { returns Post }
@@ -89,7 +90,7 @@ class PostsController < ApplicationController
   def permitted
     params.require(:post)
           .then { |permitted| authorized(permitted) }
-          .merge(post:, user: current_user, account: current_account)
+          .merge(post:, user: Current.user, account: Current.account)
   end
 
   sig { returns T::Locals }
@@ -98,7 +99,7 @@ class PostsController < ApplicationController
       locals: {
         post: post.decorate,
         updates: updates.decorate,
-        newsletters: current_account.newsletters
+        newsletters: Current.account.newsletters
       }
     }
   end

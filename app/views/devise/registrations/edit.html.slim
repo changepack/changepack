@@ -50,7 +50,7 @@
         - fields.inputs do
           .field
             = label_tag :api_key, 'Your API key', class: 'label'
-            = text_field_tag :api_key, current_account.api_keys.pick(:token), disabled: true, class: 'input text'
+            = text_field_tag :api_key, Current.account.api_keys.pick(:token), disabled: true, class: 'input text'
 
     - wrapper.actions do
       = f.button :submit, 'Update account'

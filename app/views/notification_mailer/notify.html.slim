@@ -1,13 +1,13 @@
 p Hey there,
 
-p
-  strong = @notification.title
-  br
-  = @notification.summary
+- # rubocop:disable Rails/OutputSafety
+p: strong = @notification.title.html_safe
 
-p = @notification.body
+p: em = @notification.summary.html_safe
 
-p
-  ' Best regards,
-  br
-  = ENV.fetch('APP_NAME')
+p = @notification.body.html_safe
+- # rubocop:enable Rails/OutputSafety
+
+hr
+
+p Sent by #{ENV.fetch('APP_NAME')}

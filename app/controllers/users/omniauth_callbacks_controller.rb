@@ -20,7 +20,7 @@ module Users
       if user_signed_out?
         User.register!(provider, auth).tap { |user| sign_in(user) }
       else
-        current_user.register!(provider, auth)
+        Current.user.register!(provider, auth)
       end
 
       true

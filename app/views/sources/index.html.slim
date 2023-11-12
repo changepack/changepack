@@ -5,15 +5,15 @@
       h2.mt-4
         | Pull changes from GitHub or Linear and write newsletters based on the most recent changes
 
-    - unless current_user.github? && current_user.linear?
+    - unless Current.user.github? && Current.user.linear?
       .mt-4.flex
-        - unless current_user.github?
+        - unless Current.user.github?
           = button_to 'Connect GitHub', \
                       user_github_omniauth_authorize_path, \
                       method: :post, \
                       class: 'button-2 mr-2', \
                       data: { turbo: false }
-        - unless current_user.linear?
+        - unless Current.user.linear?
           = button_to 'Connect Linear', \
                       user_linear_omniauth_authorize_path, \
                       method: :post, \
@@ -32,7 +32,7 @@ section.overflow-x-auto
             .-my-8
               == pagy_nav(pagy)
 
-      - elsif current_account.access_tokens.any?
+      - elsif Current.account.access_tokens.any?
         section data-test-id="blank"
           = render I::Flash.new(type: :info) do
             ' We haven’t pulled any data sources from account yet.

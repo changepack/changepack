@@ -49,7 +49,7 @@ module I
               icon 'cog',
                    **classes('text-gray-400 mr-2 p-2 rounded-full hover:bg-gray-200',
                              account?: 'bg-orange-900 hover:bg-orange-900 text-white')
-              render I::AccountPicture.new(account: helpers.current_account)
+              render I::AccountPicture.new(account: Current.account)
             end
           end
         end

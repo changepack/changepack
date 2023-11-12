@@ -11,10 +11,10 @@ class ApplicationController < ActionController::Base
 
   before_action :set_paper_trail_whodunnit
   before_action :authenticate_user!
+  before_action :set_current_user
   before_action :set_raven_context
 
   helper_method :user_signed_out?
-  helper_method :current_account
   helper_method :disallowed_to?
   helper_method :pagy_array
   helper_method :pagy
@@ -25,12 +25,12 @@ class ApplicationController < ActionController::Base
 
   sig { returns T.nilable(account_id: String, user_id: String) }
   def set_raven_context
-    Sentry.set_user(account_id: current_account.id, user_id: current_user.id) if user_signed_in?
+    Sentry.set_user(account_id: Current.account.id, user_id: Current.user.id) if user_signed_in?
   end
 
-  sig { returns T.nilable(Account) }
-  def current_account
-    @current_account ||= current_user.account if user_signed_in?
+  sig { returns T.nilable(User) }
+  def set_current_user
+    Current.user = current_user if user_signed_in?
   end
 
   sig { returns T.nilable(String) }
