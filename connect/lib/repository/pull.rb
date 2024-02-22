@@ -52,8 +52,7 @@ class Repository
       @cursor ||= commits.select { |commit| commit.commited_at > 1.month.ago }
                          .sort_by(&:commited_at)
                          .reverse
-                         .pick(:commited_at)
-                         .try(:to_i)
+                         .pick(:commited_at)&.to_i
     end
 
     sig { overridable.returns Provider }

@@ -32,6 +32,6 @@ class Issue < ApplicationRecord
   normalizes :identifier, with: ->(identifier) { identifier.squish }
 
   before_validation do
-    self.account ||= team.try(:account)
+    self.account ||= team&.account if team_id.present?
   end
 end

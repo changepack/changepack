@@ -7,7 +7,7 @@ class Source
 
     sig { override.returns T.nilable(Source) }
     def run
-      Source.find_by(repository_id: event.id).try(:destroy)
+      Source.find_by(repository_id: event.id)&.destroy
     end
   end
 end

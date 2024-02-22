@@ -68,8 +68,7 @@ class Sydney
   sig { params(content: String).returns Output }
   def request(content)
     client.chat(parameters: parameters(content))
-          .dig('choices', 0, 'message', 'content')
-          .try(:squish)
+          .dig('choices', 0, 'message', 'content')&.squish
   end
 
   sig { returns OpenAI::Client }

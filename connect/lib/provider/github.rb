@@ -38,8 +38,7 @@ class Provider
     def next_page
       client.last_response
             .rels
-            .fetch(:next, nil)
-            .try(:href)
+            .fetch(:next, nil)&.href
     end
 
     sig { override.returns(Octokit::Client) }

@@ -31,7 +31,7 @@ module API
     attr_writer :current_api_key, :current_bearer
 
     def render_unprocessable_entity_response(exception)
-      json = exception.try(:record) ? exception.record.errors : exception.message
+      json = exception&.record ? exception.record.errors : exception.message
       render json:, status: :unprocessable_entity
     end
 
@@ -70,8 +70,8 @@ module API
     def authenticator(http_token, _options)
       @current_api_key = API::Key.find_by(token: http_token)
 
-      current_api_key.try(:update, last_used_at: Time.zone.now)
-      current_api_key.try(:bearer)
+      current_api_key&.update(last_used_at: Time.zone.now)
+      current_api_key&.bearer
     end
   end
 end

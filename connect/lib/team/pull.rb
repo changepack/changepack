@@ -52,8 +52,7 @@ class Team
       @cursor ||= issues.sort_by(&:issued_at)
                         .reverse
                         .last(100)
-                        .last
-                        .try(:linear)
+                        .last&.linear
     end
 
     sig { overridable.returns Provider }

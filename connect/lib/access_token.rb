@@ -16,7 +16,7 @@ class AccessToken < ApplicationRecord
   validates :type, presence: true
 
   before_save do
-    self.account ||= user.try(:account) if user_id.present?
+    self.account ||= user.account if user_id.present?
   end
 
   sig { returns String }

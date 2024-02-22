@@ -3,8 +3,8 @@
 
 # you can delete this file if you don't use Rails Test Fixtures
 
-fixtures_dir = command_options.try(:[], 'fixtures_dir')
-fixture_files = command_options.try(:[], 'fixtures')
+fixtures_dir = command_options&.fetch('fixtures_dir', nil)
+fixture_files = command_options&.fetch('fixtures', nil)
 
 if defined?(ActiveRecord)
   require 'active_record/fixtures'

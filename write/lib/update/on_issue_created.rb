@@ -49,7 +49,7 @@ class Update
     sig { returns T::Array[String] }
     def tags
       [
-        assignee.try(:fetch, :email)
+        assignee&.fetch(:email)
       ].compact
     end
   end

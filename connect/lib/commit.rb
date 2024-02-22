@@ -26,6 +26,6 @@ class Commit < ApplicationRecord
   normalizes :message, with: ->(message) { message.squish }
 
   before_validation do
-    self.account ||= repository.try(:account)
+    self.account ||= repository.account if repository_id.present?
   end
 end

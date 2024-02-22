@@ -8,11 +8,11 @@ module ApplicationHelper
 
   sig { returns T.nilable(Symbol) }
   def current_controller
-    params.fetch(:controller, nil).try(:to_sym)
+    params.fetch(:controller, nil)&.to_sym
   end
 
   def current_action
-    params.fetch(:action, nil).try(:to_sym)
+    params.fetch(:action, nil)&.to_sym
   end
 
   sig { params(name: T::Key, args: T.untyped).returns(T.untyped) }
