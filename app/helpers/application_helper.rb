@@ -11,6 +11,10 @@ module ApplicationHelper
     params.fetch(:controller, nil).try(:to_sym)
   end
 
+  def current_action
+    params.fetch(:action, nil).try(:to_sym)
+  end
+
   sig { params(name: T::Key, args: T.untyped).returns(T.untyped) }
   def icon(name, **args)
     fa_icon(name, **args)

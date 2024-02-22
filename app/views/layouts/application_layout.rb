@@ -110,15 +110,15 @@ class ApplicationLayout < ApplicationView
   end
 
   def home?
-    helpers.current_controller.in? %i[accounts]
+    helpers.current_controller.in?(%i[posts]) && !helpers.current_action.in?(%i[new edit])
+  end
+
+  def compose?
+    helpers.current_controller.in?(%i[posts]) && helpers.current_action.in?(%i[new edit])
   end
 
   def sources?
     helpers.current_controller.in? %i[sources]
-  end
-
-  def compose?
-    helpers.current_controller.in? %i[posts]
   end
 
   def settings

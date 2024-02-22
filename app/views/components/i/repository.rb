@@ -6,7 +6,7 @@ module I
     attribute :repository, ::Repository
 
     def template
-      render I::Box.new(cols: %w[w-1/2 w-2/5 w-1/5], data: { test_id: 'repository' }) do
+      render I::Box.new(cols: %w[w-1/2 w-1/5 w-2/5], data: { test_id: 'repository' }) do
         td { name }
         td(class: 'text-right pr-4') { pulled }
         td { actions }
@@ -108,7 +108,7 @@ module I
     end
 
     def pulled_at
-      helpers.l(repository.pulled_at, format: :long)
+      helpers.l(repository.pulled_at, format: :short)
     end
   end
 end

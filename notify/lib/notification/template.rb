@@ -13,7 +13,7 @@ class Notification
 
     has_many :notifications, dependent: :nullify
 
-    validates :category, :type, :title, :body, :summary, presence: true
+    validates :category, :type, :title, :summary, presence: true
     validates :type, uniqueness: { scope: :category }
   end
 end

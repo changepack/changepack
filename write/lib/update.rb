@@ -46,7 +46,7 @@ class Update < ApplicationRecord
   after_commit :created!, on: :create
   after_commit :updated!, on: :update
 
-  def prompt = context || name
+  def prompt = "#{id}: #{context || name}"
 
   private
 
