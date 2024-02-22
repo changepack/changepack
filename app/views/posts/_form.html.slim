@@ -6,8 +6,8 @@
 
   - if newsletters.count > 1
     .my-5
-      = form.collection_select :newsletter_id, newsletters, \
-        :id, :name, { include_blank: 'Select a newsletter' }, \
+      = form.collection_select :newsletter_id, newsletters,
+        :id, :name, { include_blank: 'Select a newsletter' },
         class: 'input string', required: true, data: { test_id: 'newsletter' }
 
   .my-5

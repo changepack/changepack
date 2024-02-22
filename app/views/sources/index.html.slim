@@ -8,16 +8,16 @@
     - unless Current.user.github? && Current.user.linear?
       .mt-4.flex
         - unless Current.user.github?
-          = button_to 'Connect GitHub', \
-                      user_github_omniauth_authorize_path, \
-                      method: :post, \
-                      class: 'button-2 mr-2', \
+          = button_to 'Connect GitHub',
+                      user_github_omniauth_authorize_path,
+                      method: :post,
+                      class: 'button-2 mr-2',
                       data: { turbo: false }
         - unless Current.user.linear?
-          = button_to 'Connect Linear', \
-                      user_linear_omniauth_authorize_path, \
-                      method: :post, \
-                      class: 'button-2', \
+          = button_to 'Connect Linear',
+                      user_linear_omniauth_authorize_path,
+                      method: :post,
+                      class: 'button-2',
                       data: { turbo: false }
 
 section.overflow-x-auto
@@ -59,16 +59,16 @@ section.overflow-x-auto
 
         .py-10.md:py-24
           .flex.md:-my-8
-            = button_to 'Connect GitHub', \
-                        user_github_omniauth_authorize_path, \
-                        method: :post, \
-                        class: 'button-1 mr-2', \
+            = button_to 'Connect GitHub',
+                        user_github_omniauth_authorize_path,
+                        method: :post,
+                        class: 'button-1 mr-2',
                         data: { turbo: false }
 
-            = button_to 'Connect Linear', \
-                        user_linear_omniauth_authorize_path, \
-                        method: :post, \
-                        class: 'button-2', \
+            = button_to 'Connect Linear',
+                        user_linear_omniauth_authorize_path,
+                        method: :post,
+                        class: 'button-2',
                         data: { turbo: false }
 
       - else

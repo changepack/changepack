@@ -1,7 +1,7 @@
 = turbo_frame_tag "pull_#{repository.id}" do
-  = button_to repository, \
-                class: 'button-2 inline-block', \
-                data: { test_id: 'confirm_pull', turbo_frame: '_top' }, \
+  = button_to repository,
+                class: 'button-2 inline-block',
+                data: { test_id: 'confirm_pull', turbo_frame: '_top' },
                 method: :put do
     = icon 'plug', class: 'mr-2'
     | I’m sure, do it

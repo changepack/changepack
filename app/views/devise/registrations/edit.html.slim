@@ -12,11 +12,11 @@
           = f.fields_for :account do |field|
             = field.input :name, label: 'Company name', required: true
             = field.input :website, label: 'Website', required: true
-            = field.input :description, \
-              label: 'Company description', \
-              as: :text, \
-              required: true, \
-              input_html: { rows: 3 }, \
+            = field.input :description,
+              label: 'Company description',
+              as: :text,
+              required: true,
+              input_html: { rows: 3 },
               hint: 'This field helps our AI learn what your company does'
 
             .field
@@ -37,8 +37,8 @@
           = f.input :email, required: true, label: 'Email address'
           = f.input :name, required: true
 
-          = f.input :password, \
-            hint: "Leave blank if you don't want to change it. #{@minimum_password_length} characters minimum", \
+          = f.input :password,
+            hint: "Leave blank if you don't want to change it. #{@minimum_password_length} characters minimum",
             autocomplete: 'new-password'
           = f.input :password_confirmation, autocomplete: 'new-password'
           = f.input :current_password, required: true, hint: 'We need your current password to confirm your changes'
