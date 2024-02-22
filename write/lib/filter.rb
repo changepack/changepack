@@ -31,6 +31,12 @@ class Filter < ApplicationRecord
     !!(value =~ Regexp.new(content))
   end
 
+
+  sig { params(other: T::Array[String]).returns(T::Array[String]) }
+  def &(other)
+    other.select { |value| value =~ self }
+  end
+
   sig { returns T::Array[Filter] }
   def self.defaults
     [

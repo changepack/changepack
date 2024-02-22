@@ -19,7 +19,7 @@ class Update
       return if source.blank?
       return if source.filters
                       .select(&:reject?)
-                      .none? { |filter| tags.any? { |tag| tag =~ filter } }
+                      .none? { |filter| (filter & tags).any? }
 
       errors.add(:tags, 'rejected by a filter')
     end
@@ -30,7 +30,7 @@ class Update
 
       filters = source.filters.select(&:select?)
       return if filters.none?
-      return if filters.any? { |filter| tags.any? { |tag| tag =~ filter } }
+      return if filters.any? { |filter| (filter & tags).any? }
 
       errors.add(:tags, 'must match a filter')
     end
