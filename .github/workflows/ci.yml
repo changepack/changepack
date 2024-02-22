@@ -70,7 +70,7 @@ jobs:
         run: kill -2 `cat tmp/pids/server.pid`
       - name: Publish code coverage
         if: github.ref == 'refs/heads/main'
-        uses: paambaati/codeclimate-action@v4.0.0
+        uses: paambaati/codeclimate-action@v5.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
