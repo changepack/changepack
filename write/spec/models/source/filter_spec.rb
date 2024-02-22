@@ -11,7 +11,7 @@ class Source
       it 'associates the filter keywords with the source' do
         ::Filter.defaults.each do |filter|
           expect(
-            ::Filter.find_by(source:, type: filter.type, content: filter.content)
+            ::Filter.find_by(source:, trait: filter.trait, content: filter.content)
           ).to be_present
         end
       end

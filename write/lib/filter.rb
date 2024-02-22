@@ -4,23 +4,23 @@
 class Filter < ApplicationRecord
   key :fil
 
-  attribute :type, :string
+  attribute :trait, :string
   attribute :content, :string
 
   belongs_to :source
 
-  TYPES = %w[email].freeze
+  TRAITS = %w[email].freeze
 
-  validates :type, presence: true, inclusion: { in: TYPES }
-  validates :content, presence: true, uniqueness: { scope: %i[type source_id] }
+  validates :trait, presence: true, inclusion: { in: TRAITS }
+  validates :content, presence: true, uniqueness: { scope: %i[trait source_id] }
 
-  inquirer :type
-  delegate :email?, to: :type
+  inquirer :trait
+  delegate :email?, to: :trait
 
   sig { returns T::Array[Filter] }
   def self.defaults
     [
-      new(type: 'email', content: 'dependabot')
+      new(trait: 'email', content: 'dependabot')
     ]
   end
 end
