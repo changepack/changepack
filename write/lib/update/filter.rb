@@ -10,18 +10,29 @@ class Update
     abstract!
 
     included do
-      validate :must_pass_filters, on: :create
+      validate :must_pass_rejectable_filters, on: :create
+      validate :must_pass_selectable_filters, on: :create
     end
 
     sig { overridable.returns T.nilable(ActiveModel::Error) }
-    def must_pass_filters
+    def must_pass_rejectable_filters
       return if source.blank?
       return if source.filters
                       .select(&:reject?)
-                      .map(&:content)
-                      .none? { |regexp| tags.any? { |tag| tag =~ Regexp.new(regexp) } }
+                      .none? { |filter| tags.any? { |tag| tag =~ filter } }
 
-      errors.add(:tags, 'match a filter keyword')
+      errors.add(:tags, 'rejected by a filter')
+    end
+
+    sig { overridable.returns T.nilable(ActiveModel::Error) }
+    def must_pass_selectable_filters
+      return if source.blank?
+
+      filters = source.filters.select(&:select?)
+      return if filters.none?
+      return if filters.any? { |filter| tags.any? { |tag| tag =~ filter } }
+
+      errors.add(:tags, 'must match a filter')
     end
   end
 end

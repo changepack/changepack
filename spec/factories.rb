@@ -51,6 +51,7 @@ FactoryBot.define do
     source factory: %i[source repository]
     content { Faker::Internet.email }
     add_attribute(:trait) { 'email' }
+    type { 'reject' }
   end
 
   factory :issue do

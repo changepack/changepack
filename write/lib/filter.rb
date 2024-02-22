@@ -23,6 +23,14 @@ class Filter < ApplicationRecord
   delegate :email?, to: :trait
   delegate :reject?, :select?, to: :type
 
+  sig { params(value: String).returns(T::Boolean) }
+  def =~(value)
+    return false if value.blank?
+    return false if content.blank?
+
+    !!(value =~ Regexp.new(content))
+  end
+
   sig { returns T::Array[Filter] }
   def self.defaults
     [
