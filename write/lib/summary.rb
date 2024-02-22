@@ -37,8 +37,8 @@ class Summary
     Notification.create!(
       body: post.content.to_s,
       recipient: account,
-      category: 'write',
-      type: 'summary'
+      category: :write,
+      type: :summary
     )
   end
 
