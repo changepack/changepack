@@ -33,6 +33,7 @@ class Summary
     post.valid?
   end
 
+  sig { returns Notification }
   def notify
     Notification.create!(
       body: post.content.to_s,
