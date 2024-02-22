@@ -1,10 +1,8 @@
 # typed: false
 # frozen_string_literal: true
 
-class Banned < ApplicationRecord
-  self.table_name = 'banned_items'
-
-  key :ban
+class Filter < ApplicationRecord
+  key :fil
 
   attribute :type, :string
   attribute :content, :string
@@ -19,7 +17,7 @@ class Banned < ApplicationRecord
   inquirer :type
   delegate :email?, to: :type
 
-  sig { returns T::Array[Banned] }
+  sig { returns T::Array[Filter] }
   def self.defaults
     [
       new(type: 'email', content: 'dependabot')

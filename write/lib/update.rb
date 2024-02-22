@@ -3,8 +3,8 @@
 
 class Update < ApplicationRecord
   include Options
+  include Filter
   include Events
-  include Ban
 
   key :upd
 

@@ -3,7 +3,7 @@
 
 class Source < ApplicationRecord
   include Active
-  include Ban
+  include Filter
 
   key :src
 

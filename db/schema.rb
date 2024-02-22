@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_22_175956) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_22_184929) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -87,16 +87,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_175956) do
     t.index ["token"], name: "index_api_keys_on_token", unique: true
   end
 
-  create_table "banned_items", id: :string, force: :cascade do |t|
-    t.string "type", null: false
-    t.string "content", null: false
-    t.string "source_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["source_id", "type", "content"], name: "index_banned_items_on_source_id_and_type_and_content", unique: true
-    t.index ["source_id"], name: "index_banned_items_on_source_id"
-  end
-
   create_table "commits", id: :string, force: :cascade do |t|
     t.text "message", null: false
     t.string "url", null: false
@@ -135,6 +125,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_175956) do
     t.index ["created_at"], name: "index_event_store_events_in_streams_on_created_at"
     t.index ["stream", "event_id"], name: "index_event_store_events_in_streams_on_stream_and_event_id", unique: true
     t.index ["stream", "position"], name: "index_event_store_events_in_streams_on_stream_and_position", unique: true
+  end
+
+  create_table "filters", id: :string, force: :cascade do |t|
+    t.string "type", null: false
+    t.string "content", null: false
+    t.string "source_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source_id", "type", "content"], name: "index_filters_on_source_id_and_type_and_content", unique: true
+    t.index ["source_id"], name: "index_filters_on_source_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -385,9 +385,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_175956) do
   add_foreign_key "access_tokens", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "banned_items", "sources"
   add_foreign_key "commits", "accounts"
   add_foreign_key "commits", "repositories"
+  add_foreign_key "filters", "sources"
   add_foreign_key "issues", "accounts"
   add_foreign_key "issues", "teams"
   add_foreign_key "newsletters", "accounts"

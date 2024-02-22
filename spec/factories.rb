@@ -47,7 +47,7 @@ FactoryBot.define do
     bearer factory: %i[account]
   end
 
-  factory :banned do
+  factory :filter do
     source factory: %i[source repository]
     content { Faker::Internet.email }
     type { 'email' }
