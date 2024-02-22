@@ -12,7 +12,7 @@ module I
         attribute :if, T::Boolean, as: :show, default: -> { true }
         attribute :active, T::Boolean, default: -> { false }
 
-        def template(&)
+        def template
           return if hide?
 
           unsafe_raw helpers.link_to name, options, html_options.merge(classes(activity)).merge(test_id)
@@ -83,11 +83,11 @@ module I
       end
     end
 
-    def wrapper(&)
+    def wrapper(&block)
       nav class: 'bg-white drop-shadow-sm md:drop-shadow-none overflow-x-auto' do
         div class: 'w-full mx-auto px-5' do
           div class: 'flex items-center justify-between h-16' do
-            div class: 'flex items-center w-full', &
+            div class: 'flex items-center w-full', &block
           end
         end
       end

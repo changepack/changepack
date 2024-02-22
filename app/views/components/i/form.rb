@@ -8,7 +8,7 @@ module I
     class Fields < ApplicationComponent
       include Phlex::DeferredRender
 
-      def template(&)
+      def template
         render I::Aside.new do |aside|
           sidebar(aside)
           article(aside)
@@ -36,7 +36,7 @@ module I
         end
       end
 
-      def article(aside, &)
+      def article(aside)
         aside.article do
           div class: 'fields md:ml-24', &@inputs
         end
@@ -87,10 +87,10 @@ module I
       div class: "container mx-auto p-6 md:my-16 fields #{px}".squish, &@form
     end
 
-    def top_container(&)
+    def top_container(&block)
       div class: 'w-full px-2 bg-white shadow-sm' do
         div class: 'relative overflow-hidden' do
-          div class: 'flex-row items-center justify-between p-4 space-y-3 sm:flex sm:space-y-0 sm:space-x-4', &
+          div class: 'flex-row items-center justify-between p-4 space-y-3 sm:flex sm:space-y-0 sm:space-x-4', &block
         end
       end
     end

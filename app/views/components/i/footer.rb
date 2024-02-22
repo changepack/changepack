@@ -17,8 +17,8 @@ module I
       end
     end
 
-    def wrapper(&)
-      footer(class: 'bg-gray-100') { div(class: 'lg:container mx-auto p-5 py-6 lg:py-16', &) }
+    def wrapper(&block)
+      footer(class: 'bg-gray-100') { div(class: 'lg:container mx-auto p-5 py-6 lg:py-16', &block) }
     end
 
     def top
@@ -68,11 +68,11 @@ module I
 
     # Can't use `classes` in `#menu` because Tailwind doesn't detect
     # the conditional classes
-    def menu_wrapper(&)
+    def menu_wrapper(&block)
       if company?
-        div(class: 'grid gap-8 sm:gap-24 grid-cols-2 sm:grid-cols-2', &)
+        div(class: 'grid gap-8 sm:gap-24 grid-cols-2 sm:grid-cols-2', &block)
       else
-        div(&)
+        div(&block)
       end
     end
 

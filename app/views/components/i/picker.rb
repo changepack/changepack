@@ -9,11 +9,11 @@ module I
       attribute :attribute, T.any(Symbol, String)
       attribute :form, T.untyped
 
-      def template(&)
+      def template(&block)
         div class: 'mb-3' do
           unsafe_raw form.check_box(attribute, *opts)
 
-          label for: id, class: 'ml-2', &
+          label for: id, class: 'ml-2', &block
         end
       end
     end
@@ -30,7 +30,7 @@ module I
       super
     end
 
-    def template(&)
+    def template
       wrapper do
         h2 { title }
         section class: 'overflow-x-scroll max-h-80' do
@@ -45,10 +45,10 @@ module I
       @checkboxes << Choice.new(...)
     end
 
-    def wrapper(&)
+    def wrapper(&block)
       div class: 'mt-10 hidden md:block' do
         div class: 'accordion accordion-mini' do
-          div class: 'accordion-single', &
+          div class: 'accordion-single', &block
         end
       end
     end

@@ -26,7 +26,7 @@ module Provided
     def provider(name)
       define_method(name) { providers[name.to_s] }
       define_singleton_method(name) { where('providers -> ? IS NOT NULL', name) }
-      define_method("#{name}?") { providers[name.to_s].present? }
+      define_method(:"#{name}?") { providers[name.to_s].present? }
 
       true
     end

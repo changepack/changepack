@@ -60,7 +60,7 @@ module I
     end
 
     def thead
-      super class: 'text-xs text-gray-700 uppercase bg-gray-50' do
+      super(class: 'text-xs text-gray-700 uppercase bg-gray-50') do
         tr do
           headings.each do |heading|
             th scope: 'col', class: 'px-4 py-3' do

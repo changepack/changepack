@@ -14,7 +14,7 @@ module I
         label_value: attribute.to_s.humanize,
         name: "#{model.model_name.singular}[#{attribute}]",
         id: ['toggle', model.id].compact.join('_'),
-        checked: model.public_send("#{attribute}?")
+        checked: model.public_send(:"#{attribute}?")
       )
     end
 

@@ -6,12 +6,12 @@ module I
     attribute :data, T.nilable(Hash), default: -> { {} }
     attribute :cols, T::Array[T.any(Integer, String)], default: -> { [] }
 
-    def template(&)
+    def template(&block)
       div class: 'box', data: do
         table class: 'w-full' do
           colgroups
           tbody do
-            tr class: 'focus:outline-none h-16', &
+            tr class: 'focus:outline-none h-16', &block
           end
         end
       end

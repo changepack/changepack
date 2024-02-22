@@ -38,8 +38,8 @@ class ApplicationController < ActionController::Base
     params.require(:id)
   end
 
-  def disallowed_to?(rule, record = :__undef__, **options)
-    !allowed_to?(rule, record, **options)
+  def disallowed_to?(rule, record = :__undef__, **)
+    !allowed_to?(rule, record, **)
   end
 
   sig { returns T::Boolean }

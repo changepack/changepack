@@ -4,11 +4,11 @@
 class FormLayout < ApplicationView
   include Phlex::Rails::Layout
 
-  def template(&)
+  def template(&block)
     doctype
     html do
       head_tag
-      body(&)
+      body(&block)
     end
   end
 

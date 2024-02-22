@@ -12,22 +12,22 @@ class ApplicationLayout < ApplicationView
 
   attr_reader :brand
 
-  def template(&)
+  def template(&block)
     white_label
 
     doctype
     html do
-      head_tag(&)
+      head_tag(&block)
       body do
-        page_container(&)
+        page_container(&block)
       end
     end
   end
 
-  def head_tag(&)
+  def head_tag(&block)
     head do
       title { title_or_app_name }
-      meta_tags(&)
+      meta_tags(&block)
 
       stylesheet_link_tag 'application', data_turbo_track: 'reload'
       stylesheet_link_tag 'tailwind', data_turbo_track: 'reload'
@@ -51,11 +51,11 @@ class ApplicationLayout < ApplicationView
     csrf_meta_tags
   end
 
-  def page_container(&)
+  def page_container(&block)
     div class: 'flex flex-col min-h-screen' do
       div class: 'flex-grow' do
         navigation
-        content(&)
+        content(&block)
       end
       div class: 'flex-none' do
         footer
