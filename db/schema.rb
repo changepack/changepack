@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_22_190215) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_22_194956) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -133,7 +133,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_190215) do
     t.string "source_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["source_id", "trait", "content"], name: "index_filters_on_source_id_and_trait_and_content", unique: true
+    t.string "type", default: "reject", null: false
+    t.index ["source_id", "trait", "content", "type"], name: "index_filters_on_source_id_trait_content_and_type", unique: true
     t.index ["source_id"], name: "index_filters_on_source_id"
   end
 

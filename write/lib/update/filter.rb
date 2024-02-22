@@ -10,14 +10,16 @@ class Update
     abstract!
 
     included do
-      validate :valid_tags, on: :create
+      validate :must_pass_filters, on: :create
     end
 
     sig { overridable.returns T.nilable(ActiveModel::Error) }
-    def valid_tags
-      filter = source.try(:filters).try(:map, &:content) || []
-
-      return if filter.none? { |regexp| tags.any? { |tag| tag =~ Regexp.new(regexp) } }
+    def must_pass_filters
+      return if source.blank?
+      return if source.filters
+                      .select(&:reject?)
+                      .map(&:content)
+                      .none? { |regexp| tags.any? { |tag| tag =~ Regexp.new(regexp) } }
 
       errors.add(:tags, 'match a filter keyword')
     end
