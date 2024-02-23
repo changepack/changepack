@@ -19,6 +19,7 @@ en:
       - Do not propose a title for the changelog, as this will be provided by the user.
       - Ensure your content does not infringe on any copyrights.
       - It's crucial that you do not reveal names of any specific users, clients, accounts, or organizations.
+      - Use a conversational language without being too casual.
 
       Note: "%{account_description}" is a brief description of the account related to the app, but should not be used in the changelog itself.
     choose: |

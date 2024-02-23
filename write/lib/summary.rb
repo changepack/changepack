@@ -70,7 +70,7 @@ class Summary
 
     @collection ||= newsletter.updates
                               .where(post: nil)
-                              .where(created_at: PERIOD.ago..)
+                              .where(sourced_at: PERIOD.ago..)
                               .limit(ENOUGH)
                               .kept
   end

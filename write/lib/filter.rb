@@ -31,10 +31,9 @@ class Filter < ApplicationRecord
     !!(value =~ Regexp.new(content))
   end
 
-
   sig { params(other: T::Array[String]).returns(T::Array[String]) }
   def &(other)
-    other.select { |value| value =~ self }
+    other.select { |value| value =~ self } # rubocop:disable Style/SelectByRegexp
   end
 
   sig { returns T::Array[Filter] }

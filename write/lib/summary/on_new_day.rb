@@ -8,7 +8,7 @@ class Summary
     sig { override.returns T::Array[Event] }
     def run
       Newsletter.pluck(:id)
-                .select { event.day > 1 }
+                .select { event.date.monday? }
                 .map { |newsletter_id| Summary::Requested.new(newsletter_id:) }
                 .each { |event| Event.publish(event) }
     end

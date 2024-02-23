@@ -6,31 +6,24 @@ module Clock
 
   class NewHour < Event
     attribute :hour, Integer
+    attribute :date, Date
   end
 
   class NewDay < Event
-    attribute :day, Integer
+    attribute :date, Date
   end
 
   class HourlyTick < ApplicationJob
     sig { returns Integer }
     def perform
-      Time.current.hour.tap do |hour|
-        Event.publish(
-          NewHour.new(hour:)
-        )
-      end
+      Time.current.tap { |time| Event.publish NewHour.new(hour: time.hour, date: time.to_date) }
     end
   end
 
   class DailyTick < ApplicationJob
     sig { returns Integer }
     def perform
-      Time.current.day.tap do |day|
-        Event.publish(
-          NewDay.new(day:)
-        )
-      end
+      Event.publish NewDay.new(date: Date.current)
     end
   end
 
