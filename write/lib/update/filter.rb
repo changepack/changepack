@@ -16,23 +16,23 @@ class Update
 
     sig { overridable.returns T.nilable(ActiveModel::Error) }
     def must_pass_rejectable_filters
-      return if source.blank?
-      return if source.filters
-                      .select(&:reject?)
-                      .none? { |filter| (filter & tags).any? }
-
-      errors.add(:tags, 'rejected by a filter')
+      errors.add(:tags, 'rejected by a filter') if rejected_by_filter?
     end
 
     sig { overridable.returns T.nilable(ActiveModel::Error) }
     def must_pass_selectable_filters
-      return if source.blank?
+      errors.add(:tags, 'must match a filter') unless blank_or_selected_by_filter?
+    end
 
-      filters = source.filters.select(&:select?)
-      return if filters.none?
-      return if filters.any? { |filter| (filter & tags).any? }
+    sig { returns(T::Boolean) }
+    def rejected_by_filter?
+      source&.filters&.select(&:reject?)&.any? { |filter| (filter & tags).any? }
+    end
 
-      errors.add(:tags, 'must match a filter')
+    sig { returns(T::Boolean) }
+    def blank_or_selected_by_filter?
+      filters = Array(source&.filters&.select(&:select?))
+      filters.none? || filters.any? { |filter| (filter & tags).any? }
     end
   end
 end
