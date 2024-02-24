@@ -16,6 +16,11 @@ Every week, Changepack delivers a brief update to you or your company, highlight
 * **Pull commits from GitHub.** You can link Changepack with your GitHub activity, making it easy to track progress. (GitLab coming soon!)
 * **Retrieve issues from Linear.** We connect to project management tools of your choice, allowing ChatGPT to stay informed about your current tasks. (Other tools coming soon.)
 
+## Use cases
+
+* As a manager, I can receive weekly email updates on my team’s progress from GitHub, eliminating the need to constantly ask them for status updates.
+* As a programmer, I can receive a summary of my work from the previous week and share it in my team’s status update channel on Slack, so everyone is informed about what I’ve shipped.
+
 ## Build and run locally
 
 ```
