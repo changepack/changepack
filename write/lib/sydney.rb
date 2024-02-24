@@ -40,7 +40,7 @@ class Sydney
   def choose
     return if invalid?
 
-    input = humanize updates.map { |upd| upd.prompt(true) }
+    input = humanize(updates.map { |upd| upd.prompt(include_id: true) })
     content = prompt(:choose, input)
     request(content)
   end

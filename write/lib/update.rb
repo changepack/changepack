@@ -46,7 +46,7 @@ class Update < ApplicationRecord
   after_commit :created!, on: :create
   after_commit :updated!, on: :update
 
-  def prompt(include_id = false) = include_id || !description ? "#{id}: #{name}" : "#{name}: #{description}"
+  def prompt(include_id: false) = include_id || !description ? "#{id}: #{name}" : "#{name}: #{description}"
 
   private
 

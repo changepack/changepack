@@ -50,8 +50,7 @@ class Summary
     @publication ||= Publication.new(
       account: newsletter.account,
       post: Post.new,
-      updates:,
-      title:
+      updates:
     )
   end
 
@@ -73,13 +72,5 @@ class Summary
                               .where(sourced_at: PERIOD.ago..)
                               .limit(ENOUGH)
                               .kept
-  end
-
-  sig { returns String }
-  def title
-    Date.current
-        .last_month
-        .strftime('%B %Y')
-        .then { |month| I18n.t('summary.title', month:) }
   end
 end
