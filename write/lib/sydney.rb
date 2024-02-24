@@ -46,10 +46,10 @@ class Sydney
   end
 
   sig { returns Output }
-  def context
+  def description
     return if invalid?
 
-    content = prompt(:context, update.issue.description)
+    content = prompt(:description, update.issue.description)
     response = request(content)
     return if response.blank?
 

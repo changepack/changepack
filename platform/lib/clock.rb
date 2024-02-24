@@ -14,7 +14,7 @@ module Clock
   end
 
   class HourlyTick < ApplicationJob
-    sig { returns Integer }
+    sig { returns Time }
     def perform
       Time.current.tap { |time| Event.publish NewHour.new(hour: time.hour, date: time.to_date) }
     end

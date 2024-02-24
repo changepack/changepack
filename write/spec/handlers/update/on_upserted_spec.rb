@@ -19,25 +19,25 @@ RSpec.describe Update::OnUpserted do
 
     before do
       allow(Sydney).to receive(:new).and_return(double)
-      allow(double).to receive(:context).and_return('Test')
+      allow(double).to receive(:description).and_return('Test')
     end
 
     def perform
       handler.perform(payload)
     end
 
-    def context
-      update.reload.context
+    def description
+      update.reload.description
     end
 
-    it 'saves context' do
-      expect { perform }.to change { context }.to('Test')
+    it 'saves description' do
+      expect { perform }.to change { description }.to('Test')
     end
 
     context 'when update is blank' do
       let(:update) { nil }
 
-      it 'keeps context empty' do
+      it 'does not create a new update' do
         expect { perform }.not_to change(Update, :count)
       end
     end
@@ -45,24 +45,24 @@ RSpec.describe Update::OnUpserted do
     context 'when update is discarded' do
       before { update.discard }
 
-      it 'keeps context empty' do
-        expect { perform }.not_to(change { context })
+      it 'keeps description empty' do
+        expect { perform }.not_to(change { description })
       end
     end
 
     context 'when update has context' do
-      before { update.update!(context: 'Test') }
+      before { update.update!(description: 'Test') }
 
-      it 'keeps context empty' do
-        expect { perform }.not_to(change { context })
+      it 'keeps description empty' do
+        expect { perform }.not_to(change { description })
       end
     end
 
     context 'when update originates from a commit' do
       let(:update) { create(:update, :commit) }
 
-      it 'keeps context empty' do
-        expect { perform }.not_to(change { context })
+      it 'keeps description empty' do
+        expect { perform }.not_to(change { description })
       end
     end
   end

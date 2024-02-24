@@ -2,7 +2,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/6fcca30f3ba6843848db/maintainability)](https://codeclimate.com/github/changepack/changepack/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/6fcca30f3ba6843848db/test_coverage)](https://codeclimate.com/github/changepack/changepack/test_coverage)
 
-Every week, Changepack delivers a brief update to you or your company, highlighting the progress and developments your team achieved in the past week, all powered by ChatGPT. It’s a great way to keep folks informed about new changes and features, ensuring everyone stays connected and up-to-date!
+Every week, Changepack delivers a brief update to you or your company, highlighting the progress your team achieved in the past week, all powered by ChatGPT. It’s a great way to keep folks informed about new changes and features, ensuring everyone stays connected and up-to-date!
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 <a href="https://render.com/deploy?repo=https://github.com/changepack/changepack">

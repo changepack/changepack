@@ -6,7 +6,7 @@ module I
     attribute :team, ::Team
 
     def template
-      render I::Box.new(cols: %w[w-1/2 w-2/5 w-1/5], data: { test_id: 'team' }) do
+      render I::Box.new(cols: %w[w-1/2 w-1/5 w-2/5], data: { test_id: 'team' }) do
         td { name }
         td(class: 'text-right pr-4') { pulled }
         td { actions }
@@ -101,7 +101,7 @@ module I
     end
 
     def pulled_at
-      helpers.l(team.pulled_at, format: :long)
+      helpers.l(team.pulled_at, format: :short)
     end
   end
 end
