@@ -40,7 +40,7 @@ class Sydney
   def choose
     return if invalid?
 
-    input = humanize updates.map(&:prompt)
+    input = humanize updates.map { |upd| upd.prompt(true) }
     content = prompt(:choose, input)
     request(content)
   end
@@ -101,7 +101,7 @@ class Sydney
 
   sig { returns T.nilable(String) }
   def audience
-    @audience ||= newsletter.audience
+    @audience ||= newsletter.audience&.downcase
   end
 
   sig { returns Newsletter }

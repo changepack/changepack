@@ -10,8 +10,7 @@ class Newsletter < ApplicationRecord
   attribute :private, :boolean, default: true
   # A short description of the audience for this newsletter in natural language.
   # It is used to help AI write content with specific audiences and markets in mind.
-  attribute :audience, :string
-
+  attribute :audience, :string, default: 'Company personnel'
   belongs_to :account
 
   has_many :posts, dependent: :destroy

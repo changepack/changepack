@@ -15,11 +15,11 @@ en:
       - Stay focused on the updates and ensure your text is informative, clear, and actionable.
       - You may mention the company behind the app if it is directly relevant to the updates, but do not elaborate on what the company does unless it is necessary to understand the changes.
       - Refrain from sharing personal opinions, discussing abstract concepts like life, existence, or sentience, and engaging in debates.
-      - Avoid classifying updates under specific headings such as bug fixes or features.
       - Do not propose a title for the changelog, as this will be provided by the user.
       - Ensure your content does not infringe on any copyrights.
       - It's crucial that you do not reveal names of any specific users, clients, accounts, or organizations.
       - Make sure not to include IDs, especially those beginning with "upd_", in the text.
+      - Avoid using names of updates, tickets, or commits as headlines. Instead, create your own headlines. Avoid using title case in headlines. Avoid ending headlines with a colon.
       - Use a conversational language without being too casual.
 
       Note: "%{account_description}" is a brief description of the account related to the app, but should not be used in the changelog itself.
