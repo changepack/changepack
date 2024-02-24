@@ -13,8 +13,7 @@ Every week, Changepack delivers a brief update to you or your company, highlight
 ## Features
 
 * **Weekly summaries.** Each week, Changepack handpicks the most notable updates and emails you a release note. We leverage OpenAI’s [ChatGPT](https://openai.com/blog/chatgpt) to publish your content in seconds.
-* **Pull commits from GitHub.** You can link Changepack with your GitHub activity, making it easy to track progress. (GitLab coming soon!)
-* **Retrieve issues from Linear.** We connect to project management tools of your choice, allowing ChatGPT to stay informed about your current tasks. (Other tools coming soon.)
+* **Pull commits from GitHub and issues from Linear.** You can link Changepack with your GitHub activity, making it easy to track progress. We can also connect to project management tools like Linear, allowing ChatGPT to stay informed about your current tasks. (Support for other tools coming soon.)
 
 ## Use cases
 
