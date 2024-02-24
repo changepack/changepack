@@ -148,6 +148,14 @@
   line-height: inherit;
 }
 
+.prose .trix-content p:first-child {
+  margin-top: 0;
+}
+
+.prose .attachment {
+  margin: 0;
+}
+
 trix-editor:empty:not(:focus)::before {
   @apply text-gray-300;
 }
@@ -170,10 +178,6 @@ trix-editor:empty:not(:focus)::before {
 
 .pagination .page.disabled {
   @apply opacity-50 cursor-default hover:shadow-none;
-}
-
-.prose .attachment {
-  margin: 0;
 }
 
 .ml-auto {
