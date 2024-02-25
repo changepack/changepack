@@ -33,6 +33,10 @@ class Notification < ApplicationRecord
   validates :channel, inclusion: { in: CHANNELS }
 
   normalizes :channel, with: ->(channel) { Array(channel).map(&:downcase) }
+  normalizes :category, with: ->(category) { category.squish.downcase }
+  normalizes :type, with: ->(type) { type.squish.downcase }
+  normalizes :summary, with: ->(summary) { summary.squish }
+  normalizes :title, with: ->(title) { title.squish }
 
   inquirer :category
   inquirer :type
