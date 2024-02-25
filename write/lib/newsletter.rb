@@ -16,10 +16,6 @@ class Newsletter < ApplicationRecord
   has_many :sources, dependent: :destroy
   has_many :updates, dependent: :destroy
 
-  before_validation do
-    self.name ||= self.class.name
-  end
-
   validates :name, presence: true
   normalizes :name, with: ->(name) { name.squish }
 

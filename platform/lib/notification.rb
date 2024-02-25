@@ -22,9 +22,11 @@ class Notification < ApplicationRecord
 
   attr_accessor :recipient
 
-  belongs_to :account
   belongs_to :subject, polymorphic: true, optional: true
-  belongs_to :template, class_name: 'Notification::Template', optional: true
+  belongs_to :account, default: -> { recipient.is_a?(User) ? recipient.account : recipient }
+  belongs_to :template, default: -> { Template.find_by(category:, type:) if category.present? && type.present? },
+                        class_name: 'Notification::Template',
+                        optional: true
 
   has_many :deliveries, dependent: :destroy
   has_many :users, -> { distinct }, through: :deliveries, source: :recipient, source_type: User.name
@@ -43,8 +45,6 @@ class Notification < ApplicationRecord
   inquirer :type
 
   before_validation on: :create do
-    assign_template
-    assign_account_from_recipient
     assign_attributes_from_template
   end
 
@@ -52,22 +52,10 @@ class Notification < ApplicationRecord
 
   sig { returns T::Array[T.any(Hook, User)] }
   def recipients
-    @recipients ||= begin
-      recipients = []
-      recipients += slack_recipients if channel.include?('slack')
-      recipients += email_recipients if channel.include?('email')
-      recipients
-    end
+    @recipients ||= [slack_recipients, email_recipients].flatten
   end
 
   private
-
-  sig { returns T.nilable(Notification::Template) }
-  def assign_template
-    return if category.blank? || type.blank?
-
-    self.template ||= Notification::Template.find_by(category:, type:)
-  end
 
   sig { returns Notification }
   def assign_attributes_from_template # rubocop:disable Metrics/AbcSize
@@ -83,11 +71,6 @@ class Notification < ApplicationRecord
     self
   end
 
-  def assign_account_from_recipient
-    self.account ||= recipient.account if recipient.is_a?(User)
-    self.account ||= recipient if recipient.is_a?(Account)
-  end
-
   sig { returns T::Array[User] }
   def create_deliveries_from_recipient
     recipients.each do |recipient|
@@ -97,6 +80,8 @@ class Notification < ApplicationRecord
 
   sig { returns T::Array[Hook] }
   def slack_recipients
+    return [] unless channel.include?('slack')
+
     case recipient
     when Account
       Hook.slack.outgoing.where(account: recipient).to_a
@@ -107,6 +92,8 @@ class Notification < ApplicationRecord
 
   sig { returns T::Array[User] }
   def email_recipients
+    return [] unless channel.include?('email')
+
     case recipient
     when User
       [recipient]

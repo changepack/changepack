@@ -14,8 +14,8 @@ class Commit < ApplicationRecord
   attribute :commited_at, :datetime
   attribute :author, Author.to_type, default: -> { {} }
 
-  belongs_to :account
   belongs_to :repository
+  belongs_to :account, default: -> { repository&.account }
 
   validates :message, presence: true
   validates :url, presence: true, url: true
@@ -24,8 +24,4 @@ class Commit < ApplicationRecord
   validates :providers, presence: true, uniqueness: { scope: :repository_id }
 
   normalizes :message, with: ->(message) { message.squish }
-
-  before_validation do
-    self.account ||= repository.account if repository_id.present?
-  end
 end

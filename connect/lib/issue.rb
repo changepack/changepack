@@ -19,8 +19,8 @@ class Issue < ApplicationRecord
   attribute :identifier, :string
   attribute :issued_at, :datetime
 
-  belongs_to :account
   belongs_to :team
+  belongs_to :account, default: -> { team&.account }
 
   validates :title, presence: true
   validates :assignee, store_model: true, allow_blank: true
@@ -30,8 +30,4 @@ class Issue < ApplicationRecord
   normalizes :description, with: ->(description) { description.squish }
   normalizes :branch, with: ->(branch) { branch.squish }
   normalizes :identifier, with: ->(identifier) { identifier.squish }
-
-  before_validation do
-    self.account ||= team&.account if team_id.present?
-  end
 end
