@@ -5,6 +5,8 @@ require 'simplecov'
 SimpleCov.start 'rails' do
   coverage_dir 'coverage/rspec'
   formatter SimpleCov::Formatter::SimpleFormatter
+  add_filter 'app/controllers/users/cypress_controller.rb'
+  add_filter 'app/views/components'
 end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
