@@ -36,7 +36,7 @@ FactoryBot.define do
 
   factory :delivery, class: 'Notification::Delivery' do
     notification { association :notification, :custom }
-    user { association :user, account: notification.account }
+    recipient { association :user, account: notification.account }
     queued_at { nil }
     sent_at { nil }
     channel { :email }

@@ -27,7 +27,8 @@ class Notification < ApplicationRecord
   belongs_to :template, class_name: 'Notification::Template', optional: true
 
   has_many :deliveries, dependent: :destroy
-  has_many :users, -> { distinct }, through: :deliveries
+  has_many :users, -> { distinct }, through: :deliveries, source: :recipient, source_type: User.name
+  has_many :slack_channels, -> { distinct }, through: :deliveries, source: :recipient, source_type: Slack::Channel.name
 
   validates :category, :type, :title, :body, :summary, :channel, presence: true
   validates :channel, inclusion: { in: CHANNELS }
@@ -91,7 +92,7 @@ class Notification < ApplicationRecord
   def create_deliveries_from_recipient
     recipients.each do |recipient|
       channel.each do |channel|
-        deliveries.create!(channel:, user: recipient)
+        deliveries.create!(channel:, recipient:)
       end
     end
   end

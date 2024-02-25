@@ -9,8 +9,8 @@ RSpec.describe Slack::Channel do
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:username) }
   it { is_expected.to validate_presence_of(:webhook_url) }
-  it { is_expected.to allow_value('http://example.com/webhook').for(:webhook_url) }
   it { is_expected.not_to allow_value('not_a_url').for(:webhook_url) }
+  it { is_expected.to allow_value('http://example.com/webhook').for(:webhook_url) }
 
   context 'when normalizing attributes' do
     subject(:channel) { build(:slack_channel, name: ' Channel Name ', username: ' UserName ') }

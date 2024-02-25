@@ -6,13 +6,15 @@ class Notification
     key :ntfd
 
     belongs_to :notification
-    belongs_to :user
+    belongs_to :recipient, polymorphic: true
 
     attribute :queued_at, :datetime
     attribute :sent_at, :datetime
     attribute :channel, :string
 
     validates :channel, presence: true, inclusion: { in: Notification::CHANNELS }
+    validates :recipient_type, inclusion: { in: [User, Slack::Channel].map(&:name) }
+
     inquirer :channel
 
     scope :pending, -> { where(queued_at: nil, sent_at: nil) }

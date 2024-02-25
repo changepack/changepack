@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_25_112541) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_25_125902) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -183,14 +183,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_112541) do
 
   create_table "notification_deliveries", id: :string, force: :cascade do |t|
     t.string "notification_id", null: false
-    t.string "user_id", null: false
+    t.string "recipient_id", null: false
     t.datetime "queued_at"
     t.datetime "sent_at"
     t.string "channel", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "recipient_type"
     t.index ["notification_id"], name: "index_notification_deliveries_on_notification_id"
-    t.index ["user_id"], name: "index_notification_deliveries_on_user_id"
+    t.index ["recipient_id"], name: "index_notification_deliveries_on_recipient_id"
+    t.index ["recipient_type", "recipient_id"], name: "idx_on_recipient_type_recipient_id_562ec654b9"
   end
 
   create_table "notification_templates", id: :string, force: :cascade do |t|
@@ -402,7 +404,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_112541) do
   add_foreign_key "issues", "teams"
   add_foreign_key "newsletters", "accounts"
   add_foreign_key "notification_deliveries", "notifications"
-  add_foreign_key "notification_deliveries", "users"
+  add_foreign_key "notification_deliveries", "users", column: "recipient_id"
   add_foreign_key "notifications", "accounts"
   add_foreign_key "notifications", "notification_templates", column: "template_id"
   add_foreign_key "post_transitions", "posts"
