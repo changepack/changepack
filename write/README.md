@@ -6,11 +6,14 @@ The `write` bounded context is responsible for managing and handling the creatio
 
 The `write` bounded context includes the following models:
 
-1. `Newsletter`: Represents a changelog, sent in a form of a newsletter, which is a collection of posts documenting changes and updates.
-2. `Post`: Represents a post within a changelog, containing content and metadata.
-3. `Publication`: A model that facilitates the creation and updating of posts, incorporating associated updates and managing their publication status.
-4. `Source`: Represents a source of updates, such as a repository or team, providing essential information for filtering and reporting purposes.
-5. `Update`: Represents an update within a source, such as a commit or issue, containing relevant information and metadata.
+* `Newsletter`: Represents a changelog, sent in a form of a newsletter, which is a collection of posts documenting changes and updates.
+* `Post`: Represents a post within a changelog, containing content and metadata.
+* `Publication`: A service object that facilitates the creation and updating of posts, incorporating associated updates and managing their publication status.
+* `Source`: Represents a source of updates, such as a repository or team, providing essential information for filtering and reporting purposes.
+* `Update`: Represents an update within a source, such as a commit or issue, containing relevant information and metadata.
+* `Filter`: Represents a set of criteria used to include or exclude updates based on their content, type, or source. It supports dynamic filtering of updates to ensure that only relevant changes are documented and published.
+* `Sydney`: A service object that interfaces with OpenAI's GPT to generate content based on updates. It supports operations like writing, choosing, and describing, utilizing AI to enhance content creation.
+
 
 ## Features and functionality
 

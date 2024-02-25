@@ -5,27 +5,22 @@ The `platform` bounded context is a horizontal context that provides foundationa
 ## Models
 
 * `Account` represents an organization or user account within the Platform context, providing attributes for account information, such as name, description, and website. It establishes associations with key models, enabling user and resource management at the account level.
-
-* `User` represents individual users within the Platform context, handling authentication and authorization. It establishes associations with the Account model, facilitating user-account relationships and enabling secure access to resources.
-
+* `API` serves as the interface for external and internal communication, defining the structure and types for API requests and responses.
+* `Clock` provides time-based utilities and events. It facilitates the scheduling and handling of time-based events within the application.
 * `Event` represents an event that can be published and subscribed to by different parts of the application. It provides methods for handling events, managing metadata, and retrieving event data.
-
 * `Handler` is a base class for event handlers that process incoming events. It subscribes to specific events and executes the appropriate logic when those events are received.
+* `Notification` manages the creation, categorization, and delivery of notifications to users or accounts. It supports multiple channels, such as email, and allows for the association of notifications with specific accounts and subjects.
+* `User` represents individual users within the Platform context, handling authentication and authorization. It establishes associations with the Account model, facilitating user-account relationships and enabling secure access to resources.
 
 ## Concerns
 
 The `platform` bounded context includes the following key features:
 
 * `Domain` provides functionality for managing and validating domain-related attributes, such as the domain name associated with an account. It ensures that domain names are valid and unique within the system.
-
 * `Identifier` adds a unique identifier to models, enabling them to be easily referenced and accessed within the system. It includes methods for generating and managing identifiers.
-
 * `Inquirer` provides a mechanism for creating inquirer methods on models. An inquirer method allows for querying the state of an attribute in a more expressive and readable way.
-
 * `Resourcable` provides functionality for automatically triggering events when a resource is created, updated, or destroyed. It simplifies the process of publishing events related to resource changes.
-
 * `Status` concern enables models to have a status attribute and provides methods for managing and querying the status of a model. It includes functionality for transitioning between different states and validating the current state.
-
 * `Provided` adds support for tracking and managing external providers associated with a model. It allows models to define provider attributes and automatically trigger events when providers are added or removed.
 
 These concerns are horizontal; they are not a core part of any specific model, unlike concerns from other contexts. Therefore, they are located under `platform/concerns`, separate from the domain models.
