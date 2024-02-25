@@ -25,21 +25,10 @@ Every week, Changepack delivers a brief update to you or your company, highlight
 ```
 git clone https://github.com/changepack/changepack.git
 cd changepack
-
-# Install dependencies
-bundle install
-yarn install
-
-# Update environment variables
-cp config/application.yml.example config/application.yml
-
-# Run the application
-bundle exec rails db:create db:migrate db:seed
-bin/test
-bundle exec rails s
+bin/setup
 ```
 
-Use `tmuxinator` or `foreman` to run backgrounds processes like `guard`, a `cypruss` server, or a `tailwindcss` watcher.
+Use `tmuxinator` or `foreman` to run backgrounds processes like `guard`, a `cypress` server, or a `tailwindcss` watcher.
 
 ## Contributors 🎉
 
