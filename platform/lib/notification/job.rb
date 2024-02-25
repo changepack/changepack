@@ -39,7 +39,7 @@ class Notification
 
     def slack_opts(delivery)
       {
-        channel: delivery.recipient.channel,
+        channel: delivery.recipient.name,
         username: delivery.recipient.username
       }
     end

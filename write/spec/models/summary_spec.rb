@@ -10,27 +10,29 @@ describe Summary, :vcr do
     let(:newsletter) { create(:newsletter, account:) }
     let(:account) { create(:account, :production) }
 
-    context 'when there are no updates' do
+    before do
+      create(:template, category: :write, type: :summary)
+      # Deterministic ID required for the API call
+      create(:update, :commit, :production, account:, newsletter:, sourced_at:, id: 'upd_mj9Esq4bdtpY')
+    end
+
+    context 'when there are no updates within the last week' do
+      let(:sourced_at) { 2.weeks.ago }
+
       it 'does not save the summary' do
         expect(summary.save).to be_falsey
       end
     end
 
-    context 'when there are updates' do
-      # Deterministic ID required for the API call
-      let(:id) { 'upd_mj9Esq4bdtpY' }
-
-      before do
-        create(:template, category: :write, type: :summary)
-        create(:update, :commit, :production, account:, newsletter:, id:)
-      end
+    context 'when there are updates within the last week' do
+      let(:sourced_at) { Time.current }
 
       it 'saves the summary' do
         expect(summary.save).to be_truthy
       end
 
       it 'sends an email' do
-        expect { summary.save }.to change { Notification.count }.by(1) # rubocop:disable RSpec/ExpectChange
+        expect { summary.save }.to change(Notification, :count).by(1)
       end
     end
   end

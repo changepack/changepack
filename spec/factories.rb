@@ -35,11 +35,17 @@ FactoryBot.define do
   end
 
   factory :delivery, class: 'Notification::Delivery' do
-    notification { association :notification, :custom }
     recipient { association :user, account: notification.account }
+    notification { association :notification, :custom }
+    channel { :email }
     queued_at { nil }
     sent_at { nil }
-    channel { :email }
+
+    trait :slack do
+      recipient { association :slack_channel, account: notification.account }
+      notification { association :notification, :custom, channel: :slack }
+      channel { :slack }
+    end
   end
 
   factory :api_image, class: 'API::Image' do
