@@ -22,7 +22,7 @@ class Hook < ApplicationRecord
 
   belongs_to :account
 
-  validates :request, presence: true
+  validates :request, presence: true, store_model: true
   validates :provider, presence: true, inclusion: { in: PROVIDERS }
   validates :direction, presence: true, inclusion: { in: DIRECTIONS }
 
