@@ -3,6 +3,7 @@
 
 class Post < ApplicationRecord
   include Publish
+  include Events
   include Status
   include Slug
 

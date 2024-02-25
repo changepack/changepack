@@ -10,15 +10,25 @@ class PostStateMachine
   transition from: :draft, to: [:published]
   transition from: :published, to: [:draft]
 
-  after_transition after_commit: true do |post, transition|
-    post.update!(status: transition.to_state)
-  end
-
   before_transition to: :published do |post, _|
     post.update!(published_at: Time.current)
   end
 
-  after_transition to: :draft, after_commit: true do |post, _|
+  after_transition do |post, transition|
+    post.update!(status: transition.to_state)
+  end
+
+  after_transition to: :published, after_commit: true do |post, transition|
+    Event.publish(
+      Post::Published.new(
+        id: transition.post_id,
+        content: post.content.to_s,
+        account_id: post.account_id
+      )
+    )
+  end
+
+  after_transition to: :draft do |post, _|
     post.update!(published_at: nil)
   end
 end
