@@ -9,10 +9,11 @@ module ValueObject
   abstract!
 
   included do
-    include StoreModel::Model
+    include ActiveRecord::AttributeMethods::Dirty
     include ActiveModel::Validations::Callbacks
     include ActiveRecord::Normalization
-    include ActiveRecord::AttributeMethods::Dirty
+    include StoreModel::Model
+    include ::Inquirer
 
     class_eval do
       extend T::Helpers

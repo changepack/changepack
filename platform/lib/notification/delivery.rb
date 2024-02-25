@@ -13,7 +13,7 @@ class Notification
     attribute :channel, :string
 
     validates :channel, presence: true, inclusion: { in: Notification::CHANNELS }
-    validates :recipient_type, inclusion: { in: [User, Slack::Channel].map(&:name) }
+    validates :recipient_type, inclusion: { in: [User, Hook].map(&:name) }
 
     inquirer :channel
 

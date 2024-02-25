@@ -28,7 +28,7 @@ class Notification < ApplicationRecord
 
   has_many :deliveries, dependent: :destroy
   has_many :users, -> { distinct }, through: :deliveries, source: :recipient, source_type: User.name
-  has_many :slack_channels, -> { distinct }, through: :deliveries, source: :recipient, source_type: Slack::Channel.name
+  has_many :slack_channels, -> { distinct }, through: :deliveries, source: :recipient, source_type: Hook.name
 
   validates :category, :type, :title, :body, :summary, :channel, presence: true
   validates :channel, inclusion: { in: CHANNELS }
@@ -50,7 +50,7 @@ class Notification < ApplicationRecord
 
   after_create :create_deliveries_from_recipient
 
-  sig { returns T::Array[T.any(Slack::Channel, User)] }
+  sig { returns T::Array[T.any(Hook, User)] }
   def recipients
     @recipients ||= begin
       recipients = []
@@ -97,11 +97,11 @@ class Notification < ApplicationRecord
     end
   end
 
-  sig { returns T::Array[Slack::Channel] }
+  sig { returns T::Array[Hook] }
   def slack_recipients
     case recipient
     when Account
-      Slack::Channel.where(account: recipient).to_a
+      Hook.where(provider: :slack, account: recipient).to_a
     else
       []
     end

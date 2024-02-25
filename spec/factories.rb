@@ -4,11 +4,18 @@
 require 'faker'
 
 FactoryBot.define do
-  factory :slack_channel, class: 'Slack::Channel' do
+  factory :hook, class: 'Hook' do
     account
-    name { Faker::Lorem.word }
+    provider { :slack }
+    direction { :outgoing }
+    request factory: :slack_request
+  end
+
+  factory :slack_request, class: 'Hook::Slack::Request' do
+    provider { :slack }
     webhook_url { Faker::Internet.url }
     username { Faker::Internet.username }
+    channel { Faker::Lorem.word.downcase }
   end
 
   factory :template, class: 'Notification::Template' do
@@ -42,7 +49,7 @@ FactoryBot.define do
     sent_at { nil }
 
     trait :slack do
-      recipient { association :slack_channel, account: notification.account }
+      recipient { association :hook, account: notification.account }
       notification { association :notification, :custom, channel: :slack }
       channel { :slack }
     end

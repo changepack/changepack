@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_25_125902) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_25_174819) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -149,6 +149,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_125902) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "hooks", id: :string, force: :cascade do |t|
+    t.string "provider", null: false
+    t.string "direction", null: false
+    t.jsonb "request", default: {}, null: false
+    t.string "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_hooks_on_account_id"
+  end
+
   create_table "issues", id: :string, force: :cascade do |t|
     t.string "title", null: false
     t.text "description"
@@ -285,16 +295,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_125902) do
     t.index ["repository_id", "sort_key"], name: "index_repository_transitions_parent_sort", unique: true
   end
 
-  create_table "slack_channels", id: :string, force: :cascade do |t|
-    t.string "account_id", null: false
-    t.string "name", null: false
-    t.string "webhook_url", null: false
-    t.string "username", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_slack_channels_on_account_id"
-  end
-
   create_table "sources", id: :string, force: :cascade do |t|
     t.string "name", null: false
     t.string "type", null: false
@@ -400,6 +400,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_125902) do
   add_foreign_key "commits", "accounts"
   add_foreign_key "commits", "repositories"
   add_foreign_key "filters", "sources"
+  add_foreign_key "hooks", "accounts"
   add_foreign_key "issues", "accounts"
   add_foreign_key "issues", "teams"
   add_foreign_key "newsletters", "accounts"
@@ -414,7 +415,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_125902) do
   add_foreign_key "repositories", "access_tokens"
   add_foreign_key "repositories", "accounts"
   add_foreign_key "repository_transitions", "repositories"
-  add_foreign_key "slack_channels", "accounts"
   add_foreign_key "sources", "accounts"
   add_foreign_key "sources", "newsletters"
   add_foreign_key "team_transitions", "teams"

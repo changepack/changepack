@@ -24,12 +24,6 @@ We have decided not to use Single Table Inheritance (STI) for the `Team` and `Re
 
 By not using STI, we are able to keep the data models for `Team`, `Repository`, `Commit`, and `Issue` separate and well-organized, ensuring that each model maintains its own specific attributes and behavior. This makes it easier to manage, understand, and maintain the codebase and data structure in the long run.
 
-### Slack::Channel
-
-The `Slack` module within the `connect` context is designed to facilitate communication with Slack, enabling notifications and updates to be sent directly to Slack channels. This integration is primarily handled through the `Slack::Channel` class, which models the necessary attributes and behaviors for interacting with Slack webhooks.
-
-The `Slack::Channel` class is a key component of the Slack integration, representing a specific Slack channel where notifications will be sent. It includes attributes such as `name`, the bot’s `username`, and `webhook_url`, which are essential for sending messages to the correct Slack channel.
-
 ## Inbound Communication
 
 The `connect` context receives events from other contexts and handles them through a set of event handlers. These event handlers are responsible for updating the `connect` context's state and triggering actions based on the events. The context collaborates with the `platform` context for inbound communication. This collaboration is particularly relevant when new access tokens need to be created as users sign in or register using OAuth 2 provided by GitHub, Linear, and others.

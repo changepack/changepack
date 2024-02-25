@@ -33,14 +33,14 @@ class Notification
     end
 
     def send_slack_notification(delivery)
-      notifier = Slack::Notifier.new(delivery.recipient.webhook_url, **slack_opts(delivery))
+      notifier = Slack::Notifier.new(delivery.recipient.request.webhook_url, **slack_opts(delivery))
       notifier.ping(delivery.notification.body)
     end
 
     def slack_opts(delivery)
       {
-        channel: delivery.recipient.name,
-        username: delivery.recipient.username
+        channel: delivery.recipient.request.channel,
+        username: delivery.recipient.request.username
       }
     end
   end
