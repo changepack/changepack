@@ -7,7 +7,7 @@ class Notification
       delivery = Notification::Delivery.find(delivery_id)
       case delivery.channel
       when 'email'
-        NotificationMailer.with(delivery:).notify
+        NotificationMailer.with(delivery:).notify.deliver_now
       else
         raise "Unknown channel #{delivery.channel}"
       end
