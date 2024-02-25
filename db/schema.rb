@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_24_203753) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_25_000858) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -177,7 +177,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_203753) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "discarded_at"
-    t.boolean "private", default: true
     t.string "audience"
     t.index ["account_id"], name: "index_newsletters_on_account_id"
   end

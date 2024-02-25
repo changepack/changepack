@@ -7,7 +7,6 @@ class Newsletter < ApplicationRecord
   key :cl
 
   attribute :name, :string, default: 'Changelog'
-  attribute :private, :boolean, default: true
   # A short description of the audience for this newsletter in natural language.
   # It is used to help AI write content with specific audiences and markets in mind.
   attribute :audience, :string, default: 'Company personnel'
