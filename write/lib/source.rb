@@ -5,11 +5,11 @@ class Source < ApplicationRecord
   include Active
   include Filter
 
+  # We only duplicate attributes essential for filters, reports, or SQL queries,
+  # such as those used to scope paginated repositories and teams together,
+  # for example.
   key :src
 
-  # Refer to the following comment. We only duplicate attributes essential for
-  # filters, reports, or SQL queries, such as those used to scope paginated
-  # repositories and teams together, for instance.
   attribute :name, :string
   attribute :type, :string
   # Status is derived from the repository or team
@@ -18,9 +18,9 @@ class Source < ApplicationRecord
   belongs_to :account
   belongs_to :newsletter, optional: true
   # We are violating the guideline of avoiding cross-domain model references here,
-  # as sources, repositories, and teams typically change in tandem. Our goal is to
-  # prevent the added complexity of caching other attributes from repositories
-  # and teams, which you can reference directly.
+  # as sources, repositories, and teams typically change in tandem. Our goal
+  # is to prevent the added complexity of caching other attributes from
+  # repositories and teams, which you can reference directly.
   belongs_to :repository, optional: true
   belongs_to :team, optional: true
 
