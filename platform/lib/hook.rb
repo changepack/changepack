@@ -26,6 +26,10 @@ class Hook < ApplicationRecord
   validates :provider, presence: true, inclusion: { in: PROVIDERS }
   validates :direction, presence: true, inclusion: { in: DIRECTIONS }
 
+  scope :slack, -> { where(provider: :slack) }
+  scope :outgoing, -> { where(direction: :outgoing) }
+  scope :incoming, -> { where(direction: :incoming) }
+
   inquirer :provider
   inquirer :direction
 end

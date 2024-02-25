@@ -13,7 +13,7 @@ module ValueObject
     include ActiveModel::Validations::Callbacks
     include ActiveRecord::Normalization
     include StoreModel::Model
-    include ::Inquirer
+    include Inquirer
 
     class_eval do
       extend T::Helpers

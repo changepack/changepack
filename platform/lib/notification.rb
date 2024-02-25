@@ -91,9 +91,7 @@ class Notification < ApplicationRecord
   sig { returns T::Array[User] }
   def create_deliveries_from_recipient
     recipients.each do |recipient|
-      channel.each do |channel|
-        deliveries.create!(channel:, recipient:)
-      end
+      channel.each { |channel| deliveries.create!(channel:, recipient:) }
     end
   end
 
@@ -101,7 +99,7 @@ class Notification < ApplicationRecord
   def slack_recipients
     case recipient
     when Account
-      Hook.where(provider: :slack, account: recipient).to_a
+      Hook.slack.outgoing.where(account: recipient).to_a
     else
       []
     end
