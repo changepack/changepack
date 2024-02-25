@@ -22,8 +22,8 @@ class PostStateMachine
     Event.publish(
       Post::Published.new(
         id: transition.post_id,
-        content: post.content.to_s,
-        account_id: post.account_id
+        account_id: post.account_id,
+        content: post.content.to_s.to_str
       )
     )
   end

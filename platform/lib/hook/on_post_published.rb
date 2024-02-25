@@ -10,7 +10,7 @@ class Hook
       return if account.blank?
 
       Notification.create!(
-        body: event.content,
+        body: ReverseMarkdown.convert(event.content),
         recipient: account,
         category: :write,
         channel: :slack,

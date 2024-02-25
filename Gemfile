@@ -209,3 +209,5 @@ gem "json-schema"
 gem "simple_form"
 
 gem "slack-notifier"
+
+gem "reverse_markdown"
