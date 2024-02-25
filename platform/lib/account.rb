@@ -38,11 +38,6 @@ class Account < ApplicationRecord
     api_keys << API::Key.new
   end
 
-  sig { returns T::Array[String] }
-  def notifications
-    @notifications ||= users.map(&:email)
-  end
-
   private
 
   sig { returns T::Array[Symbol] }
