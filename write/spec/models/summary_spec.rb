@@ -30,7 +30,7 @@ describe Summary, :vcr do
       end
 
       it 'sends an email' do
-        expect { summary.save }.to change(Notification, :count).by(1)
+        expect { summary.save }.to change { Notification.count }.by(1) # rubocop:disable RSpec/ExpectChange
       end
     end
   end

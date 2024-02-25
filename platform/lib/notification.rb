@@ -4,7 +4,7 @@
 class Notification < ApplicationRecord
   key :ntf
 
-  CHANNELS = %w[email].freeze
+  CHANNELS = %w[email slack].freeze
 
   # Categories are used to group notifications together, like `user`
   attribute :category, :string
@@ -16,7 +16,7 @@ class Notification < ApplicationRecord
   attribute :body, :string
   # Summaries are used to generate a preview of the notification
   attribute :summary, :string
-  attribute :channel, :string, array: true, default: CHANNELS
+  attribute :channel, :string, array: true, default: ['email']
   attribute :data, :jsonb, default: {}
   attribute :url, :string
 
@@ -48,6 +48,16 @@ class Notification < ApplicationRecord
   end
 
   after_create :create_deliveries_from_recipient
+
+  sig { returns T::Array[T.any(Slack::Channel, User)] }
+  def recipients
+    @recipients ||= begin
+      recipients = []
+      recipients += slack_recipients if channel.include?('slack')
+      recipients += email_recipients if channel.include?('email')
+      recipients
+    end
+  end
 
   private
 
@@ -86,8 +96,18 @@ class Notification < ApplicationRecord
     end
   end
 
+  sig { returns T::Array[Slack::Channel] }
+  def slack_recipients
+    case recipient
+    when Account
+      Slack::Channel.where(account: recipient).to_a
+    else
+      []
+    end
+  end
+
   sig { returns T::Array[User] }
-  def recipients
+  def email_recipients
     case recipient
     when User
       [recipient]

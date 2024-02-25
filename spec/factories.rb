@@ -4,6 +4,13 @@
 require 'faker'
 
 FactoryBot.define do
+  factory :slack_channel, class: 'Slack::Channel' do
+    account
+    name { Faker::Lorem.word }
+    webhook_url { Faker::Internet.url }
+    username { Faker::Internet.username }
+  end
+
   factory :template, class: 'Notification::Template' do
     category { Faker::Lorem.word }
     type { Faker::Lorem.word }

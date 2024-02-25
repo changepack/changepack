@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_25_000858) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_25_112541) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -283,6 +283,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_000858) do
     t.index ["repository_id", "sort_key"], name: "index_repository_transitions_parent_sort", unique: true
   end
 
+  create_table "slack_channels", id: :string, force: :cascade do |t|
+    t.string "account_id", null: false
+    t.string "name", null: false
+    t.string "webhook_url", null: false
+    t.string "username", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_slack_channels_on_account_id"
+  end
+
   create_table "sources", id: :string, force: :cascade do |t|
     t.string "name", null: false
     t.string "type", null: false
@@ -402,6 +412,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_000858) do
   add_foreign_key "repositories", "access_tokens"
   add_foreign_key "repositories", "accounts"
   add_foreign_key "repository_transitions", "repositories"
+  add_foreign_key "slack_channels", "accounts"
   add_foreign_key "sources", "accounts"
   add_foreign_key "sources", "newsletters"
   add_foreign_key "team_transitions", "teams"
