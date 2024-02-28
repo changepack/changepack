@@ -7,8 +7,10 @@ class Account < ApplicationRecord
   key :acc
 
   attribute :name, :string
-  attribute :description, :string
   attribute :website, :string
+  attribute :description, :string
+
+  has_one_attached :picture
 
   has_many :users, dependent: :destroy
   has_many :api_keys, as: :bearer, class_name: 'API::Key', dependent: :destroy
@@ -17,13 +19,12 @@ class Account < ApplicationRecord
   has_many :updates, dependent: :destroy
   has_many :newsletters, dependent: :destroy
 
-  has_many :access_tokens, dependent: :destroy
-  has_many :repositories, dependent: :destroy
-  has_many :commits, dependent: :destroy
+  has_many :hooks, dependent: :destroy
   has_many :teams, dependent: :destroy
   has_many :issues, dependent: :destroy
-
-  has_one_attached :picture
+  has_many :commits, dependent: :destroy
+  has_many :repositories, dependent: :destroy
+  has_many :access_tokens, dependent: :destroy
 
   PICTURES = %w[image/jpeg image/png image/gif].freeze
 

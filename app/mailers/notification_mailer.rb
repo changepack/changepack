@@ -6,6 +6,6 @@ class NotificationMailer < ApplicationMailer
     @delivery = params[:delivery]
     @notification = @delivery.notification
 
-    mail(to: @delivery.user.email, subject: @notification.title)
+    mail(to: @delivery.recipient.email, subject: @notification.title)
   end
 end

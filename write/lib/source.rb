@@ -25,6 +25,7 @@ class Source < ApplicationRecord
   belongs_to :team, optional: true
 
   has_many :updates, dependent: :destroy
+  has_many :filters, dependent: :destroy, class_name: '::Filter'
 
   TYPES = %w[repository team].freeze
 
