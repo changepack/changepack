@@ -397,7 +397,7 @@ GEM
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
-    pagy (7.0.4)
+    pagy (7.0.7)
     paper_trail (15.1.0)
       activerecord (>= 6.1)
       request_store (~> 1.4)
